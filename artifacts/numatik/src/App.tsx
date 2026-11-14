@@ -218,6 +218,7 @@ const SmaVektorPadaSistemKoordinatKartesiusPage = lazy(() => import("./pages/rua
 const SmaSudutAntaraDuaVektorPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSudutAntaraDuaVektorPage"));
 const SmaProyeksiVektorPage = lazy(() => import("./pages/ruang-untuk-guru/SmaProyeksiVektorPage"));
 const NumatikGamePage = lazy(() => import("./pages/ruang-untuk-guru/NumatikGamePage"));
+const NumatikKartPage = lazy(() => import("./pages/ruang-untuk-guru/NumatikKartPage"));
 const NumatikStrikeGamePage = lazy(() => import("./pages/math-game-arena/umum/GamePage"));
 const NumatikWorldPage = lazy(() => import("./pages/math-game-arena/umum/NumatikWorldPage"));
 const KeyakinanKelasPage = lazy(() => import("./pages/ruang-untuk-guru/KeyakinanKelasPage"));
@@ -1382,6 +1383,7 @@ const AppInner = () => {
             <Route path="/ruang-untuk-guru/sma/tes-kemampuan-akademik" element={<SmaComingSoonPage />} />
             <Route path="/ruang-untuk-guru/exam-browser" element={<ExamBrowserComingSoonPage />} />
             <Route path="/ruang-untuk-guru/numatik-game" element={<NumatikGamePage />} />
+            <Route path="/ruang-untuk-guru/numatik-game/kart" element={<NumatikKartPage />} />
             <Route path="/math-game-arena/umum/numatik-strike" element={<NumatikStrikeGamePage />} />
             <Route path="/math-game-arena/umum/numatik-world" element={<NumatikWorldPage />} />
             <Route path="/ruang-untuk-guru/keyakinan-kelas" element={<KeyakinanKelasPage />} />

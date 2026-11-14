@@ -93,6 +93,7 @@ type SoldierState = {
 };
 type TreasureChest = {
   group: THREE.Group;
+  waves: Array<{ mesh: THREE.Mesh; material: THREE.MeshBasicMaterial; phase: number }>;
   collected: boolean;
   phase: number;
 };
@@ -882,6 +883,10 @@ const GamePage = ({
     const playerGunMat = material("#2b3231", 0.74, 0.18);
     const playerGunMetalMat = material("#3e4847", 0.33, 0.76);
     const playerGunAccentMat = material("#756a4d", 0.58, 0.28);
+    const rifleOpticTubeMat = playerGunMetalMat.clone();
+    rifleOpticTubeMat.side = THREE.DoubleSide;
+    materials.push(rifleOpticTubeMat);
+    const rifleOpticInnerMat = material("#111817", 0.48, 0.2);
     const playerGloveMat = material("#292f2c", 0.9, 0.04);
     const playerSleeveMat = soldierCamoMaterials[0]!;
     const enemyTracerMat = new THREE.LineBasicMaterial({ color: "#ff604d", transparent: true, opacity: 0.84 });
@@ -926,22 +931,36 @@ const GamePage = ({
     };
     const rifleView = new THREE.Group();
     camera.add(rifleView);
-    const sightLensMat = material("#56645f", 0.24, 0.48);
     addViewPart(rifleView, new THREE.BoxGeometry(0.18, 0.15, 0.37), playerGunMat, 0, 0, 0.16);
     addViewPart(rifleView, new THREE.BoxGeometry(0.17, 0.15, 0.43), playerGunMetalMat, 0, 0.01, -0.24);
     addViewPart(rifleView, new THREE.BoxGeometry(0.15, 0.13, 0.36), playerGunMat, 0, 0.015, -0.59);
     addViewPart(rifleView, new THREE.BoxGeometry(0.12, 0.035, 0.47), playerGunMat, 0, 0.095, -0.38);
-    const rifleOptic = addViewPart(rifleView, new THREE.CylinderGeometry(0.052, 0.052, 0.2, 14), playerGunMat, 0, 0.19, -0.4);
+    const rifleOptic = addViewPart(
+      rifleView,
+      new THREE.CylinderGeometry(0.056, 0.056, 0.22, 18, 1, true),
+      rifleOpticTubeMat,
+      0,
+      0.19,
+      -0.4,
+    );
     rifleOptic.rotation.x = -Math.PI / 2;
-    addViewPart(rifleView, new THREE.TorusGeometry(0.052, 0.012, 6, 16), playerGunMetalMat, 0, 0.19, -0.505);
-    addViewPart(rifleView, new THREE.CircleGeometry(0.041, 16), sightLensMat, 0, 0.19, -0.514);
+    const opticInnerTube = addViewPart(
+      rifleView,
+      new THREE.CylinderGeometry(0.04, 0.04, 0.224, 18, 1, true),
+      rifleOpticInnerMat,
+      0,
+      0.19,
+      -0.4,
+    );
+    opticInnerTube.rotation.x = -Math.PI / 2;
+    addViewPart(rifleView, new THREE.TorusGeometry(0.075, 0.015, 8, 24), playerGunMetalMat, 0, 0.19, -0.255);
+    addViewPart(rifleView, new THREE.TorusGeometry(0.075, 0.015, 8, 24), playerGunMetalMat, 0, 0.19, -0.545);
     addViewPart(rifleView, new THREE.BoxGeometry(0.075, 0.2, 0.08), playerGunMat, 0, -0.08, -0.5);
     addViewPart(rifleView, new THREE.BoxGeometry(0.13, 0.15, 0.12), playerGunMat, 0.16, -0.01, -0.59);
     const rifleBarrel = addViewPart(rifleView, new THREE.CylinderGeometry(0.023, 0.03, 0.42, 8), playerGunMetalMat, 0, 0.02, -0.87);
     rifleBarrel.rotation.x = -Math.PI / 2;
     addViewPart(rifleView, new THREE.BoxGeometry(0.12, 0.25, 0.13), playerGunMat, 0.035, -0.17, -0.13);
     addViewPart(rifleView, new THREE.BoxGeometry(0.11, 0.035, 0.42), playerGunMetalMat, 0, 0.105, -0.42);
-    addViewPart(rifleView, new THREE.BoxGeometry(0.12, 0.09, 0.13), playerGunMetalMat, 0, 0.16, -0.37);
     addViewPart(rifleView, new THREE.BoxGeometry(0.19, 0.055, 0.12), playerGunAccentMat, 0, 0.12, -0.38);
     addViewPart(rifleView, new THREE.BoxGeometry(0.045, 0.12, 0.055), playerGunMetalMat, 0, 0.11, -0.72);
     addViewPart(rifleView, new THREE.CylinderGeometry(0.055, 0.055, 0.13, 8), playerGunMetalMat, 0, 0.02, -1.1).rotation.x = -Math.PI / 2;
@@ -2043,6 +2062,7 @@ const GamePage = ({
     const treasureRimGeometry = new THREE.TorusGeometry(0.19, 0.025, 6, 20);
     const treasureGlowRingGeometry = new THREE.TorusGeometry(1.55, 0.07, 8, 40);
     const treasureOuterGlowGeometry = new THREE.TorusGeometry(1.9, 0.035, 8, 40);
+    const treasureWaveGeometry = new THREE.TorusGeometry(0.8, 0.045, 6, 36);
     const addChestPart = (
       group: THREE.Group,
       geometry: THREE.BufferGeometry,
@@ -2083,6 +2103,16 @@ const GamePage = ({
       innerGlow.rotation.x = Math.PI / 2;
       const outerGlow = addChestPart(group, treasureOuterGlowGeometry, treasureGlowMat, [0, 0.025, 0], [1, 1, 1], false);
       outerGlow.rotation.x = Math.PI / 2;
+      const waves = Array.from({ length: 2 }, (_, waveIndex) => {
+        const waveMaterial = treasureGlowMat.clone();
+        waveMaterial.opacity = 0;
+        materials.push(waveMaterial);
+        const mesh = addChestPart(group, treasureWaveGeometry, waveMaterial, [0, 1.15, 0], [0.35, 1, 0.35], false);
+        mesh.rotation.x = Math.PI / 2;
+        mesh.castShadow = false;
+        mesh.receiveShadow = false;
+        return { mesh, material: waveMaterial, phase: waveIndex * 0.5 };
+      });
       const beacon = new THREE.PointLight("#ffc94d", 3.2, 13, 2);
       beacon.position.set(0, 1.6, 0);
       group.add(beacon);
@@ -2095,7 +2125,7 @@ const GamePage = ({
       group.children.forEach((child) => {
         if (treasureChestTargets.includes(child)) worldOccluders.push(child);
       });
-      treasureChests.push({ group, collected: false, phase: index * 0.9 });
+      treasureChests.push({ group, waves, collected: false, phase: index * 0.9 });
     }
 
     const soldierGeometries = new Set<THREE.BufferGeometry>();
@@ -3643,8 +3673,14 @@ const GamePage = ({
       ) > 0.1;
       const sprintingNow = sprintingRef.current || keys.current.ShiftLeft || keys.current.ShiftRight;
       const spreadScale = aimingRef.current ? 0.52 : sprintingNow ? 2.25 : moving ? 1.38 : 1;
-      const spread = config.baseSpread * spreadScale * Math.sqrt(Math.random());
-      const spreadAngle = Math.random() * Math.PI * 2;
+      const spread = aimingRef.current ? 0 : config.baseSpread * spreadScale * Math.sqrt(Math.random());
+      const spreadAngle = spread > 0 ? Math.random() * Math.PI * 2 : 0;
+      player.rotation.y = yaw;
+      camera.rotation.x = THREE.MathUtils.clamp(
+        pitch + (aimingRef.current ? 0 : cameraRecoil),
+        -1.25,
+        1.25,
+      );
       scene.updateMatrixWorld(true);
       camera.updateMatrixWorld(true);
       raycaster.setFromCamera(new THREE.Vector2(
@@ -4012,7 +4048,7 @@ const GamePage = ({
     const weaponPose = {
       rifle: {
         hip: new THREE.Vector3(0.34, -0.3, -0.58),
-        aim: new THREE.Vector3(0.025, -0.13, -0.43),
+        aim: new THREE.Vector3(0, -0.19, -0.43),
       },
       pistol: {
         hip: new THREE.Vector3(0.34, -0.32, -0.48),
@@ -4193,6 +4229,13 @@ const GamePage = ({
         chest.group.children.forEach((child) => {
           if (child instanceof THREE.PointLight) child.intensity = 2.6 + Math.sin(now * 0.003 + chest.phase) * 0.6;
           if (child instanceof THREE.Mesh && child.material === treasureGlowMat) child.scale.setScalar(pulse);
+        });
+        chest.waves.forEach((wave) => {
+          const progress = (now / 1800 + chest.phase / (Math.PI * 2) + wave.phase) % 1;
+          const scale = 0.35 + progress * 1.45;
+          wave.mesh.position.y = 1.15 + progress * 3.2;
+          wave.mesh.scale.set(scale, 1, scale);
+          wave.material.opacity = Math.sin(progress * Math.PI) * 0.72;
         });
       });
       if (gamePhaseRef.current !== "combat") {
@@ -4470,7 +4513,11 @@ const GamePage = ({
       }
       cameraFovRef.current = camera.fov;
       cameraRecoil *= Math.exp(-dt * 8);
-      camera.rotation.x = THREE.MathUtils.clamp(pitch + cameraRecoil, -1.25, 1.25);
+      camera.rotation.x = THREE.MathUtils.clamp(
+        pitch + (aimingRef.current ? 0 : cameraRecoil),
+        -1.25,
+        1.25,
+      );
 
       const selectedWeapon = activeWeaponRef.current;
       const selectedView = selectedWeapon === "rifle" ? rifleView : pistolView;

@@ -79,6 +79,7 @@ type Treasure = {
   id: number;
   group: THREE.Group;
   glow: THREE.Group;
+  waves: Array<{ mesh: THREE.Mesh; material: THREE.MeshBasicMaterial; phase: number }>;
   beaconLight: THREE.PointLight;
   home: THREE.Vector3;
   phase: number;
@@ -904,7 +905,7 @@ const NumatikWorldPage = ({
     scene.background = new THREE.Color("#91ddff");
     scene.fog = new THREE.Fog("#91ddff", 100, 235);
     const camera = new THREE.PerspectiveCamera(58, 1, 0.1, 300);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(host.clientWidth, host.clientHeight);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -969,8 +970,10 @@ const NumatikWorldPage = ({
     resources.add(treasureGlowMaterial);
     const treasureGlowGeometry = new THREE.TorusGeometry(1.12, 0.07, 8, 40);
     const treasureOuterGlowGeometry = new THREE.TorusGeometry(1.38, 0.04, 8, 40);
+    const treasureWaveGeometry = new THREE.TorusGeometry(0.72, 0.045, 6, 36);
     resources.add(treasureGlowGeometry);
     resources.add(treasureOuterGlowGeometry);
+    resources.add(treasureWaveGeometry);
     const addMesh = <T extends THREE.BufferGeometry>(
       geometry: T,
       mat: THREE.Material,
@@ -4619,10 +4622,18 @@ const NumatikWorldPage = ({
       innerGlow.rotation.x = Math.PI / 2;
       const outerGlow = addMesh(treasureOuterGlowGeometry, treasureGlowMaterial, glow, [0, -0.02, 0]);
       outerGlow.rotation.x = Math.PI / 2;
+      const waves = Array.from({ length: 2 }, (_, waveIndex) => {
+        const waveMaterial = treasureGlowMaterial.clone();
+        waveMaterial.opacity = 0;
+        resources.add(waveMaterial);
+        const mesh = addMesh(treasureWaveGeometry, waveMaterial, group, [0, 1.1, 0], [0.35, 1, 0.35]);
+        mesh.rotation.x = Math.PI / 2;
+        return { mesh, material: waveMaterial, phase: waveIndex * 0.5 };
+      });
       const beaconLight = new THREE.PointLight("#ffe66d", 0.8, 5, 2);
       beaconLight.position.set(0, 0.9, 0);
       group.add(beaconLight);
-      return { id: index, group, glow, beaconLight, home: group.position.clone(), phase: index * 0.8, collected: false };
+      return { id: index, group, glow, waves, beaconLight, home: group.position.clone(), phase: index * 0.8, collected: false };
     });
 
     const playerPosition = new THREE.Vector3(0, 1.68, 43);
@@ -4766,7 +4777,7 @@ const NumatikWorldPage = ({
         );
         if (moving) {
           direction.normalize();
-          const speed = (input.has("shift") ? 10 : 6.2) * inputMagnitude;
+          const speed = (input.has("shift") ? 13 : 8) * inputMagnitude;
           movementSpeed = speed;
           playerPosition.x += direction.x * speed * dt;
           playerPosition.z += direction.z * speed * dt;
@@ -5542,6 +5553,13 @@ const NumatikWorldPage = ({
         const glowPulse = 1 + Math.sin(now * 0.003 + treasure.phase) * 0.08;
         treasure.glow.scale.setScalar(glowPulse);
         treasure.beaconLight.intensity = 0.6 + Math.sin(now * 0.003 + treasure.phase) * 0.2;
+        treasure.waves.forEach((wave) => {
+          const progress = (now / 1800 + treasure.phase / (Math.PI * 2) + wave.phase) % 1;
+          const scale = 0.35 + progress * 1.45;
+          wave.mesh.position.y = 1.1 + progress * 3.2;
+          wave.mesh.scale.set(scale, 1, scale);
+          wave.material.opacity = Math.sin(progress * Math.PI) * 0.72;
+        });
       });
       inhabitants.forEach(({ group, homeY, phase, isAnimal }) => {
         group.position.y = homeY + Math.sin(now * 0.0018 + phase) * (isAnimal ? 0.045 : 0.025);

@@ -14,12 +14,20 @@ import {
   Disc,
   GraduationCap,
   Sparkles,
+  Flag,
 } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
 const games = [
+  {
+    label: "NUMATIK KART 3D",
+    emoji: "🏎️",
+    path: "/ruang-untuk-guru/numatik-game/kart",
+    desc: "Balapan di lintasan 3D berkelok, kuasai tikungan dan drift!",
+    icon: <Flag className="w-7 h-7 text-rose-400 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
   {
     label: "Turtle Run Math",
     emoji: "🐢",
@@ -148,7 +156,8 @@ const NumatikGamePage = () => {
           {games.map((game, i) => {
             const isStrike = game.path.endsWith("/numatik-strike");
             const isWorld = game.path.endsWith("/numatik-world");
-            const is3dGame = isStrike || isWorld;
+            const isKart = game.path.endsWith("/numatik-game/kart");
+            const is3dGame = isStrike || isWorld || isKart;
             return (
             <button
               key={game.path}
@@ -156,7 +165,9 @@ const NumatikGamePage = () => {
               className={`group relative bg-card/80 backdrop-blur border rounded-xl p-4
                 hover:border-primary/60 hover:box-glow-cyan transition-all duration-300
                 cursor-pointer text-left animate-slide-up ${
-                  isStrike
+                  isKart
+                    ? "border-rose-300/80 ring-2 ring-rose-400/40 shadow-[0_5px_0_rgba(127,29,29,0.85),0_8px_24px_rgba(244,63,94,0.3)]"
+                    : isStrike
                     ? "border-amber-300/80 ring-2 ring-amber-400/40 shadow-[0_5px_0_rgba(127,29,29,0.85),0_8px_24px_rgba(245,158,11,0.35)]"
                     : isWorld
                       ? "border-cyan-300/80 ring-2 ring-emerald-300/40 shadow-[0_5px_0_rgba(6,95,70,0.85),0_8px_24px_rgba(34,211,238,0.35)]"
@@ -172,7 +183,9 @@ const NumatikGamePage = () => {
                 {is3dGame && (
                   <span
                     className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-1 font-display text-[9px] font-black tracking-wider text-white shadow-[0_3px_0_rgba(0,0,0,0.55)] ${
-                      isStrike
+                      isKart
+                        ? "border-rose-100/80 bg-gradient-to-b from-rose-300 via-pink-500 to-rose-700"
+                        : isStrike
                         ? "border-amber-200/80 bg-gradient-to-b from-amber-300 via-orange-500 to-red-600"
                         : "border-cyan-100/80 bg-gradient-to-b from-cyan-300 via-teal-500 to-emerald-600"
                     }`}
@@ -183,7 +196,7 @@ const NumatikGamePage = () => {
                 )}
               </div>
               <h3 className={`font-display text-[11px] sm:text-xs font-bold mb-1 leading-tight ${
-                isStrike ? "text-amber-200" : isWorld ? "text-cyan-200" : "text-foreground"
+                isKart ? "text-rose-200" : isStrike ? "text-amber-200" : isWorld ? "text-cyan-200" : "text-foreground"
               }`}>
                 {game.label}
               </h3>

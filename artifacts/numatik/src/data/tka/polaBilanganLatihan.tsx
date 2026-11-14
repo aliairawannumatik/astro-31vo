@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import type { MateriSection } from "@/components/tka/TKAPemantapanLayout";
-import polaLingkaranImage from "@/assets/image_1793171450761.png";
 
 export interface TkaPolaBilanganSoal {
   no: number;
@@ -155,6 +154,53 @@ const Soal7Svg = () => {
       <text x="196" y="201" textAnchor="middle" fill="#a5f3fc" fontSize="10" fontFamily="sans-serif">
         Lapisan atas → lapisan bawah
       </text>
+    </svg>
+  );
+};
+
+const Soal1Svg = () => {
+  const radius = 8.5;
+  const spacing = 22;
+  const patternCenters = [38, 128, 228, 360];
+
+  return (
+    <svg
+      viewBox="0 0 410 150"
+      role="img"
+      aria-label="Pola lingkaran segitiga: satu, tiga, enam, dan sepuluh lingkaran pada pola pertama hingga keempat"
+      className="block h-auto w-full max-w-sm rounded-xl bg-white"
+    >
+      <title>Pola lingkaran segitiga, pola ke-1 sampai ke-4</title>
+      {[1, 2, 3, 4].map((pattern, patternIndex) => (
+        <g key={pattern}>
+          {Array.from({ length: pattern }, (_, row) => {
+            const count = pattern - row;
+            const y = 93 - row * spacing;
+            const firstX = patternCenters[patternIndex]! - ((count - 1) * spacing) / 2;
+            return Array.from({ length: count }, (_, column) => (
+              <circle
+                key={`${row}-${column}`}
+                cx={firstX + column * spacing}
+                cy={y}
+                r={radius}
+                fill="white"
+                stroke="#111827"
+                strokeWidth="3"
+              />
+            ));
+          })}
+          <text
+            x={patternCenters[patternIndex]}
+            y="132"
+            textAnchor="middle"
+            fill="#111827"
+            fontSize="16"
+            fontFamily="sans-serif"
+          >
+            {pattern}
+          </text>
+        </g>
+      ))}
     </svg>
   );
 };
@@ -399,13 +445,7 @@ const Soal31Svg = () => {
 };
 
 export const polaBilanganSoalSvgMap: Record<string, ReactNode> = {
-  "1": (
-    <img
-      src={polaLingkaranImage}
-      alt="Pola lingkaran segitiga untuk pola 1, 2, 3, dan 4"
-      className="my-2 w-full max-w-sm rounded-xl bg-white"
-    />
-  ),
+  "1": <Soal1Svg />,
   "7": <Soal7Svg />,
   "9": <Soal9Svg />,
   "27": <Soal27Svg />,
