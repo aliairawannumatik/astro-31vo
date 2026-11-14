@@ -3,14 +3,15 @@ import { ArrowLeft, BookOpen, ClipboardList, GraduationCap, Sparkles } from "luc
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { getSmaTopic } from "@/data/smaTopics";
+import { getSmaTopicsForMode } from "@/data/smaTopics";
 
 const BASE_PATH = "/ruang-untuk-guru/sma";
 
 const SmaSubtopicComingSoonPage = () => {
   const navigate = useNavigate();
   const { mode, topicSlug, subtopicSlug } = useParams<{ mode: string; topicSlug: string; subtopicSlug: string }>();
-  const topic = getSmaTopic(topicSlug);
+  const learningMode = mode === "tugas-latihan-mandiri" ? mode : "buku-animasi";
+  const topic = getSmaTopicsForMode(learningMode).find((item) => item.slug === topicSlug);
   const subtopic = topic?.subtopics.find((item) => item.slug === subtopicSlug);
   const isPractice = mode === "tugas-latihan-mandiri";
   const Icon = isPractice ? ClipboardList : BookOpen;

@@ -153,6 +153,16 @@ export const useSecureExam = ({
   useEffect(() => {
     if (!active || submitted) return;
 
+    const examUrl = window.location.href;
+    const examHistoryState = window.history.state;
+    window.history.pushState(examHistoryState, "", examUrl);
+
+    const handlePopState = (event: PopStateEvent) => {
+      event.stopImmediatePropagation();
+      window.history.pushState(examHistoryState, "", examUrl);
+      recordViolation();
+    };
+
     const handleFullscreenChange = () => {
       const fullscreen = Boolean(document.fullscreenElement);
       setIsFullscreen(fullscreen);
@@ -212,6 +222,7 @@ export const useSecureExam = ({
     };
 
     document.addEventListener("fullscreenchange", handleFullscreenChange);
+    window.addEventListener("popstate", handlePopState, true);
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("blur", handleBlur);
     window.addEventListener("focus", handleFocus);
@@ -226,6 +237,7 @@ export const useSecureExam = ({
 
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      window.removeEventListener("popstate", handlePopState, true);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("blur", handleBlur);
       window.removeEventListener("focus", handleFocus);

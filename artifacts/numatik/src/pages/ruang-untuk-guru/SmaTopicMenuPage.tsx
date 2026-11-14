@@ -3,7 +3,7 @@ import { ArrowLeft, BookOpen, ClipboardList, GraduationCap } from "lucide-react"
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { getSmaTopic, SMA_TOPICS, type SmaLearningMode } from "@/data/smaTopics";
+import { getSmaTopicsForMode, type SmaLearningMode } from "@/data/smaTopics";
 
 const BASE_PATH = "/ruang-untuk-guru/sma";
 
@@ -36,8 +36,9 @@ const SmaTopicMenuPage = () => {
   const mode = modeParam === "tugas-latihan-mandiri" ? modeParam : "buku-animasi";
   const config = modeConfig[mode];
   const Icon = config.icon;
-  const selectedTopic = getSmaTopic(topicSlug);
-  const availableItems = (selectedTopic?.subtopics ?? SMA_TOPICS).filter(
+  const topics = getSmaTopicsForMode(mode);
+  const selectedTopic = topics.find((topic) => topic.slug === topicSlug);
+  const availableItems = (selectedTopic?.subtopics ?? topics).filter(
     (item) =>
       mode === "buku-animasi" ||
       (item.slug !== "identitas-dan-rumus-rumus-trigonometri" && item.slug !== "rumus-rumus-trigonometri"),

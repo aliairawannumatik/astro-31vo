@@ -276,3 +276,33 @@ export const SMA_TOPICS: SmaTopic[] = [
 
 export const getSmaTopic = (slug: string | undefined) =>
   SMA_TOPICS.find((topic) => topic.slug === slug);
+
+const PERSAMAAN_LINGKARAN_SUBTOPICS: SmaSubtopic[] = [
+  {
+    title: "DEFINISI DAN BENTUK UMUM PERSAMAAN LINGKARAN",
+    slug: "definisi-dan-bentuk-umum-persamaan-lingkaran",
+  },
+  {
+    title: "KUASA TITIK TERHADAP LINGKARAN DAN LINGKARAN DAN GARIS",
+    slug: "kuasa-titik-terhadap-lingkaran-dan-garis",
+  },
+  {
+    title: "PERSAMAAN GARIS SINGGUNG LINGKARAN",
+    slug: "persamaan-garis-singgung-lingkaran",
+  },
+  {
+    title: "HUBUNGAN DUA LINGKARAN",
+    slug: "hubungan-dua-lingkaran",
+  },
+];
+
+export const getSmaTopicsForMode = (mode: SmaLearningMode): SmaTopic[] =>
+  SMA_TOPICS.map((topic) =>
+    mode === "buku-animasi" && topic.slug === "lingkaran"
+      ? {
+          ...topic,
+          title: "PERSAMAAN LINGKARAN",
+          subtopics: PERSAMAAN_LINGKARAN_SUBTOPICS,
+        }
+      : topic,
+  );

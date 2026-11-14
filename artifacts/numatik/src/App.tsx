@@ -172,6 +172,8 @@ const IntensifUtbkPage = lazy(() => import("./pages/ruang-untuk-guru/IntensifUtb
 const SmaComingSoonPage = lazy(() => import("./pages/ruang-untuk-guru/SmaComingSoonPage"));
 const SmaTopicMenuPage = lazy(() => import("./pages/ruang-untuk-guru/SmaTopicMenuPage"));
 const SmaSubtopicComingSoonPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSubtopicComingSoonPage"));
+const SmaDefinisiBentukUmumPersamaanLingkaranPage = lazy(() => import("./pages/ruang-untuk-guru/SmaDefinisiBentukUmumPersamaanLingkaranPage"));
+const SmaKuasaTitikLingkaranDanGarisPage = lazy(() => import("./pages/ruang-untuk-guru/SmaKuasaTitikLingkaranDanGarisPage"));
 const SmaSpltvPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSpltvPage"));
 const SmaSptdvPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSptdvPage"));
 const SmaPolinomialKonsepPage = lazy(() => import("./pages/ruang-untuk-guru/SmaPolinomialKonsepPage"));
@@ -1377,6 +1379,14 @@ const AppInner = () => {
             <Route
               path="/ruang-untuk-guru/sma/buku-animasi/peluang/komplemen-suatu-kejadian"
               element={<SmaPeluangFrekuensiHarapanKomplemenPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/lingkaran/definisi-dan-bentuk-umum-persamaan-lingkaran"
+              element={<SmaDefinisiBentukUmumPersamaanLingkaranPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/lingkaran/kuasa-titik-terhadap-lingkaran-dan-garis"
+              element={<SmaKuasaTitikLingkaranDanGarisPage />}
             />
             <Route path="/ruang-untuk-guru/sma/:mode/:topicSlug/:subtopicSlug" element={<SmaSubtopicComingSoonPage />} />
             <Route path="/ruang-untuk-guru/sma/olimpiade" element={<SmaComingSoonPage />} />
