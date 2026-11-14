@@ -592,13 +592,222 @@ const latihanDasarTka: LatihanSoal[] = [
   },
 ];
 
+const latihanDiagram = (ariaLabel: string, children: React.ReactNode) => (
+  <svg
+    viewBox="0 0 360 210"
+    role="img"
+    aria-label={ariaLabel}
+    className="mx-auto my-3 h-auto w-full max-w-sm rounded-lg border border-border bg-background p-3 text-foreground"
+  >
+    {children}
+  </svg>
+);
+
+const rightTriangleDiagram = ({
+  ariaLabel,
+  left,
+  bottom,
+  hypotenuse,
+  caption,
+  topAngle,
+  endAngle,
+}: {
+  ariaLabel: string;
+  left: string;
+  bottom: string;
+  hypotenuse: string;
+  caption?: string;
+  topAngle?: string;
+  endAngle?: string;
+}) => latihanDiagram(ariaLabel, <>
+  <path d="M75 150 L75 38 L285 150 Z" fill="none" stroke="currentColor" strokeWidth="2.5" />
+  <path d="M75 136 h14 v14" fill="none" stroke="currentColor" strokeWidth="1.5" />
+  <text x="34" y="100" fontSize="14" fill="currentColor">{left}</text>
+  <text x="175" y="174" textAnchor="middle" fontSize="14" fill="currentColor">{bottom}</text>
+  <text x="194" y="83" textAnchor="middle" fontSize="14" fill="currentColor">{hypotenuse}</text>
+  {topAngle && <text x="62" y="57" fontSize="12" fill="currentColor">{topAngle}</text>}
+  {endAngle && <text x="250" y="140" fontSize="12" fill="currentColor">{endAngle}</text>}
+  {caption && <text x="180" y="202" textAnchor="middle" fontSize="12" fill="currentColor">{caption}</text>}
+</>);
+
+const generalTriangleDiagram = (
+  ariaLabel: string,
+  left: string,
+  bottom: string,
+  right: string,
+  caption: string,
+) => latihanDiagram(ariaLabel, <>
+  <path d="M66 70 L294 70 L150 166 Z" fill="none" stroke="currentColor" strokeWidth="2.5" />
+  <text x="102" y="111" fontSize="14" fill="currentColor">{left}</text>
+  <text x="180" y="91" textAnchor="middle" fontSize="14" fill="currentColor">{bottom}</text>
+  <text x="250" y="119" fontSize="14" fill="currentColor">{right}</text>
+  <text x="180" y="198" textAnchor="middle" fontSize="12" fill="currentColor">{caption}</text>
+</>);
+
+const coordinateDiagram = (
+  ariaLabel: string,
+  firstPoint: string,
+  secondPoint: string,
+  horizontal: string,
+  vertical: string,
+  distance: string,
+  cornerLabel?: string,
+) => latihanDiagram(ariaLabel, <>
+  <path d="M55 158 H310 M75 180 V25" fill="none" stroke="currentColor" strokeWidth="1" opacity=".45" />
+  <path d="M92 140 H264 V57" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="5 4" opacity=".75" />
+  <path d="M92 140 L264 57" fill="none" stroke="currentColor" strokeWidth="2.5" />
+  <path d="M250 57 h14 v14" fill="none" stroke="currentColor" strokeWidth="1.4" />
+  <circle cx="92" cy="140" r="4" fill="currentColor" />
+  <circle cx="264" cy="57" r="4" fill="currentColor" />
+  <text x="80" y="162" textAnchor="end" fontSize="13" fill="currentColor">{firstPoint}</text>
+  <text x="271" y="53" fontSize="13" fill="currentColor">{secondPoint}</text>
+  <text x="178" y="158" textAnchor="middle" fontSize="12" fill="currentColor">{horizontal}</text>
+  <text x="270" y="105" fontSize="12" fill="currentColor">{vertical}</text>
+  <text x="165" y="88" textAnchor="middle" fontSize="12" fill="currentColor">{distance}</text>
+  {cornerLabel && <text x="264" y="158" fontSize="12" fill="currentColor">{cornerLabel}</text>}
+</>);
+
+const rectangleDiagram = (
+  ariaLabel: string,
+  length: string,
+  width: string,
+  diagonal: string,
+  caption?: string,
+) => latihanDiagram(ariaLabel, <>
+  <path d="M65 45 H290 V150 H65 Z M65 45 L290 150" fill="none" stroke="currentColor" strokeWidth="2.5" />
+  <text x="177" y="36" textAnchor="middle" fontSize="14" fill="currentColor">{length}</text>
+  <text x="302" y="104" fontSize="14" fill="currentColor">{width}</text>
+  <text x="190" y="82" textAnchor="middle" fontSize="14" fill="currentColor">{diagonal}</text>
+  {caption && <text x="177" y="184" textAnchor="middle" fontSize="12" fill="currentColor">{caption}</text>}
+</>);
+
+const rhombusDiagram = (
+  ariaLabel: string,
+  diagonalVertical: string,
+  diagonalHorizontal: string,
+  side: string,
+  caption?: string,
+) => latihanDiagram(ariaLabel, <>
+  <path d="M180 28 L300 100 L180 172 L60 100 Z" fill="none" stroke="currentColor" strokeWidth="2.5" />
+  <path d="M180 28 V172 M60 100 H300" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="5 4" />
+  <path d="M174 100 h12 M180 94 v12" fill="none" stroke="currentColor" strokeWidth="1.5" />
+  <text x="185" y="48" fontSize="13" fill="currentColor">{diagonalVertical}</text>
+  <text x="95" y="94" fontSize="13" fill="currentColor">{diagonalHorizontal}</text>
+  <text x="240" y="62" fontSize="13" fill="currentColor">{side}</text>
+  {caption && <text x="180" y="202" textAnchor="middle" fontSize="12" fill="currentColor">{caption}</text>}
+</>);
+
+const triplesDiagram = (ariaLabel: string, rows: Array<[string, string]>) => latihanDiagram(ariaLabel, <>
+  {rows.map(([triple, result], index) => {
+    const y = 42 + index * 36;
+    return (
+      <g key={triple}>
+        <rect x="34" y={y - 19} width="292" height="28" rx="6" fill="currentColor" opacity=".06" />
+        <text x="52" y={y} fontSize="14" fill="currentColor">{triple}</text>
+        <text x="306" y={y} textAnchor="end" fontSize="13" fill="currentColor">{result}</text>
+      </g>
+    );
+  })}
+</>);
+
+const ladderDiagram = (ariaLabel: string, ladder: string, base: string, height: string) => latihanDiagram(ariaLabel, <>
+  <path d="M72 166 H292 M72 166 V35 M91 166 L274 43" fill="none" stroke="currentColor" strokeWidth="2.5" />
+  <path d="M72 152 h14 v14" fill="none" stroke="currentColor" strokeWidth="1.5" />
+  <path d="M94 160 l8 -7 M111 160 l8 -7 M128 160 l8 -7" stroke="currentColor" strokeWidth="1.5" />
+  <text x="184" y="91" fontSize="14" fill="currentColor">{ladder}</text>
+  <text x="178" y="187" textAnchor="middle" fontSize="14" fill="currentColor">{base}</text>
+  <text x="37" y="102" fontSize="14" fill="currentColor">{height}</text>
+</>);
+
+const boatDiagram = (east: string, north: string, direct: string) => latihanDiagram("Rute kapal ke timur lalu ke utara membentuk segitiga siku-siku", <>
+  <path d="M65 155 H270 V48 M65 155 L270 48" fill="none" stroke="currentColor" strokeWidth="2.5" />
+  <path d="M254 48 h16 v16" fill="none" stroke="currentColor" strokeWidth="1.5" />
+  <circle cx="65" cy="155" r="5" fill="currentColor" />
+  <path d="M125 155 l-8 -5 v10 z M270 105 l-5 8 h10 z" fill="currentColor" />
+  <text x="165" y="177" textAnchor="middle" fontSize="13" fill="currentColor">Timur {east}</text>
+  <text x="279" y="104" fontSize="13" fill="currentColor">Utara {north}</text>
+  <text x="157" y="89" textAnchor="middle" fontSize="13" fill="currentColor">{direct}</text>
+</>);
+
+const towerDiagram = () => latihanDiagram("Jarak anak ke puncak tiang bendera membentuk segitiga siku-siku", <>
+  <path d="M55 162 H310 M250 162 V42 M105 162 L250 42" fill="none" stroke="currentColor" strokeWidth="2.5" />
+  <path d="M236 162 h14 v-14" fill="none" stroke="currentColor" strokeWidth="1.5" />
+  <circle cx="105" cy="145" r="6" fill="currentColor" />
+  <path d="M105 151 v11 m-7 -5 h14" stroke="currentColor" strokeWidth="2" />
+  <text x="175" y="180" textAnchor="middle" fontSize="14" fill="currentColor">9 m</text>
+  <text x="258" y="105" fontSize="14" fill="currentColor">12 m</text>
+  <text x="164" y="94" fontSize="14" fill="currentColor">15 m</text>
+</>);
+
+const coordinateSolutionsDiagram = () => latihanDiagram("Titik S dan dua kemungkinan posisi titik R pada sumbu x dengan jarak 5 satuan", <>
+  <path d="M45 145 H315 M100 185 V28" fill="none" stroke="currentColor" strokeWidth="1.5" />
+  <path d="M90 62 H222 V145 M90 62 L222 145 M90 62 L45 145" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="5 4" />
+  <circle cx="90" cy="62" r="5" fill="currentColor" />
+  <circle cx="222" cy="145" r="5" fill="currentColor" />
+  <circle cx="45" cy="145" r="5" fill="currentColor" />
+  <text x="76" y="54" fontSize="13" fill="currentColor">S(1,4)</text>
+  <text x="222" y="166" textAnchor="middle" fontSize="13" fill="currentColor">R(4,0)</text>
+  <text x="45" y="166" textAnchor="middle" fontSize="13" fill="currentColor">R(-2,0)</text>
+  <text x="148" y="82" fontSize="13" fill="currentColor">5</text>
+</>);
+
+const midpointDiagram = () => latihanDiagram("Titik A dan B, jarak 10 satuan dan titik tengah (5,5)", <>
+  <path d="M52 165 H315 M74 180 V25" fill="none" stroke="currentColor" strokeWidth="1" opacity=".5" />
+  <path d="M115 145 L270 48" fill="none" stroke="currentColor" strokeWidth="2.5" />
+  <circle cx="115" cy="145" r="5" fill="currentColor" />
+  <circle cx="270" cy="48" r="5" fill="currentColor" />
+  <circle cx="192" cy="96" r="5" fill="currentColor" />
+  <text x="84" y="140" fontSize="13" fill="currentColor">A(2,1)</text>
+  <text x="275" y="46" fontSize="13" fill="currentColor">B(8,9)</text>
+  <text x="198" y="91" fontSize="13" fill="currentColor">M(5,5)</text>
+  <text x="184" y="125" fontSize="13" fill="currentColor">AB = 10</text>
+</>);
+
+const latihanSvgMap: Record<string, React.ReactNode> = {
+  "pythagoras-latihan-1": rightTriangleDiagram({ ariaLabel: "Segitiga siku-siku dengan sisi tegak 6 cm dan 8 cm serta sisi miring yang dicari", left: "6 cm", bottom: "8 cm", hypotenuse: "c = ?" }),
+  "pythagoras-latihan-2": rightTriangleDiagram({ ariaLabel: "Segitiga siku-siku dengan sisi 5 cm, 12 cm, dan 13 cm", left: "5 cm", bottom: "12 cm", hypotenuse: "13 cm", caption: "5² + 12² = 13²" }),
+  "pythagoras-latihan-3": rightTriangleDiagram({ ariaLabel: "Segitiga siku-siku umum dengan sisi a, b, dan c", left: "a", bottom: "b", hypotenuse: "c", caption: "c² = a² + b²" }),
+  "pythagoras-latihan-4": rightTriangleDiagram({ ariaLabel: "Segitiga siku-siku dengan hipotenusa 13 cm, satu sisi 5 cm, dan sisi lain yang dicari", left: "5 cm", bottom: "?", hypotenuse: "13 cm" }),
+  "pythagoras-latihan-5": triplesDiagram("Daftar empat kelompok bilangan untuk menentukan tripel Pythagoras", [["3, 4, 5", "Tripel"], ["5, 12, 13", "Tripel"], ["6, 8, 12", "Bukan"], ["8, 15, 17", "Tripel"]]),
+  "pythagoras-latihan-6": coordinateDiagram("Titik A(1,2) dan B(4,6), dengan selisih koordinat 3 dan 4", "A(1,2)", "B(4,6)", "Δx = 3", "Δy = 4", "AB = 5"),
+  "pythagoras-latihan-7": ladderDiagram("Tangga panjang 10 m bersandar pada tembok dengan jarak kaki 6 m", "10 m", "6 m", "h = ?"),
+  "pythagoras-latihan-8": rightTriangleDiagram({ ariaLabel: "Segitiga 30, 60, 90 dengan hipotenusa 24 cm", left: "12 cm", bottom: "12√3 cm", hypotenuse: "24 cm", topAngle: "60°", endAngle: "30°" }),
+  "pythagoras-latihan-9": generalTriangleDiagram("Segitiga dengan sisi c terpanjang untuk membandingkan kuadrat sisi", "a", "c terpanjang", "b", "Bandingkan c² dengan a² + b²"),
+  "pythagoras-latihan-10": coordinateDiagram("Jarak titik P(1,2) dan Q(4,6) pada bidang koordinat", "P(1,2)", "Q(4,6)", "Δx = 3", "Δy = 4", "PQ = ?"),
+  "pythagoras-latihan-11": rhombusDiagram("Belah ketupat dengan diagonal 10 cm dan 24 cm serta sisi 13 cm", "24 cm", "10 cm", "13 cm", "Diagonal saling membagi dua tegak lurus"),
+  "pythagoras-latihan-12": rightTriangleDiagram({ ariaLabel: "Segitiga siku-siku sama kaki dengan sisi tegak a dan sisi miring a akar dua", left: "a cm", bottom: "a cm", hypotenuse: "a√2 cm", topAngle: "45°", endAngle: "45°" }),
+  "pythagoras-latihan-13": generalTriangleDiagram("Segitiga sisi 8 cm, 15 cm, dan 20 cm untuk klasifikasi sudut", "8 cm", "20 cm", "15 cm", "20² > 8² + 15² (tumpul)"),
+  "pythagoras-latihan-14": rectangleDiagram("Persegi panjang ABCD berukuran 3 kali 4 dengan diagonal 5", "3 satuan", "4 satuan", "AC = 5", "A(0,0), B(3,0), C(3,4), D(0,4)"),
+  "pythagoras-latihan-15": rhombusDiagram("Belah ketupat dengan diagonal 16 cm dan 12 cm", "16 cm", "12 cm", "10 cm", "Sisi diperoleh dari setengah diagonal"),
+  "pythagoras-latihan-16": rhombusDiagram("Belah ketupat dengan diagonal 16 cm dan 12 cm untuk menghitung keliling", "16 cm", "12 cm", "10 cm", "Keliling = 4 × sisi"),
+  "pythagoras-latihan-17": rightTriangleDiagram({ ariaLabel: "Segitiga ABC siku-siku di B dengan AB 15 cm, BC 20 cm, dan AC 25 cm", left: "AB = 15", bottom: "BC = 20", hypotenuse: "AC = 25", caption: "Luas = 150 cm²; keliling = 60 cm" }),
+  "pythagoras-latihan-18": boatDiagram("12 km", "5 km", "Jarak langsung = 13 km"),
+  "pythagoras-latihan-19": rectangleDiagram("Persegi panjang dengan panjang 15 cm, lebar 8 cm, dan diagonal dicari", "15 cm", "8 cm", "d = ?"),
+  "pythagoras-latihan-20": coordinateDiagram("Segitiga PQR pada bidang koordinat dengan PQ 6, QR 8, dan PR 10", "P(0,0)", "R(6,8)", "PQ = 6", "QR = 8", "PR = 10", "Q(6,0)"),
+  "pythagoras-latihan-21": towerDiagram(),
+  "pythagoras-latihan-22": rightTriangleDiagram({ ariaLabel: "Segitiga siku-siku sama kaki dengan kedua sisi tegak 7 cm", left: "7 cm", bottom: "7 cm", hypotenuse: "c = ?", topAngle: "45°", endAngle: "45°" }),
+  "pythagoras-latihan-23": rightTriangleDiagram({ ariaLabel: "Segitiga siku-siku sama kaki dengan sisi miring 10 akar dua cm", left: "10 cm", bottom: "10 cm", hypotenuse: "10√2 cm", topAngle: "45°", endAngle: "45°" }),
+  "pythagoras-latihan-24": rightTriangleDiagram({ ariaLabel: "Segitiga siku-siku dengan sisi 5 cm, 12 cm, dan 13 cm", left: "5 cm", bottom: "12 cm", hypotenuse: "13 cm", caption: "Luas = 30 cm²; keliling = 30 cm" }),
+  "pythagoras-latihan-25": coordinateSolutionsDiagram(),
+  "pythagoras-latihan-26": triplesDiagram("Dua segitiga yang dibentuk oleh tangga 17 m: sisi 8, 15, 17 dan 15, 8, 17", [["Tangga 17 m, alas 8 m", "tinggi 15 m"], ["Tangga 17 m, alas 15 m", "tinggi 8 m"], ["Luas untuk alas 8", "60 m²"]]),
+  "pythagoras-latihan-27": midpointDiagram(),
+  "pythagoras-latihan-28": rightTriangleDiagram({ ariaLabel: "Segitiga 30, 60, 90 dengan hipotenusa 20 cm", left: "10 cm", bottom: "10√3 cm", hypotenuse: "20 cm", topAngle: "60°", endAngle: "30°" }),
+  "pythagoras-latihan-29": triplesDiagram("Perbandingan empat kelompok sisi segitiga untuk klasifikasi sudut", [["9, 40, 41", "Siku-siku"], ["6, 7, 10", "Tumpul"], ["4, 5, 6", "Lancip"], ["5, 6, 8", "Bukan siku-siku"]]),
+  "pythagoras-latihan-30": rectangleDiagram("Persegi panjang berukuran 24 cm kali 7 cm dengan diagonal 25 cm", "24 cm", "7 cm", "d = 25 cm", "Keliling = 62 cm"),
+};
+
+const latihanDenganDiagram = latihanDasarTka.map((soal) => ({
+  ...soal,
+  soalSvg: `pythagoras-latihan-${soal.no}`,
+}));
+
 const TeoremaPage = () => (
   <TKAPemantapanLayout
     title="TEOREMA PYTHAGORAS"
     materiSections={materiSections}
     contohSoal={contohSoal}
-    soalSvgMap={contohSvgMap}
-    latihanDasar={latihanDasarTka}
+    soalSvgMap={{ ...contohSvgMap, ...latihanSvgMap }}
+    latihanDasar={latihanDenganDiagram}
     imageScale="half"
     imageScaleExceptQuestionNo={13}
   />

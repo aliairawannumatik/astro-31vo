@@ -132,55 +132,21 @@ function TopiKerucutSVG() {
 /* ── No 7 · CORONG KERUCUT ─────────────────────────────────────── */
 function CorongSVG() {
   return (
-    <svg viewBox="0 0 220 230" width="220" height="230" className="mx-auto">
+    <svg viewBox="0 0 220 230" width="220" height="230" className="mx-auto" role="img" aria-label="Wadah kerucut berisi es serut, jari-jari alas 7 cm dan tinggi 12 cm">
       <defs>
-        <linearGradient id="cr-body" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#7dd3fc" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.7" />
+        <linearGradient id="cone-volume-fill" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#bae6fd" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#0284c7" stopOpacity="0.55" />
         </linearGradient>
-        <linearGradient id="cr-pipe" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#38bdf8" />
-          <stop offset="50%" stopColor="#e0f2fe" />
-          <stop offset="100%" stopColor="#38bdf8" />
-        </linearGradient>
-        <linearGradient id="cr-liquid" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.6" />
-        </linearGradient>
-        <clipPath id="cr-clip">
-          <polygon points="110,30 32,165 188,165" />
-        </clipPath>
       </defs>
-
-      {/* Top rim ellipse */}
-      <ellipse cx="110" cy="30" rx="78" ry="16" fill="#bae6fd" fillOpacity="0.3" stroke="#38bdf8" strokeWidth="2" />
-
-      {/* Cone body (inverted funnel) */}
-      <polygon points="110,165 32,30 188,30" fill="url(#cr-body)" stroke="#0ea5e9" strokeWidth="1.8" />
-
-      {/* Sheen left */}
-      <polygon points="32,30 65,30 110,165" fill="white" fillOpacity="0.18" clipPath="url(#cr-clip)" />
-
-      {/* Liquid inside cone */}
-      <polygon points="110,165 65,85 155,85" fill="url(#cr-liquid)" fillOpacity="0.55" />
-      <ellipse cx="110" cy="85" rx="45" ry="9" fill="#fde68a" fillOpacity="0.6" />
-
-      {/* Pipe/tube at bottom */}
-      <rect x="100" y="163" width="20" height="45" fill="url(#cr-pipe)" stroke="#0ea5e9" strokeWidth="1.5" rx="3" />
-      <ellipse cx="110" cy="163" rx="10" ry="3.5" fill="#7dd3fc" stroke="#0ea5e9" strokeWidth="1.2" />
-      <ellipse cx="110" cy="208" rx="10" ry="3.5" fill="#38bdf8" fillOpacity="0.7" stroke="#0ea5e9" strokeWidth="1.2" />
-
-      {/* Liquid drop from pipe */}
-      <ellipse cx="110" cy="215" rx="4" ry="6" fill="#fbbf24" fillOpacity="0.7" />
-
-      {/* Labels */}
-      <line x1="110" y1="30" x2="188" y2="30" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="4,2" />
-      <text x="149" y="22" fill="#38bdf8" fontSize="11" textAnchor="middle" fontFamily="monospace">r = 10 cm</text>
-      <line x1="192" y1="30" x2="192" y2="165" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="4,2" />
-      <line x1="187" y1="30" x2="197" y2="30" stroke="#38bdf8" strokeWidth="1.2" />
-      <line x1="187" y1="165" x2="197" y2="165" stroke="#38bdf8" strokeWidth="1.2" />
-      <text x="207" y="102" fill="#38bdf8" fontSize="11" textAnchor="middle" fontFamily="monospace">s=26</text>
-      <text x="110" y="225" fill="#7dd3fc" fontSize="10" textAnchor="middle" fontFamily="monospace" fillOpacity="0.8">Corong</text>
+      <ellipse cx="110" cy="174" rx="73" ry="20" fill="#7dd3fc" fillOpacity="0.18" stroke="#0284c7" strokeWidth="1.8" />
+      <path d="M37 174 L110 34 L183 174 Z" fill="url(#cone-volume-fill)" stroke="#0284c7" strokeWidth="2" />
+      <path d="M110 174 L110 34" fill="none" stroke="#075985" strokeWidth="1.4" strokeDasharray="5 4" />
+      <path d="M110 174 L183 174" fill="none" stroke="#075985" strokeWidth="1.4" strokeDasharray="4 3" />
+      <path d="M106 174 V168 H112" fill="none" stroke="#075985" strokeWidth="1.4" />
+      <text x="151" y="165" fill="#075985" fontSize="12" textAnchor="middle" fontFamily="monospace">r = 7 cm</text>
+      <text x="120" y="105" fill="#075985" fontSize="12" fontFamily="monospace">t = 12 cm</text>
+      <text x="110" y="215" fill="#075985" fontSize="11" textAnchor="middle" fontFamily="monospace">Wadah es kerucut</text>
     </svg>
   );
 }
@@ -389,7 +355,8 @@ const questions: Q[] = [
   },
   {
     n: 2, title: "Luas Selimut Kerucut",
-    content: "Sebuah kerucut memiliki jari-jari 7 cm dan garis pelukis 25 cm. Luas selimut kerucut tersebut adalah ... (π = 22/7)",
+    content: "Sebuah kerucut memiliki jari-jari 7 cm dan tinggi 24 cm. Luas selimut kerucut tersebut adalah ... (π = 22/7)",
+    diagram: <ConeSVG r="7 cm" h="24 cm" s="25 cm" />,
     options: [
       { key: "A", text: "440 cm²" },
       { key: "B", text: "550 cm²" },
@@ -445,14 +412,14 @@ const questions: Q[] = [
     answer: "C",
   },
   {
-    n: 7, title: "Soal Cerita – Corong Kerucut",
-    content: "Sebuah corong berbentuk kerucut tanpa alas memiliki r = 10 cm dan s = 26 cm. Luas selimut corong tersebut adalah ... (π = 3,14)",
+    n: 7, title: "Soal Cerita – Volume Wadah Kerucut",
+    content: "Seorang pedagang mengisi es serut ke dalam wadah berbentuk kerucut dengan jari-jari alas 7 cm dan tinggi 12 cm. Volume maksimal es serut di dalam wadah tersebut adalah ... (π = 22/7)",
     diagram: <CorongSVG />,
     options: [
-      { key: "A", text: "753,6 cm²" },
-      { key: "B", text: "816,4 cm²" },
-      { key: "C", text: "879,2 cm²" },
-      { key: "D", text: "942 cm²" },
+      { key: "A", text: "308 cm³" },
+      { key: "B", text: "616 cm³" },
+      { key: "C", text: "924 cm³" },
+      { key: "D", text: "1.848 cm³" },
     ],
     answer: "B",
   },

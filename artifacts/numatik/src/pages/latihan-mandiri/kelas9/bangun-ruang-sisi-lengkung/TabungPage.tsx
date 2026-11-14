@@ -625,8 +625,8 @@ const questions: Q[] = [
     answer: "B",
   }),
   Qn(7, "Luas Permukaan – Terpadu", {
-    content: "Sebuah tabung memiliki luas permukaan total 836 cm² dan tinggi 12 cm. Volume tabung tersebut adalah ... (π = 22/7)",
-    diagram: <CylinderSVG r="?" h="12 cm" lightMode />,
+    content: "Sebuah tabung memiliki luas permukaan total 836 cm² dan jari-jari 7 cm. Volume tabung tersebut adalah ... (π = 22/7)",
+    diagram: <CylinderSVG r="7 cm" extraLabel="L total = 836 cm²" lightMode />,
     choices: [
       { label: "A", text: "924 cm³" },
       { label: "B", text: "1.848 cm³" },
