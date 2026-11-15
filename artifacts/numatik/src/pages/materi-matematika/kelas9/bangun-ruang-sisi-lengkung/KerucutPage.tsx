@@ -370,7 +370,7 @@ const LuasKerucutSVG = ({ language }: { language: Language }) => {
       </defs>
 
       {/* ── Formula bar ── */}
-      <text x="140" y="18" fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = πrs + πr²</text>
+      <text x="140" y="18" fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle" fontWeight="bold">L = πr² + πrs</text>
       <text x="140" y="33" fill="#94a3b8" fontSize="10" fontFamily="monospace" textAnchor="middle">= πr(r + s)</text>
 
       {/* ── SELIMUT — proper juring (sector) lingkaran ── */}
@@ -2208,7 +2208,7 @@ function getSections(language: Language): Sec[] {
             <p>{s5.line3}</p>
           </div>
           <div className="bg-slate-800/60 rounded p-3">
-            <BlockMath math="L = \pi r s + \pi r^2" />
+            <BlockMath math="L = \pi r^2 + \pi r s" />
             <BlockMath math="\boxed{L = \pi r(r + s)}" />
           </div>
           <p className="text-white/60 text-xs">{s5.note}</p>
