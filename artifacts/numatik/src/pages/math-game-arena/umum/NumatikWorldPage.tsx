@@ -825,7 +825,6 @@ const makeQuestion = (quizQuestion?: QuizQuestion): WorldQuestion => {
 
 const NumatikWorldPage = ({
   treasureQuestions,
-  backPath = "/math-game-arena/umum",
 }: {
   treasureQuestions?: QuizQuestion[];
   backPath?: string;
@@ -6062,10 +6061,10 @@ const NumatikWorldPage = ({
               <div className="world-start-top">
                 <button
                   className="world-start-back"
-                  onClick={() => avatarPickerOpen ? navigate(backPath) : setAvatarPickerOpen(true)}
-                  aria-label={avatarPickerOpen ? "Kembali ke pilihan game" : "Kembali ke pemilihan avatar"}
+                  onClick={() => avatarPickerOpen ? navigate(-1) : setAvatarPickerOpen(true)}
+                  aria-label={avatarPickerOpen ? "Kembali ke halaman sebelumnya" : "Kembali ke pemilihan avatar"}
                 >
-                  <ArrowLeft size={15} /> {avatarPickerOpen ? "MENU" : "PILIH AVATAR"}
+                  <ArrowLeft size={15} /> {avatarPickerOpen ? "KEMBALI" : "PILIH AVATAR"}
                 </button>
                 <div className="world-start-badge"><Sparkles size={14} /> PETUALANGAN BELAJAR</div>
               </div>

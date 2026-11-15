@@ -358,7 +358,6 @@ const getQualityPixelRatio = (quality: QualitySetting) => (
 
 const GamePage = ({
   treasureQuestions,
-  backPath = "/math-game-arena/umum",
 }: {
   treasureQuestions?: QuizQuestion[];
   backPath?: string;
@@ -5651,8 +5650,9 @@ const GamePage = ({
               <button
                 className="strike-arena-menu-button"
                 type="button"
-                onClick={() => navigate(backPath)}
-              >KEMBALI KE MENU</button>
+                onClick={() => navigate(-1)}
+                aria-label="Kembali ke halaman sebelumnya"
+              >KEMBALI</button>
               <header className="strike-briefing-head">
                 <div className="strike-briefing-kicker">
                   <span className="strike-briefing-emblem"><Crosshair size={19} /></span>
@@ -5740,7 +5740,7 @@ const GamePage = ({
               {mobile && renderTouchControlSettings("pause")}
               <button className="strike-phase-button is-secondary" onClick={openArenaPicker}>PILIH LOKASI PERANG</button>
               <button className="strike-phase-button" onClick={() => resumeGameRef.current?.()}>LANJUT BERMAIN</button>
-              <button className="strike-phase-button is-secondary" onClick={() => navigate(backPath)}>KEMBALI KE MENU</button>
+              <button className="strike-phase-button is-secondary" onClick={() => navigate(-1)} aria-label="Kembali ke halaman sebelumnya">KEMBALI</button>
             </section>
           </div>
         )}
@@ -5799,7 +5799,7 @@ const GamePage = ({
               </div>
               <button className="strike-phase-button" onClick={() => restartGameRef.current?.()}>MAIN LAGI</button>
               <button className="strike-phase-button is-secondary" onClick={openArenaPicker}>PILIH LOKASI PERANG</button>
-              <button className="strike-phase-button is-secondary" onClick={() => navigate(backPath)}>KEMBALI KE MENU</button>
+              <button className="strike-phase-button is-secondary" onClick={() => navigate(-1)} aria-label="Kembali ke halaman sebelumnya">KEMBALI</button>
             </section>
           </div>
         )}
