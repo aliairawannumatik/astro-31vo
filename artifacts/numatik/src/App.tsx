@@ -174,6 +174,8 @@ const SmaTopicMenuPage = lazy(() => import("./pages/ruang-untuk-guru/SmaTopicMen
 const SmaSubtopicComingSoonPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSubtopicComingSoonPage"));
 const SmaDefinisiBentukUmumPersamaanLingkaranPage = lazy(() => import("./pages/ruang-untuk-guru/SmaDefinisiBentukUmumPersamaanLingkaranPage"));
 const SmaKuasaTitikLingkaranDanGarisPage = lazy(() => import("./pages/ruang-untuk-guru/SmaKuasaTitikLingkaranDanGarisPage"));
+const SmaPersamaanGarisSinggungLingkaranPage = lazy(() => import("./pages/ruang-untuk-guru/SmaPersamaanGarisSinggungLingkaranPage"));
+const SmaHubunganDuaLingkaranPage = lazy(() => import("./pages/ruang-untuk-guru/SmaHubunganDuaLingkaranPage"));
 const SmaSpltvPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSpltvPage"));
 const SmaSptdvPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSptdvPage"));
 const SmaPolinomialKonsepPage = lazy(() => import("./pages/ruang-untuk-guru/SmaPolinomialKonsepPage"));
@@ -1387,6 +1389,14 @@ const AppInner = () => {
             <Route
               path="/ruang-untuk-guru/sma/buku-animasi/lingkaran/kuasa-titik-terhadap-lingkaran-dan-garis"
               element={<SmaKuasaTitikLingkaranDanGarisPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/lingkaran/persamaan-garis-singgung-lingkaran"
+              element={<SmaPersamaanGarisSinggungLingkaranPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/lingkaran/hubungan-dua-lingkaran"
+              element={<SmaHubunganDuaLingkaranPage />}
             />
             <Route path="/ruang-untuk-guru/sma/:mode/:topicSlug/:subtopicSlug" element={<SmaSubtopicComingSoonPage />} />
             <Route path="/ruang-untuk-guru/sma/olimpiade" element={<SmaComingSoonPage />} />
