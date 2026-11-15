@@ -172,6 +172,10 @@ const IntensifUtbkPage = lazy(() => import("./pages/ruang-untuk-guru/IntensifUtb
 const SmaComingSoonPage = lazy(() => import("./pages/ruang-untuk-guru/SmaComingSoonPage"));
 const SmaTopicMenuPage = lazy(() => import("./pages/ruang-untuk-guru/SmaTopicMenuPage"));
 const SmaSubtopicComingSoonPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSubtopicComingSoonPage"));
+const SmaRelasiDanFungsiPage = lazy(() => import("./pages/ruang-untuk-guru/SmaRelasiDanFungsiPage"));
+const SmaFungsiInversPage = lazy(() => import("./pages/ruang-untuk-guru/SmaFungsiInversPage"));
+const SmaFungsiKomposisiPage = lazy(() => import("./pages/ruang-untuk-guru/SmaFungsiKomposisiPage"));
+const SmaPenerapanOperasiInversKomposisiPage = lazy(() => import("./pages/ruang-untuk-guru/SmaPenerapanOperasiInversKomposisiPage"));
 const SmaDefinisiBentukUmumPersamaanLingkaranPage = lazy(() => import("./pages/ruang-untuk-guru/SmaDefinisiBentukUmumPersamaanLingkaranPage"));
 const SmaKuasaTitikLingkaranDanGarisPage = lazy(() => import("./pages/ruang-untuk-guru/SmaKuasaTitikLingkaranDanGarisPage"));
 const SmaPersamaanGarisSinggungLingkaranPage = lazy(() => import("./pages/ruang-untuk-guru/SmaPersamaanGarisSinggungLingkaranPage"));
@@ -1397,6 +1401,22 @@ const AppInner = () => {
             <Route
               path="/ruang-untuk-guru/sma/buku-animasi/lingkaran/hubungan-dua-lingkaran"
               element={<SmaHubunganDuaLingkaranPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/komposisi-fungsi-dan-fungsi-invers/relasi-dan-fungsi"
+              element={<SmaRelasiDanFungsiPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/komposisi-fungsi-dan-fungsi-invers/fungsi-invers"
+              element={<SmaFungsiInversPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/komposisi-fungsi-dan-fungsi-invers/fungsi-komposisi"
+              element={<SmaFungsiKomposisiPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/komposisi-fungsi-dan-fungsi-invers/menyelesaikan-permasalahan-operasi-invers-komposisi-fungsi"
+              element={<SmaPenerapanOperasiInversKomposisiPage />}
             />
             <Route path="/ruang-untuk-guru/sma/:mode/:topicSlug/:subtopicSlug" element={<SmaSubtopicComingSoonPage />} />
             <Route path="/ruang-untuk-guru/sma/olimpiade" element={<SmaComingSoonPage />} />

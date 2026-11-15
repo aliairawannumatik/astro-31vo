@@ -120,10 +120,13 @@ export const SMA_TOPICS: SmaTopic[] = [
     title: "Komposisi Fungsi dan Fungsi Invers",
     slug: "komposisi-fungsi-dan-fungsi-invers",
     subtopics: [
-      { title: "Konsep Fungsi, Domain, Kodomain, dan Range", slug: "konsep-fungsi-domain-kodomain-range" },
-      { title: "Operasi Aljabar pada Fungsi", slug: "operasi-aljabar-pada-fungsi" },
-      { title: "Fungsi Komposisi", slug: "fungsi-komposisi" },
-      { title: "Fungsi Invers", slug: "fungsi-invers" },
+      { title: "RELASI DAN FUNGSI", slug: "relasi-dan-fungsi" },
+      { title: "FUNGSI INVERS", slug: "fungsi-invers" },
+      { title: "FUNGSI KOMPOSISI", slug: "fungsi-komposisi" },
+      {
+        title: "MENYELESAIKAN PERMASALAHAN YANG BERKAITAN DENGAN OPERASI, INVERS, DAN KOMPOSISI FUNGSI",
+        slug: "menyelesaikan-permasalahan-operasi-invers-komposisi-fungsi",
+      },
     ],
   },
   {
