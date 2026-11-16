@@ -1002,13 +1002,6 @@ const HingedNetPreview = ({
 };
 
 type NetDirection = "up" | "down" | "left" | "right";
-type NetVector = [number, number, number];
-type NetFrame = {
-  center: NetVector;
-  u: NetVector;
-  v: NetVector;
-  normal: NetVector;
-};
 
 const NET_DIRECTIONS: { direction: NetDirection; dc: number; dr: number }[] = [
   { direction: "up", dc: 0, dr: -1 },
@@ -1016,85 +1009,6 @@ const NET_DIRECTIONS: { direction: NetDirection; dc: number; dr: number }[] = [
   { direction: "left", dc: -1, dr: 0 },
   { direction: "right", dc: 1, dr: 0 },
 ];
-
-const addNetVector = (a: NetVector, b: NetVector): NetVector =>
-  [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
-const scaleNetVector = (v: NetVector, factor: number): NetVector =>
-  [v[0] * factor, v[1] * factor, v[2] * factor];
-const negateNetVector = (v: NetVector): NetVector => scaleNetVector(v, -1);
-
-const foldNetFrame = (frame: NetFrame, direction: NetDirection): NetFrame => {
-  const { center, u, v, normal } = frame;
-  if (direction === "right") {
-    return {
-      center: addNetVector(center, addNetVector(scaleNetVector(u, 0.5), scaleNetVector(normal, -0.5))),
-      u: negateNetVector(normal),
-      v,
-      normal: u,
-    };
-  }
-  if (direction === "left") {
-    return {
-      center: addNetVector(center, addNetVector(scaleNetVector(u, -0.5), scaleNetVector(normal, -0.5))),
-      u: normal,
-      v,
-      normal: negateNetVector(u),
-    };
-  }
-  if (direction === "down") {
-    return {
-      center: addNetVector(center, addNetVector(scaleNetVector(v, 0.5), scaleNetVector(normal, -0.5))),
-      u,
-      v: negateNetVector(normal),
-      normal: v,
-    };
-  }
-  return {
-    center: addNetVector(center, addNetVector(scaleNetVector(v, -0.5), scaleNetVector(normal, -0.5))),
-    u,
-    v: normal,
-    normal: negateNetVector(v),
-  };
-};
-
-const getNetFrames = (cells: [number, number][]): Map<number, NetFrame> => {
-  const cellIndex = new Map(cells.map(([c, r], index) => [`${c},${r}`, index]));
-  const degree = (index: number) => {
-    const [c, r] = cells[index];
-    return NET_DIRECTIONS.filter(({ dc, dr }) => cellIndex.has(`${c + dc},${r + dr}`)).length;
-  };
-  const rootIndex = cells.reduce((best, _cell, index) =>
-    degree(index) > degree(best) ? index : best, 0);
-  const frames = new Map<number, NetFrame>([[
-    rootIndex,
-    { center: [0, 0, 0], u: [1, 0, 0], v: [0, 1, 0], normal: [0, 0, 1] },
-  ]]);
-  const queue = [rootIndex];
-
-  while (queue.length > 0) {
-    const parentIndex = queue.shift()!;
-    const [c, r] = cells[parentIndex];
-    const parentFrame = frames.get(parentIndex);
-    if (!parentFrame) continue;
-    for (const { direction, dc, dr } of NET_DIRECTIONS) {
-      const childIndex = cellIndex.get(`${c + dc},${r + dr}`);
-      if (childIndex === undefined || frames.has(childIndex)) continue;
-      frames.set(childIndex, foldNetFrame(parentFrame, direction));
-      queue.push(childIndex);
-    }
-  }
-  return frames;
-};
-
-const netFrameTransform = (frame: NetFrame): string => {
-  const matrix = [
-    frame.u[0], frame.u[1], frame.u[2], 0,
-    frame.v[0], frame.v[1], frame.v[2], 0,
-    frame.normal[0], frame.normal[1], frame.normal[2], 0,
-    frame.center[0] * NET_HINGE_SIZE, frame.center[1] * NET_HINGE_SIZE, frame.center[2] * NET_HINGE_SIZE, 1,
-  ];
-  return `matrix3d(${matrix.join(",")})`;
-};
 
 const NET_HINGE_SIZE = 40;
 const NET_HINGE_HALF = NET_HINGE_SIZE / 2;
@@ -1146,9 +1060,11 @@ const getNetTree = (cells: [number, number][]): HingedNetNode => {
 const FrontHingedNetCell = ({
   index,
   children,
+  style,
 }: {
   index: number;
   children?: React.ReactNode;
+  style?: React.CSSProperties;
 }) => (
   <div
     style={{
@@ -1156,6 +1072,7 @@ const FrontHingedNetCell = ({
       width: NET_HINGE_SIZE,
       height: NET_HINGE_SIZE,
       transformStyle: "preserve-3d",
+      ...style,
     }}
   >
     <div
@@ -1205,9 +1122,15 @@ const FrontHingedNetCell = ({
 const FrontHingedNetPreview = ({
   cells,
   lang,
+  hingeAngles,
+  hingeDelays,
+  viewTransform = "rotateX(-18deg) rotateY(28deg)",
 }: {
   cells: [number, number][];
   lang: string;
+  hingeAngles?: Partial<Record<number, number>>;
+  hingeDelays?: Partial<Record<number, number>>;
+  viewTransform?: string;
 }) => {
   const { isDark } = useTheme();
   const [isOpen, setIsOpen] = useState(true);
@@ -1227,14 +1150,15 @@ const FrontHingedNetPreview = ({
         }`
       : "rounded-lg border border-slate-600 bg-slate-800/40 px-3 py-1.5 text-[10px] font-bold text-slate-500 cursor-default";
 
-  const hingeFor = (direction: NetDirection): React.CSSProperties => {
-    const angle = direction === "up"
+  const hingeFor = (direction: NetDirection, depth: number, index: number): React.CSSProperties => {
+    const defaultAngle = direction === "up"
       ? (isOpen ? 0 : -90)
       : direction === "down"
       ? (isOpen ? 0 : 90)
       : direction === "left"
       ? (isOpen ? 0 : 90)
       : (isOpen ? 0 : -90);
+    const angle = isOpen ? 0 : hingeAngles?.[index] ?? defaultAngle;
     const position = direction === "up"
       ? { top: 0, left: 0, width: NET_HINGE_SIZE, height: 0, transformOrigin: "50% 0% 0" }
       : direction === "down"
@@ -1248,10 +1172,13 @@ const FrontHingedNetPreview = ({
       transformStyle: "preserve-3d",
       transform: `rotate${direction === "up" || direction === "down" ? "X" : "Y"}(${angle}deg)`,
       transition: NET_HINGE_TRANSITION,
+      transitionDelay: isOpen
+        ? "0ms"
+        : `${hingeDelays?.[index] ?? Math.max(0, depth - 1) * 180}ms`,
     };
   };
 
-  const renderNode = (node: HingedNetNode): React.ReactNode => {
+  const renderNode = (node: HingedNetNode, depth = 0): React.ReactNode => {
     const cellPosition = !node.direction
       ? { top: 0, left: 0 }
       : node.direction === "up"
@@ -1260,14 +1187,14 @@ const FrontHingedNetPreview = ({
       ? { top: 0, left: -NET_HINGE_SIZE }
       : { top: 0, left: 0 };
     const cell = (
-      <FrontHingedNetCell index={node.index}>
-        {node.children.map(renderNode)}
+      <FrontHingedNetCell index={node.index} style={cellPosition}>
+        {node.children.map(child => renderNode(child, depth + 1))}
       </FrontHingedNetCell>
     );
     if (!node.direction) return cell;
     return (
-      <div key={node.index} style={hingeFor(node.direction)}>
-        <div style={{ position: "absolute", ...cellPosition }}>{cell}</div>
+      <div key={node.index} style={hingeFor(node.direction, depth, node.index)}>
+        {cell}
       </div>
     );
   };
@@ -1286,122 +1213,11 @@ const FrontHingedNetPreview = ({
             height: NET_HINGE_SIZE,
             marginLeft: -NET_HINGE_HALF,
             marginTop: -NET_HINGE_HALF,
-            transform: "rotateX(-18deg) rotateY(28deg)",
+            transform: viewTransform,
             transformStyle: "preserve-3d",
           }}
         >
           {renderNode(tree)}
-        </div>
-      </div>
-      <p className={`text-center text-[10px] font-body ${isOpen ? (isDark ? "text-white/50" : "text-slate-500") : "text-emerald-500"}`}>
-        {isOpen ? labels.net : labels.cube}
-      </p>
-      <div className="mt-2 flex justify-center gap-2">
-        <button
-          type="button"
-          onClick={() => { playPopSound(); setIsOpen(true); }}
-          className={buttonClass(!isOpen, "cyan")}
-        >
-          {labels.unfold}
-        </button>
-        <button
-          type="button"
-          onClick={() => { playPopSound(); setIsOpen(false); }}
-          className={buttonClass(isOpen, "violet")}
-        >
-          {labels.assemble}
-        </button>
-      </div>
-    </div>
-  );
-};
-
-const GenericHingedNetPreview = ({
-  cells,
-  lang,
-}: {
-  cells: [number, number][];
-  lang: string;
-}) => {
-  const { isDark } = useTheme();
-  const [isOpen, setIsOpen] = useState(true);
-  const frames = getNetFrames(cells);
-  const cols = cells.map(([c]) => c);
-  const rows = cells.map(([, r]) => r);
-  const centerC = (Math.min(...cols) + Math.max(...cols)) / 2;
-  const centerR = (Math.min(...rows) + Math.max(...rows)) / 2;
-  const labels = {
-    unfold: lang === "en" ? "Unfold" : lang === "ja" ? "展開" : "Bongkar",
-    assemble: lang === "en" ? "Assemble" : lang === "ja" ? "折りたたむ" : "Satukan",
-    net: lang === "en" ? "Cube net" : lang === "ja" ? "立方体の展開図" : "Jaring-jaring kubus",
-    cube: lang === "en" ? "Assembled cube" : lang === "ja" ? "組み立てた立方体" : "Kubus tersusun",
-  };
-
-  const buttonClass = (active: boolean, tone: "cyan" | "violet") =>
-    active
-      ? `rounded-lg border px-3 py-1.5 text-[10px] font-bold cursor-pointer transition-colors ${
-          tone === "cyan"
-            ? "border-cyan-500 bg-cyan-900/80 text-cyan-200 hover:bg-cyan-800"
-            : "border-violet-500 bg-violet-900/80 text-violet-200 hover:bg-violet-800"
-        }`
-      : "rounded-lg border border-slate-600 bg-slate-800/40 px-3 py-1.5 text-[10px] font-bold text-slate-500 cursor-default";
-
-  return (
-    <div className="w-full">
-      <div
-        className="relative mx-auto overflow-visible"
-        style={{ width: 230, height: 184, perspective: 820 }}
-        aria-label={isOpen ? labels.net : labels.cube}
-      >
-        <div
-          className="absolute left-1/2 top-1/2"
-          style={{
-            width: NET_HINGE_SIZE,
-            height: NET_HINGE_SIZE,
-            marginLeft: -NET_HINGE_HALF,
-            marginTop: -NET_HINGE_HALF,
-            transform: `translateZ(-${NET_HINGE_HALF}px) rotateX(-18deg) rotateY(28deg)`,
-            transformStyle: "preserve-3d",
-          }}
-        >
-          {cells.map(([c, r], index) => {
-            const frame = frames.get(index);
-            const flatTransform = `translate3d(${(c - centerC) * NET_HINGE_SIZE}px, ${(r - centerR) * NET_HINGE_SIZE}px, 0)`;
-            return (
-              <div
-                key={`${c}-${r}`}
-                style={{
-                  position: "absolute",
-                  left: "50%",
-                  top: "50%",
-                  width: NET_HINGE_SIZE,
-                  height: NET_HINGE_SIZE,
-                  marginLeft: -NET_HINGE_HALF,
-                  marginTop: -NET_HINGE_HALF,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: NET_COLORS[index],
-                  border: `2px solid ${NET_COLORS[index]}cc`,
-                  borderRadius: 5,
-                  color: "white",
-                  fontSize: 12,
-                  fontWeight: 800,
-                  fontFamily: "monospace",
-                  boxShadow: isOpen
-                    ? `0 3px 8px ${NET_COLORS[index]}55`
-                    : `0 0 8px ${NET_COLORS[index]}88`,
-                  transformStyle: "preserve-3d",
-                  transformOrigin: "50% 50% 0",
-                  backfaceVisibility: "hidden",
-                  transform: isOpen || !frame ? flatTransform : netFrameTransform(frame),
-                  transition: `${NET_HINGE_TRANSITION} ${isOpen ? (cells.length - index - 1) * 45 : index * 45}ms`,
-                }}
-              >
-                {index + 1}
-              </div>
-            );
-          })}
         </div>
       </div>
       <p className={`text-center text-[10px] font-body ${isOpen ? (isDark ? "text-white/50" : "text-slate-500") : "text-emerald-500"}`}>
@@ -1440,7 +1256,12 @@ const NetGallery = ({ lang }: { lang: string }) => {
           {i < 4 ? (
             <HingedNetPreview faceNumbers={NET_FACE_NUMBERS[i]} variant={(i + 1) as 1 | 2 | 3 | 4} lang={lang} />
           ) : (
-            <GenericHingedNetPreview cells={cells} lang={lang} />
+            <FrontHingedNetPreview
+              cells={cells}
+              lang={lang}
+              hingeAngles={i === 4 ? { 0: -90, 1: 90, 3: 90, 4: 90, 5: -90 } : undefined}
+              hingeDelays={i === 4 ? { 0: 1150 } : undefined}
+            />
           )}
         </div>
       ))}
