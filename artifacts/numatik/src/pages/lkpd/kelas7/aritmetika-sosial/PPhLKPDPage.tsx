@@ -194,10 +194,10 @@ const games: LKPDGame[] = [
   {
     kind: "page-link",
     id: "game-arena-pph",
-    title: "🚀 Game 3: Math Game Arena – PPh",
-    description: "Lanjutkan permainan PPh dengan tantangan layar penuh di Math Game Arena!",
-    path: "/math-game-arena/kelas-7/aritmetika-sosial/pph",
-    buttonLabel: "MAINKAN DI MATH GAME ARENA",
+    title: "🚀 Game 3: Numatik Gamez – PPh",
+    description: "Lanjutkan permainan PPh dengan tantangan layar penuh di Numatik Gamez!",
+    path: "/numatik-gamez/aritmetika-sosial/pph",
+    buttonLabel: "MAINKAN DI NUMATIK GAMEZ",
     emoji: "💼",
   },
 ];

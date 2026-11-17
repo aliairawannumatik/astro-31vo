@@ -1,12 +1,12 @@
 import PracticeCollectionBankPage from "@/components/bank-soal/PracticeCollectionBankPage";
-import PengertianUnsurAljabarPage from "@/pages/latihan-mandiri/kelas7/aljabar/PengertianUnsurAljabarPage";
-import PenjumlahanPenguranganAljabarPage from "@/pages/latihan-mandiri/kelas7/aljabar/PenjumlahanPenguranganAljabarPage";
-import PerkalianAljabarPage from "@/pages/latihan-mandiri/kelas7/aljabar/PerkalianAljabarPage";
-import PembagianAljabarPage from "@/pages/latihan-mandiri/kelas7/aljabar/PembagianAljabarPage";
-import PemangkatanAljabarPage from "@/pages/latihan-mandiri/kelas7/aljabar/PemangkatanAljabarPage";
-import SubstitusiBilanganAljabarPage from "@/pages/latihan-mandiri/kelas7/aljabar/SubstitusiBilanganAljabarPage";
-import FaktorisasiAljabarPage from "@/pages/latihan-mandiri/kelas7/aljabar/FaktorisasiAljabarPage";
-import MenyederhanakanPecahanAljabarPage from "@/pages/latihan-mandiri/kelas7/aljabar/MenyederhanakanPecahanAljabarPage";
+import PengertianUnsurAljabarPage from "@/pages/tugas-latihan-mandiri/aljabar/PengertianUnsurAljabarPage";
+import PenjumlahanPenguranganAljabarPage from "@/pages/tugas-latihan-mandiri/aljabar/PenjumlahanPenguranganAljabarPage";
+import PerkalianAljabarPage from "@/pages/tugas-latihan-mandiri/aljabar/PerkalianAljabarPage";
+import PembagianAljabarPage from "@/pages/tugas-latihan-mandiri/aljabar/PembagianAljabarPage";
+import PemangkatanAljabarPage from "@/pages/tugas-latihan-mandiri/aljabar/PemangkatanAljabarPage";
+import SubstitusiBilanganAljabarPage from "@/pages/tugas-latihan-mandiri/aljabar/SubstitusiBilanganAljabarPage";
+import FaktorisasiAljabarPage from "@/pages/tugas-latihan-mandiri/aljabar/FaktorisasiAljabarPage";
+import MenyederhanakanPecahanAljabarPage from "@/pages/tugas-latihan-mandiri/aljabar/MenyederhanakanPecahanAljabarPage";
 
 const sections = [
   ["PENGERTIAN DAN UNSUR-UNSUR ALJABAR", PengertianUnsurAljabarPage],

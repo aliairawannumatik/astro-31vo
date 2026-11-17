@@ -21,7 +21,7 @@ const modeConfig: Record<SmaLearningMode, {
     accentClass: "text-primary",
     icon: BookOpen,
   },
-  "tugas-latihan-mandiri": {
+  "tugas-tugas-latihan-mandiri": {
     title: "TUGAS-LATIHAN MANDIRI SMA",
     subtitle: "Pilih topik untuk melihat subtopik latihan matematika SMA.",
     actionLabel: "PILIH TOPIK",
@@ -33,7 +33,7 @@ const modeConfig: Record<SmaLearningMode, {
 const SmaTopicMenuPage = () => {
   const navigate = useNavigate();
   const { mode: modeParam, topicSlug } = useParams<{ mode: string; topicSlug?: string }>();
-  const mode = modeParam === "tugas-latihan-mandiri" ? modeParam : "buku-animasi";
+  const mode = modeParam === "tugas-tugas-latihan-mandiri" ? modeParam : "buku-animasi";
   const config = modeConfig[mode];
   const Icon = config.icon;
   const topics = getSmaTopicsForMode(mode);

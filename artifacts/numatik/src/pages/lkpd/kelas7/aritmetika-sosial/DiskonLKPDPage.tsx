@@ -185,10 +185,10 @@ const games: LKPDGame[] = [
   {
     kind: "page-link",
     id: "game-arena-diskon",
-    title: "🚀 Game 3: Math Game Arena – Diskon",
-    description: "Buka mode permainan layar penuh untuk berburu diskon di Math Game Arena!",
-    path: "/math-game-arena/kelas-7/aritmetika-sosial/diskon",
-    buttonLabel: "MAINKAN DI MATH GAME ARENA",
+    title: "🚀 Game 3: Numatik Gamez – Diskon",
+    description: "Buka mode permainan layar penuh untuk berburu diskon di Numatik Gamez!",
+    path: "/numatik-gamez/aritmetika-sosial/diskon",
+    buttonLabel: "MAINKAN DI NUMATIK GAMEZ",
     emoji: "🏷️",
   },
 ];

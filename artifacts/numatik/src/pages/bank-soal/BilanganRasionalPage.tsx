@@ -1,14 +1,14 @@
 import PracticeCollectionBankPage from "@/components/bank-soal/PracticeCollectionBankPage";
-import ArtiPecahanSenilaiMembandingkanPage from "@/pages/latihan-mandiri/kelas7/pecahan/ArtiPecahanSenilaiMembandingkanPage";
-import PecahanCampuranPersenPage from "@/pages/latihan-mandiri/kelas7/pecahan/PecahanCampuranPersenPage";
-import PenjumlahanPecahanPage from "@/pages/latihan-mandiri/kelas7/pecahan/PenjumlahanPecahanPage";
-import PerkalianPecahanPage from "@/pages/latihan-mandiri/kelas7/pecahan/PerkalianPecahanPage";
-import PembagianPecahanPage from "@/pages/latihan-mandiri/kelas7/pecahan/PembagianPecahanPage";
-import BentukDesimalPage from "@/pages/latihan-mandiri/kelas7/pecahan/BentukDesimalPage";
-import PenjumlahanPenguranganDesimalPage from "@/pages/latihan-mandiri/kelas7/pecahan/PenjumlahanPenguranganDesimalPage";
-import PerkalianDesimalPage from "@/pages/latihan-mandiri/kelas7/pecahan/PerkalianDesimalPage";
-import PembagianDesimalPage from "@/pages/latihan-mandiri/kelas7/pecahan/PembagianDesimalPage";
-import PembulatanDesimalPage from "@/pages/latihan-mandiri/kelas7/pecahan/PembulatanDesimalPage";
+import ArtiPecahanSenilaiMembandingkanPage from "@/pages/tugas-latihan-mandiri/pecahan/ArtiPecahanSenilaiMembandingkanPage";
+import PecahanCampuranPersenPage from "@/pages/tugas-latihan-mandiri/pecahan/PecahanCampuranPersenPage";
+import PenjumlahanPecahanPage from "@/pages/tugas-latihan-mandiri/pecahan/PenjumlahanPecahanPage";
+import PerkalianPecahanPage from "@/pages/tugas-latihan-mandiri/pecahan/PerkalianPecahanPage";
+import PembagianPecahanPage from "@/pages/tugas-latihan-mandiri/pecahan/PembagianPecahanPage";
+import BentukDesimalPage from "@/pages/tugas-latihan-mandiri/pecahan/BentukDesimalPage";
+import PenjumlahanPenguranganDesimalPage from "@/pages/tugas-latihan-mandiri/pecahan/PenjumlahanPenguranganDesimalPage";
+import PerkalianDesimalPage from "@/pages/tugas-latihan-mandiri/pecahan/PerkalianDesimalPage";
+import PembagianDesimalPage from "@/pages/tugas-latihan-mandiri/pecahan/PembagianDesimalPage";
+import PembulatanDesimalPage from "@/pages/tugas-latihan-mandiri/pecahan/PembulatanDesimalPage";
 
 const sections = [
   ["ARTI PECAHAN, PECAHAN SENILAI, DAN MEMBANDINGKAN PECAHAN", ArtiPecahanSenilaiMembandingkanPage],

@@ -35,13 +35,13 @@ const smaMenuItems = [
   {
     label: "TUGAS-LATIHAN MANDIRI SMA",
     icon: ClipboardList,
-    path: "/ruang-untuk-guru/sma/tugas-latihan-mandiri",
+    path: "/ruang-untuk-guru/sma/tugas-tugas-latihan-mandiri",
     desc: "Latihan soal untuk memperkuat pemahaman materi",
   },
   {
-    label: "MATH GAME ARENA SMA",
+    label: "NUMATIK GAMEZ SMA",
     icon: Gamepad2,
-    path: "/math-game-arena/sma",
+    path: "/numatik-gamez/sma",
     desc: "Belajar matematika sambil bermain game interaktif",
   },
   {

@@ -6,14 +6,14 @@ import { BookOpen } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const TOPICS = [
-  { key: "bilanganBerpangkat", path: "/materi-matematika/kelas-9/bilangan-berpangkat" },
-  { key: "kesebangunan", path: "/materi-matematika/kelas-9/kesebangunan-kekongruenan" },
-  { key: "transformasiGeometri", path: "/materi-matematika/kelas-9/transformasi-geometri" },
-  { key: "bangunRuangSisiLengkung", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung" },
-  { key: "statistika", path: "/materi-matematika/kelas-9/statistika" },
-  { key: "peluang", path: "/materi-matematika/kelas-9/peluang" },
-  { key: "persamaanKuadrat", path: "/materi-matematika/kelas-9/persamaan-kuadrat" },
-  { key: "fungsiKuadrat", path: "/materi-matematika/kelas-9/fungsi-kuadrat" },
+  { key: "bilanganBerpangkat", path: "/buku-animasi-matematika/bilangan-berpangkat" },
+  { key: "kesebangunan", path: "/buku-animasi-matematika/kesebangunan-kekongruenan" },
+  { key: "transformasiGeometri", path: "/buku-animasi-matematika/transformasi-geometri" },
+  { key: "bangunRuangSisiLengkung", path: "/buku-animasi-matematika/bangun-ruang-sisi-lengkung" },
+  { key: "statistika", path: "/buku-animasi-matematika/statistika" },
+  { key: "peluang", path: "/buku-animasi-matematika/peluang" },
+  { key: "persamaanKuadrat", path: "/buku-animasi-matematika/persamaan-kuadrat" },
+  { key: "fungsiKuadrat", path: "/buku-animasi-matematika/fungsi-kuadrat" },
 ] as const;
 
 const BukuAnimasiMatematikaKelas9Page = () => {

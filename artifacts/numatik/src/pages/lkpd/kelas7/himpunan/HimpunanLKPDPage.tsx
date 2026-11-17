@@ -397,8 +397,8 @@ const games: LKPDGame[] = [
     title: "🚀 Game 5: Arena Himpunan Layar Penuh",
     description:
       "Buka mode permainan layar penuh dan tantang dirimu menjawab soal himpunan secepat mungkin!",
-    path: "/math-game-arena/kelas-7/himpunan",
-    buttonLabel: "MAINKAN DI MATH GAME ARENA",
+    path: "/numatik-gamez/himpunan",
+    buttonLabel: "MAINKAN DI NUMATIK GAMEZ",
     emoji: "🎮",
   },
 ];

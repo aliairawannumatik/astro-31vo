@@ -35,13 +35,13 @@ const sdMenuItems = [
   {
     label: "TUGAS-LATIHAN MANDIRI",
     icon: ClipboardList,
-    path: "/ruang-untuk-guru/sd/tugas-latihan-mandiri",
+    path: "/ruang-untuk-guru/sd/tugas-tugas-latihan-mandiri",
     desc: "Latihan bertahap untuk menguatkan pemahaman",
   },
   {
-    label: "MATH GAME ARENA SD",
+    label: "NUMATIK GAMEZ SD",
     icon: Gamepad2,
-    path: "/ruang-untuk-guru/sd/math-game-arena",
+    path: "/ruang-untuk-guru/sd/numatik-gamez",
     desc: "Asah kemampuan berhitung lewat permainan matematika",
   },
   {
@@ -99,12 +99,12 @@ const sdUpcomingFeatures: Record<string, { title: string; description: string }>
     title: "BUKU ANIMASI MATEMATIKA SD",
     description: "Buku animasi matematika untuk jenjang SD sedang disiapkan.",
   },
-  "tugas-latihan-mandiri": {
+  "tugas-tugas-latihan-mandiri": {
     title: "TUGAS-LATIHAN MANDIRI SD",
     description: "Kumpulan latihan mandiri yang sesuai dengan materi SD sedang disiapkan.",
   },
-  "math-game-arena": {
-    title: "MATH GAME ARENA SD",
+  "numatik-gamez": {
+    title: "NUMATIK GAMEZ SD",
     description: "Permainan matematika yang dirancang untuk siswa SD sedang disiapkan.",
   },
   "tes-kemampuan-akademik": {

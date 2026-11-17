@@ -173,10 +173,10 @@ const games: LKPDGame[] = [
   {
     kind: "page-link",
     id: "game-arena-bnt",
-    title: "🚀 Game 3: Math Game Arena – Bruto, Netto & Tara",
+    title: "🚀 Game 3: Numatik Gamez – Bruto, Netto & Tara",
     description: "Lanjut bermain di arena layar penuh dengan tantangan timbangan!",
-    path: "/math-game-arena/kelas-7/aritmetika-sosial/bruto-netto-tara",
-    buttonLabel: "MAINKAN DI MATH GAME ARENA",
+    path: "/numatik-gamez/aritmetika-sosial/bruto-netto-tara",
+    buttonLabel: "MAINKAN DI NUMATIK GAMEZ",
     emoji: "📦",
   },
 ];

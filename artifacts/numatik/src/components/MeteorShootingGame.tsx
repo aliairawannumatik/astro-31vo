@@ -281,7 +281,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
                   <span className="text-base leading-none">←</span>
                   <span>Kembali</span>
                 </button>
-                <div className="text-[7px] tracking-[5px] text-orange-500/60 uppercase font-bold">⬡ MATH GAME ARENA ⬡</div>
+                <div className="text-[7px] tracking-[5px] text-orange-500/60 uppercase font-bold">⬡ NUMATIK GAMEZ ⬡</div>
                 <button onClick={() => { playPopSound(); stopBgMusic(); navigate(homePath); }}
                   className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-display font-bold text-xs shadow-[0_0_15px_rgba(255,100,0,0.4)] hover:opacity-90 transition-opacity cursor-pointer">
                   <span className="text-base leading-none">🏠</span>

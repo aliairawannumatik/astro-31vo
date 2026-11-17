@@ -18,9 +18,9 @@ export default function DirectTopicMenu({ kind }: { kind: MenuKind }) {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const light = theme !== "dark" && theme !== "ocean";
-  const base = kind === "materi" ? "/materi-matematika" : kind === "latihan" ? "/latihan-mandiri" : kind === "game" ? "/math-game-arena" : "/lkpd";
+  const base = kind === "materi" ? "/buku-animasi-matematika" : kind === "latihan" ? "/tugas-latihan-mandiri" : kind === "game" ? "/numatik-gamez" : "/lkpd";
   const Icon = kind === "materi" ? BookOpen : kind === "latihan" ? ClipboardList : kind === "game" ? Gamepad2 : ClipboardList;
-  const title = kind === "materi" ? "BUKU ANIMASI MATEMATIKA" : kind === "latihan" ? "TUGAS-LATIHAN MANDIRI" : kind === "game" ? "MATH GAME ARENA SMP" : "LKPD";
+  const title = kind === "materi" ? "BUKU ANIMASI MATEMATIKA" : kind === "latihan" ? "TUGAS-LATIHAN MANDIRI" : kind === "game" ? "NUMATIK GAMEZ SMP" : "LKPD";
   return <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${light && kind === "game" ? "gradient-snow" : "gradient-space"}`}>
     {light && kind === "game" ? <Snowfall /> : <Starfield />}
     <PageNavigation prevPath="/menu" />
@@ -29,17 +29,20 @@ export default function DirectTopicMenu({ kind }: { kind: MenuKind }) {
       <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">{title}</h1>
        <p className={`${light ? "text-slate-600" : "text-white/60"} text-sm text-center mb-8 font-body`}>Pilih materi secara langsung.</p>
        <div className="flex flex-col gap-3">
-         {topics.map(([grade, label, slug]) => (
-           <button
-             key={slug}
-             onClick={() => { playPopSound(); navigate(`${base}/kelas-${grade}/${slug}`); }}
-             className={`group flex items-center gap-4 rounded-xl px-5 py-4 transition-all cursor-pointer text-left ${light ? "bg-white/90 border border-slate-200 shadow-sm hover:bg-cyan-50 hover:border-cyan-300" : "bg-card/80 backdrop-blur border border-border hover:border-primary/60"}`}
-           >
-             <Icon className="w-5 h-5 text-primary shrink-0 group-hover:scale-110 transition-transform" />
-             <span className={`font-body text-sm ${light ? "text-slate-800" : "text-white"}`}>{label}</span>
-             <span className="ml-auto text-xs text-primary font-display">BUKA</span>
-           </button>
-         ))}
+         {topics.map(([grade, label, slug]) => {
+           const path = kind === "lkpd" ? `${base}/kelas-${grade}/${slug}` : `${base}/${slug}`;
+           return (
+             <button
+               key={slug}
+               onClick={() => { playPopSound(); navigate(path); }}
+               className={`group flex items-center gap-4 rounded-xl px-5 py-4 transition-all cursor-pointer text-left ${light ? "bg-white/90 border border-slate-200 shadow-sm hover:bg-cyan-50 hover:border-cyan-300" : "bg-card/80 backdrop-blur border border-border hover:border-primary/60"}`}
+             >
+               <Icon className="w-5 h-5 text-primary shrink-0 group-hover:scale-110 transition-transform" />
+               <span className={`font-body text-sm ${light ? "text-slate-800" : "text-white"}`}>{label}</span>
+               <span className="ml-auto text-xs text-primary font-display">BUKA</span>
+             </button>
+           );
+         })}
        </div>
     </main>
   </div>;

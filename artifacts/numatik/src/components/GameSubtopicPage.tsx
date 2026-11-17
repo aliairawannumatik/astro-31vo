@@ -37,16 +37,16 @@ const LEVEL_COLORS = [
 ];
 
 const getGameChooserPath = (path: string) => {
-  const match = path.match(/^\/math-game-arena\/kelas-(7|8|9)\/([^/]+)\/([^/]+)$/);
+  const match = path.match(/^\/numatik-gamez\/([^/]+)\/([^/]+)$/);
   if (!match) return path;
-  const [, grade, parentSlug, slug] = match;
-  return `/math-game-arena/kelas-${grade}/pilih/${parentSlug}/${slug}`;
+  const [, parentSlug, slug] = match;
+  return `/numatik-gamez/pilih/${parentSlug}/${slug}`;
 };
 
 const GameSubtopicPage = ({
   title,
   subtopics,
-  backPath = "/math-game-arena/kelas-7",
+  backPath = "/numatik-gamez",
   backLabel,
   icon = "🚀",
   kelasLabel,
@@ -55,7 +55,7 @@ const GameSubtopicPage = ({
   const { theme } = useTheme();
   const { t, i18n } = useTranslation();
   const isLight = theme === "light";
-  const allTopicsPath = "/math-game-arena";
+  const allTopicsPath = "/numatik-gamez";
   const language = i18n.resolvedLanguage?.split("-")[0] ?? "id";
   const backToAllLabel =
     language === "en" ? "Back to all topics" :
@@ -77,7 +77,7 @@ const GameSubtopicPage = ({
             {title}
           </h1>
           <p className="text-cyan-400/60 text-xs font-body tracking-widest uppercase">
-            Math Game Arena
+            Numatik Gamez
           </p>
           <div className="mt-3 flex items-center justify-center gap-2 text-[11px] font-body" style={{ color: "var(--text-secondary)" }}>
             <span>🎮</span>

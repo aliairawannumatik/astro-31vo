@@ -1,13 +1,13 @@
 import OlympiadBankPage from "@/components/bank-soal/OlympiadBankPage";
 import type { OlympiadQuestion } from "@/components/bank-soal/OlympiadBankPage";
-import { QUESTIONS_BY_LANG as penjumlahanQuestions } from "@/pages/latihan-mandiri/kelas7/bilangan-bulat/PenjumlahanPage";
-import { QUESTIONS_BY_LANG as penguranganQuestions } from "@/pages/latihan-mandiri/kelas7/bilangan-bulat/PenguranganPage";
-import { QUESTIONS_BY_LANG as perkalianQuestions } from "@/pages/latihan-mandiri/kelas7/bilangan-bulat/PerkalianPage";
+import { QUESTIONS_BY_LANG as penjumlahanQuestions } from "@/pages/tugas-latihan-mandiri/bilangan-bulat/PenjumlahanPage";
+import { QUESTIONS_BY_LANG as penguranganQuestions } from "@/pages/tugas-latihan-mandiri/bilangan-bulat/PenguranganPage";
+import { QUESTIONS_BY_LANG as perkalianQuestions } from "@/pages/tugas-latihan-mandiri/bilangan-bulat/PerkalianPage";
 import {
   MATH_QUESTIONS as operasiMathQuestions,
   ESSAY_QUESTIONS_BY_LANG as operasiEssayQuestions,
-} from "@/pages/latihan-mandiri/kelas7/bilangan-bulat/OperasiCampuranPage";
-import { QUESTIONS_BY_LANG as kpkFpbQuestions } from "@/pages/latihan-mandiri/kelas7/bilangan-bulat/KPKFPBPage";
+} from "@/pages/tugas-latihan-mandiri/bilangan-bulat/OperasiCampuranPage";
+import { QUESTIONS_BY_LANG as kpkFpbQuestions } from "@/pages/tugas-latihan-mandiri/bilangan-bulat/KPKFPBPage";
 
 const toReadableMath = (math: string) =>
   math

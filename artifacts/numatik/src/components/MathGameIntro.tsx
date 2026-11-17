@@ -210,7 +210,7 @@ const MathGameIntro = ({
           <div className="mb-1 sm:mb-2">
             <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-black tracking-wider">
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(0,200,255,0.55)]">
-                MATH GAME ARENA
+                NUMATIK GAMEZ
               </span>
             </h1>
           </div>

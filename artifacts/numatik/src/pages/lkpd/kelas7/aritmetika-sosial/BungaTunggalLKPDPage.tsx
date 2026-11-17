@@ -197,10 +197,10 @@ const games: LKPDGame[] = [
   {
     kind: "page-link",
     id: "game-arena-bunga",
-    title: "🚀 Game 3: Math Game Arena – Bunga Tunggal",
-    description: "Mainkan tantangan bunga tunggal layar penuh di Math Game Arena!",
-    path: "/math-game-arena/kelas-7/aritmetika-sosial/bunga-tunggal",
-    buttonLabel: "MAINKAN DI MATH GAME ARENA",
+    title: "🚀 Game 3: Numatik Gamez – Bunga Tunggal",
+    description: "Mainkan tantangan bunga tunggal layar penuh di Numatik Gamez!",
+    path: "/numatik-gamez/aritmetika-sosial/bunga-tunggal",
+    buttonLabel: "MAINKAN DI NUMATIK GAMEZ",
     emoji: "🏦",
   },
 ];

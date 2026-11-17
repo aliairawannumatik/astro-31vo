@@ -390,7 +390,7 @@ const ModelSPLDVLKPDPage = () => {
               <p className="font-body text-xs text-white/50 text-center mb-4">Pilih mode game favoritmu!</p>
               <div className="grid grid-cols-3 gap-2">
                 {POSTES_GAMES.map(g=>(
-                  <button key={g.id} onClick={()=>navigate(`/math-game-arena/kelas-8/spldv/model-spldv/${g.id}`)} className={`rounded-xl border-2 bg-gradient-to-br ${g.bg} p-3 text-center active:scale-95 transition-all hover:brightness-110`} style={{boxShadow:`0 0 16px ${g.glow}`}}>
+                  <button key={g.id} onClick={()=>navigate(`/numatik-gamez/spldv/model-spldv/${g.id}`)} className={`rounded-xl border-2 bg-gradient-to-br ${g.bg} p-3 text-center active:scale-95 transition-all hover:brightness-110`} style={{boxShadow:`0 0 16px ${g.glow}`}}>
                     <p className="text-2xl mb-1">{g.emoji}</p><p className="font-body text-[10px] text-white/85 font-semibold leading-tight">{g.name}</p>
                   </button>
                 ))}

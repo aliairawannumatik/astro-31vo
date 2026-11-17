@@ -1,14 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import MeteorShootingGame from "@/components/MeteorShootingGame";
 import type { QuizQuestion } from "@/components/MeteorShootingGame";
-import FlappyRocketPage from "@/pages/math-game-arena/umum/FlappyRocketPage";
-import BattleTankPage from "@/pages/math-game-arena/umum/BattleTankPage";
-import SpaceImpactPage from "@/pages/math-game-arena/umum/SpaceImpactPage";
-import DinoRunGamePage from "@/pages/math-game-arena/umum/DinoRunGamePage";
-import TetrisGamePage from "@/pages/math-game-arena/umum/TetrisGamePage";
-import SnakeMathPage from "@/pages/math-game-arena/umum/SnakeMathPage";
-import BrickBreakerPage from "@/pages/math-game-arena/umum/BrickBreakerPage";
-import GalaksiTempurPage from "@/pages/math-game-arena/umum/GalaksiTempurPage";
+import FlappyRocketPage from "@/pages/numatik-gamez/umum/FlappyRocketPage";
+import BattleTankPage from "@/pages/numatik-gamez/umum/BattleTankPage";
+import SpaceImpactPage from "@/pages/numatik-gamez/umum/SpaceImpactPage";
+import DinoRunGamePage from "@/pages/numatik-gamez/umum/DinoRunGamePage";
+import TetrisGamePage from "@/pages/numatik-gamez/umum/TetrisGamePage";
+import SnakeMathPage from "@/pages/numatik-gamez/umum/SnakeMathPage";
+import BrickBreakerPage from "@/pages/numatik-gamez/umum/BrickBreakerPage";
+import GalaksiTempurPage from "@/pages/numatik-gamez/umum/GalaksiTempurPage";
 import { getSubmaterialK8 } from "@/data/mga-k8/registry";
 import type { GuruQuestion } from "@/hooks/useGuruQuiz";
 

@@ -6,15 +6,15 @@ import { BookOpen } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const TOPICS = [
-  { key: "polaBilangan", path: "/materi-matematika/kelas-8/pola-bilangan" },
-  { key: "koordinatKartesius", path: "/materi-matematika/kelas-8/koordinat-cartesius" },
-  { key: "relasiFungsi", path: "/materi-matematika/kelas-8/relasi-dan-fungsi" },
-  { key: "spldv", path: "/materi-matematika/kelas-8/spldv" },
-  { key: "persamaanGarisLurus", path: "/materi-matematika/kelas-8/persamaan-garis-lurus" },
-  { key: "teoremaPythagoras", path: "/materi-matematika/kelas-8/teorema-pythagoras" },
-  { key: "lingkaran", path: "/materi-matematika/kelas-8/lingkaran" },
-  { key: "garisSinggungLingkaran", path: "/materi-matematika/kelas-8/garis-singgung-lingkaran" },
-  { key: "bangunRuangSisiDatar", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar" },
+  { key: "polaBilangan", path: "/buku-animasi-matematika/pola-bilangan" },
+  { key: "koordinatKartesius", path: "/buku-animasi-matematika/koordinat-cartesius" },
+  { key: "relasiFungsi", path: "/buku-animasi-matematika/relasi-dan-fungsi" },
+  { key: "spldv", path: "/buku-animasi-matematika/spldv" },
+  { key: "persamaanGarisLurus", path: "/buku-animasi-matematika/persamaan-garis-lurus" },
+  { key: "teoremaPythagoras", path: "/buku-animasi-matematika/teorema-pythagoras" },
+  { key: "lingkaran", path: "/buku-animasi-matematika/lingkaran" },
+  { key: "garisSinggungLingkaran", path: "/buku-animasi-matematika/garis-singgung-lingkaran" },
+  { key: "bangunRuangSisiDatar", path: "/buku-animasi-matematika/bangun-ruang-sisi-datar" },
 ] as const;
 
 const BukuAnimasiMatematikaKelas8Page = () => {

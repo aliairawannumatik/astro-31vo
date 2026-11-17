@@ -112,7 +112,7 @@ const SmaEksponenLogaritmaLatihanPage = () => {
     <div className="relative min-h-screen overflow-x-hidden bg-[#070b23] text-white">
       <Starfield />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(ellipse_at_top,_rgba(217,70,239,0.24),_transparent_68%)]" />
-      <PageNavigation prevPath="/ruang-untuk-guru/sma/tugas-latihan-mandiri/eksponen-dan-logaritma" />
+      <PageNavigation prevPath="/ruang-untuk-guru/sma/tugas-tugas-latihan-mandiri/eksponen-dan-logaritma" />
 
       <main className="relative z-10 mx-auto w-full max-w-5xl px-4 pb-20 pt-16">
         <header className="relative mb-8 overflow-hidden rounded-[2rem] border border-fuchsia-200/25 bg-gradient-to-br from-fuchsia-500/20 via-violet-600/15 to-cyan-600/20 p-6 text-center shadow-2xl shadow-fuchsia-950/30 md:p-10">
@@ -224,7 +224,7 @@ const SmaEksponenLogaritmaLatihanPage = () => {
         <div className="mt-6 text-center">
           <button
             type="button"
-            onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/sma/tugas-latihan-mandiri/eksponen-dan-logaritma"); }}
+            onClick={() => { playPopSound(); navigate("/ruang-untuk-guru/sma/tugas-tugas-latihan-mandiri/eksponen-dan-logaritma"); }}
             className="font-body text-sm text-white/50 transition hover:text-fuchsia-200"
           >
             Kembali ke subtopik

@@ -6,15 +6,15 @@ import { BookOpen } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const TOPICS = [
-  { key: "bilanganBulat", path: "/materi-matematika/kelas-7/bilangan-bulat" },
-  { key: "pecahan", path: "/materi-matematika/kelas-7/bilangan-rasional" },
-  { key: "aljabar", path: "/materi-matematika/kelas-7/aljabar" },
-  { key: "plsvPtlsv", path: "/materi-matematika/kelas-7/plsv-ptlsv" },
-  { key: "perbandingan", path: "/materi-matematika/kelas-7/perbandingan" },
-  { key: "aritmetikaSosial", path: "/materi-matematika/kelas-7/aritmetika-sosial" },
-  { key: "garisDanSudut", path: "/materi-matematika/kelas-7/garis-dan-sudut" },
-  { key: "segitigaDanSegiempat", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat" },
-  { key: "himpunan", path: "/materi-matematika/kelas-7/himpunan" },
+  { key: "bilanganBulat", path: "/buku-animasi-matematika/bilangan-bulat" },
+  { key: "pecahan", path: "/buku-animasi-matematika/bilangan-rasional" },
+  { key: "aljabar", path: "/buku-animasi-matematika/aljabar" },
+  { key: "plsvPtlsv", path: "/buku-animasi-matematika/plsv-ptlsv" },
+  { key: "perbandingan", path: "/buku-animasi-matematika/perbandingan" },
+  { key: "aritmetikaSosial", path: "/buku-animasi-matematika/aritmetika-sosial" },
+  { key: "garisDanSudut", path: "/buku-animasi-matematika/garis-dan-sudut" },
+  { key: "segitigaDanSegiempat", path: "/buku-animasi-matematika/segitiga-dan-segiempat" },
+  { key: "himpunan", path: "/buku-animasi-matematika/himpunan" },
 ] as const;
 
 const BukuAnimasiMatematikaKelas7Page = () => {

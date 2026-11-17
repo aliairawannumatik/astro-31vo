@@ -60,7 +60,7 @@ const QuizGameOverlay = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const isGamePage = location.pathname.startsWith("/math-game-arena/umum/");
+  const isGamePage = location.pathname.startsWith("/numatik-gamez/umum/");
 
   const [countdown, setCountdown] = useState(QUIZ_INTERVAL);
   const [lives, setLives] = useState(MAX_LIVES);

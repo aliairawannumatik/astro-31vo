@@ -151,7 +151,7 @@ const SubmaterialGameVariantsChooser = () => {
         {isLight ? <Snowfall /> : <Starfield />}
         <div className="relative z-10 text-center px-6">
           <h1 className="font-display text-2xl font-black mb-2" style={{ color: "var(--text-primary)" }}>Sub-materi tidak ditemukan</h1>
-          <p className="text-sm mb-6 font-body" style={{ color: "var(--text-secondary)" }}>Sub-materi ini belum tersedia di Math Game Arena.</p>
+          <p className="text-sm mb-6 font-body" style={{ color: "var(--text-secondary)" }}>Sub-materi ini belum tersedia di Numatik Gamez.</p>
           <button
             onClick={() => navigate(-1)}
             className="rounded-full px-5 py-2 text-sm font-bold transition-colors" style={{ border: "1px solid var(--border)", background: "var(--btn-bg)", color: "var(--text-primary)" }}
@@ -163,7 +163,7 @@ const SubmaterialGameVariantsChooser = () => {
     );
   }
 
-  const parentPath = `/math-game-arena/kelas-7/${entry.parentSlug}`;
+  const parentPath = `/numatik-gamez/${entry.parentSlug}`;
 
   return (
     <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
@@ -180,7 +180,7 @@ const SubmaterialGameVariantsChooser = () => {
             {entry.label}
           </h1>
           <p className="text-cyan-400/60 text-xs font-body tracking-widest uppercase">
-            Kelas 7 · Math Game Arena
+            Kelas 7 · Numatik Gamez
           </p>
           <div className="mt-3 flex items-center justify-center gap-2 text-[11px] font-body" style={{ color: "var(--text-secondary)" }}>
             <span>🎮</span>
@@ -190,7 +190,7 @@ const SubmaterialGameVariantsChooser = () => {
 
         <div className="flex flex-col gap-3">
           {VARIANTS.map((v, i) => {
-            const path = `/math-game-arena/kelas-7/${entry.parentSlug}/${entry.slug}/${v.variantSlug}`;
+            const path = `/numatik-gamez/${entry.parentSlug}/${entry.slug}/${v.variantSlug}`;
             const isStrike = v.variantSlug === "numatik-strike";
             const isWorld = v.variantSlug === "numatik-world";
             const is3dGame = isStrike || isWorld;

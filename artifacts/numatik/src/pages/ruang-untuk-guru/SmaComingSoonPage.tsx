@@ -28,7 +28,7 @@ const FEATURES: Record<string, SmaFeature> = {
     accent: "text-cyan-300",
     glow: "bg-cyan-400/15",
   },
-  "tugas-latihan-mandiri": {
+  "tugas-tugas-latihan-mandiri": {
     title: "TUGAS-LATIHAN MANDIRI SMA",
     description: "Kumpulan latihan bertahap untuk membantu kamu belajar mandiri sedang diracik.",
     icon: ClipboardList,

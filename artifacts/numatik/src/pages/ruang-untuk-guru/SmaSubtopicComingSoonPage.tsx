@@ -10,10 +10,10 @@ const BASE_PATH = "/ruang-untuk-guru/sma";
 const SmaSubtopicComingSoonPage = () => {
   const navigate = useNavigate();
   const { mode, topicSlug, subtopicSlug } = useParams<{ mode: string; topicSlug: string; subtopicSlug: string }>();
-  const learningMode = mode === "tugas-latihan-mandiri" ? mode : "buku-animasi";
+  const learningMode = mode === "tugas-tugas-latihan-mandiri" ? mode : "buku-animasi";
   const topic = getSmaTopicsForMode(learningMode).find((item) => item.slug === topicSlug);
   const subtopic = topic?.subtopics.find((item) => item.slug === subtopicSlug);
-  const isPractice = mode === "tugas-latihan-mandiri";
+  const isPractice = mode === "tugas-tugas-latihan-mandiri";
   const Icon = isPractice ? ClipboardList : BookOpen;
 
   if (!topic || !subtopic) {
@@ -24,7 +24,7 @@ const SmaSubtopicComingSoonPage = () => {
           <h1 className="font-display text-2xl font-bold text-primary">Subtopik tidak ditemukan</h1>
           <button
             type="button"
-            onClick={() => { playPopSound(); navigate(`${BASE_PATH}/${isPractice ? "tugas-latihan-mandiri" : "buku-animasi"}`); }}
+            onClick={() => { playPopSound(); navigate(`${BASE_PATH}/${isPractice ? "tugas-tugas-latihan-mandiri" : "buku-animasi"}`); }}
             className="mt-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-primary"
           >
             <ArrowLeft className="w-4 h-4" />

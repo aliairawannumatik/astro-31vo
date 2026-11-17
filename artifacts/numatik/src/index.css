@@ -1904,7 +1904,7 @@
 .light-mode .bg-green-900\/20   { background-color: rgba(220,252,231,0.6) !important; }
 .theme-ocean .bg-green-900\/20  { background-color: rgba(6,95,70,0.30) !important; }
 
-/* ── Bilangan Berpangkat latihan-mandiri: card gradient + bg overrides ──
+/* ── Bilangan Berpangkat tugas-latihan-mandiri: card gradient + bg overrides ──
    Pages use bg-gradient-to-br from-{color}-900/30 via-slate-900/80 to-{color2}-900/30.
    via-slate-900/80 is already handled; the from-* and to-* gradient stops need overrides.
    bg-white/5 (question-part rows) needs a dark-tint equivalent for light bg.         ── */
@@ -1927,7 +1927,7 @@
 .light-mode .bg-amber-900\/20     { background-color: rgba(254,243,199,0.65) !important; }
 .light-mode .bg-rose-900\/20      { background-color: rgba(255,228,230,0.65) !important; }
 
-/* ── Kesebangunan/Kekongruenan latihan-mandiri: missing gradient + bg overrides ──
+/* ── Kesebangunan/Kekongruenan tugas-latihan-mandiri: missing gradient + bg overrides ──
    These pages use bg-gradient-to-br from-{color}-900/30 via-slate-900/80 to-{color2}-900/30.
    The via-slate-900/80 is the dominant dark middle stop — must be overridden first.
    Additionally, cyan and orange from/to stops and their concept-box bg-*-900/20 are missing. ── */
@@ -1966,13 +1966,13 @@
 /* ── Aritmetika Sosial latihan: brighten the Bunga Tunggal and PPN cards ──
    Their lime/green and emerald/teal gradient stops were not covered by the
    existing light-mode palette, leaving the cards visibly dark. ── */
-html.light-mode .latihan-mandiri-route .from-lime-900\/40 {
+html.light-mode .tugas-latihan-mandiri-route .from-lime-900\/40 {
   --tw-gradient-from: rgba(236,252,203,0.80) var(--tw-gradient-from-position) !important;
 }
-html.light-mode .latihan-mandiri-route .to-green-900\/30 {
+html.light-mode .tugas-latihan-mandiri-route .to-green-900\/30 {
   --tw-gradient-to: rgba(220,252,231,0.65) var(--tw-gradient-to-position) !important;
 }
-html.light-mode .latihan-mandiri-route .from-emerald-900\/40 {
+html.light-mode .tugas-latihan-mandiri-route .from-emerald-900\/40 {
   --tw-gradient-from: rgba(209,250,229,0.80) var(--tw-gradient-from-position) !important;
 }
 
@@ -2517,7 +2517,7 @@ html.light-mode .division-zero-calculator-copy {
 }
 
 /* button.rounded-2xl.overflow-hidden — auto-covers ALL subtopic list pages
-   (MateriTopicPage, GameSubtopicPage, every latihan-mandiri page, etc.)
+   (MateriTopicPage, GameSubtopicPage, every tugas-latihan-mandiri page, etc.)
    without editing each file individually */
 [data-theme="white"] button.rounded-2xl.overflow-hidden {
   background: linear-gradient(
@@ -5432,104 +5432,104 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
    ══════════════════════════════════════════════════════════════════ */
 
 /* Make translucent white and dark utility surfaces read as light cards. */
-.light-mode .latihan-mandiri-route .bg-white\/3,
-.light-mode .latihan-mandiri-route .bg-white\/5,
-.light-mode .latihan-mandiri-route .bg-white\/8,
-.light-mode .latihan-mandiri-route .bg-white\/10,
-.light-mode .latihan-mandiri-route .bg-white\/20 {
+.light-mode .tugas-latihan-mandiri-route .bg-white\/3,
+.light-mode .tugas-latihan-mandiri-route .bg-white\/5,
+.light-mode .tugas-latihan-mandiri-route .bg-white\/8,
+.light-mode .tugas-latihan-mandiri-route .bg-white\/10,
+.light-mode .tugas-latihan-mandiri-route .bg-white\/20 {
   background-color: rgba(255,255,255,0.76) !important;
 }
 
-.light-mode .latihan-mandiri-route .bg-slate-950,
-.light-mode .latihan-mandiri-route .bg-slate-950\/70,
-.light-mode .latihan-mandiri-route .bg-slate-950\/80,
-.light-mode .latihan-mandiri-route .bg-slate-900\/60,
-.light-mode .latihan-mandiri-route .bg-slate-900\/70,
-.light-mode .latihan-mandiri-route .bg-slate-900\/80,
-.light-mode .latihan-mandiri-route .bg-slate-800\/80 {
+.light-mode .tugas-latihan-mandiri-route .bg-slate-950,
+.light-mode .tugas-latihan-mandiri-route .bg-slate-950\/70,
+.light-mode .tugas-latihan-mandiri-route .bg-slate-950\/80,
+.light-mode .tugas-latihan-mandiri-route .bg-slate-900\/60,
+.light-mode .tugas-latihan-mandiri-route .bg-slate-900\/70,
+.light-mode .tugas-latihan-mandiri-route .bg-slate-900\/80,
+.light-mode .tugas-latihan-mandiri-route .bg-slate-800\/80 {
   background-color: rgba(248,250,252,0.94) !important;
 }
 
 /* Exercise index cards that use an inline translucent dark background. */
-.light-mode .latihan-mandiri-route button.backdrop-blur,
-.light-mode .latihan-mandiri-route button[class*="bg-card"] {
+.light-mode .tugas-latihan-mandiri-route button.backdrop-blur,
+.light-mode .tugas-latihan-mandiri-route button[class*="bg-card"] {
   background-color: rgba(255,255,255,0.92) !important;
   background-image: none !important;
 }
 
 /* Card overlays and question panels with inline dark colors. */
-.light-mode .latihan-mandiri-route [style*="rgba(2,8,23"],
-.light-mode .latihan-mandiri-route [style*="rgba(6,12,30"],
-.light-mode .latihan-mandiri-route [style*="rgba(8,15,35"],
-.light-mode .latihan-mandiri-route [style*="rgba(9,16,35"],
-.light-mode .latihan-mandiri-route [style*="rgba(10,15,40"],
-.light-mode .latihan-mandiri-route [style*="rgba(10,18,40"],
-.light-mode .latihan-mandiri-route [style*="rgba(15,12,41"],
-.light-mode .latihan-mandiri-route [style*="rgba(15,10,30"],
-.light-mode .latihan-mandiri-route [style*="rgba(20,20,40"] {
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(2,8,23"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(6,12,30"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(8,15,35"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(9,16,35"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(10,15,40"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(10,18,40"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(15,12,41"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(15,10,30"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(20,20,40"] {
   background: var(--bg-card) !important;
   border-color: var(--border) !important;
 }
 
 /* Formula / answer rows written as inline white-on-dark surfaces. */
-.light-mode .latihan-mandiri-route [style*="rgba(255,255,255,0.03"],
-.light-mode .latihan-mandiri-route [style*="rgba(255,255,255,0.04"],
-.light-mode .latihan-mandiri-route [style*="rgba(255,255,255,0.06"],
-.light-mode .latihan-mandiri-route [style*="rgba(255,255,255,0.08"] {
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(255,255,255,0.03"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(255,255,255,0.04"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(255,255,255,0.06"],
+.light-mode .tugas-latihan-mandiri-route [style*="rgba(255,255,255,0.08"] {
   background-color: rgba(241,245,249,0.92) !important;
   border-color: rgba(100,116,139,0.28) !important;
 }
 
 /* Readable body copy and headings in custom exercise cards. */
-.light-mode .latihan-mandiri-route .text-white,
-.light-mode .latihan-mandiri-route .text-white\/80,
-.light-mode .latihan-mandiri-route .text-white\/85,
-.light-mode .latihan-mandiri-route .text-white\/90,
-.light-mode .latihan-mandiri-route .text-white\/95 {
+.light-mode .tugas-latihan-mandiri-route .text-white,
+.light-mode .tugas-latihan-mandiri-route .text-white\/80,
+.light-mode .tugas-latihan-mandiri-route .text-white\/85,
+.light-mode .tugas-latihan-mandiri-route .text-white\/90,
+.light-mode .tugas-latihan-mandiri-route .text-white\/95 {
   color: #172033 !important;
 }
 
-.light-mode .latihan-mandiri-route .text-white\/20,
-.light-mode .latihan-mandiri-route .text-white\/25,
-.light-mode .latihan-mandiri-route .text-white\/30,
-.light-mode .latihan-mandiri-route .text-white\/40,
-.light-mode .latihan-mandiri-route .text-white\/50,
-.light-mode .latihan-mandiri-route .text-white\/55,
-.light-mode .latihan-mandiri-route .text-white\/60,
-.light-mode .latihan-mandiri-route .text-white\/65,
-.light-mode .latihan-mandiri-route .text-white\/70,
-.light-mode .latihan-mandiri-route .text-white\/75 {
+.light-mode .tugas-latihan-mandiri-route .text-white\/20,
+.light-mode .tugas-latihan-mandiri-route .text-white\/25,
+.light-mode .tugas-latihan-mandiri-route .text-white\/30,
+.light-mode .tugas-latihan-mandiri-route .text-white\/40,
+.light-mode .tugas-latihan-mandiri-route .text-white\/50,
+.light-mode .tugas-latihan-mandiri-route .text-white\/55,
+.light-mode .tugas-latihan-mandiri-route .text-white\/60,
+.light-mode .tugas-latihan-mandiri-route .text-white\/65,
+.light-mode .tugas-latihan-mandiri-route .text-white\/70,
+.light-mode .tugas-latihan-mandiri-route .text-white\/75 {
   color: #475569 !important;
 }
 
 /* The generic light-mode rules do not cover every low-opacity accent. */
-.light-mode .latihan-mandiri-route .text-cyan-300\/30,
-.light-mode .latihan-mandiri-route .text-cyan-300\/50,
-.light-mode .latihan-mandiri-route .text-emerald-300\/30,
-.light-mode .latihan-mandiri-route .text-green-300\/30,
-.light-mode .latihan-mandiri-route .text-indigo-300\/30,
-.light-mode .latihan-mandiri-route .text-indigo-300\/60,
-.light-mode .latihan-mandiri-route .text-muted-foreground\/60,
-.light-mode .latihan-mandiri-route .text-violet-300\/30,
-.light-mode .latihan-mandiri-route .text-violet-300\/70,
-.light-mode .latihan-mandiri-route .text-rose-300\/30,
-.light-mode .latihan-mandiri-route .text-rose-300\/50,
-.light-mode .latihan-mandiri-route .text-teal-400\/40,
-.light-mode .latihan-mandiri-route .text-white\/20 {
+.light-mode .tugas-latihan-mandiri-route .text-cyan-300\/30,
+.light-mode .tugas-latihan-mandiri-route .text-cyan-300\/50,
+.light-mode .tugas-latihan-mandiri-route .text-emerald-300\/30,
+.light-mode .tugas-latihan-mandiri-route .text-green-300\/30,
+.light-mode .tugas-latihan-mandiri-route .text-indigo-300\/30,
+.light-mode .tugas-latihan-mandiri-route .text-indigo-300\/60,
+.light-mode .tugas-latihan-mandiri-route .text-muted-foreground\/60,
+.light-mode .tugas-latihan-mandiri-route .text-violet-300\/30,
+.light-mode .tugas-latihan-mandiri-route .text-violet-300\/70,
+.light-mode .tugas-latihan-mandiri-route .text-rose-300\/30,
+.light-mode .tugas-latihan-mandiri-route .text-rose-300\/50,
+.light-mode .tugas-latihan-mandiri-route .text-teal-400\/40,
+.light-mode .tugas-latihan-mandiri-route .text-white\/20 {
   color: #475569 !important;
 }
 
 /* Dashed separators should remain visible against the pale cards. */
-.light-mode .latihan-mandiri-route .border-white\/5,
-.light-mode .latihan-mandiri-route .border-white\/8,
-.light-mode .latihan-mandiri-route .border-white\/10,
-.light-mode .latihan-mandiri-route .border-white\/20 {
+.light-mode .tugas-latihan-mandiri-route .border-white\/5,
+.light-mode .tugas-latihan-mandiri-route .border-white\/8,
+.light-mode .tugas-latihan-mandiri-route .border-white\/10,
+.light-mode .tugas-latihan-mandiri-route .border-white\/20 {
   border-color: rgba(100,116,139,0.28) !important;
 }
 
 /* SVG canvases embedded in exercises should not remain navy. */
-.light-mode .latihan-mandiri-route svg.bg-slate-900\/60,
-.light-mode .latihan-mandiri-route svg.bg-slate-950\/70 {
+.light-mode .tugas-latihan-mandiri-route svg.bg-slate-900\/60,
+.light-mode .tugas-latihan-mandiri-route svg.bg-slate-950\/70 {
   background-color: rgba(248,250,252,0.96) !important;
 }
 

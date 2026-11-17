@@ -185,7 +185,7 @@ const LatihanMockup = () => {
   );
 };
 
-/* ── SLIDE 7 MOCKUP: Math Game Arena ── */
+/* ── SLIDE 7 MOCKUP: Numatik Gamez ── */
 const GameMockup = () => {
   const { language } = useLanguage();
   const m = {
@@ -194,9 +194,9 @@ const GameMockup = () => {
     ja: { grades: ["中学1年",  "中学2年",  "中学3年"],  action: "プレイ" },
   }[language];
   return (
-    <MockupFrame title="MATH GAME ARENA" accentColor="text-orange-400">
+    <MockupFrame title="NUMATIK GAMEZ" accentColor="text-orange-400">
       <div className="p-3 space-y-2">
-        <p className="text-[9px] text-orange-300 font-bold text-center">MATH GAME ARENA</p>
+        <p className="text-[9px] text-orange-300 font-bold text-center">NUMATIK GAMEZ</p>
         {m.grades.map((k) => (
           <div key={k} className="flex items-center justify-between bg-white/5 border border-white/10 rounded px-2 py-1.5">
             <div className="flex items-center gap-1.5">
@@ -1037,14 +1037,14 @@ function getSlides(language: Language): Slide[] {
       };
     })(),
 
-    /* ── 7: Math Game Arena (id 5) ── */
+    /* ── 7: Numatik Gamez (id 5) ── */
     (() => {
       const s7 = {
         id: {
-          title: "Math Game Arena",
-          desc: "Belajar matematika sambil bermain! Math Game Arena menghadirkan game interaktif bertema matematika yang seru dan menantang untuk setiap jenjang kelas.",
+          title: "Numatik Gamez",
+          desc: "Belajar matematika sambil bermain! Numatik Gamez menghadirkan game interaktif bertema matematika yang seru dan menantang untuk setiap jenjang kelas.",
           steps: [
-            "Pilih 'MATH GAME ARENA' dari Menu Utama",
+            "Pilih 'NUMATIK GAMEZ' dari Menu Utama",
             "Pilih kelas yang sesuai (7, 8, atau 9)",
             "Pilih jenis game yang ingin dimainkan",
             "Kerjakan soal matematika dalam format game yang menyenangkan dengan cara menekan meteor pada jawaban yang benar maka pesawat otomatis akan menembak dan keluar notif benar, namun jika menekan meteor dengan jawaban yang salah maka akan keluar notif salah",
@@ -1052,10 +1052,10 @@ function getSlides(language: Language): Slide[] {
           submenus: ["Kelas 7 - Game Materi Kelas 7", "Kelas 8 - Game Materi Kelas 8", "Kelas 9 - Game Materi Kelas 9"],
         },
         en: {
-          title: "Math Game Arena",
-          desc: "Learn math while playing! Math Game Arena offers fun and challenging interactive math-themed games for every grade level.",
+          title: "Numatik Gamez",
+          desc: "Learn math while playing! Numatik Gamez offers fun and challenging interactive math-themed games for every grade level.",
           steps: [
-            "Select 'MATH GAME ARENA' from the Main Menu",
+            "Select 'NUMATIK GAMEZ' from the Main Menu",
             "Choose the appropriate grade (7, 8, or 9)",
             "Select the game you want to play",
             "Solve math problems in a fun game format — tap the meteor with the correct answer and the spaceship fires automatically; tapping a wrong answer shows an incorrect notification",
@@ -1063,10 +1063,10 @@ function getSlides(language: Language): Slide[] {
           submenus: ["Grade 7 — Grade 7 Math Games", "Grade 8 — Grade 8 Math Games", "Grade 9 — Grade 9 Math Games"],
         },
         ja: {
-          title: "Math Game Arena",
-          desc: "遊びながら数学を学ぼう！Math Game Arenaは、各学年向けの楽しくて挑戦的なインタラクティブ数学ゲームを提供します。",
+          title: "Numatik Gamez",
+          desc: "遊びながら数学を学ぼう！Numatik Gamezは、各学年向けの楽しくて挑戦的なインタラクティブ数学ゲームを提供します。",
           steps: [
-            "メインメニューから「MATH GAME ARENA」を選択",
+            "メインメニューから「NUMATIK GAMEZ」を選択",
             "学年（中学1・2・3年）を選択",
             "遊びたいゲームを選択",
             "ゲーム形式で数学の問題を解こう — 正しい答えの隕石をタップすると宇宙船が自動発射し正解通知が表示される。誤った答えをタップすると不正解通知が表示されます",

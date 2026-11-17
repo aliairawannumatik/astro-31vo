@@ -1,8 +1,8 @@
 import type { QuizQuestion } from "@/components/MeteorShootingGame";
-import type { MQ as FlappyMQ } from "@/pages/math-game-arena/umum/FlappyRocketPage";
-import type { MQ as TankMQ } from "@/pages/math-game-arena/umum/BattleTankPage";
-import type { MQ as SpaceMQ } from "@/pages/math-game-arena/umum/SpaceImpactPage";
-import type { MQ as DinoMQ } from "@/pages/math-game-arena/umum/DinoRunGamePage";
+import type { MQ as FlappyMQ } from "@/pages/numatik-gamez/umum/FlappyRocketPage";
+import type { MQ as TankMQ } from "@/pages/numatik-gamez/umum/BattleTankPage";
+import type { MQ as SpaceMQ } from "@/pages/numatik-gamez/umum/SpaceImpactPage";
+import type { MQ as DinoMQ } from "@/pages/numatik-gamez/umum/DinoRunGamePage";
 import type { GuruQuestion } from "@/hooks/useGuruQuiz";
 
 export type VariantSlug =

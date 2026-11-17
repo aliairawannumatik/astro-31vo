@@ -8,7 +8,7 @@ const games = [
   {
     label: "Hajar Mol!",
     emoji: "🔨",
-    path: "/math-game-arena/umum/hajar-mol",
+    path: "/numatik-gamez/umum/hajar-mol",
     desc: "Pukul mol yang muncul hanya ketika membawa jawaban yang benar!",
     icon: <Hammer className="w-7 h-7 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />,
     border: "border-amber-500/30 hover:border-amber-400/60",
@@ -17,7 +17,7 @@ const games = [
   {
     label: "Galaksi Defender Math",
     emoji: "👽",
-    path: "/math-game-arena/umum/galaxy-defender",
+    path: "/numatik-gamez/umum/galaxy-defender",
     desc: "Pertahankan Bumi! Tembak alien jawaban benar yang turun dari luar angkasa!",
     icon: <Rocket className="w-7 h-7 text-fuchsia-400 shrink-0 group-hover:scale-110 transition-transform" />,
     border: "border-fuchsia-500/30 hover:border-fuchsia-400/60",
@@ -26,7 +26,7 @@ const games = [
   {
     label: "Bubble Pop",
     emoji: "🫧",
-    path: "/math-game-arena/umum/bubble-pop",
+    path: "/numatik-gamez/umum/bubble-pop",
     desc: "Pecahkan gelembung jawaban benar sebelum sampai ke atas!",
     icon: <Sparkles className="w-7 h-7 text-sky-400 shrink-0 group-hover:scale-110 transition-transform" />,
     border: "border-sky-500/30 hover:border-sky-400/60",

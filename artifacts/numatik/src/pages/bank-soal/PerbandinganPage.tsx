@@ -1,9 +1,9 @@
 import PracticeCollectionBankPage from "@/components/bank-soal/PracticeCollectionBankPage";
-import PerbandinganUmumPage from "@/pages/latihan-mandiri/kelas7/perbandingan/PerbandinganUmumPage";
-import PerbandinganBertingkatPage from "@/pages/latihan-mandiri/kelas7/perbandingan/PerbandinganBertingkatPage";
-import PerbandinganSenilaiPage from "@/pages/latihan-mandiri/kelas7/perbandingan/PerbandinganSenilaiPage";
-import PerbandinganSkalaPage from "@/pages/latihan-mandiri/kelas7/perbandingan/PerbandinganSkalaPage";
-import PerbandinganCampuranPage from "@/pages/latihan-mandiri/kelas7/perbandingan/PerbandinganCampuranPage";
+import PerbandinganUmumPage from "@/pages/tugas-latihan-mandiri/perbandingan/PerbandinganUmumPage";
+import PerbandinganBertingkatPage from "@/pages/tugas-latihan-mandiri/perbandingan/PerbandinganBertingkatPage";
+import PerbandinganSenilaiPage from "@/pages/tugas-latihan-mandiri/perbandingan/PerbandinganSenilaiPage";
+import PerbandinganSkalaPage from "@/pages/tugas-latihan-mandiri/perbandingan/PerbandinganSkalaPage";
+import PerbandinganCampuranPage from "@/pages/tugas-latihan-mandiri/perbandingan/PerbandinganCampuranPage";
 
 const sections = [
   ["PERBANDINGAN UMUM", PerbandinganUmumPage],

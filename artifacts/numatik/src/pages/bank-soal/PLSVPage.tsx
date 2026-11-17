@@ -1,11 +1,11 @@
 import PracticeCollectionBankPage from "@/components/bank-soal/PracticeCollectionBankPage";
-import KalimatTerbukaTertutupPage from "@/pages/latihan-mandiri/kelas7/plsv-ptlsv/KalimatTerbukaTertutupPage";
-import PengertianPLSVPage from "@/pages/latihan-mandiri/kelas7/plsv-ptlsv/PengertianPLSVPage";
-import PenyelesaianPLSVPage from "@/pages/latihan-mandiri/kelas7/plsv-ptlsv/PenyelesaianPLSVPage";
-import ModelMatematikaPLSVPage from "@/pages/latihan-mandiri/kelas7/plsv-ptlsv/ModelMatematikaPLSVPage";
-import PengertianPtLSVPage from "@/pages/latihan-mandiri/kelas7/plsv-ptlsv/PengertianPtLSVPage";
-import PenyelesaianPtLSVPage from "@/pages/latihan-mandiri/kelas7/plsv-ptlsv/PenyelesaianPtLSVPage";
-import ModelMatematikaPtLSVPage from "@/pages/latihan-mandiri/kelas7/plsv-ptlsv/ModelMatematikaPtLSVPage";
+import KalimatTerbukaTertutupPage from "@/pages/tugas-latihan-mandiri/plsv-ptlsv/KalimatTerbukaTertutupPage";
+import PengertianPLSVPage from "@/pages/tugas-latihan-mandiri/plsv-ptlsv/PengertianPLSVPage";
+import PenyelesaianPLSVPage from "@/pages/tugas-latihan-mandiri/plsv-ptlsv/PenyelesaianPLSVPage";
+import ModelMatematikaPLSVPage from "@/pages/tugas-latihan-mandiri/plsv-ptlsv/ModelMatematikaPLSVPage";
+import PengertianPtLSVPage from "@/pages/tugas-latihan-mandiri/plsv-ptlsv/PengertianPtLSVPage";
+import PenyelesaianPtLSVPage from "@/pages/tugas-latihan-mandiri/plsv-ptlsv/PenyelesaianPtLSVPage";
+import ModelMatematikaPtLSVPage from "@/pages/tugas-latihan-mandiri/plsv-ptlsv/ModelMatematikaPtLSVPage";
 
 const sections = [
   ["KALIMAT TERBUKA DAN TERTUTUP", KalimatTerbukaTertutupPage],

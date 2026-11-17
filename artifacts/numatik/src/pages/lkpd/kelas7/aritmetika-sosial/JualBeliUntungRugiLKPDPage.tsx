@@ -201,10 +201,10 @@ const games: LKPDGame[] = [
   {
     kind: "page-link",
     id: "game-arena-jualbeli",
-    title: "🚀 Game 3: Math Game Arena – Jual Beli, Untung & Rugi",
+    title: "🚀 Game 3: Numatik Gamez – Jual Beli, Untung & Rugi",
     description: "Tantang dirimu di arena permainan layar penuh dengan soal jual beli yang seru!",
-    path: "/math-game-arena/kelas-7/aritmetika-sosial/jual-beli-untung-rugi",
-    buttonLabel: "MAINKAN DI MATH GAME ARENA",
+    path: "/numatik-gamez/aritmetika-sosial/jual-beli-untung-rugi",
+    buttonLabel: "MAINKAN DI NUMATIK GAMEZ",
     emoji: "🛍️",
   },
 ];

@@ -1,17 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
 import MeteorShootingGame from "@/components/MeteorShootingGame";
-import FlappyRocketPage from "@/pages/math-game-arena/umum/FlappyRocketPage";
-import BattleTankPage from "@/pages/math-game-arena/umum/BattleTankPage";
-import SpaceImpactPage from "@/pages/math-game-arena/umum/SpaceImpactPage";
-import DinoRunGamePage from "@/pages/math-game-arena/umum/DinoRunGamePage";
-import TetrisGamePage from "@/pages/math-game-arena/umum/TetrisGamePage";
-import SnakeMathPage from "@/pages/math-game-arena/umum/SnakeMathPage";
-import BrickBreakerPage from "@/pages/math-game-arena/umum/BrickBreakerPage";
-import GalaksiTempurPage from "@/pages/math-game-arena/umum/GalaksiTempurPage";
-import ZumaMathPage from "@/pages/math-game-arena/umum/ZumaMathPage";
-import PacmanMathPage from "@/pages/math-game-arena/umum/PacmanMathPage";
-import NumatikStrikePage from "@/pages/math-game-arena/umum/GamePage";
-import NumatikWorldPage from "@/pages/math-game-arena/umum/NumatikWorldPage";
+import FlappyRocketPage from "@/pages/numatik-gamez/umum/FlappyRocketPage";
+import BattleTankPage from "@/pages/numatik-gamez/umum/BattleTankPage";
+import SpaceImpactPage from "@/pages/numatik-gamez/umum/SpaceImpactPage";
+import DinoRunGamePage from "@/pages/numatik-gamez/umum/DinoRunGamePage";
+import TetrisGamePage from "@/pages/numatik-gamez/umum/TetrisGamePage";
+import SnakeMathPage from "@/pages/numatik-gamez/umum/SnakeMathPage";
+import BrickBreakerPage from "@/pages/numatik-gamez/umum/BrickBreakerPage";
+import GalaksiTempurPage from "@/pages/numatik-gamez/umum/GalaksiTempurPage";
+import ZumaMathPage from "@/pages/numatik-gamez/umum/ZumaMathPage";
+import PacmanMathPage from "@/pages/numatik-gamez/umum/PacmanMathPage";
+import NumatikStrikePage from "@/pages/numatik-gamez/umum/GamePage";
+import NumatikWorldPage from "@/pages/numatik-gamez/umum/NumatikWorldPage";
 import { getSubmaterialK8 } from "@/data/mga-k8/registry";
 import type { GuruQuestion } from "@/hooks/useGuruQuiz";
 import { useTranslation } from "react-i18next";
@@ -64,7 +64,7 @@ const SubmaterialGameDispatcherK8 = () => {
     );
   }
 
-  const backPath = `/math-game-arena/kelas-8/${entry.parentSlug}/${entry.slug}`;
+  const backPath = `/numatik-gamez/${entry.parentSlug}/${entry.slug}`;
   const homePath = "/menu";
   const topicLabel = entry.label;
   const q = entry.questions;

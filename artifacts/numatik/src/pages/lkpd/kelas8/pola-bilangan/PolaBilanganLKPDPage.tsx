@@ -382,8 +382,8 @@ const games: LKPDGame[] = [
     title: "🚀 Game 5: Arena Pola Bilangan Layar Penuh",
     description:
       "Buka mode permainan layar penuh untuk menantang dirimu menjawab soal pola bilangan secepat kilat!",
-    path: "/math-game-arena/kelas-8/pola-bilangan",
-    buttonLabel: "MAINKAN DI MATH GAME ARENA",
+    path: "/numatik-gamez/pola-bilangan",
+    buttonLabel: "MAINKAN DI NUMATIK GAMEZ",
     emoji: "🎮",
   },
 ];
