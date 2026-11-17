@@ -16,7 +16,7 @@ const TOPICS = [
   { key: "fungsiKuadrat", path: "/materi-matematika/kelas-9/fungsi-kuadrat" },
 ] as const;
 
-const MateriMatematikaKelas9Page = () => {
+const BukuAnimasiMatematikaKelas9Page = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -63,4 +63,4 @@ const MateriMatematikaKelas9Page = () => {
   );
 };
 
-export default MateriMatematikaKelas9Page;
+export default BukuAnimasiMatematikaKelas9Page;

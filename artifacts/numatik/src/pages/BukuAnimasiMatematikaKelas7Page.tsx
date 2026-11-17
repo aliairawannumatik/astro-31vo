@@ -17,7 +17,7 @@ const TOPICS = [
   { key: "himpunan", path: "/materi-matematika/kelas-7/himpunan" },
 ] as const;
 
-const MateriMatematikaKelas7Page = () => {
+const BukuAnimasiMatematikaKelas7Page = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -64,4 +64,4 @@ const MateriMatematikaKelas7Page = () => {
   );
 };
 
-export default MateriMatematikaKelas7Page;
+export default BukuAnimasiMatematikaKelas7Page;

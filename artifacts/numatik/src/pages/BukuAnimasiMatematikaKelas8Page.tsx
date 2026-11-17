@@ -17,7 +17,7 @@ const TOPICS = [
   { key: "bangunRuangSisiDatar", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar" },
 ] as const;
 
-const MateriMatematikaKelas8Page = () => {
+const BukuAnimasiMatematikaKelas8Page = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -64,4 +64,4 @@ const MateriMatematikaKelas8Page = () => {
   );
 };
 
-export default MateriMatematikaKelas8Page;
+export default BukuAnimasiMatematikaKelas8Page;
