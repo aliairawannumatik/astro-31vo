@@ -18,6 +18,16 @@ export default defineConfig({
 
   envPrefix: ["VITE_"],
 
+  optimizeDeps: {
+    noDiscovery: true,
+    include: [
+      "react-dom/client",
+      "react-router-dom",
+      "lucide-react",
+      "react-i18next",
+    ],
+  },
+
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -50,12 +60,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
-      "@assets": path.resolve(
-        import.meta.dirname,
-        "..",
-        "..",
-        "attached_assets",
-      ),
     },
     dedupe: ["react", "react-dom"],
   },
