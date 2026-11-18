@@ -1,19 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { Hammer, Rocket, Sparkles, Gamepad2, ArrowLeft } from "lucide-react";
+import { Rocket, Gamepad2, ArrowLeft } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 
 const games = [
-  {
-    label: "Hajar Mol!",
-    emoji: "🔨",
-    path: "/numatik-gamez/umum/hajar-mol",
-    desc: "Pukul mol yang muncul hanya ketika membawa jawaban yang benar!",
-    icon: <Hammer className="w-7 h-7 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />,
-    border: "border-amber-500/30 hover:border-amber-400/60",
-    gradient: "from-amber-500/10 to-orange-500/10",
-  },
   {
     label: "Galaksi Defender Math",
     emoji: "👽",
@@ -22,15 +13,6 @@ const games = [
     icon: <Rocket className="w-7 h-7 text-fuchsia-400 shrink-0 group-hover:scale-110 transition-transform" />,
     border: "border-fuchsia-500/30 hover:border-fuchsia-400/60",
     gradient: "from-fuchsia-500/10 to-violet-500/10",
-  },
-  {
-    label: "Bubble Pop",
-    emoji: "🫧",
-    path: "/numatik-gamez/umum/bubble-pop",
-    desc: "Pecahkan gelembung jawaban benar sebelum sampai ke atas!",
-    icon: <Sparkles className="w-7 h-7 text-sky-400 shrink-0 group-hover:scale-110 transition-transform" />,
-    border: "border-sky-500/30 hover:border-sky-400/60",
-    gradient: "from-sky-500/10 to-cyan-500/10",
   },
 ];
 

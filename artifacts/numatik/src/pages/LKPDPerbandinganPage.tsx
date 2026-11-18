@@ -1,11 +1,11 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO", path: "/lkpd/kelas-7/perbandingan/umum", icon: "⚖️" },
-  { label: "PERBANDINGAN BERTINGKAT", path: "/lkpd/kelas-7/perbandingan/bertingkat", icon: "📶" },
-  { label: "PERBANDINGAN SENILAI DAN BERBALIK NILAI", path: "/lkpd/kelas-7/perbandingan/senilai-berbalik", icon: "🔄" },
-  { label: "SKALA", path: "/lkpd/kelas-7/perbandingan/skala", icon: "🗺️" },
-  { label: "PERBANDINGAN CAMPURAN", path: "/lkpd/kelas-7/perbandingan/campuran", icon: "🔀" },
+  { label: "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO", path: "/lkpd/perbandingan/umum", icon: "⚖️" },
+  { label: "PERBANDINGAN BERTINGKAT", path: "/lkpd/perbandingan/bertingkat", icon: "📶" },
+  { label: "PERBANDINGAN SENILAI DAN BERBALIK NILAI", path: "/lkpd/perbandingan/senilai-berbalik", icon: "🔄" },
+  { label: "SKALA", path: "/lkpd/perbandingan/skala", icon: "🗺️" },
+  { label: "PERBANDINGAN CAMPURAN", path: "/lkpd/perbandingan/campuran", icon: "🔀" },
 ];
 
 const LKPDPerbandinganPage = () => (
@@ -14,8 +14,8 @@ const LKPDPerbandinganPage = () => (
     emoji="⚖️"
     kelas="Kelas 7"
     subtopics={subtopics}
-    backPath="/lkpd/kelas-7"
-    backLabel="Kembali ke LKPD Kelas 7"
+    backPath="/lkpd"
+    backLabel="Kembali ke LKPD"
     contextLabel="LKPD"
   />
 );

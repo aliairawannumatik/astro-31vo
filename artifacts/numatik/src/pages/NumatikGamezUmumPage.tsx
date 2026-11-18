@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Gamepad2, Car, Layers, Zap, Rocket, ShoppingBasket, Worm, Crosshair, Sparkles, Hammer, Fish, Swords, Shield, Gem, Trophy, Waves, ChevronsUp, Sword, Plane, Circle, Target, Disc } from "lucide-react";
+import { Gamepad2, Layers, Zap, Rocket, Worm, Crosshair, Shield, Sparkles, Plane } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
@@ -14,12 +14,6 @@ const NumatikGamezUmumPage = () => {
   const isLight = theme === "light";
 
   const games = [
-    {
-      slug: "balapMobil",
-      emoji: "🏎️",
-      path: "/numatik-gamez/umum/balap-mobil",
-      icon: <Car className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
     {
       slug: "tetris",
       emoji: "🧩",
@@ -39,12 +33,6 @@ const NumatikGamezUmumPage = () => {
       icon: <Rocket className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     },
     {
-      slug: "tangkapBenda",
-      emoji: "🧺",
-      path: "/numatik-gamez/umum/tangkap-benda",
-      icon: <ShoppingBasket className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
       slug: "snakeMat",
       emoji: "🐍",
       path: "/numatik-gamez/umum/snake-math",
@@ -57,24 +45,6 @@ const NumatikGamezUmumPage = () => {
       icon: <Crosshair className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     },
     {
-      slug: "popSoal",
-      emoji: "🫧",
-      path: "/numatik-gamez/umum/bubble-pop",
-      icon: <Sparkles className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "hajarMol",
-      emoji: "🔨",
-      path: "/numatik-gamez/umum/hajar-mol",
-      icon: <Hammer className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "mancingSoal",
-      emoji: "🎣",
-      path: "/numatik-gamez/umum/mancing-soal",
-      icon: <Fish className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
       slug: "tembakTank",
       emoji: "🪖",
       path: "/numatik-gamez/umum/tembak-tank",
@@ -84,49 +54,13 @@ const NumatikGamezUmumPage = () => {
       slug: "keretaKoin",
       emoji: "🚆",
       path: "/numatik-gamez/umum/kereta-koin-math",
-      icon: <Gem className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "ninjaBuah",
-      emoji: "🍉",
-      path: "/numatik-gamez/umum/ninja-buah-math",
       icon: <Sparkles className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "pulauHarta",
-      emoji: "🏝️",
-      path: "/numatik-gamez/umum/pulau-harta-math",
-      icon: <Trophy className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "kapalSelam",
-      emoji: "🚢",
-      path: "/numatik-gamez/umum/kapal-selam-math-battle",
-      icon: <Waves className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "lompatJawaban",
-      emoji: "🪐",
-      path: "/numatik-gamez/umum/lompat-jawaban",
-      icon: <ChevronsUp className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "ksatria",
-      emoji: "⚔️",
-      path: "/numatik-gamez/umum/ksatria-mat",
-      icon: <Sword className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     },
     {
       slug: "spaceImpact",
       emoji: "🛩️",
       path: "/numatik-gamez/umum/space-impact",
       icon: <Plane className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "meteorPantul",
-      emoji: "🛸☄️",
-      path: "/numatik-gamez/umum/pecah-jawaban",
-      icon: <Swords className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     },
     {
       slug: "pacMath",
@@ -139,24 +73,6 @@ const NumatikGamezUmumPage = () => {
       emoji: "🔮",
       path: "/numatik-gamez/umum/zuma-math",
       icon: <Sparkles className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "bounceMath",
-      emoji: "🎱",
-      path: "/numatik-gamez/umum/bounce-math",
-      icon: <Circle className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "westernBar",
-      emoji: "🤠",
-      path: "/numatik-gamez/umum/western-bar",
-      icon: <Target className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
-    },
-    {
-      slug: "pinball",
-      emoji: "🎰",
-      path: "/numatik-gamez/umum/pinball-math",
-      icon: <Disc className="w-8 h-8 text-accent shrink-0 group-hover:scale-110 transition-transform" />,
     },
   ];
 

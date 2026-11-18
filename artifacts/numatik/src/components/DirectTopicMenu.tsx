@@ -29,8 +29,8 @@ export default function DirectTopicMenu({ kind }: { kind: MenuKind }) {
       <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">{title}</h1>
        <p className={`${light ? "text-slate-600" : "text-white/60"} text-sm text-center mb-8 font-body`}>Pilih materi secara langsung.</p>
        <div className="flex flex-col gap-3">
-         {topics.map(([grade, label, slug]) => {
-           const path = kind === "lkpd" ? `${base}/kelas-${grade}/${slug}` : `${base}/${slug}`;
+         {topics.map(([, label, slug]) => {
+           const path = `${base}/${slug}`;
            return (
              <button
                key={slug}
