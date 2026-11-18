@@ -228,6 +228,19 @@
   border-color: var(--border) !important;
 }
 
+/* Brighten dark gradient stops used by practice submaterial question cards. */
+.light-mode .animation-submaterial-route [class*="from-"][class*="-900/"] {
+  --tw-gradient-from: rgba(248,250,252,0.96) var(--tw-gradient-from-position) !important;
+}
+
+.light-mode .animation-submaterial-route [class*="via-"][class*="-900/"] {
+  --tw-gradient-stops: var(--tw-gradient-from), rgba(241,245,249,0.96) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+.light-mode .animation-submaterial-route [class*="to-"][class*="-900/"] {
+  --tw-gradient-to: rgba(224,242,254,0.88) var(--tw-gradient-to-position) !important;
+}
+
 /* Integer animation book: SVG labels need their own light surface because
    SVG text does not inherit the page's Tailwind text-color overrides. */
 [data-theme="light"] .integer-animation-book-route .integer-animation-svg-shell,
