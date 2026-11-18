@@ -23,6 +23,20 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const games = [
   {
+    label: "NUMATIK RUNNER 3D",
+    emoji: "🤖",
+    path: "/game/numatik-runner",
+    desc: "Lari di tiga jalur, loncat, sliding, kumpulkan bintang, dan jawab gerbang matematika!",
+    icon: <Zap className="w-7 h-7 text-cyan-300 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
+    label: "OBBY MATEMATIKA 3D",
+    emoji: "🏁",
+    path: "/game/obby-matematika",
+    desc: "Selesaikan lintasan parkour lima zona, lewati persimpangan soal, dan raih garis finis!",
+    icon: <Flag className="w-7 h-7 text-emerald-300 shrink-0 group-hover:scale-110 transition-transform" />,
+  },
+  {
     label: "NUMATIK CITY RIDER 3D",
     emoji: "🏍️",
     path: "/ruang-untuk-guru/numatik-game/city-ride",
@@ -166,7 +180,9 @@ const NumatikGamePage = () => {
             const isWorld = game.path.endsWith("/numatik-world");
             const isKart = game.path.endsWith("/numatik-game/kart");
             const isCity = game.path.endsWith("/city-ride");
-            const is3dGame = isStrike || isWorld || isKart || isCity;
+            const isRunner = game.path.endsWith("/numatik-runner");
+            const isObby = game.path.endsWith("/obby-matematika");
+            const is3dGame = isStrike || isWorld || isKart || isCity || isRunner || isObby;
             return (
             <button
               key={game.path}

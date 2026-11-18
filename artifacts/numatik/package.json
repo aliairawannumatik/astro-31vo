@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "predev": "node ../../scripts/ensure-deps.mjs && node scripts/build-search-index.mjs",
+    "predev": "node ../../scripts/ensure-deps.mjs && node ../../scripts/prepare-asset-decoders.mjs && node scripts/build-search-index.mjs",
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "prebuild": "node scripts/ensure-deps.mjs && node scripts/build-search-index.mjs",
+    "prebuild": "node scripts/ensure-deps.mjs && node ../../scripts/prepare-asset-decoders.mjs && node scripts/build-search-index.mjs",
     "build": "NODE_OPTIONS='--max-old-space-size=4096' vite build --config vite.config.ts",
     "build:search-index": "node scripts/build-search-index.mjs",
     "preview": "node scripts/ensure-deps.mjs && vite preview --config vite.config.ts --host 0.0.0.0",
@@ -30,6 +30,7 @@
     "three": "^0.186.1"
   },
   "devDependencies": {
+    "@gltf-transform/cli": "^4.5.1",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "^1.2.4",
     "@radix-ui/react-alert-dialog": "^1.1.7",
