@@ -147,12 +147,12 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_245px]">
           <div className="min-w-0 space-y-12">
             <section className="scroll-mt-8 space-y-5">
-              <Heading number="4.2.4" title="Menerapkan konsep matriks untuk menyelesaikan SPL" intro="Metode matriks bisa membantu kita menemukan solusi SPLDV maupun SPLTV. Kita dapat memakai invers, eliminasi Gauss–Jordan, atau aturan Cramer. Ayo mulai dari persamaan yang paling sederhana, lalu naik ke sistem yang lebih menantang!" />
+              <Heading number="4.2.4" title="Menerapkan konsep matriks untuk menyelesaikan SPL" intro="Siap berpetualang dengan matriks? Kita akan mengubah SPLDV dan SPLTV ke bentuk yang lebih rapi, lalu menemukan solusinya lewat invers, eliminasi Gauss–Jordan, dan aturan Cramer. Kita mulai dari yang sederhana, kemudian menaklukkan tantangan berikutnya bersama-sama!" />
 
               <div id="pldv" className="scroll-mt-8 space-y-4 rounded-3xl border border-cyan-200/15 bg-cyan-200/[.045] p-4 sm:p-5">
                 <h3 className="font-display text-lg font-bold text-cyan-100">A. Persamaan linear dengan dua variabel (PLDV)</h3>
-                <p className="text-sm leading-relaxed text-slate-300">Persamaan linear dua variabel berbentuk <span className="font-mono text-white">ax + by = c</span>, dengan a, b, dan c bilangan real serta a dan b tidak keduanya nol. Satu persamaan seperti ini biasanya memiliki tak terhingga banyak pasangan penyelesaian. Setiap pasangan penyelesaian dapat ditampilkan sebagai titik pada sebuah garis lurus.</p>
-                <p className="text-sm leading-relaxed text-slate-300">Jika <span className="font-mono text-white">a ≠ 0</span>, kita dapat memilih <span className="font-mono text-white">y = t</span>, sehingga <span className="font-mono text-white">x = c/a − (b/a)t</span>. Jika a = 0, maka b ≠ 0 dan y = c/b, sementara x dapat dipilih bebas.</p>
+                <p className="text-sm leading-relaxed text-slate-300">Kita mulai dari bentuk dasarnya, yaitu <span className="font-mono text-white">ax + by = c</span>, dengan a, b, dan c bilangan real serta a dan b tidak keduanya nol. Satu persamaan seperti ini biasanya memiliki tak terhingga banyak pasangan penyelesaian. Serunya, semua pasangan itu dapat digambarkan sebagai titik-titik pada satu garis lurus!</p>
+                <p className="text-sm leading-relaxed text-slate-300">Untuk menemukan semua pasangan tersebut, jika <span className="font-mono text-white">a ≠ 0</span>, pilih <span className="font-mono text-white">y = t</span>. Lalu <span className="font-mono text-white">x = c/a − (b/a)t</span>. Jika a = 0, maka b ≠ 0, sehingga y = c/b dan x dapat dipilih bebas. Mudah, kan?</p>
                 <Formula label="Solusi parametrik umum saat a ≠ 0">
                   <Matrix rows={[[<span>x</span>], [<span>y</span>]]} label="Vektor variabel x dan y" />
                   <span>=</span>
@@ -161,7 +161,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                   <Matrix rows={[[<span>−b/a</span>], [1]]} label="Vektor arah minus b per a dan satu" />
                   <span>, t ∈ ℝ</span>
                 </Formula>
-                <p className="text-sm leading-relaxed text-slate-300">Contohnya, dari <span className="font-mono text-white">3x + 2y = 12</span>, kita dapat menuliskan <span className="font-mono text-white">x = 4 − ⅔y</span>. Jika <span className="font-mono text-white">y = t</span>, maka semua penyelesaiannya dapat ditulis seperti berikut.</p>
+                <p className="text-sm leading-relaxed text-slate-300">Biar makin kebayang, lihat <span className="font-mono text-white">3x + 2y = 12</span>. Kita bisa menuliskannya sebagai <span className="font-mono text-white">x = 4 − ⅔y</span>. Sekarang pilih <span className="font-mono text-white">y = t</span>, lalu semua solusinya tersaji rapi seperti ini.</p>
                 <Formula label="Bentuk parametrik solusi PLDV">
                   <Matrix rows={[[<span>x</span>], [<span>y</span>]]} label="Vektor variabel x dan y" />
                   <span>=</span>
@@ -170,12 +170,12 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                   <Matrix rows={[[<span>−⅔</span>], [1]]} label="Vektor arah minus dua per tiga dan satu" />
                   <span>, t ∈ ℝ</span>
                 </Formula>
-                <p className="text-sm leading-relaxed text-slate-300">Jadi, satu persamaan dengan dua variabel memberi satu garis berisi banyak pasangan solusi. Nilai parameter t boleh dipilih bebas, lalu x menyesuaikan agar persamaan tetap benar.</p>
+                <p className="text-sm leading-relaxed text-slate-300">Nah, satu persamaan dengan dua variabel menghasilkan satu garis dengan tak terhingga banyak pasangan solusi. Pilih nilai t sesukamu, lalu x menyesuaikan agar persamaannya tetap benar. Asyik!</p>
               </div>
 
               <div id="spldv" className="scroll-mt-8 space-y-4 rounded-3xl border border-violet-200/15 bg-violet-200/[.04] p-4 sm:p-5">
                 <h3 className="font-display text-lg font-bold text-violet-100">B. Sistem persamaan linear dengan dua variabel (SPLDV)</h3>
-                <p className="text-sm leading-relaxed text-slate-300">Dua persamaan linear dengan variabel x dan y dapat ditulis dalam bentuk matriks <span className="font-mono text-white">AX = B</span>. Matriks A memuat koefisien, X memuat variabel, dan B memuat konstanta.</p>
+                <p className="text-sm leading-relaxed text-slate-300">Kalau ada dua persamaan dengan variabel x dan y, kita bisa merapikannya menjadi bentuk matriks <span className="font-mono text-white">AX = B</span>. Matriks A memuat koefisien, X memuat variabel, dan B memuat konstanta. Semuanya jadi lebih ringkas!</p>
                 <Formula label="SPLDV dalam bentuk matriks">
                   <EquationSystem equations={[<span>ax + by = p</span>, <span>cx + dy = q</span>]} />
                   <span>⇔</span>
@@ -184,7 +184,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                   <span>=</span>
                   <Matrix rows={[[<span>p</span>], [<span>q</span>]]} label="Vektor konstanta p q" />
                 </Formula>
-                <p className="text-sm leading-relaxed text-slate-300">Jika determinan matriks koefisien tidak nol, matriks itu mempunyai invers dan sistem memiliki tepat satu penyelesaian. Dalam keadaan ini, kita dapat memakai invers atau aturan Cramer.</p>
+                <p className="text-sm leading-relaxed text-slate-300">Periksa determinan matriks koefisien, ya! Jika nilainya tidak nol, matriks mempunyai invers dan sistem memiliki tepat satu penyelesaian. Kita bisa langsung memakai invers atau aturan Cramer untuk menemukannya.</p>
                 <Formula label="Mencari solusi dengan invers">
                   <span>X = A⁻¹B = </span><span>1/(ad − bc)</span>
                   <Matrix rows={[[<span>d</span>, <span>−b</span>], [<span>−c</span>, <span>a</span>]]} label="Adjoin matriks koefisien" />
@@ -194,13 +194,13 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                   <span>D = ad − bc</span><span>·</span><span>Dₓ = pd − bq</span><span>·</span><span>Dᵧ = aq − cp</span>
                   <span>x = Dₓ/D</span><span>·</span><span>y = Dᵧ/D</span><span>, jika D ≠ 0</span>
                 </Formula>
-                <p className="text-sm leading-relaxed text-slate-300">Kalau <span className="font-mono text-white">D = 0</span>, cek determinan pengganti <span className="font-mono text-white">Dₓ</span> dan <span className="font-mono text-white">Dᵧ</span>. Jika salah satunya tidak nol, sistem tidak memiliki solusi. Jika <span className="font-mono text-white">D = Dₓ = Dᵧ = 0</span>, sistem memiliki tak terhingga banyak solusi.</p>
+                <p className="text-sm leading-relaxed text-slate-300">Jika <span className="font-mono text-white">D = 0</span>, jangan buru-buru berhenti—cek determinan pengganti <span className="font-mono text-white">Dₓ</span> dan <span className="font-mono text-white">Dᵧ</span>. Kalau salah satunya tidak nol, sistem tidak memiliki solusi. Kalau <span className="font-mono text-white">D = Dₓ = Dᵧ = 0</span>, ada tak terhingga banyak solusi.</p>
                 <SolutionCasesDiagram />
                 <p className="text-xs leading-relaxed text-slate-400">Gambar 4.1 · Garis berpotongan menunjukkan satu solusi; garis sejajar tidak memiliki solusi bersama; garis berhimpit memiliki tak terhingga banyak titik persekutuan.</p>
               </div>
 
               <Example number={23} title="Mengenali jenis penyelesaian SPLDV">
-                <p className="text-sm text-slate-300">Ayo periksa tiga kemungkinan berikut. Kita hitung D, Dₓ, dan Dᵧ untuk mengetahui banyaknya solusi.</p>
+                <p className="text-sm text-slate-300">Yuk, jadi detektif solusi! Kita periksa tiga kemungkinan berikut dengan menghitung D, Dₓ, dan Dᵧ.</p>
                 <div className="grid gap-4 lg:grid-cols-3">
                   <div className="rounded-2xl border border-white/10 bg-white/[.025] p-4">
                     <h4 className="font-display font-bold text-emerald-100">a · Tepat satu solusi</h4>
@@ -208,7 +208,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                     <div className="mt-3 space-y-2 text-sm leading-relaxed text-slate-300">
                       <p><span className="font-mono text-white">D = 2(−1) − 1(1) = −3</span>, jadi D ≠ 0.</p>
                       <p><span className="font-mono text-white">Dₓ = 8(−1) − 1(1) = −9</span> dan <span className="font-mono text-white">Dᵧ = 2(1) − 8(1) = −6</span>.</p>
-                      <p><span className="font-mono text-white">x = Dₓ/D = 3</span> dan <span className="font-mono text-white">y = Dᵧ/D = 2</span>. Jadi, HP = <span className="font-mono text-white">{`{(3, 2)}`}</span>.</p>
+                      <p><span className="font-mono text-white">x = Dₓ/D = 3</span> dan <span className="font-mono text-white">y = Dᵧ/D = 2</span>. Ketemu! HP = <span className="font-mono text-white">{`{(3, 2)}`}</span>.</p>
                     </div>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/[.025] p-4">
@@ -216,7 +216,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                     <div className="mt-3"><EquationSystem equations={[<span>2x + 4y = 8</span>, <span>x + 2y = 5</span>]} /></div>
                     <div className="mt-3 space-y-2 text-sm leading-relaxed text-slate-300">
                       <p><span className="font-mono text-white">D = 2(2) − 4(1) = 0</span>.</p>
-                      <p><span className="font-mono text-white">Dₓ = 8(2) − 4(5) = −4</span> ≠ 0. Maka, persamaan-persamaan ini tidak konsisten dan HP = ∅.</p>
+                      <p><span className="font-mono text-white">Dₓ = 8(2) − 4(5) = −4</span> ≠ 0. Artinya, persamaan-persamaan ini tidak konsisten dan HP = ∅.</p>
                       <p>Persamaan pertama menyederhana menjadi <span className="font-mono text-white">x + 2y = 4</span>, sedangkan persamaan kedua meminta <span className="font-mono text-white">x + 2y = 5</span>. Keduanya tidak mungkin benar bersamaan.</p>
                     </div>
                   </div>
@@ -224,8 +224,8 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                     <h4 className="font-display font-bold text-amber-100">c · Tak terhingga banyak solusi</h4>
                     <div className="mt-3"><EquationSystem equations={[<span>3x + 2y = 6</span>, <span>6x + 4y = 12</span>]} /></div>
                     <div className="mt-3 space-y-2 text-sm leading-relaxed text-slate-300">
-                      <p><span className="font-mono text-white">D = 0</span>, <span className="font-mono text-white">Dₓ = 6(4) − 2(12) = 0</span>, dan <span className="font-mono text-white">Dᵧ = 3(12) − 6(6) = 0</span>.</p>
-                      <p>Persamaan kedua adalah dua kali persamaan pertama. Dengan <span className="font-mono text-white">y = t</span>, diperoleh <span className="font-mono text-white">x = 2 − ⅔t</span>.</p>
+                      <p><span className="font-mono text-white">D = 0</span>, <span className="font-mono text-white">Dₓ = 6(4) − 2(12) = 0</span>, dan <span className="font-mono text-white">Dᵧ = 3(12) − 6(6) = 0</span>. Ketiganya nol—ini petunjuk penting!</p>
+                      <p>Persamaan kedua ternyata dua kali persamaan pertama. Pilih <span className="font-mono text-white">y = t</span>, dan kita memperoleh <span className="font-mono text-white">x = 2 − ⅔t</span>.</p>
                       <Formula><span>(x,y) = (2,0) + t(−⅔,1), t ∈ ℝ</span></Formula>
                     </div>
                   </div>
@@ -233,7 +233,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
               </Example>
 
               <Example number={24} title="Menemukan solusi SPLDV dengan invers matriks">
-                <p className="text-sm text-slate-300">Sekarang kita praktikkan rumus invers. Susun matriks koefisien dan konstanta, lalu hitung <span className="font-mono text-white">X = A⁻¹B</span>.</p>
+                <p className="text-sm text-slate-300">Saatnya praktik! Susun matriks koefisien dan konstanta, lalu gunakan <span className="font-mono text-white">X = A⁻¹B</span> untuk menemukan pasangan solusinya.</p>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="rounded-2xl border border-white/10 bg-white/[.025] p-4">
                     <h4 className="font-display font-bold text-cyan-100">a · Sistem pertama</h4>
@@ -246,7 +246,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                         <Matrix rows={[[18], [1]]} label="Vektor konstanta delapan belas satu" />
                         <span>=</span><Matrix rows={[[4], [3]]} label="Vektor solusi empat tiga" />
                       </Formula>
-                      <p>Jadi, penyelesaiannya adalah <span className="font-mono text-white">(x,y) = (4,3)</span>.</p>
+                      <p>Mantap, penyelesaiannya adalah <span className="font-mono text-white">(x,y) = (4,3)</span>.</p>
                     </div>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/[.025] p-4">
@@ -260,7 +260,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                         <Matrix rows={[[9], [17]]} label="Vektor konstanta sembilan tujuh belas" />
                         <span>=</span><Matrix rows={[[2], [5]]} label="Vektor solusi dua lima" />
                       </Formula>
-                      <p>Jadi, penyelesaiannya adalah <span className="font-mono text-white">(x,y) = (2,5)</span>.</p>
+                      <p>Berhasil! Penyelesaiannya adalah <span className="font-mono text-white">(x,y) = (2,5)</span>.</p>
                     </div>
                   </div>
                 </div>
@@ -268,74 +268,74 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
 
               <section id="gauss-jordan" className="scroll-mt-8 space-y-5">
                 <div className="space-y-4 rounded-3xl border border-emerald-200/15 bg-emerald-200/[.035] p-4 sm:p-5">
-                  <h3 className="font-display text-lg font-bold text-emerald-100">2. Cara eliminasi Gauss–Jordan (pemantapan)</h3>
-                  <p className="text-sm leading-relaxed text-slate-300">Untuk menyelesaikan SPLDV, tulis sistem sebagai matriks augmented <span className="font-mono text-white">[A | B]</span>, lalu lakukan operasi baris elementer (OBE) sampai bagian kiri menjadi matriks identitas. Bagian kanan akan menunjukkan nilai variabel jika solusinya tunggal.</p>
+                  <h3 className="font-display text-lg font-bold text-emerald-100">2. Mantapkan langkah eliminasi Gauss–Jordan</h3>
+                  <p className="text-sm leading-relaxed text-slate-300">Gauss–Jordan membantu kita menuntaskan SPLDV dengan rapi. Tulis sistem sebagai matriks augmented <span className="font-mono text-white">[A | B]</span>, lalu lakukan operasi baris elementer (OBE) sampai bagian kiri menjadi matriks identitas. Jika solusinya tunggal, bagian kanan langsung menunjukkan nilai variabelnya.</p>
                   <Formula label="Bentuk awal dan bentuk tujuan"><span>[A | B] → [I | X]</span></Formula>
                   <div className="grid gap-3 sm:grid-cols-3">
                     <div className="rounded-xl border border-white/10 bg-white/[.025] p-3 text-sm text-slate-300"><strong className="text-emerald-100">Tukar baris:</strong> <span className="font-mono text-white">Bᵢ ↔ Bⱼ</span>.</div>
                     <div className="rounded-xl border border-white/10 bg-white/[.025] p-3 text-sm text-slate-300"><strong className="text-emerald-100">Kali skalar bukan nol:</strong> <span className="font-mono text-white">Bᵢ → kBᵢ</span>, dengan k ≠ 0.</div>
                     <div className="rounded-xl border border-white/10 bg-white/[.025] p-3 text-sm text-slate-300"><strong className="text-emerald-100">Tambah kelipatan baris:</strong> <span className="font-mono text-white">Bᵢ → Bᵢ + kBⱼ</span>, i ≠ j.</div>
                   </div>
-                  <p className="text-sm leading-relaxed text-slate-300">Ketiga operasi tersebut tidak mengubah himpunan penyelesaian. Kerjakan operasi yang sama pada seluruh baris matriks augmented agar hubungan persamaan tetap terjaga.</p>
+                  <p className="text-sm leading-relaxed text-slate-300">Kabar baiknya, ketiga operasi ini tidak mengubah himpunan penyelesaian. Lakukan operasi yang sama pada seluruh elemen dalam baris matriks augmented agar hubungan persamaannya tetap terjaga.</p>
                 </div>
 
-                <Example number={25} title="Menentukan solusi SPLDV dengan OBE">
-                  <p className="text-sm text-slate-300">Ayo selesaikan <span className="font-mono text-white">2x + 6y = 10</span> dan <span className="font-mono text-white">x + 4y = 9</span> dengan Gauss–Jordan.</p>
-                  <p className="text-sm text-slate-300">Kita ubah sistem menjadi matriks augmented:</p>
+                <Example number={25} title="Ayo tuntaskan SPLDV dengan OBE!">
+                  <p className="text-sm text-slate-300">Tantangan berikutnya: selesaikan <span className="font-mono text-white">2x + 6y = 10</span> dan <span className="font-mono text-white">x + 4y = 9</span> dengan Gauss–Jordan. Ikuti pivotnya, ya!</p>
+                  <p className="text-sm text-slate-300">Pertama, kita susun matriks augmented:</p>
                   <Formula><Matrix rows={[[2, 6, "|", 10], [1, 4, "|", 9]]} label="Matriks augmented untuk sistem bagian a" /></Formula>
                   <div className="space-y-3">
                     <div className="rounded-xl border border-white/10 bg-white/[.025] p-3">
-                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-400">Langkah 1 · Buat pivot pertama menjadi 1</p>
+                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-400">Langkah 1 · Siapkan pivot pertama menjadi 1</p>
                       <Formula><span>B₁ ← ½B₁</span><span>→</span><Matrix rows={[[1, 3, "|", 5], [1, 4, "|", 9]]} label="Matriks setelah baris pertama dibagi dua" /></Formula>
                     </div>
                     <div className="rounded-xl border border-white/10 bg-white/[.025] p-3">
-                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-400">Langkah 2 · Nolkan elemen di bawah pivot</p>
+                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-400">Langkah 2 · Hilangkan elemen di bawah pivot</p>
                       <Formula><span>B₂ ← B₂ − B₁</span><span>→</span><Matrix rows={[[1, 3, "|", 5], [0, 1, "|", 4]]} label="Matriks setelah elemen bawah pivot dinolkan" /></Formula>
                     </div>
                     <div className="rounded-xl border border-emerald-200/20 bg-emerald-300/[.05] p-3">
-                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-emerald-100">Langkah 3 · Nolkan elemen di atas pivot kedua</p>
+                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-emerald-100">Langkah 3 · Rapikan elemen di atas pivot kedua</p>
                       <Formula><span>B₁ ← B₁ − 3B₂</span><span>→</span><Matrix rows={[[1, 0, "|", -7], [0, 1, "|", 4]]} label="Matriks identitas di kiri dan solusi di kanan" /></Formula>
                     </div>
                   </div>
                   <p className="rounded-xl border border-emerald-200/20 bg-emerald-300/[.06] p-3 text-sm text-emerald-50">Berhasil! <span className="font-mono font-bold">x = −7, y = 4</span>, sehingga HP = <strong>{`{(−7,4)}`}</strong>.</p>
                 </Example>
 
-                <Example number={26} title="Membaca solusi tak terhingga dengan OBE">
-                  <p className="text-sm text-slate-300">Selesaikan sistem <span className="font-mono text-white">2x + y = 7</span> dan <span className="font-mono text-white">4x + 2y = 14</span>. Apa yang terjadi pada baris kedua?</p>
+                <Example number={26} title="Menemukan solusi tak terhingga dengan OBE">
+                  <p className="text-sm text-slate-300">Ayo selesaikan sistem <span className="font-mono text-white">2x + y = 7</span> dan <span className="font-mono text-white">4x + 2y = 14</span>. Amati baik-baik baris kedua setelah dieliminasi!</p>
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <Formula><Matrix rows={[[2, 1, "|", 7], [4, 2, "|", 14]]} label="Matriks augmented sistem bergantung" /><span>B₁ ← ½B₁; B₂ ← B₂ − 4B₁</span><span>→</span><Matrix rows={[[1, "½", "|", "7/2"], [0, 0, "|", 0]]} label="Baris kedua menjadi baris nol" /></Formula>
-                    <p>Baris kedua menjadi <span className="font-mono text-white">0 = 0</span>, jadi kedua persamaan mewakili garis yang sama. Tetapkan <span className="font-mono text-white">y = t</span>; persamaan pertama memberi <span className="font-mono text-white">x = 7/2 − t/2</span>.</p>
+                    <p>Baris kedua berubah menjadi <span className="font-mono text-white">0 = 0</span>. Artinya, kedua persamaan mewakili garis yang sama! Tetapkan <span className="font-mono text-white">y = t</span>; persamaan pertama memberi <span className="font-mono text-white">x = 7/2 − t/2</span>.</p>
                     <Formula><span>(x,y) = (7/2 − t/2,t), t ∈ ℝ</span></Formula>
-                    <p>Jadi, sistem mempunyai tak terhingga banyak penyelesaian.</p>
+                    <p>Hebat, sistem ini memiliki tak terhingga banyak penyelesaian!</p>
                   </div>
                 </Example>
 
-                <Example number={27} title="Mengenali sistem tanpa solusi">
-                  <p className="text-sm text-slate-300">Selesaikan <span className="font-mono text-white">3x + 6y = 9</span> dan <span className="font-mono text-white">x + 2y = 5</span> dengan OBE. Awas, periksa ruas kanannya juga!</p>
+                <Example number={27} title="Menangkap tanda sistem tanpa solusi">
+                  <p className="text-sm text-slate-300">Coba selesaikan <span className="font-mono text-white">3x + 6y = 9</span> dan <span className="font-mono text-white">x + 2y = 5</span> dengan OBE. Awas, periksa ruas kanannya juga!</p>
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <Formula><Matrix rows={[[3, 6, "|", 9], [1, 2, "|", 5]]} label="Matriks augmented sistem yang tidak konsisten" /><span>B₁ ← ⅓B₁</span><span>→</span><Matrix rows={[[1, 2, "|", 3], [1, 2, "|", 5]]} label="Matriks setelah membagi baris pertama dengan tiga" /></Formula>
                     <Formula><span>B₂ ← B₂ − B₁</span><span>→</span><Matrix rows={[[1, 2, "|", 3], [0, 0, "|", 2]]} label="Baris kedua menyatakan nol sama dengan dua" /></Formula>
-                    <p>Baris terakhir menyatakan <span className="font-mono text-white">0 = 2</span>, suatu kemustahilan. Maka, sistem tidak mempunyai penyelesaian dan <span className="font-mono text-white">HP = ∅</span>.</p>
+                    <p>Ups, baris terakhir menyatakan <span className="font-mono text-white">0 = 2</span>—mustahil terjadi. Jadi, sistem tidak mempunyai penyelesaian dan <span className="font-mono text-white">HP = ∅</span>.</p>
                   </div>
                 </Example>
 
                 <div className="rounded-2xl border border-amber-200/15 bg-amber-200/[.045] p-4">
-                  <h4 className="font-display font-bold text-amber-100">Cara membaca bentuk akhir Gauss–Jordan</h4>
+                  <h4 className="font-display font-bold text-amber-100">Yuk, baca bentuk akhir Gauss–Jordan!</h4>
                   <div className="mt-3 grid gap-3 md:grid-cols-3">
                     <div className="rounded-xl border border-white/10 bg-white/[.025] p-3">
                       <p className="font-bold text-emerald-100">Bentuk 1 · Solusi tunggal</p>
                       <Formula><Matrix rows={[[1, 0, "|", "m"], [0, 1, "|", "n"]]} label="Bentuk akhir dengan solusi tunggal m dan n" /></Formula>
-                      <p className="mt-2 text-sm text-slate-300">Kiri menjadi I; solusinya <span className="font-mono text-white">(m,n)</span>.</p>
+                      <p className="mt-2 text-sm text-slate-300">Kiri menjadi I, dan solusi tunggalnya langsung terbaca: <span className="font-mono text-white">(m,n)</span>.</p>
                     </div>
                     <div className="rounded-xl border border-white/10 bg-white/[.025] p-3">
                       <p className="font-bold text-amber-100">Bentuk 2 · Solusi tak terhingga</p>
                       <Formula><Matrix rows={[[1, 0, "|", "m"], [0, 0, "|", 0]]} label="Bentuk akhir dengan baris nol dan banyak solusi" /></Formula>
-                      <p className="mt-2 text-sm text-slate-300">Baris nol memberi variabel bebas dan tak terhingga banyak solusi.</p>
+                      <p className="mt-2 text-sm text-slate-300">Baris nol menandakan ada variabel bebas—solusinya tak terhingga banyak!</p>
                     </div>
                     <div className="rounded-xl border border-white/10 bg-white/[.025] p-3">
                       <p className="font-bold text-rose-100">Bentuk 3 · Tidak ada solusi</p>
                       <Formula><Matrix rows={[[1, 0, "|", "m"], [0, 0, "|", "p"]]} label="Bentuk akhir dengan p bukan nol dan tanpa solusi" /></Formula>
-                      <p className="mt-2 text-sm text-slate-300">Jika <span className="font-mono text-white">p ≠ 0</span>, muncul persamaan mustahil <span className="font-mono text-white">0 = p</span>.</p>
+                      <p className="mt-2 text-sm text-slate-300">Jika <span className="font-mono text-white">p ≠ 0</span>, kita menemukan persamaan mustahil <span className="font-mono text-white">0 = p</span>—berarti tidak ada solusi.</p>
                     </div>
                   </div>
                 </div>
@@ -344,11 +344,11 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
               <section id="three-two" className="scroll-mt-8 space-y-5">
                 <div className="space-y-4 rounded-3xl border border-cyan-200/15 bg-cyan-200/[.045] p-4 sm:p-5">
                   <h3 className="font-display text-lg font-bold text-cyan-100">C. Sistem dengan tiga persamaan dan dua variabel</h3>
-                  <p className="text-sm leading-relaxed text-slate-300">Dalam situasi tertentu, kita mendapat tiga persamaan linear yang hanya memuat dua variabel. Secara grafik, setiap persamaan mewakili sebuah garis. Sistem mempunyai satu solusi jika ketiga garis berpotongan di titik yang sama; tidak ada solusi jika tidak ada titik persekutuan. Jika semua garis berhimpit, solusinya tak terhingga banyak.</p>
+                  <p className="text-sm leading-relaxed text-slate-300">Nah, kadang kita bertemu tiga persamaan linear dengan hanya dua variabel. Setiap persamaan mewakili sebuah garis. Jika ketiga garis bertemu di satu titik, solusinya satu; jika tidak punya titik persekutuan, tidak ada solusi; dan jika semuanya berhimpit, solusinya tak terhingga banyak. Yuk, kita buktikan lewat contoh!</p>
                 </div>
 
                 <Example number={28} title="Memeriksa tiga persamaan yang tidak berpotongan di satu titik">
-                  <p className="text-sm text-slate-300">Coba selesaikan sistem berikut dengan Gauss–Jordan:</p>
+                  <p className="text-sm text-slate-300">Tantangan pertama: selesaikan sistem berikut dengan Gauss–Jordan dan cari petunjuk saat baris-barisnya disederhanakan.</p>
                   <EquationSystem equations={[<span>x + 2y = 8</span>, <span>2x − y = 1</span>, <span>3x + y = 10</span>]} />
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <Formula><Matrix rows={[[1, 2, "|", 8], [2, -1, "|", 1], [3, 1, "|", 10]]} label="Matriks augmented tiga persamaan dan dua variabel" /></Formula>
@@ -359,7 +359,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                 </Example>
 
                 <Example number={29} title="Menemukan solusi bersama tiga persamaan">
-                  <p className="text-sm text-slate-300">Sekarang ubah konstanta persamaan ketiga. Tentukan solusi sistem ini:</p>
+                  <p className="text-sm text-slate-300">Sekarang ubah konstanta persamaan ketiga. Bisakah kamu menemukan satu titik yang memenuhi semuanya? Ayo cek!</p>
                   <EquationSystem equations={[<span>x + 2y = 8</span>, <span>2x − y = 1</span>, <span>3x + y = 9</span>]} />
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <Formula><Matrix rows={[[1, 2, "|", 8], [2, -1, "|", 1], [3, 1, "|", 9]]} label="Matriks augmented tiga persamaan yang konsisten" /></Formula>
@@ -370,7 +370,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                 </Example>
 
                 <Example number={30} title="Memodelkan campuran alkohol dengan matriks">
-                  <p className="text-sm leading-relaxed text-slate-300">Tangki A berisi campuran 18 liter air dan 12 liter alkohol. Tangki B berisi 21 liter air dan 9 liter alkohol. Berapa liter campuran dari masing-masing tangki yang perlu diambil agar diperoleh 20 liter campuran dengan kadar alkohol 35%?</p>
+                  <p className="text-sm leading-relaxed text-slate-300">Siap jadi peracik campuran? Tangki A berisi 18 liter air dan 12 liter alkohol. Tangki B berisi 21 liter air dan 9 liter alkohol. Berapa liter campuran dari masing-masing tangki yang perlu diambil agar diperoleh 20 liter campuran dengan kadar alkohol 35%?</p>
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <p>Misalkan A dan B menyatakan banyaknya campuran (dalam liter) yang diambil dari tangki A dan B. Jumlah campuran harus 20 liter:</p>
                     <p className="font-mono text-cyan-100">A + B = 20</p>
@@ -392,13 +392,13 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
               <section id="spltv" className="scroll-mt-8 space-y-5">
                 <div className="space-y-4 rounded-3xl border border-violet-200/15 bg-violet-200/[.04] p-4 sm:p-5">
                   <h3 className="font-display text-lg font-bold text-violet-100">D. Sistem persamaan linear dengan tiga variabel (SPLTV)</h3>
-                  <p className="text-sm leading-relaxed text-slate-300">Matriks juga dapat dipakai untuk menyelesaikan persoalan dengan tiga variabel. Satu persamaan dengan tiga variabel umumnya memiliki tak terhingga banyak solusi; dua persamaan dapat menyisakan satu parameter bebas; dan tiga persamaan dapat menghasilkan satu, tak terhingga banyak, atau tidak ada solusi.</p>
+                  <p className="text-sm leading-relaxed text-slate-300">Saatnya naik level ke tiga variabel! Satu persamaan umumnya memiliki tak terhingga banyak solusi, dua persamaan dapat menyisakan satu parameter bebas, sedangkan tiga persamaan bisa menghasilkan satu solusi, tak terhingga banyak solusi, atau tidak ada solusi.</p>
                   <h4 className="font-display font-bold text-violet-100">1. Satu atau dua persamaan linear dengan tiga variabel</h4>
-                  <p className="text-sm leading-relaxed text-slate-300">Pada satu persamaan, pilih dua variabel sebagai parameter bebas. Pada dua persamaan, matriks augmented dapat disederhanakan dengan OBE hingga hubungan antarvariabel terlihat. Mari lihat kedua bentuknya!</p>
+                  <p className="text-sm leading-relaxed text-slate-300">Pada satu persamaan, pilih dua variabel sebagai parameter bebas. Untuk dua persamaan, rapikan matriks augmented dengan OBE sampai hubungan antarvariabel terlihat jelas. Mari kita coba satu per satu!</p>
                 </div>
 
-                <Example number={31} title="Memahami solusi satu persamaan dengan tiga variabel">
-                  <p className="text-sm text-slate-300">Selesaikan <span className="font-mono text-white">x + 2y + 3z = 11</span> dengan menyatakan dua variabel sebagai parameter.</p>
+                <Example number={31} title="Membuka solusi satu persamaan, tiga variabel">
+                  <p className="text-sm text-slate-300">Ayo selesaikan <span className="font-mono text-white">x + 2y + 3z = 11</span> dengan memilih dua variabel sebagai parameter bebas.</p>
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <p>Ambil <span className="font-mono text-white">y = m</span> dan <span className="font-mono text-white">z = n</span>. Maka <span className="font-mono text-white">x = 11 − 2m − 3n</span>.</p>
                     <Formula label="Himpunan solusi">
@@ -408,12 +408,12 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                       <span>+</span><span>m</span><Matrix rows={[[-2], [1], [0]]} label="Vektor arah pertama minus dua satu nol" />
                       <span>+</span><span>n</span><Matrix rows={[[-3], [0], [1]]} label="Vektor arah kedua minus tiga nol satu" />
                     </Formula>
-                    <p>Dengan <span className="font-mono text-white">m,n ∈ ℝ</span>, kita memperoleh tak terhingga banyak titik solusi.</p>
+                    <p>Karena <span className="font-mono text-white">m,n ∈ ℝ</span> boleh dipilih bebas, kita memperoleh tak terhingga banyak titik solusi. Banyak sekali, ya!</p>
                   </div>
                 </Example>
 
-                <Example number={32} title="Mencari solusi dua persamaan dengan tiga variabel">
-                  <p className="text-sm text-slate-300">Gunakan Gauss–Jordan untuk menyelesaikan <span className="font-mono text-white">x + y − z = 2</span> dan <span className="font-mono text-white">2x + y − 4z = 0</span>.</p>
+                <Example number={32} title="Menemukan solusi dua persamaan, tiga variabel">
+                  <p className="text-sm text-slate-300">Sekarang gunakan Gauss–Jordan untuk menyelesaikan <span className="font-mono text-white">x + y − z = 2</span> dan <span className="font-mono text-white">2x + y − 4z = 0</span>. Kita akan mendapat satu parameter bebas!</p>
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <Formula><Matrix rows={[[1, 1, -1, "|", 2], [2, 1, -4, "|", 0]]} label="Matriks augmented sistem dua persamaan tiga variabel" /></Formula>
                     <Formula><span>B₂ ← B₂ − 2B₁</span><span>→</span><Matrix rows={[[1, 1, -1, "|", 2], [0, -1, -2, "|", -4]]} label="Matriks setelah mengeliminasi x" /></Formula>
@@ -425,7 +425,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
 
                 <div className="space-y-4 rounded-3xl border border-cyan-200/15 bg-cyan-200/[.045] p-4 sm:p-5">
                   <h4 className="font-display font-bold text-cyan-100">2. Tiga persamaan linear dengan tiga variabel</h4>
-                  <p className="text-sm leading-relaxed text-slate-300">Bentuk umum SPLTV dapat ditulis sebagai <span className="font-mono text-white">AX = B</span>. Jika matriks koefisien A memiliki determinan tidak nol, solusi tunggal dapat dicari dengan invers atau aturan Cramer. Jika determinannya nol, gunakan eliminasi Gauss–Jordan untuk memeriksa apakah sistem tidak konsisten atau memiliki variabel bebas.</p>
+                  <p className="text-sm leading-relaxed text-slate-300">Untuk tiga persamaan, kita tulis SPLTV dalam bentuk ringkas <span className="font-mono text-white">AX = B</span>. Jika determinan A tidak nol, hore—ada solusi tunggal yang bisa dicari dengan invers atau aturan Cramer. Jika determinannya nol, gunakan Gauss–Jordan untuk mengecek apakah sistem tidak konsisten atau memiliki variabel bebas.</p>
                   <Formula label="Model umum SPLTV">
                     <EquationSystem equations={[<span>a₁x + b₁y + c₁z = d₁</span>, <span>a₂x + b₂y + c₂z = d₂</span>, <span>a₃x + b₃y + c₃z = d₃</span>]} />
                     <span>⇔</span>
@@ -440,25 +440,25 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                     <span>x = Dₓ/D</span><span>·</span><span>y = Dᵧ/D</span><span>·</span><span>z = D𝓏/D</span>
                   </Formula>
                   <p className="text-sm leading-relaxed text-slate-300"><span className="font-mono text-white">D = det(A)</span>. Untuk memperoleh Dₓ, Dᵧ, dan D𝓏, ganti berturut-turut kolom x, y, dan z pada A dengan vektor konstanta B. Rumus Cramer berlaku jika D ≠ 0.</p>
-                  <p className="text-sm leading-relaxed text-slate-300">Untuk metode Gauss–Jordan, susun <span className="font-mono text-white">[A | B]</span>, lalu ubah bagian kiri menjadi I. Jika berhasil, bagian kanan adalah <span className="font-mono text-white">(x,y,z)</span>. Jika muncul baris <span className="font-mono text-white">[0 0 0 | k]</span> dengan <span className="font-mono text-white">k ≠ 0</span>, tidak ada solusi; baris nol yang tersisa dapat menandakan adanya variabel bebas.</p>
+                  <p className="text-sm leading-relaxed text-slate-300">Untuk Gauss–Jordan, susun <span className="font-mono text-white">[A | B]</span>, lalu ubah sisi kiri menjadi I. Jika berhasil, sisi kanan langsung menjadi <span className="font-mono text-white">(x,y,z)</span>. Jika muncul baris <span className="font-mono text-white">[0 0 0 | k]</span> dengan <span className="font-mono text-white">k ≠ 0</span>, sistem tidak punya solusi; baris nol yang tersisa bisa menandakan variabel bebas. Perhatikan bentuk akhirnya, ya!</p>
                 </div>
 
-                <Example number={33} title="Menuntaskan SPLTV dengan Gauss–Jordan">
-                  <p className="text-sm text-slate-300">Selesaikan sistem <span className="font-mono text-white">x + y + z = 6</span>, <span className="font-mono text-white">x + 2y + 3z = 14</span>, dan <span className="font-mono text-white">2x + y + z = 7</span>.</p>
+                <Example number={33} title="Ayo tuntaskan SPLTV dengan Gauss–Jordan!">
+                  <p className="text-sm text-slate-300">Tantangan SPLTV! Selesaikan <span className="font-mono text-white">x + y + z = 6</span>, <span className="font-mono text-white">x + 2y + 3z = 14</span>, dan <span className="font-mono text-white">2x + y + z = 7</span>. Ikuti langkahnya sampai semua pivot rapi.</p>
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <Formula><Matrix rows={[[1, 1, 1, "|", 6], [1, 2, 3, "|", 14], [2, 1, 1, "|", 7]]} label="Matriks augmented tiga persamaan untuk contoh tiga puluh tiga" /></Formula>
-                    <p><strong className="text-cyan-100">Langkah pertama.</strong> Nolkan elemen pertama pada baris kedua dan ketiga.</p>
+                    <p><strong className="text-cyan-100">Langkah pertama.</strong> Hilangkan elemen pertama pada baris kedua dan ketiga.</p>
                     <Formula><span>B₂ ← B₂ − B₁; B₃ ← B₃ − 2B₁</span><span>→</span><Matrix rows={[[1, 1, 1, "|", 6], [0, 1, 2, "|", 8], [0, -1, -1, "|", -5]]} label="Hasil eliminasi kolom pertama" /></Formula>
                     <p><strong className="text-cyan-100">Langkah kedua.</strong> Jumlahkan baris kedua dan ketiga untuk memperoleh pivot z.</p>
                     <Formula><span>B₃ ← B₃ + B₂</span><span>→</span><Matrix rows={[[1, 1, 1, "|", 6], [0, 1, 2, "|", 8], [0, 0, 1, "|", 3]]} label="Pivot z diperoleh pada baris ketiga" /></Formula>
-                    <p><strong className="text-cyan-100">Langkah ketiga.</strong> Nolkan elemen di atas pivot z, kemudian di atas pivot y.</p>
+                    <p><strong className="text-cyan-100">Langkah ketiga.</strong> Rapikan elemen di atas pivot z, lalu pivot y. Tinggal sedikit lagi!</p>
                     <Formula><span>B₂ ← B₂ − 2B₃; B₁ ← B₁ − B₂ − B₃</span><span>→</span><Matrix rows={[[1, 0, 0, "|", 1], [0, 1, 0, "|", 2], [0, 0, 1, "|", 3]]} label="Matriks identitas dengan solusi x satu y dua z tiga" /></Formula>
                     <p className="rounded-xl border border-emerald-200/20 bg-emerald-300/[.06] p-3 text-emerald-50">Jadi, penyelesaiannya <span className="font-mono font-bold">(x,y,z) = (1,2,3)</span> dan HP = <strong>{`{(1,2,3)}`}</strong>.</p>
                   </div>
                 </Example>
 
-                <Example number={34} title="Mendeteksi SPLTV yang tidak konsisten">
-                  <p className="text-sm text-slate-300">Selesaikan dengan Gauss–Jordan, lalu perhatikan apakah ada baris yang mustahil.</p>
+                <Example number={34} title="Menemukan kontradiksi dalam SPLTV">
+                  <p className="text-sm text-slate-300">Ayo gunakan Gauss–Jordan dan amati apakah ada baris yang memberi pernyataan mustahil.</p>
                   <EquationSystem equations={[<span>x + y + z = 4</span>, <span>2x + 2y + 2z = 11</span>, <span>x − y + z = 1</span>]} />
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <Formula><Matrix rows={[[1, 1, 1, "|", 4], [2, 2, 2, "|", 11], [1, -1, 1, "|", 1]]} label="Matriks augmented sistem tanpa solusi" /></Formula>
@@ -468,14 +468,14 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                   </div>
                 </Example>
 
-                <Example number={35} title="Menemukan solusi tak terhingga pada SPLTV">
-                  <p className="text-sm text-slate-300">Gunakan Gauss–Jordan pada sistem berikut dan nyatakan solusinya dengan parameter.</p>
+                <Example number={35} title="Menjelajahi solusi tak terhingga SPLTV">
+                  <p className="text-sm text-slate-300">Semangat, satu tantangan lagi! Gunakan Gauss–Jordan pada sistem berikut dan tuliskan solusinya dengan parameter.</p>
                   <EquationSystem equations={[<span>x + 2y − 3z = 5</span>, <span>2x + 4y − 6z = 10</span>, <span>−2x − 3y + 4z = −6</span>]} />
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <Formula><Matrix rows={[[1, 2, -3, "|", 5], [2, 4, -6, "|", 10], [-2, -3, 4, "|", -6]]} label="Matriks augmented sistem dengan banyak solusi" /></Formula>
                     <Formula><span>B₂ ← B₂ − 2B₁; B₃ ← B₃ + 2B₁</span><span>→</span><Matrix rows={[[1, 2, -3, "|", 5], [0, 0, 0, "|", 0], [0, 1, -2, "|", 4]]} label="Satu baris menjadi nol dan satu persamaan tersisa" /></Formula>
                     <Formula><span>B₁ ← B₁ − 2B₃</span><span>→</span><Matrix rows={[[1, 0, 1, "|", -3], [0, 1, -2, "|", 4], [0, 0, 0, "|", 0]]} label="Bentuk akhir dengan z bebas" /></Formula>
-                    <p>Ambil <span className="font-mono text-white">z = t</span>. Maka <span className="font-mono text-white">x = −3 − t</span> dan <span className="font-mono text-white">y = 4 + 2t</span>, dengan <span className="font-mono text-white">t ∈ ℝ</span>.</p>
+                    <p>Ambil <span className="font-mono text-white">z = t</span>. Kita memperoleh <span className="font-mono text-white">x = −3 − t</span> dan <span className="font-mono text-white">y = 4 + 2t</span>, dengan <span className="font-mono text-white">t ∈ ℝ</span>. Satu parameter, tak terhingga banyak pasangan!</p>
                     <Formula><span>(x,y,z) = (−3,4,0) + t(−1,2,1), t ∈ ℝ</span></Formula>
                   </div>
                 </Example>
@@ -492,8 +492,8 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                   </div>
                 </details>
 
-                <Example number={36} title="Menerapkan matriks pada masalah harga buah">
-                  <p className="text-sm leading-relaxed text-slate-300">Harga 2 kg mangga, 2 kg jeruk, dan 1 kg anggur adalah Rp86.000,00. Harga 1 kg mangga, 2 kg jeruk, dan 2 kg anggur adalah Rp94.000,00. Harga 1 kg mangga, 2 kg jeruk, dan 3 kg anggur adalah Rp116.000,00. Berapa harga 1 kg anggur?</p>
+                <Example number={36} title="Menyelidiki harga buah dengan matriks">
+                  <p className="text-sm leading-relaxed text-slate-300">Saatnya jadi detektif harga! Harga 2 kg mangga, 2 kg jeruk, dan 1 kg anggur adalah Rp86.000,00. Harga 1 kg mangga, 2 kg jeruk, dan 2 kg anggur adalah Rp94.000,00. Harga 1 kg mangga, 2 kg jeruk, dan 3 kg anggur adalah Rp116.000,00. Berapa harga 1 kg anggur?</p>
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <p>Misalkan harga per kilogram mangga, jeruk, dan anggur berturut-turut adalah M, J, dan A (dalam ribuan rupiah). Model matematikanya:</p>
                     <EquationSystem equations={[<span>2M + 2J + A = 86</span>, <span>M + 2J + 2A = 94</span>, <span>M + 2J + 3A = 116</span>]} />
@@ -506,8 +506,8 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                   </div>
                 </Example>
 
-                <Example number={37} title="Memecahkan masalah uang saku dengan SPLTV">
-                  <p className="text-sm leading-relaxed text-slate-300">Uang Ari Rp10.000,00 lebih banyak daripada jumlah uang Budi dan dua kali uang Dodi. Jumlah uang Ari, Budi, dan Dodi adalah Rp98.000,00. Selisih uang Budi dan Dodi adalah Rp4.000,00. Berapa uang Ari?</p>
+                <Example number={37} title="Tantangan terakhir: uang saku dan SPLTV!">
+                  <p className="text-sm leading-relaxed text-slate-300">Tantangan terakhir! Uang Ari Rp10.000,00 lebih banyak daripada jumlah uang Budi dan dua kali uang Dodi. Jumlah uang Ari, Budi, dan Dodi adalah Rp98.000,00. Selisih uang Budi dan Dodi adalah Rp4.000,00. Yuk, cari uang Ari!</p>
                   <div className="space-y-3 text-sm leading-relaxed text-slate-300">
                     <p>Misalkan uang Ari = A, Budi = B, dan Dodi = D. Model SPLTV-nya:</p>
                     <EquationSystem equations={[<span>A − B − 2D = 10.000</span>, <span>A + B + D = 98.000</span>, <span>B − D = 4.000</span>]} />
@@ -517,7 +517,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
                     <Formula><span>B₂ ← ½B₂; B₃ ← B₃ − B₂</span><span>→</span><Matrix rows={[[1, -1, -2, "|", 10], [0, 1, "3/2", "|", 44], [0, 0, "−5/2", "|", -40]]} label="Matriks dengan pivot ketiga untuk uang Dodi" /></Formula>
                     <Formula><span>B₃ ← −⅖B₃; B₂ ← B₂ − ³⁄₂B₃</span><span>→</span><Matrix rows={[[1, -1, -2, "|", 10], [0, 1, 0, "|", 20], [0, 0, 1, "|", 16]]} label="Nilai uang Budi dan Dodi" /></Formula>
                     <Formula><span>B₁ ← B₁ + B₂ + 2B₃</span><span>→</span><Matrix rows={[[1, 0, 0, "|", 62], [0, 1, 0, "|", 20], [0, 0, 1, "|", 16]]} label="Solusi uang Ari, Budi, dan Dodi dalam ribuan rupiah" /></Formula>
-                    <p className="rounded-xl border border-emerald-200/20 bg-emerald-300/[.06] p-3 text-emerald-50">Mantap, diperoleh A = 62, B = 20, dan D = 16. Jadi, uang Ari adalah <strong>Rp62.000,00</strong>.</p>
+                    <p className="rounded-xl border border-emerald-200/20 bg-emerald-300/[.06] p-3 text-emerald-50">Mantap! Diperoleh A = 62, B = 20, dan D = 16. Jadi, uang Ari adalah <strong>Rp62.000,00</strong>.</p>
                   </div>
                 </Example>
               </section>
@@ -527,7 +527,7 @@ export default function SmaPenerapanMatriksPadaSPLPage() {
               <div className="flex items-start gap-3">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-amber-200/20 bg-amber-200/[.08] text-amber-100"><Sparkles className="h-5 w-5" aria-hidden="true" /></span>
                 <div>
-                  <h2 className="font-display text-xl font-extrabold text-white sm:text-2xl">Hebat, kamu sudah menuntaskan penerapan matriks pada SPL!</h2>
+                  <h2 className="font-display text-xl font-extrabold text-white sm:text-2xl">Hebat! Kamu berhasil menuntaskan penerapan matriks pada SPL!</h2>
                   <ul className="mt-3 space-y-2 text-sm leading-relaxed text-slate-300">
                     <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-300" aria-hidden="true" />Satu persamaan dua variabel umumnya memiliki tak terhingga banyak solusi yang membentuk garis.</li>
                     <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-300" aria-hidden="true" />SPLDV dapat memiliki satu solusi, tidak ada solusi, atau tak terhingga banyak solusi; determinan dan bentuk grafik membantu mengenalinya.</li>
