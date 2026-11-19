@@ -209,6 +209,10 @@ const SmaPersamaanGarisSinggungLingkaranPage = lazy(() => import("./pages/ruang-
 const SmaHubunganDuaLingkaranPage = lazy(() => import("./pages/ruang-untuk-guru/SmaHubunganDuaLingkaranPage"));
 const SmaSpltvPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSpltvPage"));
 const SmaSptdvPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSptdvPage"));
+const SmaKonsepJenisKesamaanTransposeMatriksPage = lazy(() => import("./pages/ruang-untuk-guru/SmaKonsepJenisKesamaanTransposeMatriksPage"));
+const SmaOperasiAljabarMatriksPage = lazy(() => import("./pages/ruang-untuk-guru/SmaOperasiAljabarMatriksPage"));
+const SmaDeterminanInversMatriksPage = lazy(() => import("./pages/ruang-untuk-guru/SmaDeterminanInversMatriksPage"));
+const SmaPenerapanMatriksPadaSPLPage = lazy(() => import("./pages/ruang-untuk-guru/SmaPenerapanMatriksPadaSPLPage"));
 const SmaPolinomialKonsepPage = lazy(() => import("./pages/ruang-untuk-guru/SmaPolinomialKonsepPage"));
 const SmaNilaiPolinomialHornerPage = lazy(() => import("./pages/ruang-untuk-guru/SmaNilaiPolinomialHornerPage"));
 const SmaPembagianPolinomialPage = lazy(() => import("./pages/ruang-untuk-guru/SmaPembagianPolinomialPage"));
@@ -253,7 +257,7 @@ const SmaVektorPadaSistemKoordinatKartesiusPage = lazy(() => import("./pages/rua
 const SmaSudutAntaraDuaVektorPage = lazy(() => import("./pages/ruang-untuk-guru/SmaSudutAntaraDuaVektorPage"));
 const SmaProyeksiVektorPage = lazy(() => import("./pages/ruang-untuk-guru/SmaProyeksiVektorPage"));
 const NumatikGamePage = lazy(() => import("./pages/ruang-untuk-guru/NumatikGamePage"));
-const NumatikCityRiderPage = lazy(() => import("./pages/ruang-untuk-guru/NumatikCityRiderPage"));
+const NumatikCityRiderPage = lazy(() => import("./games/numatik-metropolis/NumatikMetropolisPage.tsx"));
 const NumatikKartPage = lazy(() => import("./pages/ruang-untuk-guru/NumatikKartPage"));
 const NumatikRunnerPage = lazy(() => import("./games/numatik-runner/NumatikRunnerPage"));
 const ObbyMatematikaPage = lazy(() => import("./games/obby-matematika/ObbyPage"));
@@ -1338,6 +1342,22 @@ const AppInner = () => {
               element={<SmaSptdvPage />}
             />
             <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/matriks/konsep-jenis-kesamaan-transpose-matriks"
+              element={<SmaKonsepJenisKesamaanTransposeMatriksPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/matriks/operasi-aljabar-matriks"
+              element={<SmaOperasiAljabarMatriksPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/matriks/determinan-dan-invers-matriks"
+              element={<SmaDeterminanInversMatriksPage />}
+            />
+            <Route
+              path="/ruang-untuk-guru/sma/buku-animasi/matriks/penerapan-matriks-pada-spl"
+              element={<SmaPenerapanMatriksPadaSPLPage />}
+            />
+            <Route
               path="/ruang-untuk-guru/sma/buku-animasi/polinomial/konsep-dasar-dan-operasi-polinomial"
               element={<SmaPolinomialKonsepPage />}
             />
@@ -1442,6 +1462,7 @@ const AppInner = () => {
             <Route path="/ruang-untuk-guru/sma/tes-kemampuan-akademik" element={<SmaComingSoonPage />} />
             <Route path="/ruang-untuk-guru/exam-browser" element={<ExamBrowserComingSoonPage />} />
             <Route path="/ruang-untuk-guru/numatik-game" element={<NumatikGamePage />} />
+            <Route path="/game/numatik-metropolis" element={<NumatikCityRiderPage />} />
             <Route path="/ruang-untuk-guru/numatik-game/city-ride" element={<NumatikCityRiderPage />} />
             <Route path="/ruang-untuk-guru/numatik-game/kart" element={<NumatikKartPage />} />
             <Route path="/game/numatik-runner" element={<NumatikRunnerPage />} />

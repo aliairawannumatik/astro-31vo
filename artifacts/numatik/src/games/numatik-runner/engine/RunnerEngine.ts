@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { createRunnerConfig, type RunnerConfigOverrides } from "./config";
-import { getNextQuestion, type QuestionBankConfig, type RunnerQuestion as BankQuestion } from "../questions/bank";
+import { getNextQuestion, type QuestionBankConfig, type RunnerQuestion as BankQuestion } from "../../shared/questions/bank";
 
 export interface RunnerQuestion {
   id: string;

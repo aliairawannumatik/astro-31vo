@@ -1,5 +1,5 @@
 import type { Vector2 } from "three";
-import type { RunnerQuestion } from "../../numatik-runner/questions/bank";
+import type { RunnerQuestion } from "../../shared/questions/bank";
 
 export type ObbyQuestion = RunnerQuestion;
 export type ObbyQuality = "low" | "medium" | "high" | "ultra" | "auto";

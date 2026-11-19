@@ -1,0 +1,1515 @@
+.metro-game {
+  --metro-ink: #172d36;
+  --metro-ink-muted: #e8f3f0;
+  --metro-panel: rgba(15, 33, 39, .84);
+  --metro-panel-border: rgba(218, 240, 222, .2);
+  --metro-teal: #79dfc4;
+  --metro-gold: #ffce68;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #6997a0;
+  color: #f7fbf6;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  isolation: isolate;
+  touch-action: none;
+  user-select: none;
+}
+
+.metro-canvas,
+.metro-screen-wash {
+  position: absolute;
+  inset: 0;
+}
+
+.metro-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+.metro-screen-wash {
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(10, 25, 32, .36), transparent 25%, transparent 67%, rgba(12, 27, 31, .3));
+}
+
+.metro-topbar,
+.metro-hud,
+.metro-map-card,
+.metro-objective,
+.metro-interact,
+.metro-touch-controls,
+.metro-controls-hint,
+.metro-menu-wrap,
+.metro-modal-backdrop,
+.metro-toast,
+.metro-loading,
+.metro-error {
+  position: absolute;
+  z-index: 2;
+}
+
+.metro-topbar {
+  top: max(14px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
+  right: max(14px, env(safe-area-inset-right));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metro-icon-button,
+.metro-panel-header button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #f7fbf6;
+  background: rgba(14, 33, 40, .72);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.metro-icon-button:hover,
+.metro-panel-header button:hover {
+  background: rgba(30, 67, 72, .9);
+  transform: translateY(-1px);
+}
+
+.metro-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  margin-right: auto;
+  text-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
+
+.metro-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  color: #143b3c;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #a5f2d3, #ffd977);
+  box-shadow: 0 4px 20px rgba(47, 134, 111, .24);
+}
+
+.metro-brand b,
+.metro-brand small {
+  display: block;
+}
+
+.metro-brand b {
+  font-size: 12px;
+  letter-spacing: .14em;
+}
+
+.metro-brand small {
+  margin-top: 3px;
+  color: #d3e2dd;
+  font-size: 8px;
+  letter-spacing: .22em;
+}
+
+.metro-coins {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 216, 112, .4);
+  border-radius: 14px;
+  color: #ffe09a;
+  background: rgba(26, 40, 40, .76);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.metro-hud {
+  top: 76px;
+  left: 18px;
+  display: flex;
+  gap: 8px;
+}
+
+.metro-hud-card {
+  min-width: 112px;
+  padding: 11px 13px;
+  border: 1px solid rgba(239, 248, 229, .18);
+  border-radius: 15px;
+  background: var(--metro-panel);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 7px 24px rgba(7, 24, 27, .18);
+}
+
+.metro-eyebrow,
+.metro-map-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #b7d1c9;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .11em;
+}
+
+.metro-hud-card > strong {
+  display: block;
+  margin-top: 6px;
+  color: #f8faf2;
+  font-size: 21px;
+  line-height: 1.1;
+}
+
+.metro-hud-card > strong small {
+  color: #b2c7bf;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.metro-dots {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.metro-dots i {
+  width: 11px;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(227, 239, 220, .22);
+}
+
+.metro-dots i.is-found {
+  background: var(--metro-gold);
+  box-shadow: 0 0 8px rgba(255, 206, 104, .5);
+}
+
+.metro-stars-card > strong {
+  display: flex;
+  gap: 2px;
+  color: #c9d4c8;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.metro-stars-card > strong.is-wanted {
+  color: #ffd05e;
+  text-shadow: 0 0 12px rgba(255, 190, 50, .46);
+}
+
+.metro-altitude {
+  display: block;
+  margin-top: 5px;
+  color: #b7d1c9;
+  font-size: 9px;
+}
+
+.metro-map-card {
+  top: 76px;
+  right: 18px;
+  width: 166px;
+  padding: 9px;
+  border: 1px solid rgba(239, 248, 229, .2);
+  border-radius: 16px;
+  color: white;
+  text-align: left;
+  background: var(--metro-panel);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+}
+
+.metro-map-title {
+  margin: 0 0 7px 2px;
+}
+
+.metro-map {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.metro-map-card .metro-map {
+  opacity: .94;
+}
+
+.metro-map-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border: 1px solid white;
+  border-radius: 50%;
+  background: #e86254;
+  box-shadow: 0 0 7px #fae7a5;
+  pointer-events: none;
+}
+
+.metro-map-footer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 7px 2px 1px;
+  color: #c4d5cc;
+  font-size: 8px;
+}
+
+.metro-map-footer i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #91e2c6;
+}
+
+.metro-objective {
+  bottom: 24px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(390px, calc(100vw - 32px));
+  padding: 13px 15px;
+  border: 1px solid rgba(222, 243, 219, .19);
+  border-radius: 16px;
+  background: rgba(14, 33, 39, .79);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(9, 27, 28, .2);
+  transform: translateX(-50%);
+}
+
+.metro-objective-icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  border-radius: 12px;
+  color: #ffd36b;
+  background: rgba(255, 203, 86, .12);
+}
+
+.metro-objective > span:last-child {
+  min-width: 0;
+}
+
+.metro-objective small,
+.metro-objective b,
+.metro-objective em {
+  display: block;
+}
+
+.metro-objective small {
+  color: #9ac9bc;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.metro-objective b {
+  margin: 3px 0 2px;
+  font-size: 12px;
+}
+
+.metro-objective em {
+  overflow: hidden;
+  color: #c4d0c8;
+  font-size: 9px;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metro-interact {
+  left: 50%;
+  bottom: 110px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 218, 129, .58);
+  border-radius: 13px;
+  color: #ffe8ac;
+  background: rgba(57, 48, 28, .88);
+  font-size: 11px;
+  font-weight: 800;
+  box-shadow: 0 5px 20px rgba(0,0,0,.2);
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.metro-interact kbd,
+.metro-controls-hint kbd {
+  padding: 3px 5px;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 5px;
+  color: white;
+  background: rgba(255,255,255,.1);
+  font: inherit;
+}
+
+.metro-touch-controls {
+  right: 22px;
+  bottom: 22px;
+  left: 22px;
+  display: none;
+  align-items: end;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.metro-joystick,
+.metro-action-cluster {
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.metro-joystick {
+  display: flex;
+  width: 116px;
+  height: 116px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 1px solid rgba(236, 248, 225, .18);
+  border-radius: 50%;
+  background: rgba(18, 38, 42, .3);
+  backdrop-filter: blur(8px);
+}
+
+.metro-joystick-ring {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border: 1px solid rgba(237, 247, 232, .48);
+  border-radius: 50%;
+  background: rgba(215, 235, 219, .14);
+}
+
+.metro-joystick-ring i {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(194, 237, 215, .72);
+  box-shadow: 0 2px 12px rgba(4, 25, 25, .3);
+}
+
+.metro-joystick small {
+  position: absolute;
+  bottom: 15px;
+  color: #e4eee6;
+  font-size: 7px;
+  letter-spacing: .15em;
+}
+
+.metro-action-cluster {
+  display: grid;
+  grid-template-columns: repeat(2, 54px);
+  gap: 7px;
+}
+
+.metro-action-cluster button {
+  min-height: 42px;
+  border: 1px solid rgba(240, 249, 235, .28);
+  border-radius: 13px;
+  color: #f6f7ee;
+  background: rgba(16, 38, 43, .76);
+  font-size: 9px;
+  font-weight: 900;
+  backdrop-filter: blur(9px);
+  touch-action: none;
+}
+
+.metro-action-cluster button.metro-action-primary {
+  color: #20382f;
+  background: linear-gradient(135deg, #9be4bf, #f8cf78);
+}
+
+.metro-controls-hint {
+  right: 190px;
+  bottom: 32px;
+  color: #eff3ea;
+  font-size: 9px;
+  text-shadow: 0 1px 5px #172a2c;
+}
+
+.metro-menu-wrap {
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 78px 18px 26px;
+  background: linear-gradient(90deg, rgba(12, 30, 35, .57), rgba(13, 30, 34, .12) 65%, rgba(13, 30, 34, .08));
+}
+
+.metro-menu-panel {
+  width: min(540px, 100%);
+  margin-right: auto;
+  margin-left: clamp(0px, 6vw, 86px);
+  padding: clamp(23px, 4vw, 39px);
+  border: 1px solid rgba(222, 241, 220, .24);
+  border-radius: 26px;
+  background: linear-gradient(145deg, rgba(17, 42, 44, .9), rgba(23, 40, 42, .76));
+  box-shadow: 0 24px 80px rgba(7, 24, 25, .32);
+  backdrop-filter: blur(18px);
+}
+
+.metro-menu-kicker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #9ce0c7;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .15em;
+}
+
+.metro-menu-panel h1 {
+  margin: 18px 0 0;
+  font-size: clamp(40px, 7vw, 68px);
+  font-weight: 950;
+  letter-spacing: -.065em;
+  line-height: .87;
+  text-shadow: 0 6px 25px rgba(0,0,0,.25);
+}
+
+.metro-menu-panel h1 em {
+  color: #ffd36b;
+  font-size: .72em;
+  font-style: normal;
+  letter-spacing: .005em;
+}
+
+.metro-menu-subtitle {
+  margin: 15px 0 0;
+  color: #acd5c7;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .25em;
+}
+
+.metro-menu-copy {
+  max-width: 405px;
+  margin: 14px 0 0;
+  color: #d6e1d8;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.metro-feature-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 19px;
+}
+
+.metro-feature-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid rgba(223, 239, 221, .14);
+  border-radius: 10px;
+  color: #e1eee4;
+  background: rgba(255,255,255,.055);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.metro-feature-row svg {
+  color: #ffcf69;
+}
+
+.metro-menu-actions,
+.metro-menu-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.metro-menu-actions {
+  margin-top: 21px;
+}
+
+.metro-primary-button,
+.metro-secondary-button,
+.metro-pause-actions > button,
+.metro-panel-footer > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 43px;
+  padding: 0 17px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  color: #17362f;
+  background: linear-gradient(135deg, #a0e9c5, #ffdb83);
+  box-shadow: 0 5px 16px rgba(11, 25, 25, .15);
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: filter .16s ease, transform .16s ease;
+}
+
+.metro-primary-button:hover,
+.metro-secondary-button:hover,
+.metro-pause-actions > button:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.metro-secondary-button {
+  border-color: rgba(238, 246, 232, .24);
+  color: #f4f6ed;
+  background: rgba(255,255,255,.075);
+  box-shadow: none;
+}
+
+.metro-menu-links {
+  margin-top: 15px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(230, 241, 225, .12);
+}
+
+.metro-menu-links button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 3px;
+  border: 0;
+  color: #d4e4dc;
+  background: transparent;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.metro-menu-links button:hover {
+  color: #fff0bb;
+}
+
+.metro-content-note {
+  display: flex;
+  gap: 8px;
+  margin-top: 13px;
+  padding: 10px 11px;
+  border: 1px solid rgba(168, 216, 194, .13);
+  border-radius: 11px;
+  color: #b9cec3;
+  background: rgba(8, 24, 26, .25);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.metro-content-note strong {
+  color: #ffdb83;
+}
+
+.metro-menu-caption {
+  position: absolute;
+  right: 7vw;
+  bottom: 8vh;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(243, 246, 233, .75);
+  font-size: 9px;
+  letter-spacing: .14em;
+}
+
+.metro-menu-caption span {
+  color: #ffdb83;
+  font-weight: 900;
+}
+
+.metro-menu-caption i {
+  width: 27px;
+  height: 1px;
+  background: #b9d1c0;
+}
+
+.metro-modal-backdrop {
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(8, 19, 22, .58);
+  backdrop-filter: blur(6px);
+}
+
+.metro-panel {
+  width: min(730px, 100%);
+  max-height: min(88vh, 830px);
+  overflow: auto;
+  border: 1px solid rgba(224, 240, 220, .19);
+  border-radius: 22px;
+  color: #f3f7ef;
+  background: linear-gradient(150deg, rgba(21, 43, 46, .97), rgba(19, 34, 39, .97));
+  box-shadow: 0 24px 80px rgba(0,0,0,.35);
+}
+
+.metro-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 17px 19px;
+  border-bottom: 1px solid rgba(227, 240, 223, .12);
+}
+
+.metro-panel-header > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.metro-panel-header > span svg {
+  color: #ffce68;
+}
+
+.metro-panel-header button {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.07);
+}
+
+.metro-pause-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, .82fr);
+  gap: 20px;
+  padding: 18px;
+}
+
+.metro-pause-content h3,
+.metro-full-map h3,
+.metro-mission-list h3 {
+  margin: 0 0 10px;
+  color: #a9d8c6;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.metro-map--large {
+  max-width: 100%;
+  max-height: 380px;
+  border: 1px solid rgba(240, 244, 224, .18);
+}
+
+.metro-mission-list > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(227, 240, 223, .09);
+}
+
+.metro-mission-list > div > i {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(233, 241, 221, .22);
+  border-radius: 9px;
+  color: #f6d67e;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.metro-mission-list > div > span {
+  min-width: 0;
+}
+
+.metro-mission-list b,
+.metro-mission-list small {
+  display: block;
+}
+
+.metro-mission-list b {
+  font-size: 10px;
+}
+
+.metro-mission-list small {
+  overflow: hidden;
+  margin-top: 3px;
+  color: #a9bab0;
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metro-mission-list > div.is-complete {
+  color: #9edfc2;
+}
+
+.metro-mission-list > div.is-complete > i {
+  color: #a1e2c4;
+}
+
+.metro-pause-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 18px 18px;
+  border-top: 1px solid rgba(227, 240, 223, .12);
+}
+
+.metro-pause-actions > button {
+  min-height: 39px;
+  padding: 0 12px;
+  color: #e7eee6;
+  border-color: rgba(228, 240, 222, .13);
+  background: rgba(255,255,255,.07);
+  box-shadow: none;
+  font-size: 10px;
+}
+
+.metro-pause-actions > button.metro-primary-button {
+  color: #17362f;
+  border-color: transparent;
+  background: linear-gradient(135deg, #a0e9c5, #ffdb83);
+}
+
+.metro-info-panel {
+  width: min(530px, 100%);
+}
+
+.metro-settings {
+  display: grid;
+  gap: 13px;
+  padding: 20px;
+}
+
+.metro-settings label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: #e9f1e7;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.metro-settings select,
+.metro-toggle {
+  min-width: 115px;
+  padding: 9px 10px;
+  border: 1px solid rgba(224, 240, 220, .2);
+  border-radius: 9px;
+  color: #f3f5e9;
+  background: #243f42;
+  font-size: 10px;
+}
+
+.metro-settings > small {
+  margin-top: -10px;
+  color: #f4ce79;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.metro-settings input[type="range"] {
+  accent-color: #9ee1c2;
+  max-width: 180px;
+}
+
+.metro-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.metro-time-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f5dc9e;
+}
+
+.metro-info-copy {
+  padding: 20px;
+  color: #d4e0d7;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.metro-info-copy a {
+  color: #a4e2c5;
+}
+
+.metro-panel-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px 19px;
+}
+
+.metro-panel-footer > button {
+  min-height: 38px;
+}
+
+.metro-question-panel {
+  width: min(485px, 100%);
+  padding: 25px;
+  text-align: center;
+}
+
+.metro-question-gem {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 13px;
+  border: 1px solid rgba(255, 210, 105, .36);
+  border-radius: 16px;
+  color: #ffdc84;
+  background: rgba(255, 207, 97, .1);
+}
+
+.metro-question-panel .metro-menu-kicker {
+  justify-content: center;
+  font-size: 8px;
+}
+
+.metro-question-panel h2 {
+  margin: 15px 0 20px;
+  font-size: clamp(20px, 5vw, 28px);
+  line-height: 1.3;
+}
+
+.metro-answer-options {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+
+.metro-answer-options button {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 48px;
+  padding: 8px 12px;
+  border: 1px solid rgba(226, 239, 222, .16);
+  border-radius: 12px;
+  color: #eaf1e9;
+  background: rgba(255,255,255,.055);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.metro-answer-options button:hover:not(:disabled),
+.metro-answer-options button.is-selected {
+  border-color: #d4cb8a;
+  background: rgba(205, 194, 108, .12);
+}
+
+.metro-answer-options button i {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 8px;
+  color: #e9d889;
+  background: rgba(255,255,255,.09);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.metro-answer-options button.is-correct {
+  border-color: #77d7a8;
+  color: #b7f4ce;
+  background: rgba(57, 162, 109, .19);
+}
+
+.metro-answer-options button.is-wrong {
+  border-color: #db9385;
+  color: #ffd0c3;
+  background: rgba(164, 71, 61, .19);
+}
+
+.metro-answer-options button svg {
+  margin-left: auto;
+}
+
+.metro-answer-feedback {
+  margin-top: 13px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.metro-answer-feedback.is-correct {
+  color: #a6eac0;
+}
+
+.metro-answer-feedback.is-wrong {
+  color: #f3b3a5;
+}
+
+.metro-question-explanation {
+  display: block;
+  min-height: 14px;
+  margin-top: 7px;
+  color: #bac9bd;
+  font-size: 9px;
+}
+
+.metro-outcome-panel {
+  width: min(480px, 100%);
+  padding: 27px;
+}
+
+.metro-outcome-panel > .metro-menu-kicker {
+  justify-content: center;
+}
+
+.metro-outcome-panel > h2 {
+  margin: 9px 0;
+  text-align: center;
+  font-size: clamp(22px, 5vw, 32px);
+}
+
+.metro-outcome-panel > p {
+  color: #cedbd0;
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.metro-outcome-icon {
+  display: grid;
+  place-items: center;
+  width: 67px;
+  height: 67px;
+  margin: 0 auto 16px;
+  border: 1px solid rgba(255, 207, 100, .31);
+  border-radius: 22px;
+  color: #ffdb81;
+  background: rgba(255, 205, 99, .1);
+}
+
+.metro-fine-line,
+.metro-win-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 18px 0;
+  padding: 12px;
+  border: 1px solid rgba(235, 240, 218, .13);
+  border-radius: 12px;
+  color: #c2d0c7;
+  background: rgba(255,255,255,.04);
+  font-size: 11px;
+}
+
+.metro-fine-line b {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffcf76;
+}
+
+.metro-outcome-panel > .metro-primary-button {
+  width: 100%;
+}
+
+.metro-win-stats {
+  justify-content: space-around;
+}
+
+.metro-win-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #f0dc9c;
+}
+
+.metro-win-panel h3 {
+  color: #b4dcc7;
+  font-size: 10px;
+  letter-spacing: .1em;
+}
+
+.metro-wrong-list {
+  max-height: 130px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.metro-wrong-list > div {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(230, 239, 224, .1);
+}
+
+.metro-wrong-list b,
+.metro-wrong-list small {
+  display: block;
+}
+
+.metro-wrong-list b {
+  font-size: 10px;
+}
+
+.metro-wrong-list small,
+.metro-wrong-list p {
+  color: #bbc9be;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.metro-shop-panel {
+  width: min(560px, 100%);
+}
+
+.metro-shop-list {
+  padding: 8px 18px 16px;
+}
+
+.metro-shop-list article {
+  display: grid;
+  grid-template-columns: 39px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(230, 239, 224, .1);
+}
+
+.metro-shop-icon {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border-radius: 12px;
+  color: #ffda7f;
+  background: rgba(255, 255, 255, .075);
+}
+
+.metro-shop-list b,
+.metro-shop-list small {
+  display: block;
+}
+
+.metro-shop-list b {
+  font-size: 11px;
+}
+
+.metro-shop-list small {
+  margin-top: 4px;
+  color: #adbbb1;
+  font-size: 9px;
+}
+
+.metro-shop-list article > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  border: 1px solid rgba(227, 239, 222, .18);
+  border-radius: 9px;
+  color: #ffe09a;
+  background: rgba(255, 255, 255, .06);
+  font-size: 9px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.metro-map-overlay {
+  z-index: 3;
+}
+
+.metro-large-map-panel {
+  width: min(700px, 100%);
+  padding-bottom: 18px;
+}
+
+.metro-large-map-panel > .metro-map {
+  width: min(100% - 38px, 500px);
+  margin: 18px auto;
+}
+
+.metro-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 17px;
+  margin: 7px 15px 16px;
+  color: #d4e1d4;
+  font-size: 9px;
+}
+
+.metro-large-map-panel > .metro-primary-button {
+  display: flex;
+  margin: 0 auto;
+}
+
+.metro-toast {
+  left: 50%;
+  top: 72px;
+  padding: 9px 13px;
+  border: 1px solid rgba(237, 237, 200, .22);
+  border-radius: 10px;
+  color: #f8edc3;
+  background: rgba(29, 47, 43, .84);
+  font-size: 10px;
+  transform: translateX(-50%);
+}
+
+.metro-loading,
+.metro-error {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  color: #f5f8ee;
+  background: rgba(17, 37, 39, .76);
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.metro-loading strong {
+  font-size: 13px;
+}
+
+.metro-loading small {
+  color: #b5d5c6;
+  font-size: 9px;
+}
+
+.metro-progress {
+  width: min(220px, 70vw);
+  height: 5px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255,255,255,.15);
+}
+
+.metro-progress i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #84dfc0, #ffcf6a);
+  transition: width .22s ease;
+}
+
+.metro-spin {
+  color: #ffd578;
+  animation: metro-turn 3.2s linear infinite;
+}
+
+@keyframes metro-turn {
+  to { transform: rotate(360deg); }
+}
+
+.metro-error {
+  z-index: 5;
+  padding: 20px;
+}
+
+.metro-error > svg {
+  color: #ffd578;
+}
+
+.metro-error h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.metro-error p,
+.metro-error small {
+  max-width: 480px;
+  color: #d6e3d8;
+  font-size: 12px;
+}
+
+.metro-error small {
+  color: #f5ca91;
+  overflow-wrap: anywhere;
+}
+
+@media (pointer: coarse), (max-width: 720px) {
+  .metro-touch-controls {
+    display: flex;
+  }
+
+  .metro-controls-hint {
+    display: none;
+  }
+
+  .metro-objective {
+    bottom: 152px;
+    left: 50%;
+    width: min(340px, calc(100% - 36px));
+  }
+
+  .metro-interact {
+    bottom: 218px;
+  }
+
+  .metro-hud {
+    top: 72px;
+    left: 10px;
+    gap: 5px;
+  }
+
+  .metro-hud-card {
+    min-width: 86px;
+    padding: 9px;
+    border-radius: 12px;
+  }
+
+  .metro-eyebrow {
+    font-size: 7px;
+    letter-spacing: .06em;
+  }
+
+  .metro-hud-card > strong {
+    font-size: 17px;
+  }
+
+  .metro-map-card {
+    top: 72px;
+    right: 10px;
+    width: 112px;
+    padding: 7px;
+  }
+
+  .metro-stars-card {
+    display: none;
+  }
+
+  .metro-map-title {
+    font-size: 7px;
+  }
+
+  .metro-map-footer {
+    font-size: 7px;
+  }
+
+  .metro-menu-wrap {
+    padding: 68px 12px 14px;
+    background: rgba(11, 29, 31, .46);
+  }
+
+  .metro-menu-panel {
+    margin: auto;
+    padding: 22px;
+    border-radius: 21px;
+    background: rgba(17, 42, 44, .92);
+  }
+
+  .metro-menu-panel h1 {
+    font-size: clamp(39px, 12vw, 59px);
+  }
+
+  .metro-menu-copy {
+    font-size: 11px;
+  }
+
+  .metro-feature-row {
+    gap: 5px;
+    margin-top: 13px;
+  }
+
+  .metro-feature-row span {
+    gap: 4px;
+    padding: 7px;
+    font-size: 8px;
+  }
+
+  .metro-menu-actions > button {
+    flex: 1;
+    padding: 0 10px;
+  }
+
+  .metro-menu-caption {
+    display: none;
+  }
+
+  .metro-pause-content {
+    grid-template-columns: 1fr;
+  }
+
+  .metro-full-map .metro-map--large {
+    max-height: 245px;
+  }
+
+  .metro-mission-list {
+    max-height: 220px;
+    overflow: auto;
+  }
+
+  .metro-panel {
+    max-height: 91vh;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .metro-brand b {
+    font-size: 10px;
+  }
+
+  .metro-brand small {
+    font-size: 7px;
+  }
+
+  .metro-icon-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .metro-menu-panel {
+    padding: 19px;
+  }
+
+  .metro-menu-links {
+    gap: 12px;
+  }
+
+  .metro-menu-links button {
+    font-size: 9px;
+  }
+
+  .metro-content-note {
+    font-size: 8px;
+  }
+
+  .metro-action-cluster {
+    grid-template-columns: repeat(2, 48px);
+    gap: 5px;
+  }
+
+  .metro-action-cluster button {
+    min-height: 38px;
+    font-size: 8px;
+  }
+
+  .metro-joystick {
+    width: 99px;
+    height: 99px;
+  }
+
+  .metro-joystick-ring {
+    width: 54px;
+    height: 54px;
+  }
+
+  .metro-joystick small {
+    bottom: 11px;
+  }
+
+  .metro-question-panel {
+    padding: 20px;
+  }
+}
+
+.metro-game[data-theme="light"] {
+  --metro-panel: rgba(247, 250, 243, .91);
+  color: #1d3438;
+}
+
+.metro-game[data-theme="light"] .metro-icon-button,
+.metro-game[data-theme="light"] .metro-panel-header button,
+.metro-game[data-theme="light"] .metro-coins,
+.metro-game[data-theme="light"] .metro-hud-card,
+.metro-game[data-theme="light"] .metro-map-card,
+.metro-game[data-theme="light"] .metro-objective,
+.metro-game[data-theme="light"] .metro-controls-hint,
+.metro-game[data-theme="light"] .metro-toast {
+  color: #1d3438;
+  border-color: rgba(34, 69, 64, .2);
+  background-color: rgba(248, 251, 242, .88);
+  text-shadow: none;
+}
+
+.metro-game[data-theme="light"] .metro-brand small,
+.metro-game[data-theme="light"] .metro-eyebrow,
+.metro-game[data-theme="light"] .metro-hud-card > strong small,
+.metro-game[data-theme="light"] .metro-objective em,
+.metro-game[data-theme="light"] .metro-map-footer,
+.metro-game[data-theme="light"] .metro-menu-copy,
+.metro-game[data-theme="light"] .metro-menu-links button,
+.metro-game[data-theme="light"] .metro-content-note {
+  color: #526d68;
+}
+
+.metro-game[data-theme="light"] .metro-brand b {
+  color: white;
+}
+
+.metro-game[data-theme="light"] .metro-menu-panel,
+.metro-game[data-theme="light"] .metro-panel {
+  color: #21393a;
+  border-color: rgba(36, 76, 67, .22);
+  background: linear-gradient(145deg, rgba(250, 252, 245, .96), rgba(233, 243, 231, .95));
+}
+
+.metro-game[data-theme="light"] .metro-menu-panel h1,
+.metro-game[data-theme="light"] .metro-panel-header > span,
+.metro-game[data-theme="light"] .metro-question-panel h2,
+.metro-game[data-theme="light"] .metro-outcome-panel > h2 {
+  color: #203a3a;
+  text-shadow: none;
+}
+
+.metro-game[data-theme="light"] .metro-menu-kicker,
+.metro-game[data-theme="light"] .metro-menu-subtitle,
+.metro-game[data-theme="light"] .metro-menu-links button:hover,
+.metro-game[data-theme="light"] .metro-settings label,
+.metro-game[data-theme="light"] .metro-info-copy,
+.metro-game[data-theme="light"] .metro-outcome-panel > p,
+.metro-game[data-theme="light"] .metro-mission-list b,
+.metro-game[data-theme="light"] .metro-shop-list b {
+  color: #315d53;
+}
+
+.metro-game[data-theme="light"] .metro-feature-row span,
+.metro-game[data-theme="light"] .metro-answer-options button,
+.metro-game[data-theme="light"] .metro-mission-list > div,
+.metro-game[data-theme="light"] .metro-shop-list article,
+.metro-game[data-theme="light"] .metro-win-stats,
+.metro-game[data-theme="light"] .metro-fine-line {
+  color: #294446;
+  border-color: rgba(46, 83, 74, .15);
+  background: rgba(77, 132, 108, .08);
+}
+
+.metro-game[data-theme="light"] .metro-settings select,
+.metro-game[data-theme="light"] .metro-toggle {
+  color: #203a3a;
+  border-color: rgba(46, 83, 74, .2);
+  background: #e6f0e5;
+}
+
+.metro-game[data-theme="light"] .metro-settings > small,
+.metro-game[data-theme="light"] .metro-mission-list small,
+.metro-game[data-theme="light"] .metro-shop-list small,
+.metro-game[data-theme="light"] .metro-wrong-list small,
+.metro-game[data-theme="light"] .metro-info-copy {
+  color: #5d746b;
+}
+
+.metro-game[data-theme="light"] .metro-secondary-button,
+.metro-game[data-theme="light"] .metro-pause-actions > button {
+  color: #294446;
+  border-color: rgba(46, 83, 74, .2);
+  background: rgba(59, 114, 94, .08);
+}
