@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { startGlobalAmbient } from "@/hooks/useAudio";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -16,6 +16,9 @@ import { MusicProvider } from "@/contexts/MusicContext";
 import { FontProvider } from "@/contexts/FontContext";
 import { AnimationProvider } from "@/contexts/AnimationContext";
 import PageLoader from "@/components/PageLoader";
+import MenuSidebar from "@/components/MenuSidebar";
+import type { MenuSidebarTab } from "@/components/MenuSidebar";
+import { MENU_ITEMS } from "@/data/menuConfig";
 
 const LegacyMathBookRedirect = () => {
   const location = useLocation();
@@ -1029,6 +1032,7 @@ const hidePracticeGradeLabels = () => {
 };
 
 const AppInner = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     const handleInteraction = () => {
       startGlobalAmbient();
@@ -1045,6 +1049,18 @@ const AppInner = () => {
 
   // GA4: track route changes
   const { pathname } = useLocation();
+  const sidebarMenuItems = MENU_ITEMS.filter((item) => item.group !== "featured");
+  const activeMenuItem = sidebarMenuItems.find((item) => pathname === item.path)
+    ?? sidebarMenuItems
+      .filter((item) => pathname.startsWith(`${item.path}/`))
+      .sort((left, right) => right.path.length - left.path.length)[0];
+  const activeMenuTab: MenuSidebarTab = activeMenuItem?.group === "learn"
+    || activeMenuItem?.group === "practice"
+    || activeMenuItem?.group === "tools"
+    || activeMenuItem?.group === "more"
+    ? activeMenuItem.group
+    : "home";
+
   useEffect(() => {
     trackPageView(pathname);
   }, [pathname]);
@@ -1063,7 +1079,16 @@ const AppInner = () => {
         <div className={[
           /^\/buku-animasi-matematika\/kelas-[789](?:\/.*)?$/.test(pathname) ? "animation-submaterial-route" : "",
           pathname.startsWith("/tugas-latihan-mandiri") ? "tugas-latihan-mandiri-route" : "",
+          activeMenuItem ? "menu-route-layout" : "",
         ].filter(Boolean).join(" ") || undefined}>
+        {activeMenuItem && (
+          <MenuSidebar
+            activeTab={activeMenuTab}
+            activePath={activeMenuItem.path}
+            onHomeClick={() => navigate("/menu")}
+          />
+        )}
+        <div className={activeMenuItem ? "menu-route-content" : undefined}>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/menu" element={<MenuPage />} />
@@ -2143,6 +2168,7 @@ const AppInner = () => {
 
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </div>
         </div>
       </Suspense>
     </>

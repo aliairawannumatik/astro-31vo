@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import {
   ArrowUpRight,
   BookOpen,
-  ClipboardCheck,
   ClipboardList,
   Ellipsis,
   Home,
@@ -16,6 +15,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import MenuHeaderControls from "@/components/MenuHeaderControls";
+import MenuSidebar from "@/components/MenuSidebar";
 import { MENU_ITEMS, MENU_SECTIONS, type MenuGroup, type MenuItemConfig } from "@/data/menuConfig";
 import { playPopSound } from "@/hooks/useAudio";
 
@@ -435,52 +435,12 @@ const MenuPage = () => {
       </div>
 
       <div className="menu-desktop-layout">
-        <aside className="menu-sidebar">
-          <div className="menu-sidebar-brand">
-            <h1 className="menu-page-title">NUMATIK</h1>
-            <p className="menu-muted">{t("menu.subtitle")}</p>
-          </div>
-
-          <nav className="menu-sidebar-primary" aria-label={t("menu.homeTab")}>
-            {[
-              { id: "home" as const, labelKey: "menu.homeTab", icon: Home },
-              { id: "learn" as const, labelKey: "menu.learnTab", icon: BookOpen },
-              { id: "practice" as const, labelKey: "menu.practiceTab", icon: ClipboardCheck },
-              { id: "tools" as const, labelKey: "menu.toolsTab", icon: Wrench },
-            ].map(({ id, labelKey, icon: Icon }) => (
-              <button
-                key={id}
-                type="button"
-                aria-current={activeTab === id ? "page" : undefined}
-                onClick={() => setActiveTab(id)}
-                className={`menu-sidebar-link menu-focusable${activeTab === id ? " is-active" : ""}`}
-              >
-                <Icon aria-hidden="true" className="h-5 w-5 shrink-0" />
-                <span>{t(labelKey)}</span>
-              </button>
-            ))}
-          </nav>
-
-          <div className="menu-sidebar-divider" />
-
-          <nav className="menu-sidebar-info" aria-label={t("menu.sections.more")}>
-            {MENU_ITEMS.filter((item) => item.group === "more").map((item) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.path}
-                  type="button"
-                  onClick={() => handleOpenItem(item)}
-                  aria-label={t(`menuItems.${item.key}.label`)}
-                  className="menu-sidebar-link menu-focusable"
-                >
-                  <Icon aria-hidden="true" className="h-4 w-4 shrink-0" />
-                  <span>{t(`menu.${item.key}`)}</span>
-                </button>
-              );
-            })}
-          </nav>
-        </aside>
+        <MenuSidebar
+          activeTab={activeTab}
+          onOpenItem={handleOpenItem}
+          onHomeClick={() => setActiveTab("home")}
+          onSelectTab={(tab) => setActiveTab(tab)}
+        />
 
         <main className="menu-desktop-main">
           <header className="menu-desktop-header">
@@ -514,9 +474,7 @@ const MenuPage = () => {
           <div className={`menu-desktop-content${normalizedQuery ? " menu-desktop-search-content" : ""}`}>
             {normalizedQuery
               ? renderSearchResults(true)
-              : activeTab === "home"
-                ? renderDesktopHome()
-                : renderCategoryView(activeTab === "more" ? "more" : activeTab)}
+              : renderDesktopHome()}
           </div>
         </main>
       </div>

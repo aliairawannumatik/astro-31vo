@@ -1,0 +1,116 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import {
+  BookOpen,
+  ChevronDown,
+  ClipboardCheck,
+  Ellipsis,
+  Home,
+  Wrench,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { MENU_ITEMS, type MenuGroup, type MenuItemConfig } from "@/data/menuConfig";
+
+export type MenuSidebarTab = "home" | Exclude<MenuGroup, "featured">;
+
+type MenuSidebarProps = {
+  activeTab: MenuSidebarTab;
+  activePath?: string;
+  onHomeClick: () => void;
+  onOpenItem?: (item: MenuItemConfig) => void;
+  onSelectTab?: (tab: MenuSidebarTab) => void;
+};
+
+const SIDEBAR_GROUPS = [
+  { id: "learn", labelKey: "menu.learnTab", group: "learn", icon: BookOpen },
+  { id: "practice", labelKey: "menu.practiceTab", group: "practice", icon: ClipboardCheck },
+  { id: "tools", labelKey: "menu.toolsTab", group: "tools", icon: Wrench },
+  { id: "more", labelKey: "menu.moreTab", group: "more", icon: Ellipsis },
+] as const satisfies ReadonlyArray<{
+  id: Exclude<MenuSidebarTab, "home">;
+  labelKey: string;
+  group: Exclude<MenuGroup, "featured">;
+  icon: LucideIcon;
+}>;
+
+const MenuSidebar = ({ activeTab, activePath, onHomeClick, onOpenItem, onSelectTab }: MenuSidebarProps) => {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const [expandedGroup, setExpandedGroup] = useState<Exclude<MenuSidebarTab, "home"> | null>(
+    activeTab === "home" ? null : activeTab,
+  );
+
+  useEffect(() => {
+    setExpandedGroup(activeTab === "home" ? null : activeTab);
+  }, [activeTab]);
+
+  return (
+    <aside className="menu-sidebar">
+      <div className="menu-sidebar-brand">
+        <h1 className="menu-page-title">NUMATIK</h1>
+        <p className="menu-muted">{t("menu.subtitle")}</p>
+      </div>
+
+      <nav className="menu-sidebar-primary" aria-label={t("menu.homeTab")}>
+        <button
+          type="button"
+          aria-current={activeTab === "home" ? "page" : undefined}
+          onClick={() => {
+            setExpandedGroup(null);
+            onHomeClick();
+          }}
+          className={`menu-sidebar-link menu-focusable${activeTab === "home" ? " is-active" : ""}`}
+        >
+          <Home aria-hidden="true" className="h-5 w-5 shrink-0" />
+          <span>{t("menu.homeTab")}</span>
+        </button>
+
+        {SIDEBAR_GROUPS.map(({ id, labelKey, group, icon: Icon }) => {
+          const isExpanded = expandedGroup === id;
+          const submenuId = `menu-sidebar-submenu-${id}`;
+          return (
+            <div key={id} className="menu-sidebar-group">
+              <button
+                type="button"
+                aria-expanded={isExpanded}
+                aria-controls={submenuId}
+                onClick={() => {
+                  onSelectTab?.(id);
+                  setExpandedGroup((current) => current === id ? null : id);
+                }}
+                className={`menu-sidebar-link menu-focusable${activeTab === id ? " is-active" : ""}`}
+              >
+                <Icon aria-hidden="true" className="h-5 w-5 shrink-0" />
+                <span className="min-w-0 flex-1">{t(labelKey)}</span>
+                <ChevronDown aria-hidden="true" className={`menu-sidebar-chevron h-4 w-4 shrink-0${isExpanded ? " is-expanded" : ""}`} />
+              </button>
+              {isExpanded && (
+                <div id={submenuId} className="menu-sidebar-submenu">
+                  {MENU_ITEMS.filter((item) => item.group === group).map((item) => {
+                    const ItemIcon = item.icon;
+                    return (
+                      <button
+                        key={item.path}
+                        type="button"
+                        onClick={() => onOpenItem ? onOpenItem(item) : navigate(item.path)}
+                        aria-current={activePath === item.path ? "page" : undefined}
+                        aria-label={t(`menuItems.${item.key}.label`)}
+                        className={`menu-sidebar-sub-link menu-focusable${activePath === item.path ? " is-active" : ""}`}
+                      >
+                        <ItemIcon aria-hidden="true" className="h-4 w-4 shrink-0" />
+                        <span>{t(`menu.${item.key}`)}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </nav>
+    </aside>
+  );
+};
+
+export default MenuSidebar;

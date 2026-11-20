@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import i18n from "@/i18n";
+import { readLocalStorage, writeLocalStorage } from "@/lib/localStorage";
 
 export type Language = "id" | "en" | "ja";
 
@@ -16,7 +17,7 @@ const VALID_LANGS: Language[] = ["id", "en", "ja"];
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const urlParam = new URLSearchParams(window.location.search).get("lang") as Language | null;
-  const saved = localStorage.getItem(STORAGE_KEY);
+  const saved = readLocalStorage(STORAGE_KEY);
   const initial: Language = VALID_LANGS.includes(urlParam as Language) ? (urlParam as Language) : VALID_LANGS.includes(saved as Language) ? (saved as Language) : "id";
   const resolved: Language = initial;
 
@@ -28,7 +29,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, [language]);
 
   const setLanguage = (lang: Language) => {
-    localStorage.setItem(STORAGE_KEY, lang);
+    writeLocalStorage(STORAGE_KEY, lang);
     setLangState(lang);
     setHasChosenLanguage(true);
     i18n.changeLanguage(lang);

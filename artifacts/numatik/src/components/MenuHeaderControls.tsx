@@ -1,12 +1,14 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Check, Globe, Palette, Volume2, VolumeX } from "lucide-react";
+import { Check, Globe, Music2, Palette, Pause, Play } from "lucide-react";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
-import { useSound } from "@/contexts/SoundContext";
+import { useMusic } from "@/contexts/MusicContext";
 import { useTheme, type Theme } from "@/contexts/ThemeContext";
+import { TRACKS } from "@/hooks/bgMusicTracks";
+import { MP3_TRACKS } from "@/hooks/mp3Tracks";
 import { playPopSound } from "@/hooks/useAudio";
 
-type Picker = "language" | "theme" | null;
+type Picker = "language" | "music" | "theme" | null;
 
 const LANGUAGES: ReadonlyArray<{ id: Language; name: string }> = [
   { id: "id", name: "Indonesia" },
@@ -15,16 +17,19 @@ const LANGUAGES: ReadonlyArray<{ id: Language; name: string }> = [
 ];
 
 const THEMES: readonly Theme[] = ["dark", "white", "sunset", "ocean", "light", "forest", "pastel"];
+const MUSIC_TRACKS = [{ id: "none", name: "None", emoji: "🔇" }, ...MP3_TRACKS, ...TRACKS];
 
 const MenuHeaderControls = () => {
   const { t } = useTranslation();
   const { language, setLanguage } = useLanguage();
-  const { soundOn, toggleSound } = useSound();
+  const { musicOn, toggleMusic, trackId, setTrackId } = useMusic();
   const { theme, setTheme } = useTheme();
   const [openPicker, setOpenPicker] = useState<Picker>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const instanceId = useId();
   const languagePickerId = `${instanceId}-language-picker`;
+  const musicPickerId = `${instanceId}-music-picker`;
+  const musicListId = `${instanceId}-music-list`;
   const themePickerId = `${instanceId}-theme-picker`;
 
   useEffect(() => {
@@ -92,20 +97,73 @@ const MenuHeaderControls = () => {
         )}
       </div>
 
-      <button
-        type="button"
-        aria-label={t(soundOn ? "menu.soundOn" : "menu.soundOff")}
-        aria-pressed={soundOn}
-        onClick={() => {
-          playPopSound();
-          toggleSound();
-        }}
-        className="menu-control-button menu-focusable"
-      >
-        {soundOn
-          ? <Volume2 aria-hidden="true" className="h-5 w-5" />
-          : <VolumeX aria-hidden="true" className="h-5 w-5" />}
-      </button>
+      <div className="relative">
+        <button
+          type="button"
+          aria-label={t("menu.musicButton")}
+          aria-expanded={openPicker === "music"}
+          aria-controls={musicPickerId}
+          aria-pressed={musicOn}
+          onClick={() => togglePicker("music")}
+          className="menu-control-button menu-focusable"
+        >
+          <Music2 aria-hidden="true" className="h-5 w-5" />
+        </button>
+        {openPicker === "music" && (
+          <div
+            id={musicPickerId}
+            className="menu-popover absolute right-0 top-full z-50 mt-2 w-64 overflow-hidden rounded-xl border p-1.5 shadow-xl"
+          >
+            <div className="flex items-center justify-between gap-2 px-2 py-1.5">
+              <span className="text-sm font-bold">{t("menu.musicButton")}</span>
+              <button
+                type="button"
+                aria-label={t(musicOn ? "menu.musicTurnOff" : "menu.musicTurnOn")}
+                aria-pressed={musicOn}
+                disabled={trackId === "none"}
+                onClick={() => {
+                  playPopSound();
+                  toggleMusic();
+                }}
+                className="menu-popover-option menu-focusable flex min-h-10 items-center gap-2 rounded-lg px-2 text-xs font-semibold"
+              >
+                {musicOn
+                  ? <Pause aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  : <Play aria-hidden="true" className="h-4 w-4 shrink-0" />}
+                <span>{t(musicOn ? "settings.musicOn" : "settings.musicOff")}</span>
+              </button>
+            </div>
+            <div
+              id={musicListId}
+              role="group"
+              aria-label={t("menu.musicList")}
+              className="menu-music-list"
+            >
+              {MUSIC_TRACKS.map((track) => (
+                <button
+                  key={track.id}
+                  type="button"
+                  aria-pressed={trackId === track.id}
+                  title={track.id === "none" ? t("menu.musicNone") : track.name}
+                  onClick={() => {
+                    playPopSound();
+                    setTrackId(track.id);
+                    if (!musicOn && track.id !== "none") toggleMusic(track.id);
+                    setOpenPicker(null);
+                  }}
+                  className="menu-popover-option menu-focusable flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-sm"
+                >
+                  <span aria-hidden="true" className="shrink-0">{track.emoji}</span>
+                  <span className="min-w-0 flex-1 truncate">
+                    {track.id === "none" ? t("menu.musicNone") : track.name}
+                  </span>
+                  {trackId === track.id && <Check aria-hidden="true" className="h-4 w-4 shrink-0" />}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
 
       <div className="relative">
         <button

@@ -595,6 +595,29 @@ const PengaturanPage = () => {
                 {t("settings.chooseMusic")}
               </p>
 
+              <button
+                type="button"
+                onClick={() => { playPopSound(); setTrackId("none"); }}
+                aria-pressed={trackId === "none"}
+                className={`w-full rounded-xl px-4 py-2.5 flex items-center gap-3 border transition-all duration-200 cursor-pointer text-left ${
+                  trackId === "none"
+                    ? isDark
+                      ? "border-violet-500 bg-violet-500/15 shadow-[0_0_16px_rgba(139,92,246,0.2)]"
+                      : "border-violet-400 bg-violet-50 shadow-sm"
+                    : isDark
+                      ? "border-white/7 bg-white/4 hover:border-white/15 hover:bg-white/6"
+                      : "border-gray-200 bg-gray-50/80 hover:border-gray-300 hover:bg-white"
+                }`}
+              >
+                <VolumeX aria-hidden="true" className="w-5 h-5 flex-shrink-0 text-violet-500" />
+                <span className={`flex-1 font-display font-bold text-sm ${
+                  trackId === "none"
+                    ? isDark ? "text-violet-300" : "text-violet-700"
+                    : isDark ? "text-white/85" : "text-gray-800"
+                }`}>{t("menu.musicNone")}</span>
+                {trackId === "none" && <div className="w-2 h-2 rounded-full flex-shrink-0 bg-violet-500" />}
+              </button>
+
               {MP3_TRACKS.map((track) => {
                 const isActive = trackId === track.id;
                 const ac  = ACCENT[track.accentColor]  ?? ACCENT["violet"];
@@ -602,7 +625,7 @@ const PengaturanPage = () => {
                 return (
                   <button
                     key={track.id}
-                    onClick={() => { playPopSound(); setTrackId(track.id); if (!musicOn) toggleMusic(); }}
+                    onClick={() => { playPopSound(); setTrackId(track.id); if (!musicOn) toggleMusic(track.id); }}
                     className={`w-full rounded-xl px-4 py-2.5 flex items-center gap-3 border transition-all duration-200 cursor-pointer text-left ${
                       isActive
                         ? isDark
@@ -646,7 +669,7 @@ const PengaturanPage = () => {
                     return (
                       <button
                         key={track.id}
-                        onClick={() => { playPopSound(); setTrackId(track.id); if (!musicOn) toggleMusic(); }}
+                        onClick={() => { playPopSound(); setTrackId(track.id); if (!musicOn) toggleMusic(track.id); }}
                         className={`w-full rounded-xl px-4 py-2.5 flex items-center gap-3 border transition-all duration-200 cursor-pointer text-left ${
                           isActive
                             ? isDark ? `${ac.border} ${ac.bg} ${ac.shadow}` : `${acl.border} ${acl.bg} ${acl.shadow}`

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { readLocalStorage, writeLocalStorage } from "@/lib/localStorage";
 
 interface AnimationContextValue {
   animationsOn: boolean;
@@ -10,7 +11,7 @@ const STORAGE_KEY = "numatik-animations";
 
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
   const [animationsOn, setAnimationsOn] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = readLocalStorage(STORAGE_KEY);
     return saved === null
       ? !window.matchMedia("(prefers-reduced-motion: reduce)").matches
       : saved !== "false";
@@ -18,7 +19,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     document.documentElement.classList.toggle("animations-off", !animationsOn);
-    localStorage.setItem(STORAGE_KEY, String(animationsOn));
+    writeLocalStorage(STORAGE_KEY, String(animationsOn));
   }, [animationsOn]);
 
   const toggleAnimations = () => setAnimationsOn((current) => !current);
