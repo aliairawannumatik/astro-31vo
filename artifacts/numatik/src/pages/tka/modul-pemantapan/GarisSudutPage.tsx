@@ -445,7 +445,7 @@ const Soal18SVG = () => (
     {/* O label — slightly right and below intersection */}
     <text x="204" y="155" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">O</text>
     <text x="28"  y="198" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
-    <text x="346" y="96"  fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+    <text x="328" y="96"  fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
 
     {/* 7x in quadrant I (upper-right): moved down closer to the angle */}
     <text x="210" y="122" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan>°</text>
@@ -979,33 +979,38 @@ const latihanDasar: LatihanSoal[] = [
     pembahasan: "Konsep: garis-garis sejajar dipotong transversal; gunakan sudut sehadap/berseberangan untuk membentuk dan menyelesaikan persamaan.\n\n1. Garis $l_1 \\parallel l_2$ dipotong transversal. Tentukan pasangan sudut sehadap/berseberangan pada gambar.\n2. Bangun persamaan dari hubungan sudut-sudut tersebut.\n3. Selesaikan persamaan untuk mendapatkan $x=39°$.\n\nRumus: sudut sehadap sama besar; sudut dalam berseberangan sama besar\n\nJawaban: B",
   },
   {
-    no: 14, type: "pg",
-    soal: "Empat sudut terbentuk oleh dua garis berpotongan seperti pada gambar berikut:\n\nBila diketahui $q° = 45°$ maka:",
+    no: 14, type: "pgk",
+    soal: "Empat sudut terbentuk oleh dua garis berpotongan seperti pada gambar berikut. Diketahui $q = 45°$. Pernyataan yang benar mengenai gambar berikut adalah …",
     gambar: <Soal16SVG />,
-    options: [
-      "A. $p = 135°$; $s = 45°$; $r = 135°$",
-      "B. $p = 130°$; $s = 45°$; $r = 130°$",
-      "C. $p = 135°$; $s = 40°$; $r = 135°$",
-      "D. $p = 130°$; $s = 40°$; $r = 130°$",
+    pernyataan: [
+      "$p = 135°$",
+      "$r = 135°$",
+      "$s = 45°$",
+      "$q = 135°$",
     ],
-    jawaban: "A",
-    pembahasan: "Konsep: sudut berpelurus berjumlah $180°$; sudut bertolak belakang besarnya sama.\n\n1. $p$ dan $q$ berpelurus: $p=180°-q=180°-45°=135°$\n2. $r$ bertolak belakang dengan $p$: $r=p=135°$\n3. $s$ bertolak belakang dengan $q$: $s=q=45°$\n\nRumus: berpelurus $p+q=180°$; bertolak belakang: sama besar\n\nJawaban: A",
+    jawabanPGK: [0, 1, 2],
+    jawaban: "Pernyataan (1), (2), dan (3) BENAR",
+    pembahasan: "Sudut berpelurus berjumlah $180°$, sedangkan sudut bertolak belakang sama besar.\n\n1. $p$ berpelurus dengan $q$, sehingga $p=180°-45°=135°$. BENAR.\n2. $r$ bertolak belakang dengan $p$, sehingga $r=135°$. BENAR.\n3. $s$ bertolak belakang dengan $q$, sehingga $s=45°$. BENAR.\n4. Nilai $q$ diketahui $45°$, bukan $135°$. SALAH.\n\nJawaban: Pernyataan (1), (2), dan (3) BENAR",
   },
   {
     no: 15, type: "pg",
     soal: "Perhatikan gambar.\n\nBesar sudut AOB adalah ...",
     gambar: <Soal18SVG />,
-    options: ["A. $70°$", "B. $120°$", "C. $140°$", "D. $160°$"],
-    jawaban: "C",
-    pembahasan: "Konsep: identifikasi pasangan sudut bertolak belakang (sama besar) dan berpelurus ($180°$) di sekitar titik O.\n\n1. Identifikasi sudut-sudut bertolak belakang dan berpelurus di sekitar titik O.\n2. Gunakan hubungan sudut-sudut tersebut dengan nilai yang diberikan pada gambar.\n3. Diperoleh $\\angle AOB=140°$.\n\nRumus: bertolak belakang: sama besar; berpelurus: berjumlah $180°$\n\nJawaban: C",
+    options: ["A. $70°$", "B. $120°$", "C. $140°$", "D. $180°$"],
+    jawaban: "D",
+    pembahasan: "Label B berada pada perpanjangan garis yang melalui A dan O. Karena titik A, O, dan B segaris, $\\angle AOB$ adalah sudut lurus.\n\n1. Sudut lurus besarnya $180°$.\n2. Maka $\\angle AOB=180°$.\n\nJawaban: D",
   },
   {
-    no: 16, type: "pg",
-    soal: "Perhatikan gambar berikut!\n\nJika besar $\\angle a = 35°$ dan $\\angle b = 45°$ maka jumlah besar sudut x dan y adalah ...",
+    no: 16, type: "pgkbs",
+    soal: "Perhatikan gambar berikut!\n\nDiketahui $a=35°$ dan $b=45°$. Pernyataan yang benar mengenai gambar berikut adalah …",
     gambar: <Soal19SVG />,
-    options: ["A. $285°$", "B. $300°$", "C. $315°$", "D. $330°$"],
-    jawaban: "A",
-    pembahasan: "Konsep: jumlah sudut di sekeliling satu titik $=360°$; gunakan untuk mencari total sudut yang ditanya.\n\n1. Jumlah semua sudut di sekeliling titik $=360°$.\n2. Identifikasi $x$, $y$, $a$, dan $b$ pada gambar sehingga $x+y+a+b=360°$ (dengan koreksi sudut sesuai konfigurasi gambar).\n3. Substitusi $a=35°$ dan $b=45°$, diperoleh $x+y=285°$.\n\nRumus: jumlah sudut di sekeliling titik $=360°$\n\nJawaban: A",
+    pernyataan: [
+      "$x=80°$",
+      "$y=145°$",
+      "Jumlah $x$ dan $y$ adalah $215°$",
+    ],
+    jawabanBS: ["B", "B", "S"],
+    pembahasan: "Sudut dalam segitiga yang dibentuk oleh titik L, P, dan R berjumlah $180°$. Sudut di P sama dengan $b=45°$, sedangkan sudut di R sama dengan $a=35°$.\n\n1. Sudut dalam di L adalah $180°-45°-35°=100°$. Sudut $x$ berpelurus dengannya, sehingga $x=80°$. Pernyataan (1) BENAR.\n2. Sudut $y$ berpelurus dengan $a$, sehingga $y=180°-35°=145°$. Pernyataan (2) BENAR.\n3. $x+y=80°+145°=225°$, bukan $215°$. Pernyataan (3) SALAH.\n\nJawaban: B, B, S",
   },
   {
     no: 17, type: "pg",
