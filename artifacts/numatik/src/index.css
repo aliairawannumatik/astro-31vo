@@ -796,7 +796,7 @@
   }
 }
 
-@media (min-width: 769px) and (min-height: 600px) {
+@media (min-width: 769px) {
   .menu-route-layout {
     display: flex;
     width: 100%;
@@ -1978,9 +1978,8 @@ html.animations-off *::after {
    All rules below apply ONLY to [data-theme="white"]
    ════════════════════════════════════════════════════════ */
 
-/* ── MASALAH 1: Menu Utama & Subtopik – static blue-cyan gradient ── */
+/* ── MASALAH 1: Materi & subtopik – static blue-cyan gradient ── */
 [data-theme="white"] .water-btn,
-[data-theme="white"] .menu-card,
 [data-theme="white"] .subtopic-btn {
   background: linear-gradient(to right, #2196f3, #00bcd4) !important;
   color: #ffffff !important;
@@ -1988,8 +1987,18 @@ html.animations-off *::after {
 }
 
 [data-theme="white"] .water-btn *,
-[data-theme="white"] .menu-card *,
 [data-theme="white"] .subtopic-btn * {
+  color: #ffffff !important;
+}
+
+/* Keep main menu cards turquoise in the white theme. */
+[data-theme="white"] .menu-card {
+  background: linear-gradient(to right, #0f766e, #0e7490) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+[data-theme="white"] .menu-card * {
   color: #ffffff !important;
 }
 
