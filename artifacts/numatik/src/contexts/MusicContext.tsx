@@ -36,6 +36,7 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isFirstMount = useRef(true);
+  const hasUserInteracted = useRef(false);
 
   // ── Helpers ──────────────────────────────────────────────────
   const stopMp3 = () => {
@@ -75,13 +76,28 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
   // ── React to music on/off ────────────────────────────────────
   useEffect(() => {
     localStorage.setItem("numatik-music", String(musicOn));
-    if (musicOn) {
-      startTrack(trackId);
-    } else {
-      stopAll();
-    }
+    if (!musicOn) stopAll();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [musicOn]);
+
+  useEffect(() => {
+    if (hasUserInteracted.current) return;
+
+    const onUserInteraction = () => {
+      if (hasUserInteracted.current) return;
+      hasUserInteracted.current = true;
+      if (musicOn) startTrack(trackId);
+      window.removeEventListener("pointerdown", onUserInteraction);
+      window.removeEventListener("keydown", onUserInteraction);
+    };
+
+    window.addEventListener("pointerdown", onUserInteraction);
+    window.addEventListener("keydown", onUserInteraction);
+    return () => {
+      window.removeEventListener("pointerdown", onUserInteraction);
+      window.removeEventListener("keydown", onUserInteraction);
+    };
+  }, [musicOn, trackId, musicVolumeState]);
 
   // ── React to track changes ───────────────────────────────────
   useEffect(() => {
@@ -112,7 +128,17 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const toggleMusic = () => setMusicOn(prev => !prev);
+  const toggleMusic = () => {
+    if (musicOn) {
+      stopAll();
+      setMusicOn(false);
+      return;
+    }
+
+    hasUserInteracted.current = true;
+    startTrack(trackId);
+    setMusicOn(true);
+  };
 
   const setTrackId = (id: string) => {
     if (ALL_IDS.includes(id)) {

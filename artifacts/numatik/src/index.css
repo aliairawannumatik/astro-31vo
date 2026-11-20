@@ -29,7 +29,7 @@
 }
 
 /* Light themes */
-[data-theme="light"],
+:is([data-theme="light"], [data-theme="pastel"]),
 [data-theme="white"] {
   --bg-primary:     #f0f4ff;
   --bg-secondary:   #e8ecf8;
@@ -129,6 +129,31 @@
   --menu-glow:      0 8px 24px rgba(3,105,161,0.12);
   --menu-title-shadow: 0 1px 4px rgba(12,74,110,0.12);
   --menu-card-shadow: 0 8px 24px rgba(12,74,110,0.07);
+}
+
+[data-theme="pastel"] {
+  --bg-primary:     #faf5ff;
+  --bg-secondary:   #f3e8ff;
+  --bg-card:        #fffbff;
+  --text-primary:   #1f2937;
+  --text-secondary: #374151;
+  --text-tertiary:  #4b5563;
+  --btn-bg:         #6d28d9;
+  --btn-hover:      #5b21b6;
+  --icon-color:     #5b21b6;
+  --icon-stroke:    #5b21b6;
+  --numatik-accent: #6d28d9;
+  --border:         rgba(109,40,217,0.18);
+  --shadow:         rgba(55,48,107,0.1);
+  --menu-surface:   rgba(255,255,255,0.84);
+  --menu-border:    rgba(109,40,217,0.22);
+  --menu-text:      #1f2937;
+  --menu-muted:     #374151;
+  --menu-accent:    #6d28d9;
+  --menu-on-accent: #ffffff;
+  --menu-glow:      0 8px 24px rgba(109,40,217,0.13);
+  --menu-title-shadow: 0 1px 4px rgba(55,48,107,0.12);
+  --menu-card-shadow: 0 8px 24px rgba(55,48,107,0.08);
 }
 
 /* Menu cards use semantic theme tokens rather than theme-specific markup. */
@@ -983,39 +1008,48 @@
   }
 }
 
+html.animations-off *,
+html.animations-off *::before,
+html.animations-off *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
+}
+
 /* ── Theme-aware overrides for hardcoded legacy components ── */
 
 /* Olympiad content pages: readable surfaces for light themes only. */
-[data-theme="light"] .olympiad-theme-route,
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route,
 [data-theme="white"] .olympiad-theme-route,
 [data-theme="forest"] .olympiad-theme-route,
 [data-theme="sunset"] .olympiad-theme-route {
   color: var(--text-primary);
 }
 
-[data-theme="light"] .olympiad-theme-route [class*="bg-white\/"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="bg-white\/"],
 [data-theme="white"] .olympiad-theme-route [class*="bg-white\/"],
 [data-theme="forest"] .olympiad-theme-route [class*="bg-white\/"],
 [data-theme="sunset"] .olympiad-theme-route [class*="bg-white\/"],
-[data-theme="light"] .olympiad-theme-route [class*="bg-slate-9"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="bg-slate-9"],
 [data-theme="white"] .olympiad-theme-route [class*="bg-slate-9"],
 [data-theme="forest"] .olympiad-theme-route [class*="bg-slate-9"],
 [data-theme="sunset"] .olympiad-theme-route [class*="bg-slate-9"],
-[data-theme="light"] .olympiad-theme-route [class*="bg-amber-9"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="bg-amber-9"],
 [data-theme="white"] .olympiad-theme-route [class*="bg-amber-9"],
 [data-theme="forest"] .olympiad-theme-route [class*="bg-amber-9"],
 [data-theme="sunset"] .olympiad-theme-route [class*="bg-amber-9"] {
   background-color: var(--bg-card) !important;
 }
 
-[data-theme="light"] .olympiad-theme-route [class*="text-white"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="text-white"],
 [data-theme="white"] .olympiad-theme-route [class*="text-white"],
 [data-theme="forest"] .olympiad-theme-route [class*="text-white"],
 [data-theme="sunset"] .olympiad-theme-route [class*="text-white"] {
   color: var(--text-primary) !important;
 }
 
-[data-theme="light"] .olympiad-theme-route [class*="border-white"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="border-white"],
 [data-theme="white"] .olympiad-theme-route [class*="border-white"],
 [data-theme="forest"] .olympiad-theme-route [class*="border-white"],
 [data-theme="sunset"] .olympiad-theme-route [class*="border-white"] {
@@ -1025,11 +1059,11 @@
 /* Some Olympiad pages use arbitrary dark colors and 950-level palette
    classes instead of the shared bg-card token. Keep those panels light in
    the bright themes too, while leaving the space/ocean themes unchanged. */
-[data-theme="light"] .olympiad-theme-route [class*="bg-[#"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="bg-[#"],
 [data-theme="white"] .olympiad-theme-route [class*="bg-[#"],
 [data-theme="forest"] .olympiad-theme-route [class*="bg-[#"],
 [data-theme="sunset"] .olympiad-theme-route [class*="bg-[#"],
-[data-theme="light"] .olympiad-theme-route [class*="bg-950/"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="bg-950/"],
 [data-theme="white"] .olympiad-theme-route [class*="bg-950/"],
 [data-theme="forest"] .olympiad-theme-route [class*="bg-950/"],
 [data-theme="sunset"] .olympiad-theme-route [class*="bg-950/"] {
@@ -1038,15 +1072,15 @@
 
 /* Materi panels also use dark 900-level gradient stops. Replace the full
    gradient with a soft light surface so headings and body copy stay legible. */
-[data-theme="light"] .olympiad-theme-route [class*="from-"][class*="-900/"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="from-"][class*="-900/"],
 [data-theme="white"] .olympiad-theme-route [class*="from-"][class*="-900/"],
 [data-theme="forest"] .olympiad-theme-route [class*="from-"][class*="-900/"],
 [data-theme="sunset"] .olympiad-theme-route [class*="from-"][class*="-900/"],
-[data-theme="light"] .olympiad-theme-route [class*="to-"][class*="-900/"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="to-"][class*="-900/"],
 [data-theme="white"] .olympiad-theme-route [class*="to-"][class*="-900/"],
 [data-theme="forest"] .olympiad-theme-route [class*="to-"][class*="-900/"],
 [data-theme="sunset"] .olympiad-theme-route [class*="to-"][class*="-900/"],
-[data-theme="light"] .olympiad-theme-route [class*="via-"][class*="-900/"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [class*="via-"][class*="-900/"],
 [data-theme="white"] .olympiad-theme-route [class*="via-"][class*="-900/"],
 [data-theme="forest"] .olympiad-theme-route [class*="via-"][class*="-900/"],
 [data-theme="sunset"] .olympiad-theme-route [class*="via-"][class*="-900/"] {
@@ -1057,11 +1091,11 @@
 
 /* Bilangan Bulat contains legacy inline dark gradients. Replace only those
    dark inline surfaces; transparent SVG backgrounds remain transparent. */
-[data-theme="light"] .olympiad-theme-route [style*="rgba(30,41,59)"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [style*="rgba(30,41,59)"],
 [data-theme="white"] .olympiad-theme-route [style*="rgba(30,41,59)"],
 [data-theme="forest"] .olympiad-theme-route [style*="rgba(30,41,59)"],
 [data-theme="sunset"] .olympiad-theme-route [style*="rgba(30,41,59)"],
-[data-theme="light"] .olympiad-theme-route [style*="rgba(15,23,42)"],
+:is([data-theme="light"], [data-theme="pastel"]) .olympiad-theme-route [style*="rgba(15,23,42)"],
 [data-theme="white"] .olympiad-theme-route [style*="rgba(15,23,42)"],
 [data-theme="forest"] .olympiad-theme-route [style*="rgba(15,23,42)"],
 [data-theme="sunset"] .olympiad-theme-route [style*="rgba(15,23,42)"] {
@@ -1070,7 +1104,7 @@
 
 /* Buku Animasi Matematik submateri: keep the light themes readable without
    changing the space theme (data-theme="dark"). */
-[data-theme="light"] .animation-submaterial-route,
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route,
 [data-theme="white"] .animation-submaterial-route,
 [data-theme="forest"] .animation-submaterial-route,
 [data-theme="sunset"] .animation-submaterial-route {
@@ -1078,9 +1112,9 @@
   background: var(--bg-primary);
 }
 
-[data-theme="light"] .animation-submaterial-route [class*="bg-slate-9"],
-[data-theme="light"] .animation-submaterial-route [class*="bg-gray-9"],
-[data-theme="light"] .animation-submaterial-route [class*="bg-zinc-9"],
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [class*="bg-slate-9"],
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [class*="bg-gray-9"],
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [class*="bg-zinc-9"],
 [data-theme="white"] .animation-submaterial-route [class*="bg-slate-9"],
 [data-theme="white"] .animation-submaterial-route [class*="bg-gray-9"],
 [data-theme="white"] .animation-submaterial-route [class*="bg-zinc-9"],
@@ -1094,7 +1128,7 @@
   color: var(--text-primary) !important;
 }
 
-[data-theme="light"] .animation-submaterial-route [class*="bg-black"],
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [class*="bg-black"],
 [data-theme="white"] .animation-submaterial-route [class*="bg-black"],
 [data-theme="forest"] .animation-submaterial-route [class*="bg-black"],
 [data-theme="sunset"] .animation-submaterial-route [class*="bg-black"] {
@@ -1104,7 +1138,7 @@
 
 /* These exercise cards use inline rgba backgrounds, so class-only overrides
    cannot reach them. Keep the light themes genuinely light and readable. */
-[data-theme="light"] .animation-submaterial-route [style*="background"],
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [style*="background"],
 [data-theme="white"] .animation-submaterial-route [style*="background"],
 [data-theme="forest"] .animation-submaterial-route [style*="background"],
 [data-theme="sunset"] .animation-submaterial-route [style*="background"] {
@@ -1112,7 +1146,7 @@
   color: var(--text-primary) !important;
 }
 
-[data-theme="light"] .animation-submaterial-route [style*="border"] {
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [style*="border"] {
   border-color: var(--border) !important;
 }
 [data-theme="white"] .animation-submaterial-route [style*="border"] {
@@ -1140,7 +1174,7 @@
 
 /* Integer animation book: SVG labels need their own light surface because
    SVG text does not inherit the page's Tailwind text-color overrides. */
-[data-theme="light"] .integer-animation-book-route .integer-animation-svg-shell,
+:is([data-theme="light"], [data-theme="pastel"]) .integer-animation-book-route .integer-animation-svg-shell,
 [data-theme="white"] .integer-animation-book-route .integer-animation-svg-shell,
 [data-theme="forest"] .integer-animation-book-route .integer-animation-svg-shell,
 [data-theme="sunset"] .integer-animation-book-route .integer-animation-svg-shell {
@@ -1148,7 +1182,7 @@
   border-color: #cbd5e1 !important;
 }
 
-[data-theme="light"] .integer-animation-book-route .integer-animation-book-svg,
+:is([data-theme="light"], [data-theme="pastel"]) .integer-animation-book-route .integer-animation-book-svg,
 [data-theme="white"] .integer-animation-book-route .integer-animation-book-svg,
 [data-theme="forest"] .integer-animation-book-route .integer-animation-book-svg,
 [data-theme="sunset"] .integer-animation-book-route .integer-animation-book-svg {
@@ -1156,7 +1190,7 @@
   border-radius: 0.75rem;
 }
 
-[data-theme="light"] .integer-animation-book-route .integer-animation-book-svg text,
+:is([data-theme="light"], [data-theme="pastel"]) .integer-animation-book-route .integer-animation-book-svg text,
 [data-theme="white"] .integer-animation-book-route .integer-animation-book-svg text,
 [data-theme="forest"] .integer-animation-book-route .integer-animation-book-svg text,
 [data-theme="sunset"] .integer-animation-book-route .integer-animation-book-svg text {
@@ -1166,8 +1200,8 @@
 /* Kesebangunan & Kekongruenan: the diagrams were authored for the space
    theme and use bright SVG labels. In the light themes, make every diagram
    label readable without changing the dark/space and ocean themes. */
-[data-theme="light"] .kesebangunan-kekongruenan-route svg text,
-[data-theme="light"] .kesebangunan-kekongruenan-route svg text tspan,
+:is([data-theme="light"], [data-theme="pastel"]) .kesebangunan-kekongruenan-route svg text,
+:is([data-theme="light"], [data-theme="pastel"]) .kesebangunan-kekongruenan-route svg text tspan,
 [data-theme="white"] .kesebangunan-kekongruenan-route svg text,
 [data-theme="white"] .kesebangunan-kekongruenan-route svg text tspan,
 [data-theme="forest"] .kesebangunan-kekongruenan-route svg text,
@@ -1181,10 +1215,10 @@
 /* Several diagrams have a hardcoded space-colored SVG panel behind those
    labels. Replace only those rectangular canvas/panel fills in light themes;
    colored geometry, strokes, and markers remain unchanged. */
-[data-theme="light"] .kesebangunan-kekongruenan-route svg rect[fill="#020d1a"],
-[data-theme="light"] .kesebangunan-kekongruenan-route svg rect[fill="#0f172a"],
-[data-theme="light"] .kesebangunan-kekongruenan-route svg rect[fill="#1e293b"],
-[data-theme="light"] .kesebangunan-kekongruenan-route svg rect[fill="#111827"],
+:is([data-theme="light"], [data-theme="pastel"]) .kesebangunan-kekongruenan-route svg rect[fill="#020d1a"],
+:is([data-theme="light"], [data-theme="pastel"]) .kesebangunan-kekongruenan-route svg rect[fill="#0f172a"],
+:is([data-theme="light"], [data-theme="pastel"]) .kesebangunan-kekongruenan-route svg rect[fill="#1e293b"],
+:is([data-theme="light"], [data-theme="pastel"]) .kesebangunan-kekongruenan-route svg rect[fill="#111827"],
 [data-theme="white"] .kesebangunan-kekongruenan-route svg rect[fill="#020d1a"],
 [data-theme="white"] .kesebangunan-kekongruenan-route svg rect[fill="#0f172a"],
 [data-theme="white"] .kesebangunan-kekongruenan-route svg rect[fill="#1e293b"],
@@ -1203,7 +1237,7 @@
 /* Perkalian Bilangan Bulat uses inline dark SVG row fills. Keep every
    animated label on a pale surface in the light themes so the dark labels
    remain readable while the dark space theme is unchanged. */
-[data-theme="light"] .integer-multiplication-book-route .integer-animation-book-svg rect,
+:is([data-theme="light"], [data-theme="pastel"]) .integer-multiplication-book-route .integer-animation-book-svg rect,
 [data-theme="white"] .integer-multiplication-book-route .integer-animation-book-svg rect,
 [data-theme="forest"] .integer-multiplication-book-route .integer-animation-book-svg rect,
 [data-theme="sunset"] .integer-multiplication-book-route .integer-animation-book-svg rect {
@@ -1213,7 +1247,7 @@
 /* The neutral rows use a nearly transparent white stroke in the space
    palette. Give those rows a visible slate outline on pale surfaces so the
    first rows are boxed just like the highlighted rows below them. */
-[data-theme="light"] .integer-multiplication-book-route .integer-animation-book-svg rect[stroke="#ffffff15"],
+:is([data-theme="light"], [data-theme="pastel"]) .integer-multiplication-book-route .integer-animation-book-svg rect[stroke="#ffffff15"],
 [data-theme="white"] .integer-multiplication-book-route .integer-animation-book-svg rect[stroke="#ffffff15"],
 [data-theme="forest"] .integer-multiplication-book-route .integer-animation-book-svg rect[stroke="#ffffff15"],
 [data-theme="sunset"] .integer-multiplication-book-route .integer-animation-book-svg rect[stroke="#ffffff15"] {
@@ -1222,15 +1256,15 @@
 
 /* Replace the dark gradient stops used by the calculator header and rules
    card with pale surfaces while preserving the space/ocean themes. */
-[data-theme="light"] .integer-animation-book-route [class*="from-"][class*="-700/"],
+:is([data-theme="light"], [data-theme="pastel"]) .integer-animation-book-route [class*="from-"][class*="-700/"],
 [data-theme="white"] .integer-animation-book-route [class*="from-"][class*="-700/"],
 [data-theme="forest"] .integer-animation-book-route [class*="from-"][class*="-700/"],
 [data-theme="sunset"] .integer-animation-book-route [class*="from-"][class*="-700/"],
-[data-theme="light"] .integer-animation-book-route [class*="to-"][class*="-700/"],
+:is([data-theme="light"], [data-theme="pastel"]) .integer-animation-book-route [class*="to-"][class*="-700/"],
 [data-theme="white"] .integer-animation-book-route [class*="to-"][class*="-700/"],
 [data-theme="forest"] .integer-animation-book-route [class*="to-"][class*="-700/"],
 [data-theme="sunset"] .integer-animation-book-route [class*="to-"][class*="-700/"],
-[data-theme="light"] .integer-animation-book-route [class*="via-"][class*="-700/"],
+:is([data-theme="light"], [data-theme="pastel"]) .integer-animation-book-route [class*="via-"][class*="-700/"],
 [data-theme="white"] .integer-animation-book-route [class*="via-"][class*="-700/"] ,
 [data-theme="forest"] .integer-animation-book-route [class*="via-"][class*="-700/"],
 [data-theme="sunset"] .integer-animation-book-route [class*="via-"][class*="-700/"] {
@@ -1239,15 +1273,15 @@
   --tw-gradient-via: rgba(239, 246, 255, 0.92) var(--tw-gradient-via-position) !important;
 }
 
-[data-theme="light"] .integer-animation-book-route [class*="from-"][class*="-900/"],
+:is([data-theme="light"], [data-theme="pastel"]) .integer-animation-book-route [class*="from-"][class*="-900/"],
 [data-theme="white"] .integer-animation-book-route [class*="from-"][class*="-900/"],
 [data-theme="forest"] .integer-animation-book-route [class*="from-"][class*="-900/"],
 [data-theme="sunset"] .integer-animation-book-route [class*="from-"][class*="-900/"],
-[data-theme="light"] .integer-animation-book-route [class*="to-"][class*="-900/"],
+:is([data-theme="light"], [data-theme="pastel"]) .integer-animation-book-route [class*="to-"][class*="-900/"],
 [data-theme="white"] .integer-animation-book-route [class*="to-"][class*="-900/"],
 [data-theme="forest"] .integer-animation-book-route [class*="to-"][class*="-900/"],
 [data-theme="sunset"] .integer-animation-book-route [class*="to-"][class*="-900/"],
-[data-theme="light"] .integer-animation-book-route [class*="via-"][class*="-900/"],
+:is([data-theme="light"], [data-theme="pastel"]) .integer-animation-book-route [class*="via-"][class*="-900/"],
 [data-theme="white"] .integer-animation-book-route [class*="via-"][class*="-900/"],
 [data-theme="forest"] .integer-animation-book-route [class*="via-"][class*="-900/"],
 [data-theme="sunset"] .integer-animation-book-route [class*="via-"][class*="-900/"] {
@@ -1259,120 +1293,120 @@
 /* Olimpiade Teorema Pythagoras diagrams use bright neon ink for the space
    theme. Give the same SVGs a dark, high-contrast ink palette on light themes
    so labels and construction lines remain readable against pale surfaces. */
-[data-theme="light"] .olimpiade-teorema-route svg,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg,
 [data-theme="white"] .olimpiade-teorema-route svg,
 [data-theme="forest"] .olimpiade-teorema-route svg,
 [data-theme="sunset"] .olimpiade-teorema-route svg {
   background: rgba(248, 250, 252, 0.9) !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [stroke="#22d3ee"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [stroke="#22d3ee"],
 [data-theme="white"] .olimpiade-teorema-route svg [stroke="#22d3ee"],
 [data-theme="forest"] .olimpiade-teorema-route svg [stroke="#22d3ee"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [stroke="#22d3ee"] {
   stroke: #0e7490 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [stroke="#fbbf24"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [stroke="#fbbf24"],
 [data-theme="white"] .olimpiade-teorema-route svg [stroke="#fbbf24"],
 [data-theme="forest"] .olimpiade-teorema-route svg [stroke="#fbbf24"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [stroke="#fbbf24"] {
   stroke: #a16207 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [stroke="#e5e7eb"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [stroke="#e5e7eb"],
 [data-theme="white"] .olimpiade-teorema-route svg [stroke="#e5e7eb"],
 [data-theme="forest"] .olimpiade-teorema-route svg [stroke="#e5e7eb"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [stroke="#e5e7eb"] {
   stroke: #475569 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [stroke="#38bdf8"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [stroke="#38bdf8"],
 [data-theme="white"] .olimpiade-teorema-route svg [stroke="#38bdf8"],
 [data-theme="forest"] .olimpiade-teorema-route svg [stroke="#38bdf8"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [stroke="#38bdf8"] {
   stroke: #0369a1 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [stroke="#60a5fa"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [stroke="#60a5fa"],
 [data-theme="white"] .olimpiade-teorema-route svg [stroke="#60a5fa"],
 [data-theme="forest"] .olimpiade-teorema-route svg [stroke="#60a5fa"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [stroke="#60a5fa"] {
   stroke: #1d4ed8 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [stroke="#94a3b8"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [stroke="#94a3b8"],
 [data-theme="white"] .olimpiade-teorema-route svg [stroke="#94a3b8"],
 [data-theme="forest"] .olimpiade-teorema-route svg [stroke="#94a3b8"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [stroke="#94a3b8"] {
   stroke: #475569 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [stroke="#334155"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [stroke="#334155"],
 [data-theme="white"] .olimpiade-teorema-route svg [stroke="#334155"],
 [data-theme="forest"] .olimpiade-teorema-route svg [stroke="#334155"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [stroke="#334155"] {
   stroke: #64748b !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#fbbf24"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#fbbf24"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#fbbf24"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#fbbf24"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#fbbf24"],
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#fde68a"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#fde68a"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#fde68a"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#fde68a"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#fde68a"] {
   fill: #92400e !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#e5e7eb"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#e5e7eb"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#e5e7eb"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#e5e7eb"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#e5e7eb"],
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#94a3b8"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#94a3b8"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#94a3b8"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#94a3b8"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#94a3b8"] {
   fill: #475569 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#38bdf8"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#38bdf8"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#38bdf8"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#38bdf8"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#38bdf8"] {
   fill: #0369a1 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#22d3ee"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#22d3ee"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#22d3ee"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#22d3ee"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#22d3ee"] {
   fill: #0e7490 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#7c3aed"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#7c3aed"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#7c3aed"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#7c3aed"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#7c3aed"] {
   fill: #6d28d9 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#f59e0b"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#f59e0b"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#f59e0b"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#f59e0b"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#f59e0b"] {
   fill: #b45309 !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#f472b6"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#f472b6"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#f472b6"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#f472b6"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#f472b6"] {
   fill: #be185d !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route svg [fill="#f87171"],
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route svg [fill="#f87171"],
 [data-theme="white"] .olimpiade-teorema-route svg [fill="#f87171"],
 [data-theme="forest"] .olimpiade-teorema-route svg [fill="#f87171"],
 [data-theme="sunset"] .olimpiade-teorema-route svg [fill="#f87171"] {
@@ -1382,21 +1416,21 @@
 /* Olimpiade Koordinat Kartesius diagrams use light grid lines and neon ink
    for the space theme. Use a dark ink palette on light themes so every axis,
    construction line, point, arrow, and label remains readable. */
-[data-theme="light"] .olimpiade-koordinat-route svg,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-koordinat-route svg,
 [data-theme="white"] .olimpiade-koordinat-route svg,
 [data-theme="forest"] .olimpiade-koordinat-route svg,
 [data-theme="sunset"] .olimpiade-koordinat-route svg {
   background: rgba(248, 250, 252, 0.92) !important;
 }
 
-[data-theme="light"] .olimpiade-koordinat-route svg [stroke]:not([stroke="none"]),
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-koordinat-route svg [stroke]:not([stroke="none"]),
 [data-theme="white"] .olimpiade-koordinat-route svg [stroke]:not([stroke="none"]),
 [data-theme="forest"] .olimpiade-koordinat-route svg [stroke]:not([stroke="none"]),
 [data-theme="sunset"] .olimpiade-koordinat-route svg [stroke]:not([stroke="none"]) {
   stroke: #334155 !important;
 }
 
-[data-theme="light"] .olimpiade-koordinat-route svg [fill]:not([fill="none"]),
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-koordinat-route svg [fill]:not([fill="none"]),
 [data-theme="white"] .olimpiade-koordinat-route svg [fill]:not([fill="none"]),
 [data-theme="forest"] .olimpiade-koordinat-route svg [fill]:not([fill="none"]),
 [data-theme="sunset"] .olimpiade-koordinat-route svg [fill]:not([fill="none"]) {
@@ -1405,11 +1439,11 @@
 
 /* Labels in the Garis dan Sudut basic-practice SVGs use neon colors for the
    space theme. Darken only those labels on bright themes. */
-[data-theme="light"] .olimpiade-garis-sudut-route .latihan-dasar-svg svg text,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-garis-sudut-route .latihan-dasar-svg svg text,
 [data-theme="white"] .olimpiade-garis-sudut-route .latihan-dasar-svg svg text,
 [data-theme="forest"] .olimpiade-garis-sudut-route .latihan-dasar-svg svg text,
 [data-theme="sunset"] .olimpiade-garis-sudut-route .latihan-dasar-svg svg text,
-[data-theme="light"] .olimpiade-garis-sudut-route .latihan-dasar-svg svg text tspan,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-garis-sudut-route .latihan-dasar-svg svg text tspan,
 [data-theme="white"] .olimpiade-garis-sudut-route .latihan-dasar-svg svg text tspan,
 [data-theme="forest"] .olimpiade-garis-sudut-route .latihan-dasar-svg svg text tspan,
 [data-theme="sunset"] .olimpiade-garis-sudut-route .latihan-dasar-svg svg text tspan {
@@ -1418,7 +1452,7 @@
 
 /* The KaTeX nodes inside the important-formula card do not always inherit
    the route's generic text-white light-theme override. */
-[data-theme="light"] .olimpiade-teorema-route .important-formula,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route .important-formula,
 [data-theme="white"] .olimpiade-teorema-route .important-formula,
 [data-theme="forest"] .olimpiade-teorema-route .important-formula,
 [data-theme="sunset"] .olimpiade-teorema-route .important-formula {
@@ -1428,22 +1462,22 @@
   box-shadow: 0 10px 24px rgba(14, 116, 144, 0.12) !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route .important-formula .katex,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route .important-formula .katex,
 [data-theme="white"] .olimpiade-teorema-route .important-formula .katex,
 [data-theme="forest"] .olimpiade-teorema-route .important-formula .katex,
 [data-theme="sunset"] .olimpiade-teorema-route .important-formula .katex,
-[data-theme="light"] .olimpiade-teorema-route .important-formula .katex *,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route .important-formula .katex *,
 [data-theme="white"] .olimpiade-teorema-route .important-formula .katex *,
 [data-theme="forest"] .olimpiade-teorema-route .important-formula .katex *,
 [data-theme="sunset"] .olimpiade-teorema-route .important-formula .katex * {
   color: #0f172a !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route .important-formula .katex svg,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route .important-formula .katex svg,
 [data-theme="white"] .olimpiade-teorema-route .important-formula .katex svg,
 [data-theme="forest"] .olimpiade-teorema-route .important-formula .katex svg,
 [data-theme="sunset"] .olimpiade-teorema-route .important-formula .katex svg,
-[data-theme="light"] .olimpiade-teorema-route .important-formula .katex svg path,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route .important-formula .katex svg path,
 [data-theme="white"] .olimpiade-teorema-route .important-formula .katex svg path,
 [data-theme="forest"] .olimpiade-teorema-route .important-formula .katex svg path,
 [data-theme="sunset"] .olimpiade-teorema-route .important-formula .katex svg path {
@@ -1452,23 +1486,23 @@
   stroke: #0f172a !important;
 }
 
-[data-theme="light"] .olimpiade-teorema-route .important-formula > span:first-child,
+:is([data-theme="light"], [data-theme="pastel"]) .olimpiade-teorema-route .important-formula > span:first-child,
 [data-theme="white"] .olimpiade-teorema-route .important-formula > span:first-child,
 [data-theme="forest"] .olimpiade-teorema-route .important-formula > span:first-child,
 [data-theme="sunset"] .olimpiade-teorema-route .important-formula > span:first-child {
   color: #0369a1 !important;
 }
 
-[data-theme="light"] .animation-submaterial-route [class*="text-white"],
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [class*="text-white"],
 [data-theme="white"] .animation-submaterial-route [class*="text-white"],
 [data-theme="forest"] .animation-submaterial-route [class*="text-white"],
 [data-theme="sunset"] .animation-submaterial-route [class*="text-white"] {
   color: var(--text-primary) !important;
 }
 
-[data-theme="light"] .animation-submaterial-route [class*="text-slate-3"],
-[data-theme="light"] .animation-submaterial-route [class*="text-gray-3"],
-[data-theme="light"] .animation-submaterial-route [class*="text-zinc-3"],
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [class*="text-slate-3"],
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [class*="text-gray-3"],
+:is([data-theme="light"], [data-theme="pastel"]) .animation-submaterial-route [class*="text-zinc-3"],
 [data-theme="white"] .animation-submaterial-route [class*="text-slate-3"],
 [data-theme="white"] .animation-submaterial-route [class*="text-gray-3"],
 [data-theme="white"] .animation-submaterial-route [class*="text-zinc-3"],
@@ -1482,7 +1516,7 @@
 }
 
 /* 1. Override hardcoded text-white class for non-dark themes */
-[data-theme="light"] .text-white,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white,
 [data-theme="white"] .text-white,
 [data-theme="forest"] .text-white,
 [data-theme="sunset"] .text-white {
@@ -1493,156 +1527,156 @@
 /* GuruQuizOverlay and QuizGameOverlay use hardcoded dark backgrounds.
    The generic text-white override above would make text dark on a dark bg,
    so we restore the original Tailwind colors inside .game-quiz-panel. */
-[data-theme="light"] .game-quiz-panel .text-white,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white,
 [data-theme="white"] .game-quiz-panel .text-white,
 [data-theme="forest"] .game-quiz-panel .text-white,
 [data-theme="sunset"] .game-quiz-panel .text-white { color: #ffffff !important; }
 
-[data-theme="light"] .game-quiz-panel .text-white\/10,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white\/10,
 [data-theme="white"] .game-quiz-panel .text-white\/10,
 [data-theme="forest"] .game-quiz-panel .text-white\/10,
 [data-theme="sunset"] .game-quiz-panel .text-white\/10 { color: rgba(255,255,255,0.10) !important; }
 
-[data-theme="light"] .game-quiz-panel .text-white\/20,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white\/20,
 [data-theme="white"] .game-quiz-panel .text-white\/20,
 [data-theme="forest"] .game-quiz-panel .text-white\/20,
 [data-theme="sunset"] .game-quiz-panel .text-white\/20 { color: rgba(255,255,255,0.20) !important; }
 
-[data-theme="light"] .game-quiz-panel .text-white\/30,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white\/30,
 [data-theme="white"] .game-quiz-panel .text-white\/30,
 [data-theme="forest"] .game-quiz-panel .text-white\/30,
 [data-theme="sunset"] .game-quiz-panel .text-white\/30 { color: rgba(255,255,255,0.30) !important; }
 
-[data-theme="light"] .game-quiz-panel .text-white\/40,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white\/40,
 [data-theme="white"] .game-quiz-panel .text-white\/40,
 [data-theme="forest"] .game-quiz-panel .text-white\/40,
 [data-theme="sunset"] .game-quiz-panel .text-white\/40 { color: rgba(255,255,255,0.40) !important; }
 
-[data-theme="light"] .game-quiz-panel .text-white\/50,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white\/50,
 [data-theme="white"] .game-quiz-panel .text-white\/50,
 [data-theme="forest"] .game-quiz-panel .text-white\/50,
 [data-theme="sunset"] .game-quiz-panel .text-white\/50 { color: rgba(255,255,255,0.50) !important; }
 
-[data-theme="light"] .game-quiz-panel .text-white\/60,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white\/60,
 [data-theme="white"] .game-quiz-panel .text-white\/60,
 [data-theme="forest"] .game-quiz-panel .text-white\/60,
 [data-theme="sunset"] .game-quiz-panel .text-white\/60 { color: rgba(255,255,255,0.60) !important; }
 
-[data-theme="light"] .game-quiz-panel .text-white\/70,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white\/70,
 [data-theme="white"] .game-quiz-panel .text-white\/70,
 [data-theme="forest"] .game-quiz-panel .text-white\/70,
 [data-theme="sunset"] .game-quiz-panel .text-white\/70 { color: rgba(255,255,255,0.70) !important; }
 
-[data-theme="light"] .game-quiz-panel .text-white\/80,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white\/80,
 [data-theme="white"] .game-quiz-panel .text-white\/80,
 [data-theme="forest"] .game-quiz-panel .text-white\/80,
 [data-theme="sunset"] .game-quiz-panel .text-white\/80 { color: rgba(255,255,255,0.80) !important; }
 
-[data-theme="light"] .game-quiz-panel .text-white\/90,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-white\/90,
 [data-theme="white"] .game-quiz-panel .text-white\/90,
 [data-theme="forest"] .game-quiz-panel .text-white\/90,
 [data-theme="sunset"] .game-quiz-panel .text-white\/90 { color: rgba(255,255,255,0.90) !important; }
 
-[data-theme="light"] .game-quiz-panel .text-cyan-300,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-cyan-300,
 [data-theme="white"] .game-quiz-panel .text-cyan-300,
 [data-theme="forest"] .game-quiz-panel .text-cyan-300,
 [data-theme="sunset"] .game-quiz-panel .text-cyan-300 { color: #67e8f9 !important; }
 
-[data-theme="light"] .game-quiz-panel .text-cyan-400,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-cyan-400,
 [data-theme="white"] .game-quiz-panel .text-cyan-400,
 [data-theme="forest"] .game-quiz-panel .text-cyan-400,
 [data-theme="sunset"] .game-quiz-panel .text-cyan-400 { color: #22d3ee !important; }
 
-[data-theme="light"] .game-quiz-panel .text-indigo-400,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-indigo-400,
 [data-theme="white"] .game-quiz-panel .text-indigo-400,
 [data-theme="forest"] .game-quiz-panel .text-indigo-400,
 [data-theme="sunset"] .game-quiz-panel .text-indigo-400 { color: #818cf8 !important; }
 
-[data-theme="light"] .game-quiz-panel .text-indigo-300,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-indigo-300,
 [data-theme="white"] .game-quiz-panel .text-indigo-300,
 [data-theme="forest"] .game-quiz-panel .text-indigo-300,
 [data-theme="sunset"] .game-quiz-panel .text-indigo-300 { color: #a5b4fc !important; }
 
-[data-theme="light"] .game-quiz-panel .text-yellow-300,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-yellow-300,
 [data-theme="white"] .game-quiz-panel .text-yellow-300,
 [data-theme="forest"] .game-quiz-panel .text-yellow-300,
 [data-theme="sunset"] .game-quiz-panel .text-yellow-300 { color: #fde047 !important; }
 
-[data-theme="light"] .game-quiz-panel .text-yellow-400,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-yellow-400,
 [data-theme="white"] .game-quiz-panel .text-yellow-400,
 [data-theme="forest"] .game-quiz-panel .text-yellow-400,
 [data-theme="sunset"] .game-quiz-panel .text-yellow-400 { color: #facc15 !important; }
 
-[data-theme="light"] .game-quiz-panel .text-red-400,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-red-400,
 [data-theme="white"] .game-quiz-panel .text-red-400,
 [data-theme="forest"] .game-quiz-panel .text-red-400,
 [data-theme="sunset"] .game-quiz-panel .text-red-400 { color: #f87171 !important; }
 
-[data-theme="light"] .game-quiz-panel .text-red-300,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-red-300,
 [data-theme="white"] .game-quiz-panel .text-red-300,
 [data-theme="forest"] .game-quiz-panel .text-red-300,
 [data-theme="sunset"] .game-quiz-panel .text-red-300 { color: #fca5a5 !important; }
 
-[data-theme="light"] .game-quiz-panel .text-green-400,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-green-400,
 [data-theme="white"] .game-quiz-panel .text-green-400,
 [data-theme="forest"] .game-quiz-panel .text-green-400,
 [data-theme="sunset"] .game-quiz-panel .text-green-400 { color: #4ade80 !important; }
 
-[data-theme="light"] .game-quiz-panel .text-green-300,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .text-green-300,
 [data-theme="white"] .game-quiz-panel .text-green-300,
 [data-theme="forest"] .game-quiz-panel .text-green-300,
 [data-theme="sunset"] .game-quiz-panel .text-green-300 { color: #86efac !important; }
 
 /* Also keep bg-slate-950 and bg-slate-800 dark inside quiz panels (counteract bg overrides) */
-[data-theme="light"] .game-quiz-panel.bg-slate-950,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel.bg-slate-950,
 [data-theme="white"] .game-quiz-panel.bg-slate-950,
 [data-theme="forest"] .game-quiz-panel.bg-slate-950,
 [data-theme="sunset"] .game-quiz-panel.bg-slate-950,
-[data-theme="light"] .game-quiz-panel .bg-slate-950,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .bg-slate-950,
 [data-theme="white"] .game-quiz-panel .bg-slate-950,
 [data-theme="forest"] .game-quiz-panel .bg-slate-950,
 [data-theme="sunset"] .game-quiz-panel .bg-slate-950 { background-color: #020617 !important; }
 
-[data-theme="light"] .game-quiz-panel.bg-slate-800,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel.bg-slate-800,
 [data-theme="white"] .game-quiz-panel.bg-slate-800,
 [data-theme="forest"] .game-quiz-panel.bg-slate-800,
 [data-theme="sunset"] .game-quiz-panel.bg-slate-800,
-[data-theme="light"] .game-quiz-panel .bg-slate-800,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .bg-slate-800,
 [data-theme="white"] .game-quiz-panel .bg-slate-800,
 [data-theme="forest"] .game-quiz-panel .bg-slate-800,
 [data-theme="sunset"] .game-quiz-panel .bg-slate-800 { background-color: #1e293b !important; }
 
-[data-theme="light"] .game-quiz-panel.bg-slate-700,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel.bg-slate-700,
 [data-theme="white"] .game-quiz-panel.bg-slate-700,
 [data-theme="forest"] .game-quiz-panel.bg-slate-700,
 [data-theme="sunset"] .game-quiz-panel.bg-slate-700,
-[data-theme="light"] .game-quiz-panel .bg-slate-700,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .bg-slate-700,
 [data-theme="white"] .game-quiz-panel .bg-slate-700,
 [data-theme="forest"] .game-quiz-panel .bg-slate-700,
 [data-theme="sunset"] .game-quiz-panel .bg-slate-700 { background-color: #334155 !important; }
 
-[data-theme="light"] .game-quiz-panel .bg-slate-900,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel .bg-slate-900,
 [data-theme="white"] .game-quiz-panel .bg-slate-900,
 [data-theme="forest"] .game-quiz-panel .bg-slate-900,
 [data-theme="sunset"] .game-quiz-panel .bg-slate-900 { background-color: #0f172a !important; }
 
 /* Restore bg-slate-950/80 dark inside quiz panels (overrides the global light-theme bg override) */
-[data-theme="light"] .game-quiz-panel.bg-slate-950\/80,
+:is([data-theme="light"], [data-theme="pastel"]) .game-quiz-panel.bg-slate-950\/80,
 [data-theme="white"] .game-quiz-panel.bg-slate-950\/80,
 [data-theme="forest"] .game-quiz-panel.bg-slate-950\/80,
 [data-theme="sunset"] .game-quiz-panel.bg-slate-950\/80 { background-color: rgba(2,6,23,0.80) !important; }
 
 /* 3. Override white/50 and similar opacity variants for light themes */
-[data-theme="light"] .text-white\/10,
-[data-theme="light"] .text-white\/20,
-[data-theme="light"] .text-white\/25,
-[data-theme="light"] .text-white\/30,
-[data-theme="light"] .text-white\/40,
-[data-theme="light"] .text-white\/50,
-[data-theme="light"] .text-white\/60,
-[data-theme="light"] .text-white\/70,
-[data-theme="light"] .text-white\/80,
-[data-theme="light"] .text-white\/90,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/10,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/20,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/25,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/30,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/40,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/50,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/60,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/70,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/80,
+:is([data-theme="light"], [data-theme="pastel"]) .text-white\/90,
 [data-theme="white"] .text-white\/10,
 [data-theme="white"] .text-white\/20,
 [data-theme="white"] .text-white\/25,
@@ -1681,10 +1715,10 @@
 }
 
 /* 4. Light/white theme: improve text contrast for pastel/gray colors */
-[data-theme="light"] .text-gray-300,
-[data-theme="light"] .text-gray-400,
-[data-theme="light"] .text-slate-300,
-[data-theme="light"] .text-slate-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-gray-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-gray-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-slate-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-slate-400,
 [data-theme="white"] .text-gray-300,
 [data-theme="white"] .text-gray-400,
 [data-theme="white"] .text-slate-300,
@@ -1696,133 +1730,133 @@
   color: #075985 !important;
 }
 
-[data-theme="light"] .text-gray-500,
+:is([data-theme="light"], [data-theme="pastel"]) .text-gray-500,
 [data-theme="white"] .text-gray-500,
-[data-theme="light"] .text-slate-500,
+:is([data-theme="light"], [data-theme="pastel"]) .text-slate-500,
 [data-theme="white"] .text-slate-500 {
   color: #3a3a5a !important;
 }
 
-[data-theme="light"] .text-blue-300,
-[data-theme="light"] .text-blue-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-blue-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-blue-400,
 [data-theme="white"] .text-blue-300,
 [data-theme="white"] .text-blue-400 {
   color: #1d4ed8 !important;
 }
 
-[data-theme="light"] .text-purple-300,
-[data-theme="light"] .text-purple-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-purple-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-purple-400,
 [data-theme="white"] .text-purple-300,
 [data-theme="white"] .text-purple-400 {
   color: #6d28d9 !important;
 }
 
-[data-theme="light"] .text-cyan-300,
-[data-theme="light"] .text-cyan-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-cyan-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-cyan-400,
 [data-theme="white"] .text-cyan-300,
 [data-theme="white"] .text-cyan-400 {
   color: #0e7490 !important;
 }
 
-[data-theme="light"] .text-teal-300,
-[data-theme="light"] .text-teal-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-teal-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-teal-400,
 [data-theme="white"] .text-teal-300,
 [data-theme="white"] .text-teal-400 {
   color: #0f766e !important;
 }
 
-[data-theme="light"] .text-green-300,
-[data-theme="light"] .text-green-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-green-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-green-400,
 [data-theme="white"] .text-green-300,
 [data-theme="white"] .text-green-400 {
   color: #15803d !important;
 }
 
-[data-theme="light"] .text-yellow-300,
-[data-theme="light"] .text-yellow-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-yellow-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-yellow-400,
 [data-theme="white"] .text-yellow-300,
 [data-theme="white"] .text-yellow-400 {
   color: #a16207 !important;
 }
 
-[data-theme="light"] .text-pink-300,
-[data-theme="light"] .text-pink-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-pink-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-pink-400,
 [data-theme="white"] .text-pink-300,
 [data-theme="white"] .text-pink-400 {
   color: #be185d !important;
 }
 
-[data-theme="light"] .text-violet-300,
-[data-theme="light"] .text-violet-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-violet-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-violet-400,
 [data-theme="white"] .text-violet-300,
 [data-theme="white"] .text-violet-400 {
   color: #5b21b6 !important;
 }
 
-[data-theme="light"] .text-orange-300,
-[data-theme="light"] .text-orange-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-orange-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-orange-400,
 [data-theme="white"] .text-orange-300,
 [data-theme="white"] .text-orange-400 {
   color: #c2410c !important;
 }
 
-[data-theme="light"] .text-red-300,
-[data-theme="light"] .text-red-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-red-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-red-400,
 [data-theme="white"] .text-red-300,
 [data-theme="white"] .text-red-400 {
   color: #b91c1c !important;
 }
 
-[data-theme="light"] .text-indigo-300,
-[data-theme="light"] .text-indigo-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-indigo-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-indigo-400,
 [data-theme="white"] .text-indigo-300,
 [data-theme="white"] .text-indigo-400 {
   color: #3730a3 !important;
 }
 
-[data-theme="light"] .text-emerald-300,
-[data-theme="light"] .text-emerald-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-emerald-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-emerald-400,
 [data-theme="white"] .text-emerald-300,
 [data-theme="white"] .text-emerald-400 {
   color: #065f46 !important;
 }
 
-[data-theme="light"] .text-rose-300,
-[data-theme="light"] .text-rose-400,
+:is([data-theme="light"], [data-theme="pastel"]) .text-rose-300,
+:is([data-theme="light"], [data-theme="pastel"]) .text-rose-400,
 [data-theme="white"] .text-rose-300,
 [data-theme="white"] .text-rose-400 {
   color: #9f1239 !important;
 }
 
 /* 5. Override hardcoded dark slate backgrounds for light/white/forest themes */
-[data-theme="light"] .bg-slate-950\/80,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-950\/80,
 [data-theme="white"] .bg-slate-950\/80,
 [data-theme="forest"] .bg-slate-950\/80,
-[data-theme="light"] .bg-slate-900\/80,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-900\/80,
 [data-theme="white"] .bg-slate-900\/80,
 [data-theme="forest"] .bg-slate-900\/80,
-[data-theme="light"] .bg-slate-900\/60,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-900\/60,
 [data-theme="white"] .bg-slate-900\/60,
 [data-theme="forest"] .bg-slate-900\/60,
-[data-theme="light"] .bg-slate-900\/50,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-900\/50,
 [data-theme="white"] .bg-slate-900\/50,
 [data-theme="forest"] .bg-slate-900\/50,
-[data-theme="light"] .bg-slate-900\/40,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-900\/40,
 [data-theme="white"] .bg-slate-900\/40,
 [data-theme="forest"] .bg-slate-900\/40,
-[data-theme="light"] .bg-slate-900\/30,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-900\/30,
 [data-theme="white"] .bg-slate-900\/30,
 [data-theme="forest"] .bg-slate-900\/30,
-[data-theme="light"] .bg-slate-800\/60,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-800\/60,
 [data-theme="white"] .bg-slate-800\/60,
 [data-theme="forest"] .bg-slate-800\/60,
-[data-theme="light"] .bg-slate-800\/50,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-800\/50,
 [data-theme="white"] .bg-slate-800\/50,
 [data-theme="forest"] .bg-slate-800\/50,
-[data-theme="light"] .bg-slate-800\/40,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-800\/40,
 [data-theme="white"] .bg-slate-800\/40,
 [data-theme="forest"] .bg-slate-800\/40,
-[data-theme="light"] .bg-slate-700\/60,
+:is([data-theme="light"], [data-theme="pastel"]) .bg-slate-700\/60,
 [data-theme="white"] .bg-slate-700\/60,
 [data-theme="forest"] .bg-slate-700\/60 {
   background-color: var(--bg-secondary) !important;
@@ -2128,6 +2162,28 @@
     --space-deep: 210 60% 96%;
     --space-mid: 210 50% 92%;
   }
+
+  html[data-theme="pastel"].light-mode {
+    --background: 270 100% 99%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 262 83% 46%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 270 40% 95%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 270 40% 95%;
+    --muted-foreground: 215 16% 32%;
+    --accent: 300 50% 94%;
+    --accent-foreground: 222 47% 11%;
+    --border: 270 24% 85%;
+    --input: 270 24% 89%;
+    --ring: 262 83% 46%;
+    --space-deep: 270 100% 99%;
+    --space-mid: 300 80% 97%;
+  }
 }
 
 @layer base {
@@ -2211,6 +2267,10 @@
 
   .gradient-sunset {
     background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 25%, #bae6fd 55%, #e0f2fe 80%, #f0f9ff 100%);
+  }
+
+  .gradient-pastel {
+    background: linear-gradient(160deg, #faf5ff 0%, #fff7ed 48%, #fdf2f8 100%);
   }
 
   .gradient-neon {
@@ -2469,6 +2529,11 @@
 .light-mode .gradient-space {
   background: linear-gradient(180deg,
     #bfdbfe 0%, #dbeafe 20%, #e0f2fe 50%, #f0f9ff 78%, #f8fafc 100%) !important;
+}
+
+html[data-theme="pastel"].light-mode .gradient-space,
+html[data-theme="pastel"].light-mode .gradient-snow {
+  background: linear-gradient(160deg, #faf5ff 0%, #fff7ed 48%, #fdf2f8 100%) !important;
 }
 
 /* Text glow: softer shadows on light bg */
@@ -4373,27 +4438,27 @@ html.light-mode .division-zero-calculator-copy {
 /* ── TKA menu surfaces: keep only the three bright named themes bright ── */
 /* The TKA landing and module index pages use inline space-theme surfaces,
    which otherwise stay dark even after the page gradient changes. */
-[data-theme="light"] .tka-menu-page .tka-menu-surface,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-menu-page .tka-menu-surface,
 [data-theme="forest"] .tka-menu-page .tka-menu-surface,
 [data-theme="sunset"] .tka-menu-page .tka-menu-surface {
   background: var(--bg-card) !important;
 }
 
-[data-theme="light"] .tka-menu-page .tka-menu-item,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-menu-page .tka-menu-item,
 [data-theme="forest"] .tka-menu-page .tka-menu-item,
 [data-theme="sunset"] .tka-menu-page .tka-menu-item {
   background: rgba(255,255,255,0.72) !important;
   border-color: var(--border) !important;
 }
 
-[data-theme="light"] .tka-menu-page .tka-menu-item:disabled,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-menu-page .tka-menu-item:disabled,
 [data-theme="forest"] .tka-menu-page .tka-menu-item:disabled,
 [data-theme="sunset"] .tka-menu-page .tka-menu-item:disabled {
   background: rgba(255,255,255,0.48) !important;
   border-color: var(--border) !important;
 }
 
-[data-theme="light"] .tka-menu-page .tka-menu-icon,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-menu-page .tka-menu-icon,
 [data-theme="forest"] .tka-menu-page .tka-menu-icon,
 [data-theme="sunset"] .tka-menu-page .tka-menu-icon {
   background: rgba(255,255,255,0.58) !important;
@@ -5584,110 +5649,110 @@ html.light-mode .division-zero-calculator-copy {
    original light-on-dark text tokens become unreadable on bright surfaces.
    Scope these corrections to this topic so dark/space themes and other
    Olympiad pages keep their original appearance. */
-[data-theme="light"] .brsd-olympiad-route [class*="text-white"],
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route [class*="text-white"],
 [data-theme="white"] .brsd-olympiad-route [class*="text-white"],
 [data-theme="forest"] .brsd-olympiad-route [class*="text-white"],
 [data-theme="sunset"] .brsd-olympiad-route [class*="text-white"] {
   color: var(--text-primary) !important;
 }
 
-[data-theme="light"] .brsd-olympiad-route .text-indigo-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-indigo-300,
 [data-theme="white"] .brsd-olympiad-route .text-indigo-300,
 [data-theme="forest"] .brsd-olympiad-route .text-indigo-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-indigo-300 { color: #3730a3 !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-violet-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-violet-300,
 [data-theme="white"] .brsd-olympiad-route .text-violet-300,
 [data-theme="forest"] .brsd-olympiad-route .text-violet-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-violet-300 { color: #5b21b6 !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-amber-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-amber-300,
 [data-theme="white"] .brsd-olympiad-route .text-amber-300,
 [data-theme="forest"] .brsd-olympiad-route .text-amber-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-amber-300 { color: #b45309 !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-yellow-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-yellow-300,
 [data-theme="white"] .brsd-olympiad-route .text-yellow-300,
 [data-theme="forest"] .brsd-olympiad-route .text-yellow-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-yellow-300,
-[data-theme="light"] .brsd-olympiad-route .text-yellow-400,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-yellow-400,
 [data-theme="white"] .brsd-olympiad-route .text-yellow-400,
 [data-theme="forest"] .brsd-olympiad-route .text-yellow-400,
 [data-theme="sunset"] .brsd-olympiad-route .text-yellow-400,
-[data-theme="light"] .brsd-olympiad-route [class*="text-yellow-100"],
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route [class*="text-yellow-100"],
 [data-theme="white"] .brsd-olympiad-route [class*="text-yellow-100"],
 [data-theme="forest"] .brsd-olympiad-route [class*="text-yellow-100"],
 [data-theme="sunset"] .brsd-olympiad-route [class*="text-yellow-100"] { color: #854d0e !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-orange-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-orange-300,
 [data-theme="white"] .brsd-olympiad-route .text-orange-300,
 [data-theme="forest"] .brsd-olympiad-route .text-orange-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-orange-300 { color: #c2410c !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-pink-200,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-pink-200,
 [data-theme="white"] .brsd-olympiad-route .text-pink-200,
 [data-theme="forest"] .brsd-olympiad-route .text-pink-200,
 [data-theme="sunset"] .brsd-olympiad-route .text-pink-200,
-[data-theme="light"] .brsd-olympiad-route .text-rose-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-rose-300,
 [data-theme="white"] .brsd-olympiad-route .text-rose-300,
 [data-theme="forest"] .brsd-olympiad-route .text-rose-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-rose-300 { color: #9f1239 !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-sky-200,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-sky-200,
 [data-theme="white"] .brsd-olympiad-route .text-sky-200,
 [data-theme="forest"] .brsd-olympiad-route .text-sky-200,
 [data-theme="sunset"] .brsd-olympiad-route .text-sky-200,
-[data-theme="light"] .brsd-olympiad-route .text-sky-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-sky-300,
 [data-theme="white"] .brsd-olympiad-route .text-sky-300,
 [data-theme="forest"] .brsd-olympiad-route .text-sky-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-sky-300 { color: #0369a1 !important; }
 
 /* PembahasanCard uses pale text tokens over colorful translucent boxes. */
-[data-theme="light"] .brsd-olympiad-route .text-emerald-50,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-emerald-50,
 [data-theme="white"] .brsd-olympiad-route .text-emerald-50,
 [data-theme="forest"] .brsd-olympiad-route .text-emerald-50,
 [data-theme="sunset"] .brsd-olympiad-route .text-emerald-50,
-[data-theme="light"] .brsd-olympiad-route .text-emerald-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-emerald-300,
 [data-theme="white"] .brsd-olympiad-route .text-emerald-300,
 [data-theme="forest"] .brsd-olympiad-route .text-emerald-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-emerald-300 { color: #065f46 !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-violet-50,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-violet-50,
 [data-theme="white"] .brsd-olympiad-route .text-violet-50,
 [data-theme="forest"] .brsd-olympiad-route .text-violet-50,
 [data-theme="sunset"] .brsd-olympiad-route .text-violet-50,
-[data-theme="light"] .brsd-olympiad-route .text-violet-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-violet-300,
 [data-theme="white"] .brsd-olympiad-route .text-violet-300,
 [data-theme="forest"] .brsd-olympiad-route .text-violet-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-violet-300 { color: #5b21b6 !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-cyan-50,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-cyan-50,
 [data-theme="white"] .brsd-olympiad-route .text-cyan-50,
 [data-theme="forest"] .brsd-olympiad-route .text-cyan-50,
 [data-theme="sunset"] .brsd-olympiad-route .text-cyan-50,
-[data-theme="light"] .brsd-olympiad-route .text-cyan-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-cyan-300,
 [data-theme="white"] .brsd-olympiad-route .text-cyan-300,
 [data-theme="forest"] .brsd-olympiad-route .text-cyan-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-cyan-300 { color: #155e75 !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-amber-50,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-amber-50,
 [data-theme="white"] .brsd-olympiad-route .text-amber-50,
 [data-theme="forest"] .brsd-olympiad-route .text-amber-50,
 [data-theme="sunset"] .brsd-olympiad-route .text-amber-50,
-[data-theme="light"] .brsd-olympiad-route .text-amber-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-amber-300,
 [data-theme="white"] .brsd-olympiad-route .text-amber-300,
 [data-theme="forest"] .brsd-olympiad-route .text-amber-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-amber-300 { color: #92400e !important; }
 
-[data-theme="light"] .brsd-olympiad-route .text-rose-50,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-rose-50,
 [data-theme="white"] .brsd-olympiad-route .text-rose-50,
 [data-theme="forest"] .brsd-olympiad-route .text-rose-50,
 [data-theme="sunset"] .brsd-olympiad-route .text-rose-50,
-[data-theme="light"] .brsd-olympiad-route .text-rose-200,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-rose-200,
 [data-theme="white"] .brsd-olympiad-route .text-rose-200,
 [data-theme="forest"] .brsd-olympiad-route .text-rose-200,
 [data-theme="sunset"] .brsd-olympiad-route .text-rose-200,
-[data-theme="light"] .brsd-olympiad-route .text-rose-300,
+:is([data-theme="light"], [data-theme="pastel"]) .brsd-olympiad-route .text-rose-300,
 [data-theme="white"] .brsd-olympiad-route .text-rose-300,
 [data-theme="forest"] .brsd-olympiad-route .text-rose-300,
 [data-theme="sunset"] .brsd-olympiad-route .text-rose-300 { color: #9f1239 !important; }
@@ -5891,64 +5956,64 @@ html.light-mode .division-zero-calculator-copy {
    The shared layout now follows the same light-content treatment as
    Bilangan Bulat for Salju Cerah, Hutan Hijau, and Langit Cerah.
    Keep these rules scoped so dark and ocean themes retain their original UI. */
-[data-theme="light"] .tka-pemantapan .text-white\/90,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .text-white\/90,
 [data-theme="forest"] .tka-pemantapan .text-white\/90,
 [data-theme="sunset"] .tka-pemantapan .text-white\/90 {
   color: var(--text-primary) !important;
 }
 
-[data-theme="light"] .tka-pemantapan .text-white\/80,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .text-white\/80,
 [data-theme="forest"] .tka-pemantapan .text-white\/80,
 [data-theme="sunset"] .tka-pemantapan .text-white\/80 {
   color: var(--text-secondary) !important;
 }
 
-[data-theme="light"] .tka-pemantapan .text-white\/60,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .text-white\/60,
 [data-theme="forest"] .tka-pemantapan .text-white\/60,
 [data-theme="sunset"] .tka-pemantapan .text-white\/60,
-[data-theme="light"] .tka-pemantapan .text-white\/50,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .text-white\/50,
 [data-theme="forest"] .tka-pemantapan .text-white\/50,
 [data-theme="sunset"] .tka-pemantapan .text-white\/50,
-[data-theme="light"] .tka-pemantapan .text-white\/40,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .text-white\/40,
 [data-theme="forest"] .tka-pemantapan .text-white\/40,
 [data-theme="sunset"] .tka-pemantapan .text-white\/40 {
   color: var(--text-muted-foreground) !important;
 }
 
-[data-theme="light"] .tka-pemantapan .text-white,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .text-white,
 [data-theme="forest"] .tka-pemantapan .text-white,
 [data-theme="sunset"] .tka-pemantapan .text-white {
   color: var(--text-primary) !important;
 }
 
 /* Header remains a colored ribbon, so its white icon/text stays white. */
-[data-theme="light"] .tka-pemantapan .tka-pemantapan-header .text-white,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .tka-pemantapan-header .text-white,
 [data-theme="forest"] .tka-pemantapan .tka-pemantapan-header .text-white,
 [data-theme="sunset"] .tka-pemantapan .tka-pemantapan-header .text-white {
   color: #ffffff !important;
 }
 
 /* Dark utility surfaces used by a few richer material sections. */
-[data-theme="light"] .tka-pemantapan .bg-slate-950,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .bg-slate-950,
 [data-theme="forest"] .tka-pemantapan .bg-slate-950,
 [data-theme="sunset"] .tka-pemantapan .bg-slate-950,
-[data-theme="light"] .tka-pemantapan .bg-slate-900,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .bg-slate-900,
 [data-theme="forest"] .tka-pemantapan .bg-slate-900,
 [data-theme="sunset"] .tka-pemantapan .bg-slate-900,
-[data-theme="light"] .tka-pemantapan .bg-slate-800,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .bg-slate-800,
 [data-theme="forest"] .tka-pemantapan .bg-slate-800,
 [data-theme="sunset"] .tka-pemantapan .bg-slate-800 {
   background-color: var(--bg-card) !important;
   color: var(--text-primary) !important;
 }
 
-[data-theme="light"] .tka-pemantapan .border-white\/5,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .border-white\/5,
 [data-theme="forest"] .tka-pemantapan .border-white\/5,
 [data-theme="sunset"] .tka-pemantapan .border-white\/5,
-[data-theme="light"] .tka-pemantapan .border-white\/8,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .border-white\/8,
 [data-theme="forest"] .tka-pemantapan .border-white\/8,
 [data-theme="sunset"] .tka-pemantapan .border-white\/8,
-[data-theme="light"] .tka-pemantapan .border-white\/10,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan .border-white\/10,
 [data-theme="forest"] .tka-pemantapan .border-white\/10,
 [data-theme="sunset"] .tka-pemantapan .border-white\/10 {
   border-color: var(--border) !important;
@@ -5956,13 +6021,13 @@ html.light-mode .division-zero-calculator-copy {
 
 /* Inline dark panels in custom material JSX cannot be handled by Tailwind
    theme utilities, so replace only their dark backgrounds inside this page. */
-[data-theme="light"] .tka-pemantapan [style*="rgba(15,12,41"],
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan [style*="rgba(15,12,41"],
 [data-theme="forest"] .tka-pemantapan [style*="rgba(15,12,41"],
 [data-theme="sunset"] .tka-pemantapan [style*="rgba(15,12,41"],
-[data-theme="light"] .tka-pemantapan [style*="rgba(20,20,40"],
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan [style*="rgba(20,20,40"],
 [data-theme="forest"] .tka-pemantapan [style*="rgba(20,20,40"],
 [data-theme="sunset"] .tka-pemantapan [style*="rgba(20,20,40"],
-[data-theme="light"] .tka-pemantapan [style*="rgba(15,10,30"] ,
+:is([data-theme="light"], [data-theme="pastel"]) .tka-pemantapan [style*="rgba(15,10,30"] ,
 [data-theme="forest"] .tka-pemantapan [style*="rgba(15,10,30"] ,
 [data-theme="sunset"] .tka-pemantapan [style*="rgba(15,10,30"] {
   background: var(--bg-card) !important;
@@ -6448,7 +6513,7 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
    Keep the light-theme treatment scoped to this material family so
    their complete contents become readable without changing dark mode
    or unrelated pages. */
-[data-theme="light"] .latihan-bangun-ruang-material,
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material,
 [data-theme="white"] .latihan-bangun-ruang-material,
 [data-theme="forest"] .latihan-bangun-ruang-material,
 [data-theme="sunset"] .latihan-bangun-ruang-material {
@@ -6456,7 +6521,7 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
   color: #172033;
 }
 
-[data-theme="light"] .latihan-bangun-ruang-material .absolute.inset-0.backdrop-blur,
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material .absolute.inset-0.backdrop-blur,
 [data-theme="white"] .latihan-bangun-ruang-material .absolute.inset-0.backdrop-blur,
 [data-theme="forest"] .latihan-bangun-ruang-material .absolute.inset-0.backdrop-blur,
 [data-theme="sunset"] .latihan-bangun-ruang-material .absolute.inset-0.backdrop-blur {
@@ -6464,7 +6529,7 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
   background-image: none !important;
 }
 
-[data-theme="light"] .latihan-bangun-ruang-material [class*="-900/"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material [class*="-900/"],
 [data-theme="white"] .latihan-bangun-ruang-material [class*="-900/"],
 [data-theme="forest"] .latihan-bangun-ruang-material [class*="-900/"],
 [data-theme="sunset"] .latihan-bangun-ruang-material [class*="-900/"] {
@@ -6472,23 +6537,23 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
   background-image: none !important;
 }
 
-[data-theme="light"] .latihan-bangun-ruang-material [class*="bg-white/"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material [class*="bg-white/"],
 [data-theme="white"] .latihan-bangun-ruang-material [class*="bg-white/"],
 [data-theme="forest"] .latihan-bangun-ruang-material [class*="bg-white/"],
 [data-theme="sunset"] .latihan-bangun-ruang-material [class*="bg-white/"] {
   background-color: rgba(241,245,249,0.92) !important;
 }
 
-[data-theme="light"] .latihan-bangun-ruang-material [class*="text-white"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material [class*="text-white"],
 [data-theme="white"] .latihan-bangun-ruang-material [class*="text-white"],
 [data-theme="forest"] .latihan-bangun-ruang-material [class*="text-white"],
 [data-theme="sunset"] .latihan-bangun-ruang-material [class*="text-white"] {
   color: #172033 !important;
 }
 
-[data-theme="light"] .latihan-bangun-ruang-material [style*="rgba(2,8,23"],
-[data-theme="light"] .latihan-bangun-ruang-material [style*="rgba(6,12,30"],
-[data-theme="light"] .latihan-bangun-ruang-material [style*="rgba(8,15,35"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material [style*="rgba(2,8,23"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material [style*="rgba(6,12,30"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material [style*="rgba(8,15,35"],
 [data-theme="white"] .latihan-bangun-ruang-material [style*="rgba(2,8,23"],
 [data-theme="white"] .latihan-bangun-ruang-material [style*="rgba(6,12,30"],
 [data-theme="white"] .latihan-bangun-ruang-material [style*="rgba(8,15,35"],
@@ -6504,7 +6569,7 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
 /* SVG illustrations in these materials use presentation attributes
    (fill/stroke) instead of Tailwind classes. Recolor those attributes
    in light themes so diagrams do not become black or lose their labels. */
-[data-theme="light"] .latihan-bangun-ruang-material svg text,
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg text,
 [data-theme="white"] .latihan-bangun-ruang-material svg text,
 [data-theme="forest"] .latihan-bangun-ruang-material svg text,
 [data-theme="sunset"] .latihan-bangun-ruang-material svg text {
@@ -6512,17 +6577,17 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
   stroke: none !important;
 }
 
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill="white"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill="white"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [fill="white"],
 [data-theme="forest"] .latihan-bangun-ruang-material svg [fill="white"],
 [data-theme="sunset"] .latihan-bangun-ruang-material svg [fill="white"] {
   fill: #dbeafe !important;
 }
 
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill="#0f172a"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill="#111827"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill="#1e293b"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill="#292524"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill="#0f172a"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill="#111827"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill="#1e293b"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill="#292524"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [fill="#0f172a"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [fill="#111827"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [fill="#1e293b"],
@@ -6538,11 +6603,11 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
   fill: #bfdbfe !important;
 }
 
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke="white"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke="#111827"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke="#1e293b"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke="#292524"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke="#334155"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke="white"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke="#111827"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke="#1e293b"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke="#292524"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke="#334155"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [stroke="white"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [stroke="#111827"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [stroke="#1e293b"],
@@ -6564,12 +6629,12 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
 /* Catch inline SVG colors that are dark without depending on one exact
    hex value. The scope keeps these soft-pastel replacements local to
    the five Bangun Ruang Sisi Lengkung exercise pages. */
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill="black"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill="#000"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill="#000000"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill^="#0"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill^="#1"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [fill^="#2"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill="black"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill="#000"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill="#000000"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill^="#0"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill^="#1"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [fill^="#2"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [fill="black"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [fill="#000"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [fill="#000000"],
@@ -6591,12 +6656,12 @@ html.light-mode .bg-slate-900\/90 .bg-yellow-500\/10 {
   fill: #bfdbfe !important;
 }
 
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke="black"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke="#000"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke="#000000"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke^="#0"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke^="#1"],
-[data-theme="light"] .latihan-bangun-ruang-material svg [stroke^="#2"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke="black"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke="#000"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke="#000000"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke^="#0"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke^="#1"],
+:is([data-theme="light"], [data-theme="pastel"]) .latihan-bangun-ruang-material svg [stroke^="#2"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [stroke="black"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [stroke="#000"],
 [data-theme="white"] .latihan-bangun-ruang-material svg [stroke="#000000"],
@@ -7058,148 +7123,148 @@ html.light-mode .pola-geometri-materi-route .katex {
 
 /* SMA book lessons with legacy space-theme colors stay bright in light themes,
    while dark and ocean modes retain their original appearance. */
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) {
   background: linear-gradient(180deg, #dbeafe 0%, #ecfeff 42%, #f8fafc 100%) !important;
   color: #1e293b !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-["] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-["] {
   background: #f8fafc !important;
   background-image: none !important;
   color: #1e293b !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-"][class*="-800/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-"][class*="-900/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-"][class*="-950/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-black"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-"][class*="-800/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-"][class*="-900/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-"][class*="-950/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="bg-black"] {
   background-color: rgba(248, 250, 252, 0.96) !important;
   background-image: none !important;
   color: #1e293b !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="from-"][class*="-900/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="to-"][class*="-900/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="via-"][class*="-900/"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="from-"][class*="-900/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="to-"][class*="-900/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="via-"][class*="-900/"] {
   --tw-gradient-from: rgba(248, 250, 252, 0.96) var(--tw-gradient-from-position) !important;
   --tw-gradient-to: rgba(241, 245, 249, 0.92) var(--tw-gradient-to-position) !important;
   --tw-gradient-via: rgba(248, 250, 252, 0.94) var(--tw-gradient-via-position) !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="text-"][class*="-50"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="text-"][class*="-100"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="text-"][class*="-200"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="text-"][class*="-300"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="text-"][class*="-50"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="text-"][class*="-100"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="text-"][class*="-200"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="text-"][class*="-300"] {
   color: #334155 !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="border-white"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) [class*="border-white"] {
   border-color: rgba(100, 116, 139, 0.28) !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] {
   background-color: #f8fafc !important;
   border-color: #cbd5e1 !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] > rect:first-of-type:not([fill*="grid"]) {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] > rect:first-of-type:not([fill*="grid"]) {
   fill: #f8fafc !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] pattern path {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] pattern path {
   stroke: #cbd5e1 !important;
   stroke-opacity: 0.65 !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] text,
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] tspan {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] text,
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) :is(.sma-statistika-route, .sma-exponent-logarithm-route, .sma-barisan-deret-route, .sma-vektor-route, .sma-linear-systems-route) svg[role="img"] tspan {
   fill: #334155 !important;
   color: #334155 !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-statistika-route [class*="text-slate-100"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-statistika-route [class*="text-slate-200"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-statistika-route [class*="text-slate-100"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-statistika-route [class*="text-slate-200"] {
   color: #334155 !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-vektor-route svg.sma-vector-hero-diagram text,
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-vektor-route svg.sma-vector-hero-diagram tspan {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-vektor-route svg.sma-vector-hero-diagram text,
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-vektor-route svg.sma-vector-hero-diagram tspan {
   fill: #334155 !important;
   color: #334155 !important;
 }
 
 /* SMA trigonometry lessons use legacy space colors; brighten only non-dark themes. */
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route {
   background: linear-gradient(180deg, #dbeafe 0%, #ecfeff 42%, #f8fafc 100%) !important;
   color: #1e293b !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-["] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-["] {
   background: #f8fafc !important;
   background-image: none !important;
   color: #1e293b !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-"][class*="-800/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-"][class*="-900/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-"][class*="-950/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-black"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-"][class*="-800/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-"][class*="-900/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-"][class*="-950/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="bg-black"] {
   background-color: rgba(248, 250, 252, 0.96) !important;
   background-image: none !important;
   color: #1e293b !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="from-[#"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="to-[#"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="via-[#"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="from-[#"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="to-[#"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="via-[#"] {
   --tw-gradient-from: #eff6ff var(--tw-gradient-from-position) !important;
   --tw-gradient-to: #fdf2f8 var(--tw-gradient-to-position) !important;
   --tw-gradient-via: #f8fafc var(--tw-gradient-via-position) !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="from-"][class*="-900/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="to-"][class*="-900/"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="via-"][class*="-900/"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="from-"][class*="-900/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="to-"][class*="-900/"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="via-"][class*="-900/"] {
   --tw-gradient-from: rgba(248, 250, 252, 0.96) var(--tw-gradient-from-position) !important;
   --tw-gradient-to: rgba(241, 245, 249, 0.92) var(--tw-gradient-to-position) !important;
   --tw-gradient-via: rgba(248, 250, 252, 0.94) var(--tw-gradient-via-position) !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-"][class*="-100"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-"][class*="-200"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-"][class*="-300"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-"][class*="-100"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-"][class*="-200"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-"][class*="-300"] {
   color: #334155 !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-amber-50"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-cyan-50"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-emerald-50"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-rose-50"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-violet-50"],
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-yellow-50"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-amber-50"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-cyan-50"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-emerald-50"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-rose-50"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-violet-50"],
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="text-yellow-50"] {
   color: #334155 !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="border-white"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route [class*="border-white"] {
   border-color: rgba(100, 116, 139, 0.28) !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg[role="img"] {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg[role="img"] {
   background-color: #f8fafc !important;
   border-color: #cbd5e1 !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg[role="img"] > rect:first-of-type:not([fill*="grid"]) {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg[role="img"] > rect:first-of-type:not([fill*="grid"]) {
   fill: #f8fafc !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg[role="img"] pattern path {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg[role="img"] pattern path {
   stroke: #cbd5e1 !important;
   stroke-opacity: 0.65 !important;
 }
 
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg text,
-:is([data-theme="light"], [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg tspan {
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg text,
+:is(:is([data-theme="light"], [data-theme="pastel"]), [data-theme="white"], [data-theme="forest"], [data-theme="sunset"]) .sma-trigonometry-route svg tspan {
   fill: #334155 !important;
   color: #334155 !important;
 }

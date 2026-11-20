@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useAnimations } from "@/contexts/AnimationContext";
 
 export const StarfieldVisibilityContext = createContext(true);
 
@@ -343,13 +344,15 @@ const CloudCanvas = () => {
 // ── Theme-aware switcher ───────────────────────────────────────
 const Starfield = () => {
   const isVisible = useContext(StarfieldVisibilityContext);
+  const { animationsOn } = useAnimations();
   const { theme } = useTheme();
 
-  if (!isVisible) return null;
+  if (!isVisible || !animationsOn) return null;
 
   switch (theme) {
     case "light":   return <SnowCanvas />;
     case "white":   return <WhiteCanvas />;
+    case "pastel":  return <WhiteCanvas />;
     case "forest":  return <ForestCanvas />;
     case "ocean":   return <OceanCanvas />;
     case "sunset":  return <CloudCanvas />;

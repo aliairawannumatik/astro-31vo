@@ -104,6 +104,7 @@ function getThemeStyles(theme: string): ThemeStyles {
 
     case "light":
     case "white":
+    case "pastel":
       return {
         topBg: "linear-gradient(160deg,#c7d2fe 0%,#e0e7ff 50%,#bfdbfe 100%)",
         topTextTitle: "text-indigo-900/85",

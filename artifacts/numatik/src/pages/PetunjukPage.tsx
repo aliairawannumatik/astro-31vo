@@ -1650,7 +1650,7 @@ const PetunjukPage = () => {
   const { theme } = useTheme();
   const { language } = useLanguage();
   const isDark   = theme === "dark";
-  const isWhite  = theme === "white";
+  const isWhite  = theme === "white" || theme === "pastel";
   const isSunset = theme === "sunset";
 
   const [current, setCurrent] = useState(0);

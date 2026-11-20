@@ -14,7 +14,7 @@ const LANGUAGES: ReadonlyArray<{ id: Language; name: string }> = [
   { id: "ja", name: "日本語" },
 ];
 
-const THEMES: readonly Theme[] = ["dark", "white", "sunset", "ocean", "light", "forest"];
+const THEMES: readonly Theme[] = ["dark", "white", "sunset", "ocean", "light", "forest", "pastel"];
 
 const MenuHeaderControls = () => {
   const { t } = useTranslation();

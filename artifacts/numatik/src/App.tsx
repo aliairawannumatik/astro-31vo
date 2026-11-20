@@ -14,6 +14,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { SoundProvider } from "@/contexts/SoundContext";
 import { MusicProvider } from "@/contexts/MusicContext";
 import { FontProvider } from "@/contexts/FontContext";
+import { AnimationProvider } from "@/contexts/AnimationContext";
 import PageLoader from "@/components/PageLoader";
 
 const LegacyMathBookRedirect = () => {
@@ -2150,24 +2151,26 @@ const AppInner = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <LanguageProvider>
-      <SoundProvider>
-        <MusicProvider>
-          <FontProvider>
-            <TooltipProvider>
-              <Toaster />
-              <Sonner />
-              {!Capacitor.isNativePlatform() && <Analytics />}
-              <BrowserRouter>
-                <AppInner />
-              </BrowserRouter>
-            </TooltipProvider>
-          </FontProvider>
-        </MusicProvider>
-      </SoundProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+    <AnimationProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <SoundProvider>
+            <MusicProvider>
+              <FontProvider>
+                <TooltipProvider>
+                  <Toaster />
+                  <Sonner />
+                  {!Capacitor.isNativePlatform() && <Analytics />}
+                  <BrowserRouter>
+                    <AppInner />
+                  </BrowserRouter>
+                </TooltipProvider>
+              </FontProvider>
+            </MusicProvider>
+          </SoundProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </AnimationProvider>
   </QueryClientProvider>
 );
 

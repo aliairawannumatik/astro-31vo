@@ -11,7 +11,7 @@ const BiografiPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const isWhite = theme === "white";
+  const isWhite = theme === "white" || theme === "pastel";
   const [pesan, setPesan] = useState("");
 
   useEffect(() => {

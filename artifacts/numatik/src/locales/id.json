@@ -3,6 +3,7 @@
   "appName": "NUMATIK",
   "subtitle": "Numerasi Aktif dengan Teknologi\nInformasi dan Komunikasi",
   "schoolYear": "Tahun Ajaran 2026 – 2027",
+  "desktopAvailableText": "Juga tersedia di desktop melalui www.numatik.app",
   "start": "🚀 MULAI",
   "marquee": "✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨",
   "selectTheme": "Pilih Tema",
@@ -6307,6 +6308,9 @@
     "soundSection": "Efek Suara",
     "soundOn": "🔊 Suara tombol aktif",
     "soundOff": "🔇 Suara dimatikan",
+    "animationSection": "Animasi",
+    "animationOn": "Animasi latar dan transisi aktif",
+    "animationOff": "Animasi dimatikan",
     "languageSection": "Bahasa / Language",
     "languageDesc": "Bahasa tampilan aplikasi",
     "volumeMusic": "🎚️ Volume Musik",
@@ -6499,7 +6503,8 @@
     "sunset": "Langit Cerah",
     "ocean": "Lautan Biru",
     "light": "Salju Cerah",
-    "forest": "Hutan Hijau"
+    "forest": "Hutan Hijau",
+    "pastel": "Pastel"
   },
   "languageContinueText": "Lanjut ke Menu Utama"
 }

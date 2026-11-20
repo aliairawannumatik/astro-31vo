@@ -2,12 +2,13 @@ import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Settings, Volume2, VolumeX, Music2, Type, ChevronDown, Globe } from "lucide-react";
+import { Settings, Volume2, VolumeX, Music2, Type, ChevronDown, Globe, Sparkles } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme, Theme } from "@/contexts/ThemeContext";
 import { useSound } from "@/contexts/SoundContext";
 import { useMusic } from "@/contexts/MusicContext";
 import { useFont, FONT_OPTIONS, FontKey } from "@/contexts/FontContext";
+import { useAnimations } from "@/contexts/AnimationContext";
 import { useLanguage, Language } from "@/contexts/LanguageContext";
 import { TRACKS } from "@/hooks/bgMusicTracks";
 import { MP3_TRACKS } from "@/hooks/mp3Tracks";
@@ -92,6 +93,17 @@ const THEME_DEFS: ThemeDef[] = [
     activeDot: "bg-sky-400",
     ready: false,
   },
+  {
+    id: "pastel",
+    emoji: "🎨",
+    name: "Pastel",
+    desc: "Lembut dan menenangkan 🎨",
+    gradient: "linear-gradient(135deg,#f3e8ff,#fce7f3,#fff7ed)",
+    activeBorder: "border-violet-500",
+    activeShadow: "shadow-[0_0_16px_rgba(109,40,217,0.3)]",
+    activeDot: "bg-violet-600",
+    ready: true,
+  },
 ];
 
 type LangOption = {
@@ -134,6 +146,7 @@ function getThemeGradient(t: Theme): string {
     forest: "gradient-forest",
     ocean:  "gradient-ocean",
     sunset: "gradient-sunset",
+    pastel: "gradient-pastel",
   };
   return map[t] ?? "gradient-space";
 }
@@ -174,6 +187,7 @@ const PengaturanPage = () => {
   const { soundOn, toggleSound, sfxId, setSfxId, volume, setVolume: setSfxVolume } = useSound();
   const { musicOn, toggleMusic, trackId, setTrackId, musicVolume, setMusicVolume: setMusicVol } = useMusic();
   const { fontKey, setFont } = useFont();
+  const { animationsOn, toggleAnimations } = useAnimations();
   const { language, setLanguage } = useLanguage();
 
   const [shakingBtn, setShakingBtn] = useState<string | null>(null);
@@ -339,7 +353,7 @@ const PengaturanPage = () => {
                       <div className="w-full h-8 rounded-lg border border-black/10" style={{ background: td.gradient }} />
                       <span className="text-[17px] leading-none">{td.emoji}</span>
                       <p className={`font-display font-bold text-[10px] text-center leading-tight ${isDark ? "text-white/80" : "text-gray-700"}`}>
-                        {td.name}
+                        {t(`themeNames.${td.id}`)}
                       </p>
                       {isActive && (
                         <div className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full ${td.activeDot}`} />
@@ -773,6 +787,41 @@ const PengaturanPage = () => {
             </div>
 
             </div>
+          </div>
+        </div>
+
+        <div className={`relative rounded-2xl overflow-hidden ${
+          isDark
+            ? "bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-white/10 backdrop-blur-xl"
+            : "bg-white/92 backdrop-blur-xl border border-amber-100/80 shadow-xl"
+        }`}>
+          <div className="px-5 py-5 pl-6 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/25 flex-shrink-0">
+              <Sparkles className="w-[18px] h-[18px] text-white" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className={`font-display text-[15px] font-bold leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
+                {t("settings.animationSection")}
+              </h2>
+              <p className={`font-body text-[11px] ${isDark ? "text-white/55" : "text-gray-600"}`}>
+                {t(animationsOn ? "settings.animationOn" : "settings.animationOff")}
+              </p>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={animationsOn}
+              aria-label={t("settings.animationSection")}
+              onClick={() => { playPopSound(); toggleAnimations(); }}
+              className={`relative rounded-full transition-all duration-300 flex-shrink-0 ${
+                animationsOn
+                  ? "bg-gradient-to-r from-amber-500 to-orange-500 shadow-[0_0_14px_rgba(245,158,11,0.35)]"
+                  : isDark ? "bg-white/15" : "bg-gray-300"
+              }`}
+              style={{ width: "52px", height: "28px" }}
+            >
+              <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-white shadow-md transition-transform duration-300 ${animationsOn ? "translate-x-6" : "translate-x-0"}`} />
+            </button>
           </div>
         </div>
 

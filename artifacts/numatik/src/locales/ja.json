@@ -3,6 +3,7 @@
   "appName": "NUMATIK",
   "subtitle": "情報通信技術を活用した\nアクティブ数的思考",
   "schoolYear": "2026 – 2027 年度",
+  "desktopAvailableText": "デスクトップ版は www.numatik.app でもご利用いただけます",
   "start": "🚀 スタート",
   "marquee": "✨ 中学校数学インタラクティブ学習アプリ ✨",
   "selectTheme": "テーマを選ぶ",
@@ -6311,6 +6312,9 @@
     "soundSection": "効果音",
     "soundOn": "🔊 ボタン音有効",
     "soundOff": "🔇 音オフ",
+    "animationSection": "アニメーション",
+    "animationOn": "背景と画面遷移のアニメーションが有効です",
+    "animationOff": "アニメーションはオフです",
     "languageSection": "言語",
     "languageDesc": "アプリの表示言語",
     "volumeMusic": "🎚️ 音楽ボリューム",
@@ -6503,7 +6507,8 @@
     "sunset": "晴れた空",
     "ocean": "青い海",
     "light": "雪の白",
-    "forest": "緑の森"
+    "forest": "緑の森",
+    "pastel": "パステル"
   },
   "languageContinueText": "メインメニューへ"
 }

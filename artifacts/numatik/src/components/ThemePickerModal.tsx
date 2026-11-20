@@ -52,6 +52,11 @@ const THEMES: ThemeDef[] = [
     swatch: "linear-gradient(135deg,#bbf7d0,#dcfce7,#f0fdf4)",
     ring: "ring-green-500 shadow-[0_0_14px_rgba(34,197,94,0.45)]", dot: "bg-green-500",
   },
+  {
+    id: "pastel", emoji: "🎨", name: "Pastel",
+    swatch: "linear-gradient(135deg,#f3e8ff,#fce7f3,#fff7ed)",
+    ring: "ring-violet-500 shadow-[0_0_14px_rgba(109,40,217,0.35)]", dot: "bg-violet-600",
+  },
 ];
 
 /* ── Per-theme visual tokens for the full-screen preview ─────── */
@@ -62,26 +67,28 @@ const PREVIEW_BG: Record<Theme, string> = {
   light:  "linear-gradient(160deg,#bfdbfe 0%,#dbeafe 35%,#e0f2fe 65%,#f0f9ff 100%)",
   forest: "linear-gradient(160deg,#bbf7d0 0%,#d1fae5 35%,#dcfce7 70%,#f0fdf4 100%)",
   sunset: "linear-gradient(160deg,#38bdf8 0%,#7dd3fc 25%,#bae6fd 55%,#e0f2fe 85%,#f0f9ff 100%)",
+  pastel: "linear-gradient(160deg,#faf5ff 0%,#fff7ed 48%,#fdf2f8 100%)",
 };
 
 type CardTokens = { bg: string; border: string; text: string; sub: string; icon: string };
 const CARD: Record<Theme, CardTokens> = {
   dark:   { bg:"rgba(255,255,255,0.07)", border:"rgba(255,255,255,0.13)", text:"#e2e8f0", sub:"rgba(147,197,253,0.65)", icon:"#38bdf8" },
-  white:  { bg:"linear-gradient(135deg,#2196f3,#00bcd4)", border:"transparent", text:"#ffffff", sub:"rgba(255,255,255,0.8)", icon:"#ffffff" },
+  white:  { bg:"rgba(255,255,255,0.82)", border:"rgba(67,56,202,0.2)", text:"#111827", sub:"#374151", icon:"#4338ca" },
   ocean:  { bg:"rgba(255,255,255,0.08)", border:"rgba(6,182,212,0.28)", text:"#cffafe", sub:"rgba(103,232,249,0.65)", icon:"#22d3ee" },
   light:  { bg:"rgba(255,255,255,0.78)", border:"rgba(59,130,246,0.22)", text:"#1e3a8a", sub:"#3b82f6", icon:"#2563eb" },
   forest: { bg:"rgba(255,255,255,0.68)", border:"rgba(34,197,94,0.28)", text:"#14532d", sub:"#16a34a", icon:"#15803d" },
   sunset: { bg:"rgba(255,255,255,0.78)", border:"rgba(14,165,233,0.28)", text:"#0c4a6e", sub:"#0369a1", icon:"#0284c7" },
+  pastel: { bg:"rgba(255,255,255,0.84)", border:"rgba(109,40,217,0.22)", text:"#1f2937", sub:"#374151", icon:"#6d28d9" },
 };
 
 const TITLE_COLOR: Record<Theme, string> = {
   dark:"#fbbf24", white:"#2196f3", ocean:"#67e8f9",
-  light:"#1d4ed8", forest:"#166534", sunset:"#0369a1",
+  light:"#1d4ed8", forest:"#166534", sunset:"#0369a1", pastel:"#5b21b6",
 };
 
 const SUBTITLE_COLOR: Record<Theme, string> = {
   dark:"rgba(147,197,253,0.7)", white:"rgba(33,150,243,0.7)", ocean:"rgba(103,232,249,0.65)",
-  light:"rgba(59,130,246,0.8)", forest:"rgba(22,163,74,0.8)", sunset:"rgba(3,105,161,0.7)",
+  light:"rgba(59,130,246,0.8)", forest:"rgba(22,163,74,0.8)", sunset:"rgba(3,105,161,0.7)", pastel:"#4b5563",
 };
 
 /* ── Menu items to show in preview ──────────────────────────── */
@@ -307,7 +314,7 @@ const ThemePickerModal = ({ open, onClose, onContinue }: Props) => {
               </div>
 
               {/* Theme selector strip */}
-              <div className="grid grid-cols-6 gap-2 mb-3">
+              <div className="grid grid-cols-7 gap-2 mb-3">
                 {THEMES.map((thm) => {
                   const isActive = selected === thm.id;
                   return (

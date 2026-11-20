@@ -49,6 +49,8 @@ const TKASoalAsli2025Page = () => {
   // ─── Outer background based on theme ─────────────────────────────
   const outerBg = isDark
     ? "gradient-space"
+    : theme === "pastel"
+    ? "bg-gradient-to-br from-purple-50 via-white to-pink-50"
     : theme === "white"
     ? "bg-white"
     : theme === "forest"
