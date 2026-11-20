@@ -140,28 +140,28 @@ function Point({ cx, cy, colors }: { cx: number; cy: number; colors: DiagramColo
 
 function Q1b({ colors }: { colors: DiagramColors }) {
   return (
-    <SvgFrame viewBox="0 0 500 600" label="Gambar ulang soal 1 bagian b: sudut y dan 127 derajat" colors={colors}>
-      <Line x1={48} y1={72} x2={450} y2={555} colors={colors} />
-      <Line x1={252} y1={430} x2={320} y2={100} colors={colors} />
-      <Point cx={252} cy={430} colors={colors} />
+    <SvgFrame viewBox="0 0 500 430" label="Gambar ulang soal 1 bagian b: sudut y dan 127 derajat pada satu garis lurus" colors={colors}>
+      <Line x1={80} y1={30} x2={380} y2={414} colors={colors} />
+      <Line x1={275} y1={280} x2={350} y2={0} colors={colors} />
+      <Point cx={275} cy={280} colors={colors} />
       <path
-        d="M205 330 A120 120 0 0 1 280 292"
+        d="M248 245 A44 44 0 0 1 286 237"
         fill="none"
         stroke={colors.arc}
         strokeWidth="3"
         strokeLinecap="round"
       />
       <path
-        d="M275 322 C370 340 410 425 287 514"
+        d="M292 216 A66 66 0 0 1 316 332"
         fill="none"
         stroke={colors.arc}
         strokeWidth="3"
         strokeLinecap="round"
       />
-      <Text x={260} y={320} colors={colors} size={26} italic>
+      <Text x={263} y={226} colors={colors} size={26} italic>
         y
       </Text>
-      <Text x={320} y={350} colors={colors} size={23}>
+      <Text x={333} y={276} colors={colors} size={23}>
         127°
       </Text>
     </SvgFrame>
@@ -266,27 +266,18 @@ function Q1e({ colors }: { colors: DiagramColors }) {
 
 function Q1f({ colors }: { colors: DiagramColors }) {
   return (
-    <SvgFrame viewBox="0 0 600 430" label="Gambar ulang soal 1 bagian f: sudut c dan 80 derajat" colors={colors}>
-      <Line x1={22} y1={35} x2={575} y2={405} colors={colors} />
-      <Line x1={300} y1={220} x2={570} y2={0} colors={colors} />
-      <Point cx={300} cy={220} colors={colors} />
-      <RightAngle d="M274 200 L300 174 L323 197" colors={colors} />
-      <path
-        d="M221 159 A100 100 0 0 0 384 297"
-        fill="none"
-        stroke={colors.arc}
-        strokeWidth="3"
-      />
-      <path
-        d="M364 156 A90 90 0 0 1 371 276"
-        fill="none"
-        stroke={colors.arc}
-        strokeWidth="3"
-      />
-      <Text x={160} y={300} colors={colors} size={27} italic>
+    <SvgFrame viewBox="0 0 500 400" label="Gambar ulang soal 1 bagian f: sudut c dan 80 derajat pada tiga sinar" colors={colors}>
+      <Line x1={10} y1={15} x2={235} y2={220} colors={colors} />
+      <Line x1={235} y1={220} x2={500} y2={390} colors={colors} />
+      <Line x1={235} y1={220} x2={455} y2={0} colors={colors} />
+      <Point cx={235} cy={220} colors={colors} />
+      <RightAngle d="M217 204 L234 187 L252 203" colors={colors} />
+      <path d="M161 153 A100 100 0 0 0 319 274" fill="none" stroke={colors.arc} strokeWidth="3" />
+      <path d="M292 163 A80 80 0 0 1 302 267" fill="none" stroke={colors.arc} strokeWidth="3" />
+      <Text x={130} y={315} colors={colors} size={27} italic>
         c
       </Text>
-      <Text x={395} y={235} colors={colors} size={23}>
+      <Text x={328} y={220} colors={colors} size={23}>
         80°
       </Text>
     </SvgFrame>
@@ -495,7 +486,7 @@ function Q11({ colors }: { colors: DiagramColors }) {
   return (
     <SvgFrame viewBox="0 0 600 280" label="Gambar ulang soal 11: empat sudut p, q, r, dan s" colors={colors}>
       <Line x1={30} y1={45} x2={570} y2={235} colors={colors} />
-      <Line x1={55} y1={235} x2={575} y2={55} colors={colors} />
+      <Line x1={30} y1={230} x2={570} y2={50} colors={colors} />
       <Point cx={300} cy={140} colors={colors} />
       <Text x={300} y={110} colors={colors} size={24} italic>
         p

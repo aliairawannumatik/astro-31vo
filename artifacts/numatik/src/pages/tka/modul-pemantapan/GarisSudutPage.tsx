@@ -445,7 +445,7 @@ const Soal18SVG = () => (
     {/* O label — slightly right and below intersection */}
     <text x="204" y="155" fill="#38bdf8" fontSize="14" fontStyle="italic" fontFamily="serif" fontWeight="bold">O</text>
     <text x="28"  y="198" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">A</text>
-    <text x="328" y="96"  fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
+    <text x="4" y="136" fill="#38bdf8" fontSize="15" fontStyle="italic" fontFamily="serif" fontWeight="bold">B</text>
 
     {/* 7x in quadrant I (upper-right): moved down closer to the angle */}
     <text x="210" y="122" fill="#fbbf24" fontSize="13" fontFamily="serif">7<tspan fontStyle="italic">x</tspan>°</text>
@@ -617,7 +617,7 @@ const Soal20SVG = () => {
 // Q=(200,180); P=(200,20) up; R=right; S=298,119 at 32° above horizontal
 // Right-angle marker on LEFT side; arcs at different radii so they look separate
 const Soal21SVG = () => (
-  <svg viewBox="0 0 400 290" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 400 220" className="w-full max-w-md mx-auto" style={{ background: "transparent" }} xmlns="http://www.w3.org/2000/svg">
     {/* Horizontal line: full width */}
     <line x1="20" y1="180" x2="375" y2="180" stroke="var(--icon-stroke)" strokeWidth="2" />
     {/* Vertical PQ */}
@@ -897,7 +897,7 @@ const latihanDasar: LatihanSoal[] = [
   },
   {
     no: 5, type: "pg",
-    soal: "Perhatikan gambar\n\nDiketahui besar $\\angle CBD = (2x + 5)°$ dan $\\angle ABD = (3x - 25)°$. Besar pelurus sudut CBD adalah ...",
+    soal: "Perhatikan gambar\n[DIAGRAM]\nDiketahui besar $\\angle CBD = (2x + 5)°$ dan $\\angle ABD = (3x - 25)°$. Besar pelurus sudut CBD adalah ...",
     gambar: <Soal5SVG />,
     options: ["A. $82°$", "B. $85°$", "C. $95°$", "D. $104°$"],
     jawaban: "C",
@@ -996,9 +996,9 @@ const latihanDasar: LatihanSoal[] = [
     no: 15, type: "pg",
     soal: "Perhatikan gambar.\n\nBesar sudut AOB adalah ...",
     gambar: <Soal18SVG />,
-    options: ["A. $70°$", "B. $120°$", "C. $140°$", "D. $180°$"],
-    jawaban: "D",
-    pembahasan: "Label B berada pada perpanjangan garis yang melalui A dan O. Karena titik A, O, dan B segaris, $\\angle AOB$ adalah sudut lurus.\n\n1. Sudut lurus besarnya $180°$.\n2. Maka $\\angle AOB=180°$.\n\nJawaban: D",
+    options: ["A. $20°$", "B. $70°$", "C. $120°$", "D. $140°$"],
+    jawaban: "A",
+    pembahasan: "Pada gambar, sudut siku-siku di O besarnya $90°$. Sudut $7x°$ bertolak belakang dengan bagian sudut di bawah garis vertikal, sehingga $7x°$ dan $2x°$ bersama-sama membentuk sudut siku-siku.\n\n1. $7x+2x=90$\n2. $9x=90$, sehingga $x=10°$.\n3. $\\angle AOB$ adalah sudut yang ditandai $2x°$, maka $\\angle AOB=2(10°)=20°$.\n\nJawaban: A",
   },
   {
     no: 16, type: "pgkbs",
@@ -1046,7 +1046,7 @@ const latihanDasar: LatihanSoal[] = [
   },
   {
     no: 21, type: "pg",
-    soal: "Perhatikan gambar di bawah ini.\n\nDiketahui sudut SPT $= 83°$ dan sudut PQT $= 41°$. Garis PQ dan RS sejajar, demikian juga garis PS dan QT sejajar. Maka besar x = …",
+    soal: "Perhatikan gambar di bawah ini!\n[DIAGRAM]\nDiketahui sudut SPT $= 83°$ dan sudut PQT $= 41°$. Garis PQ dan RS sejajar, demikian juga garis PS dan QT sejajar. Maka besar x = …",
     gambar: <Soal24SVG />,
     options: ["A. $41°$", "B. $82°$", "C. $124°$", "D. $139°$"],
     jawaban: "C",
@@ -1078,7 +1078,7 @@ const latihanDasar: LatihanSoal[] = [
   },
   {
     no: 25, type: "pg",
-    soal: "Perhatikan gambar di bawah ini!\n\nNilai x adalah ...",
+    soal: "Perhatikan gambar di bawah ini!\n[DIAGRAM]\nNilai x adalah ...",
     gambar: <Soal28SVG />,
     options: ["A. $150°$", "B. $140°$", "C. $110°$", "D. $100°$"],
     jawaban: "B",
