@@ -447,7 +447,7 @@
   min-height: 0;
   flex: 1 1 0;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 6px;
 }
 
@@ -508,7 +508,7 @@
   display: flex;
   min-height: 0;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 4px;
 }
 
@@ -783,25 +783,20 @@
   }
 }
 
-@media (max-height: 599px) and (max-width: 768px) {
-  .menu-page.menu-app-root {
-    height: auto;
-    min-height: 100dvh;
+@media (max-height: 599px) {
+  .menu-mobile-main {
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
-  .menu-mobile-layout {
-    height: auto;
-    min-height: 100dvh;
-  }
-
-  .menu-mobile-main,
-  .menu-mobile-content {
+  .menu-mobile-content,
+  .menu-mobile-home {
+    flex: 0 0 auto;
     overflow: visible;
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 769px) and (min-height: 600px) {
   .menu-route-layout {
     display: flex;
     width: 100%;
