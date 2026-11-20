@@ -37,9 +37,35 @@
   "menu": {
     "title": "MENU UTAMA",
     "subtitle": "Pilih menu yang ingin kamu jelajahi",
+    "searchAriaLabel": "Cari di aplikasi",
+    "searchPlaceholder": "Cari menu, materi, latihan, atau fitur...",
+    "clearSearch": "Hapus pencarian",
+    "deepSearchLoading": "Mencari ke seluruh aplikasi...",
+    "deepSearchTitle": "Hasil dari seluruh aplikasi",
+    "open": "Buka",
+    "noSearchResults": "Tidak ada hasil pencarian",
+    "tryDifferentQuery": "Coba gunakan kata kunci yang berbeda.",
+    "lastOpened": "Terakhir dibuka",
+    "homeTab": "Beranda",
+    "learnTab": "Belajar",
+    "practiceTab": "Latihan",
+    "toolsTab": "Alat",
+    "moreTab": "Lainnya",
+    "languageButton": "Pilih bahasa",
+    "soundOn": "Matikan suara",
+    "soundOff": "Nyalakan suara",
+    "themeButton": "Pilih tema",
+    "donateBanner": "Dukung NUMATIK agar terus berkembang",
+    "sections": {
+      "featured": "Fitur andalan",
+      "learn": "Belajar",
+      "practice": "Latihan dan tes",
+      "tools": "Alat bantu",
+      "more": "Lainnya"
+    },
     "teacherRoom": "RUANG GURU",
     "animatedBook": "BUKU ANIMASI",
-    "gameArena": "GAME ARENA",
+    "gameArena": "NUMATIK GAMEZ",
     "ai": "NUMATIK AI",
     "lkpd": "LKPD",
     "olympiad": "OLIMPIADE",
@@ -56,7 +82,9 @@
     "about": "TENTANG",
     "biography": "BIOGRAFI",
     "donate": "DONASI",
-    "guide": "PETUNJUK"
+    "guide": "PETUNJUK",
+    "settings": "Pengaturan",
+    "reference": "Referensi"
   },
   "menuItems": {
     "guide": {

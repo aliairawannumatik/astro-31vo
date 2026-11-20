@@ -37,9 +37,35 @@
   "menu": {
     "title": "メインメニュー",
     "subtitle": "探索したいメニューを選んでください",
+    "searchAriaLabel": "アプリを検索",
+    "searchPlaceholder": "メニュー・教材・練習・機能を検索...",
+    "clearSearch": "検索をクリア",
+    "deepSearchLoading": "アプリ全体を検索中...",
+    "deepSearchTitle": "アプリ全体の検索結果",
+    "open": "開く",
+    "noSearchResults": "検索結果がありません",
+    "tryDifferentQuery": "別のキーワードをお試しください。",
+    "lastOpened": "最近開いた項目",
+    "homeTab": "ホーム",
+    "learnTab": "学習",
+    "practiceTab": "練習",
+    "toolsTab": "ツール",
+    "moreTab": "その他",
+    "languageButton": "言語を選択",
+    "soundOn": "サウンドをオフ",
+    "soundOff": "サウンドをオン",
+    "themeButton": "テーマを選択",
+    "donateBanner": "NUMATIKの成長を応援",
+    "sections": {
+      "featured": "おすすめ機能",
+      "learn": "学習",
+      "practice": "練習とテスト",
+      "tools": "ツール",
+      "more": "その他"
+    },
     "teacherRoom": "教師の部屋",
     "animatedBook": "アニメ教科書",
-    "gameArena": "ゲームアリーナ",
+    "gameArena": "NUMATIK GAMEZ",
     "ai": "NUMATIK AI",
     "lkpd": "ワークシート",
     "olympiad": "数学オリンピック",
@@ -56,7 +82,9 @@
     "about": "このアプリについて",
     "biography": "プロフィール",
     "donate": "寄付",
-    "guide": "ガイド"
+    "guide": "ガイド",
+    "settings": "設定",
+    "reference": "参考資料"
   },
   "menuItems": {
     "guide": {

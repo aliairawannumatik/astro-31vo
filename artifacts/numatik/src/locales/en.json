@@ -37,9 +37,35 @@
   "menu": {
     "title": "MAIN MENU",
     "subtitle": "Choose a menu to explore",
+    "searchAriaLabel": "Search the app",
+    "searchPlaceholder": "Search menus, lessons, practice, or features...",
+    "clearSearch": "Clear search",
+    "deepSearchLoading": "Searching the whole app...",
+    "deepSearchTitle": "Results from across the app",
+    "open": "Open",
+    "noSearchResults": "No search results",
+    "tryDifferentQuery": "Try a different search term.",
+    "lastOpened": "Recently opened",
+    "homeTab": "Home",
+    "learnTab": "Learn",
+    "practiceTab": "Practice",
+    "toolsTab": "Tools",
+    "moreTab": "More",
+    "languageButton": "Choose language",
+    "soundOn": "Turn sound off",
+    "soundOff": "Turn sound on",
+    "themeButton": "Choose theme",
+    "donateBanner": "Support NUMATIK as it grows",
+    "sections": {
+      "featured": "Featured",
+      "learn": "Learn",
+      "practice": "Practice and tests",
+      "tools": "Tools",
+      "more": "More"
+    },
     "teacherRoom": "TEACHER ROOM",
     "animatedBook": "ANIMATED BOOK",
-    "gameArena": "GAME ARENA",
+    "gameArena": "NUMATIK GAMEZ",
     "ai": "NUMATIK AI",
     "lkpd": "WORKSHEET",
     "olympiad": "OLYMPIAD",
@@ -56,7 +82,9 @@
     "about": "ABOUT",
     "biography": "BIOGRAPHY",
     "donate": "DONATE",
-    "guide": "GUIDE"
+    "guide": "GUIDE",
+    "settings": "Settings",
+    "reference": "References"
   },
   "menuItems": {
     "guide": {
