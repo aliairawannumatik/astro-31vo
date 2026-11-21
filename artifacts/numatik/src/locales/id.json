@@ -42,6 +42,9 @@
     "searchPlaceholder": "Cari menu, materi, latihan, atau fitur...",
     "clearSearch": "Hapus pencarian",
     "dismissAnnouncement": "Tutup pengumuman",
+    "guideTooltip": "Petunjuk",
+    "newUserGuideAnnouncement": "Baru di Numatik? Lihat Petunjuk Penggunaan",
+    "viewGuide": "Lihat",
     "deepSearchLoading": "Mencari ke seluruh aplikasi...",
     "deepSearchTitle": "Hasil dari seluruh aplikasi",
     "open": "Buka",
@@ -52,6 +55,7 @@
     "homeTab": "Beranda",
     "learnTab": "Belajar",
     "practiceTab": "Latihan",
+    "gamesTab": "Permainan",
     "toolsTab": "Alat",
     "moreTab": "Lainnya",
     "languageButton": "Pilih bahasa",
@@ -91,7 +95,9 @@
     "questionBank": "BANK SOAL",
     "practice": "LATIHAN",
     "about": "TENTANG",
+    "kritikSaran": "KRITIK & SARAN",
     "biography": "BIOGRAFI",
+    "gratitude": "UCAPAN TERIMA KASIH",
     "donate": "DONASI",
     "guide": "PETUNJUK",
     "settings": "Pengaturan",
@@ -182,6 +188,10 @@
       "label": "BIOGRAFI",
       "desc": "Data pembuat aplikasi"
     },
+    "gratitude": {
+      "label": "UCAPAN TERIMA KASIH",
+      "desc": "Apresiasi untuk para guru dan inspirator NUMATIK"
+    },
     "reference": {
       "label": "SUMBER REFERENSI",
       "desc": "Daftar pustaka"
@@ -189,6 +199,10 @@
     "about": {
       "label": "TENTANG APLIKASI",
       "desc": "Informasi tentang aplikasi"
+    },
+    "kritikSaran": {
+      "label": "KRITIK & SARAN",
+      "desc": "Sampaikan masukan untuk NUMATIK"
     }
   },
   "materiMatematika": {
@@ -6441,15 +6455,34 @@
     "subtitle": "Numerasi Aktif dengan Teknologi Informasi dan Komunikasi",
     "desc1": "<boldPrimary>NUMATIK</boldPrimary> merupakan singkatan dari <boldAccent>Nu</boldAccent>merasi <boldAccent>A</boldAccent>ktif dengan <boldAccent>T</boldAccent>eknologi <boldAccent>I</boldAccent>nformasi dan <boldAccent>K</boldAccent>omunikasi — sebuah aplikasi edukasi matematika yang dirancang khusus untuk menjembatani tantangan belajar di era digital. Lahir dari semangat untuk menghadirkan pembelajaran yang tidak hanya informatif, tetapi juga <boldAccent>bermakna dan menyenangkan</boldAccent>.",
     "desc2": "Diluncurkan pertama kali pada tahun <boldPrimary>2026</boldPrimary>, Numatik dikembangkan sepenuhnya selaras dengan <boldAccent>Kurikulum Merdeka</boldAccent>. Aplikasi ini mengintegrasikan pendekatan <boldSecondary>Deep Learning</boldSecondary> untuk memastikan siswa tidak sekadar menghafal rumus, melainkan memahami konsep secara mendalam, kritis, dan kontekstual.",
-    "desc3": "Numatik dipersiapkan untuk menjadi sahabat belajar bagi seluruh siswa SMP di seluruh dunia.",
+    "desc3": "Numatik dipersiapkan untuk menjadi sahabat belajar bagi siswa SD, SMP, dan SMA di seluruh dunia.",
     "versionLabel": "Versi Aplikasi",
     "versionUpdateNote": "Pembaruan konten, fitur, dan tampilan antarmuka",
     "versionBadge": "TERBARU",
     "desktopLabel": "Versi Desktop",
     "desktopTitle": "Juga Tersedia di Browser! 🌐",
     "desktopDesc": "Buka <link>www.numatik.app</link> di laptop atau PC untuk tampilan yang lebih luas dan pengalaman belajar yang lebih maksimal.",
-    "copyright": "Edisi Keduabelas · © 2026 NUMATIK. All rights reserved.",
+    "copyright": "Edisi Ketigabelas · © 2026 NUMATIK. All rights reserved.",
     "backToMenu": "← Kembali ke Menu"
+  },
+  "kritikSaran": {
+    "eyebrow": "SUARA PENGGUNA",
+    "pageTitle": "Kritik & Saran",
+    "intro": "Masukanmu membantu NUMATIK tumbuh menjadi ruang belajar matematika yang semakin seru, ramah, dan bermanfaat.",
+    "formEyebrow": "KOTAK MASUKAN",
+    "formTitle": "Ceritakan idemu",
+    "formDescription": "Sampaikan pengalaman, kendala, atau ide yang ingin kamu lihat di NUMATIK.",
+    "messageLabel": "Pesan atau saran",
+    "placeholder": "Tulis kritik, saran, atau ide kamu di sini...",
+    "emailNote": "Pesan akan dibuka di aplikasi email.",
+    "sendEmail": "Kirim via Email",
+    "recipientNote": "Email tujuan:",
+    "ideasTitle": "Masukan yang bisa kamu bagikan",
+    "ideasIntro": "Setiap catatan kecil membantu kami menyempurnakan pengalaman belajar.",
+    "ideaExperience": "Pengalaman belajar yang ingin dibuat lebih baik",
+    "ideaIssue": "Kendala atau bagian yang membingungkan",
+    "ideaFeature": "Ide fitur, materi, dan aktivitas baru",
+    "thankYou": "Terima kasih sudah ikut membuat NUMATIK lebih baik."
   },
   "biografi": {
     "pageTitle": "BIOGRAFI PEMBUAT",
@@ -6460,11 +6493,6 @@
     "labelPesan": "PESAN DARI PEMBUAT",
     "pesanSubtitle": "🌍 Untuk Seluruh Siswa di Pelosok Dunia",
     "pesanIsi": "\"Halo Siswa-siswi hebat di seluruh dunia, Aplikasi ini Bapak rancang khusus agar matematika terasa lebih dekat dan bersahabat dengan kalian. Ingat, tidak ada orang yang 'bodoh' dalam matematika, yang ada hanyalah orang yang belum cukup berlatih. Selamat menjelajah, jangan takut salah, karena dari salahlah kita belajar!\"",
-    "labelKritikSaran": "KRITIK & SARAN",
-    "kritikPlaceholder": "Tulis kritik atau saranmu di sini...",
-    "kirimEmail": "📨 Kirim via Email",
-    "kirimKe": "Akan dikirim ke: numatik.app@gmail.com",
-    "ucapanTerimakasih": "Ucapan Terima Kasih",
     "kembali": "← Kembali ke Menu",
     "kelompokA2": {
       "badge": "Inspirasi Pertama · Guru Penggerak Angkatan 10",
@@ -6492,6 +6520,11 @@
       "tag4": "🌟 Dedikasi",
       "footer": "TERIMA KASIH SEBESAR-BESARNYA, PAK WANDRI"
     }
+  },
+  "acknowledgements": {
+    "eyebrow": "HALAMAN APRESIASI",
+    "title": "Ucapan Terima Kasih",
+    "subtitle": "Dengan hati yang penuh syukur, kami mengapresiasi setiap orang yang telah memberi inspirasi dan dukungan bagi NUMATIK."
   },
   "donasi": {
     "pageTitle": "DONASI",

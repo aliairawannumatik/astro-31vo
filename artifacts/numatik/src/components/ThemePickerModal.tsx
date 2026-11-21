@@ -33,9 +33,9 @@ const THEMES: ThemeDef[] = [
     ring: "ring-sky-400 shadow-[0_0_14px_rgba(14,165,233,0.5)]", dot: "bg-sky-400",
   },
   {
-    id: "white",  emoji: "🤍", name: "Putih Bersih",
-    swatch: "linear-gradient(135deg,#ffffff,#f8fafc,#f1f5f9)",
-    ring: "ring-slate-400 shadow-[0_0_14px_rgba(148,163,184,0.5)]", dot: "bg-slate-400",
+    id: "pastel", emoji: "🎨", name: "Pastel",
+    swatch: "linear-gradient(135deg,#fff1ad,#d5c9ff,#ffbdd9,#bfeeff)",
+    ring: "ring-violet-500 shadow-[0_0_14px_rgba(103,88,212,0.4)]", dot: "bg-violet-500",
   },
   {
     id: "ocean",  emoji: "🌊", name: "Lautan Biru",
@@ -53,9 +53,9 @@ const THEMES: ThemeDef[] = [
     ring: "ring-green-500 shadow-[0_0_14px_rgba(34,197,94,0.45)]", dot: "bg-green-500",
   },
   {
-    id: "pastel", emoji: "🎨", name: "Pastel",
-    swatch: "linear-gradient(135deg,#fff8ed,#dcebdd,#f5ded7)",
-    ring: "ring-emerald-700 shadow-[0_0_14px_rgba(85,117,99,0.35)]", dot: "bg-emerald-700",
+    id: "white",  emoji: "🤍", name: "Putih Bersih",
+    swatch: "linear-gradient(135deg,#ffffff,#f8fafc,#f1f5f9)",
+    ring: "ring-slate-400 shadow-[0_0_14px_rgba(148,163,184,0.5)]", dot: "bg-slate-400",
   },
 ];
 
@@ -67,7 +67,7 @@ const PREVIEW_BG: Record<Theme, string> = {
   light:  "linear-gradient(160deg,#bfdbfe 0%,#dbeafe 35%,#e0f2fe 65%,#f0f9ff 100%)",
   forest: "linear-gradient(160deg,#bbf7d0 0%,#d1fae5 35%,#dcfce7 70%,#f0fdf4 100%)",
   sunset: "linear-gradient(160deg,#38bdf8 0%,#7dd3fc 25%,#bae6fd 55%,#e0f2fe 85%,#f0f9ff 100%)",
-  pastel: "linear-gradient(160deg,#fff8ed 0%,#f7eee1 48%,#f5e8e2 100%)",
+  pastel: "linear-gradient(160deg,#fff4bd 0%,#f7eaff 42%,#eaf8ff 78%,#eafbea 100%)",
 };
 
 type CardTokens = { bg: string; border: string; text: string; sub: string; icon: string };
@@ -78,17 +78,17 @@ const CARD: Record<Theme, CardTokens> = {
   light:  { bg:"rgba(255,255,255,0.78)", border:"rgba(59,130,246,0.22)", text:"#1e3a8a", sub:"#3b82f6", icon:"#2563eb" },
   forest: { bg:"rgba(255,255,255,0.68)", border:"rgba(34,197,94,0.28)", text:"#14532d", sub:"#16a34a", icon:"#15803d" },
   sunset: { bg:"rgba(255,255,255,0.78)", border:"rgba(14,165,233,0.28)", text:"#0c4a6e", sub:"#0369a1", icon:"#0284c7" },
-  pastel: { bg:"rgba(255,253,247,0.88)", border:"rgba(135,106,82,0.24)", text:"#34423a", sub:"#5d6860", icon:"#557563" },
+  pastel: { bg:"rgba(255,255,255,0.9)", border:"rgba(116,102,210,0.24)", text:"#30334f", sub:"#535d75", icon:"#6758d4" },
 };
 
 const TITLE_COLOR: Record<Theme, string> = {
   dark:"#facc15", white:"#2196f3", ocean:"#67e8f9",
-  light:"#1d4ed8", forest:"#166534", sunset:"#0369a1", pastel:"#4f6b5b",
+  light:"#1d4ed8", forest:"#166534", sunset:"#0369a1", pastel:"#5144b8",
 };
 
 const SUBTITLE_COLOR: Record<Theme, string> = {
   dark:"rgba(147,197,253,0.7)", white:"rgba(33,150,243,0.7)", ocean:"rgba(103,232,249,0.65)",
-  light:"rgba(59,130,246,0.8)", forest:"rgba(22,163,74,0.8)", sunset:"rgba(3,105,161,0.7)", pastel:"#5d6860",
+  light:"rgba(59,130,246,0.8)", forest:"rgba(22,163,74,0.8)", sunset:"rgba(3,105,161,0.7)", pastel:"#535d75",
 };
 
 /* ── Menu items to show in preview ──────────────────────────── */

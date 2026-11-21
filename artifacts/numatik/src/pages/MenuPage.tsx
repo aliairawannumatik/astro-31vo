@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import {
   ArrowUpRight,
   BookOpen,
+  CircleHelp,
   ClipboardList,
   Ellipsis,
   Home,
@@ -20,6 +21,7 @@ import MenuSidebar from "@/components/MenuSidebar";
 import { MENU_ITEMS, MENU_SECTIONS, type MenuGroup, type MenuItemConfig } from "@/data/menuConfig";
 import { MENU_ANNOUNCEMENTS } from "@/data/menuAnnouncements";
 import { playPopSound } from "@/hooks/useAudio";
+import { hasSeenGuide, markGuideSeen } from "@/lib/guideVisit";
 
 type DeepSearchItem = { path: string; title: string; content: string };
 type MobileTab = "home" | "learn" | "practice" | "tools" | "more";
@@ -99,6 +101,7 @@ const MenuPage = () => {
   const [activeTab, setActiveTab] = useState<MobileTab>("home");
   const [recentPaths, setRecentPaths] = useState(readRecentPaths);
   const [dismissedAnnouncementIds, setDismissedAnnouncementIds] = useState(readDismissedAnnouncementIds);
+  const [guideSeen, setGuideSeen] = useState(hasSeenGuide);
   const [isPageVisible, setIsPageVisible] = useState(() => !document.hidden);
 
   useEffect(() => {
@@ -171,6 +174,17 @@ const MenuPage = () => {
 
   const handleOpenItem = (item: MenuItemConfig) => handleOpenPath(item.path);
 
+  const handleOpenGuide = () => {
+    markGuideSeen();
+    setGuideSeen(true);
+    handleOpenPath("/petunjuk");
+  };
+
+  const handleDismissGuideAnnouncement = () => {
+    markGuideSeen();
+    setGuideSeen(true);
+  };
+
   const handleDismissAnnouncement = (id: string) => {
     setDismissedAnnouncementIds((current) => current.includes(id) ? current : [...current, id]);
     try {
@@ -180,7 +194,32 @@ const MenuPage = () => {
     }
   };
 
+  const renderFirstVisitAnnouncement = () => (
+    <aside className="menu-announcement menu-first-visit" role="status">
+      <CircleHelp aria-hidden="true" className="h-4 w-4 shrink-0" />
+      <span className="menu-first-visit-text">{t("menu.newUserGuideAnnouncement")}</span>
+      <button
+        type="button"
+        onClick={handleOpenGuide}
+        className="menu-first-visit-action menu-focusable"
+      >
+        {t("menu.viewGuide")}
+      </button>
+      <button
+        type="button"
+        aria-label={t("menu.dismissAnnouncement")}
+        title={t("menu.dismissAnnouncement")}
+        onClick={handleDismissGuideAnnouncement}
+        className="menu-first-visit-dismiss menu-focusable"
+      >
+        <X aria-hidden="true" className="h-4 w-4" />
+      </button>
+    </aside>
+  );
+
   const renderDesktopAnnouncement = () => {
+    if (!guideSeen) return renderFirstVisitAnnouncement();
+
     const announcement = MENU_ANNOUNCEMENTS.find(({ id }) => !dismissedAnnouncementIds.includes(id));
     if (!announcement) return null;
 
@@ -245,13 +284,14 @@ const MenuPage = () => {
 
   const renderExpandedCard = (item: MenuItemConfig, desktop = false) => {
     const Icon = item.icon;
+    const feedbackCardClass = item.key === "kritikSaran" && !desktop ? " menu-feedback-card" : "";
     return (
       <button
         key={item.path}
         type="button"
         onClick={() => handleOpenItem(item)}
         aria-label={t(`menuItems.${item.key}.label`)}
-        className={`menu-card menu-focusable menu-expanded-card${desktop ? " menu-expanded-card-desktop" : ""}`}
+        className={`menu-card menu-focusable menu-expanded-card${desktop ? " menu-expanded-card-desktop" : ""}${feedbackCardClass}`}
       >
         <Icon aria-hidden="true" className="menu-card-icon h-7 w-7 shrink-0" />
         <span className="menu-expanded-copy">
@@ -292,7 +332,7 @@ const MenuPage = () => {
   const renderSection = (group: MenuGroup, mode: "compact" | "expanded", desktop = false) => {
     const section = MENU_SECTIONS.find((candidate) => candidate.group === group);
     if (!section) return null;
-    const items = MENU_ITEMS.filter((item) => item.group === group);
+    const items = MENU_ITEMS.filter((item) => item.group === group && !item.featured);
     return (
       <section
         key={group}
@@ -375,6 +415,18 @@ const MenuPage = () => {
       <h2 className="menu-category-title">{t(`menu.sections.${group}`)}</h2>
       {group === "more" ? (
         <>
+          <div className="menu-guide-more-entry">
+            <button
+              type="button"
+              aria-label={t("menu.guideTooltip")}
+              title={t("menu.guideTooltip")}
+              onClick={handleOpenGuide}
+              className="menu-guide-more-button menu-focusable"
+            >
+              <CircleHelp aria-hidden="true" className="h-4 w-4 shrink-0" />
+              <span>{t("menu.guideTooltip")}</span>
+            </button>
+          </div>
           <div className="menu-category-grid">
             {MENU_ITEMS.filter((item) => item.group === "more").map((item) => renderExpandedCard(item))}
           </div>
@@ -390,7 +442,7 @@ const MenuPage = () => {
       ) : (
         <>
           <div className="menu-category-grid">
-            {MENU_ITEMS.filter((item) => item.group === group).map((item) => renderExpandedCard(item))}
+            {MENU_ITEMS.filter((item) => item.group === group && !item.featured).map((item) => renderExpandedCard(item))}
           </div>
           {group === "tools" && renderInfoBanner()}
         </>
@@ -461,7 +513,7 @@ const MenuPage = () => {
             )}
           </div>
 
-          {renderRecentItems()}
+          {guideSeen ? renderRecentItems() : renderFirstVisitAnnouncement()}
 
           <div className={`menu-mobile-content${normalizedQuery ? " menu-mobile-search-content" : ""}`}>
             {normalizedQuery

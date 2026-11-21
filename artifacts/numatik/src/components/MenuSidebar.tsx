@@ -7,6 +7,7 @@ import {
   ChevronDown,
   ClipboardCheck,
   Ellipsis,
+  Gamepad2,
   Home,
   Wrench,
 } from "lucide-react";
@@ -25,6 +26,7 @@ type MenuSidebarProps = {
 const SIDEBAR_GROUPS = [
   { id: "learn", labelKey: "menu.learnTab", group: "learn", icon: BookOpen },
   { id: "practice", labelKey: "menu.practiceTab", group: "practice", icon: ClipboardCheck },
+  { id: "games", labelKey: "menu.gamesTab", group: "games", icon: Gamepad2 },
   { id: "tools", labelKey: "menu.toolsTab", group: "tools", icon: Wrench },
   { id: "more", labelKey: "menu.moreTab", group: "more", icon: Ellipsis },
 ] as const satisfies ReadonlyArray<{

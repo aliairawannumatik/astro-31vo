@@ -1,13 +1,14 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Check, Globe, Music2, Palette, Pause, Play, Settings, X } from "lucide-react";
+import { Check, CircleHelp, Globe, Music2, Palette, Pause, Play, Settings, X } from "lucide-react";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { useMusic } from "@/contexts/MusicContext";
 import { useTheme, type Theme } from "@/contexts/ThemeContext";
 import { TRACKS } from "@/hooks/bgMusicTracks";
 import { MP3_TRACKS } from "@/hooks/mp3Tracks";
 import { playPopSound } from "@/hooks/useAudio";
+import { markGuideSeen } from "@/lib/guideVisit";
 
 type Picker = "language" | "music" | "theme" | null;
 
@@ -17,7 +18,7 @@ const LANGUAGES: ReadonlyArray<{ id: Language; name: string }> = [
   { id: "ja", name: "日本語" },
 ];
 
-const THEMES: readonly Theme[] = ["dark", "sunset", "white", "ocean", "light", "forest", "pastel"];
+const THEMES: readonly Theme[] = ["dark", "sunset", "pastel", "ocean", "light", "forest", "white"];
 const MUSIC_TRACKS = [{ id: "none", name: "None", emoji: "🔇" }, ...MP3_TRACKS, ...TRACKS];
 
 const MenuHeaderControls = () => {
@@ -65,6 +66,7 @@ const MenuHeaderControls = () => {
         <button
           type="button"
           aria-label={t("menu.languageButton")}
+          title={t("menu.languageButton")}
           aria-expanded={openPicker === "language"}
           aria-controls={languagePickerId}
           onClick={() => togglePicker("language")}
@@ -103,6 +105,7 @@ const MenuHeaderControls = () => {
         <button
           type="button"
           aria-label={t("menu.musicButton")}
+          title={t("menu.musicButton")}
           aria-expanded={openPicker === "music"}
           aria-controls={musicPickerId}
           aria-pressed={musicOn}
@@ -171,6 +174,7 @@ const MenuHeaderControls = () => {
         <button
           type="button"
           aria-label={t("menu.themeButton")}
+          title={t("menu.themeButton")}
           aria-expanded={openPicker === "theme"}
           aria-controls={themePickerId}
           onClick={() => togglePicker("theme")}
@@ -204,6 +208,21 @@ const MenuHeaderControls = () => {
           </div>
         )}
       </div>
+
+      <button
+        type="button"
+        aria-label={t("menu.guideTooltip")}
+        title={t("menu.guideTooltip")}
+        onClick={() => {
+          playPopSound();
+          markGuideSeen();
+          setOpenPicker(null);
+          navigate("/petunjuk");
+        }}
+        className="menu-control-button menu-focusable menu-guide-header-button"
+      >
+        <CircleHelp aria-hidden="true" className="h-5 w-5" />
+      </button>
 
       <button
         type="button"

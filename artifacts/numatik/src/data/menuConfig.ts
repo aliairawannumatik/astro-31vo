@@ -13,16 +13,18 @@ import {
   Heart,
   Info,
   Medal,
+  MessageSquare,
   PlayCircle,
   Rocket,
   Settings,
   Sigma,
+  Sparkles,
   User,
   Zap,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-export type MenuGroup = "featured" | "learn" | "practice" | "tools" | "more";
+export type MenuGroup = "featured" | "learn" | "practice" | "games" | "tools" | "more";
 
 export type MenuKey =
   | "animatedBook"
@@ -45,8 +47,10 @@ export type MenuKey =
   | "settings"
   | "donate"
   | "biography"
+  | "gratitude"
   | "reference"
-  | "about";
+  | "about"
+  | "kritikSaran";
 
 export type MenuItemConfig = {
   key: MenuKey;
@@ -57,9 +61,9 @@ export type MenuItemConfig = {
 };
 
 export const MENU_ITEMS = [
-  { key: "animatedBook", icon: BookOpen, path: "/buku-animasi-matematika", group: "featured", featured: true },
-  { key: "academic", icon: Brain, path: "/tka", group: "featured", featured: true },
-  { key: "gameArena", icon: Gamepad2, path: "/numatik-gamez", group: "featured", featured: true },
+  { key: "animatedBook", icon: BookOpen, path: "/buku-animasi-matematika", group: "learn", featured: true },
+  { key: "academic", icon: Brain, path: "/tka", group: "learn", featured: true },
+  { key: "gameArena", icon: Gamepad2, path: "/numatik-gamez", group: "games", featured: true },
   { key: "teacherRoom", icon: GraduationCap, path: "/ruang-untuk-guru", group: "learn", featured: false },
   { key: "kokurikuler", icon: GraduationCap, path: "/ruang-untuk-guru/kokulikuler", group: "learn", featured: false },
   { key: "video", icon: PlayCircle, path: "/video-pembelajaran", group: "learn", featured: false },
@@ -77,8 +81,10 @@ export const MENU_ITEMS = [
   { key: "settings", icon: Settings, path: "/pengaturan", group: "more", featured: false },
   { key: "donate", icon: Heart, path: "/donasi", group: "more", featured: false },
   { key: "biography", icon: User, path: "/biografi", group: "more", featured: false },
+  { key: "gratitude", icon: Sparkles, path: "/ucapan-terima-kasih", group: "more", featured: false },
   { key: "reference", icon: BookMarked, path: "/referensi", group: "more", featured: false },
   { key: "about", icon: Rocket, path: "/tentang-aplikasi", group: "more", featured: false },
+  { key: "kritikSaran", icon: MessageSquare, path: "/kritik-saran", group: "more", featured: false },
 ] as const satisfies readonly MenuItemConfig[];
 
 export const MENU_SECTIONS = [

@@ -28,6 +28,7 @@ import KalkulatorScientificPage from "./pages/KalkulatorScientificPage";
 import KokulikulerPage from "./pages/ruang-untuk-guru/KokulikulerPage";
 import KonversiSatuanPage from "./pages/KonversiSatuanPage";
 import KumpulanRumusPage from "./pages/KumpulanRumusPage";
+import KritikSaranPage from "./pages/KritikSaranPage";
 import LKPDMenuPage from "./pages/LKPDMenuPage";
 import MenghitungCepatPage from "./pages/MenghitungCepatPage";
 import OlimpiadePage from "./pages/OlimpiadePage";
@@ -38,6 +39,7 @@ import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
 import TentangAplikasiPage from "./pages/TentangAplikasiPage";
 import TugasLatihanMandiriPage from "./pages/TugasLatihanMandiriPage";
 import UjiMandiriPage from "./pages/UjiMandiriPage";
+import UcapanTerimaKasihPage from "./pages/UcapanTerimaKasihPage";
 import VideoPembelajaranPage from "./pages/VideoPembelajaranPage";
 
 const LegacyMathBookRedirect = () => {
@@ -1056,6 +1058,7 @@ const AppInner = () => {
       .sort((left, right) => right.path.length - left.path.length)[0];
   const activeMenuTab: MenuSidebarTab = activeMenuItem?.group === "learn"
     || activeMenuItem?.group === "practice"
+    || activeMenuItem?.group === "games"
     || activeMenuItem?.group === "tools"
     || activeMenuItem?.group === "more"
     ? activeMenuItem.group
@@ -1532,6 +1535,8 @@ const AppInner = () => {
           <Route path="/video-pembelajaran" element={<VideoPembelajaranPage />} />
           <Route path="/donasi" element={<DonasiPage />} />
           <Route path="/biografi" element={<BiografiPage />} />
+          <Route path="/kritik-saran" element={<KritikSaranPage />} />
+          <Route path="/ucapan-terima-kasih" element={<UcapanTerimaKasihPage />} />
           <Route path="/olimpiade" element={<OlimpiadePage />} />
           <Route path="/olimpiade/bilangan-bulat" element={<OlimpiadeBilanganBulatPage />} />
           <Route path="/olimpiade/bilangan-rasional" element={<OlimpiadeBilanganRasionalPage />} />

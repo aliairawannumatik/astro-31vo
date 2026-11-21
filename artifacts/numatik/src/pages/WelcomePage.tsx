@@ -68,7 +68,7 @@ const WelcomePage = () => {
           }`}
           style={
             isLight
-              ? { color: isPastel ? "#4f6b5b" : "var(--text-primary)", textShadow: "0 1px 4px rgba(55,48,107,0.16)" }
+              ? { color: isPastel ? "#5144b8" : "var(--text-primary)", textShadow: "0 1px 4px rgba(55,48,107,0.16)" }
               : {
                   color: isOcean ? "var(--menu-warm-accent)" : undefined,
                   textShadow: isOcean
