@@ -33,7 +33,7 @@
     "back": "Back",
     "next": "Next page",
     "home": "Main Menu",
-    "backToHome": "Back to Main Screen"
+    "backToHome": "Start Screen"
   },
   "menu": {
     "title": "MAIN MENU",
@@ -42,6 +42,7 @@
     "searchPlaceholder": "Search menus, lessons, practice, or features...",
     "clearSearch": "Clear search",
     "dismissAnnouncement": "Dismiss announcement",
+    "closeMore": "Close More menu",
     "guideTooltip": "Guide",
     "newUserGuideAnnouncement": "New to Numatik? See the User Guide",
     "viewGuide": "View",

@@ -33,7 +33,7 @@
     "back": "Kembali",
     "next": "Halaman berikutnya",
     "home": "Menu Utama",
-    "backToHome": "Kembali ke Layar Utama"
+    "backToHome": "Layar Awal"
   },
   "menu": {
     "title": "MENU UTAMA",
@@ -42,6 +42,7 @@
     "searchPlaceholder": "Cari menu, materi, latihan, atau fitur...",
     "clearSearch": "Hapus pencarian",
     "dismissAnnouncement": "Tutup pengumuman",
+    "closeMore": "Tutup menu Lainnya",
     "guideTooltip": "Petunjuk",
     "newUserGuideAnnouncement": "Baru di Numatik? Lihat Petunjuk Penggunaan",
     "viewGuide": "Lihat",

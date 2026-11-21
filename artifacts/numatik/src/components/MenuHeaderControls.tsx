@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Check, CircleHelp, Globe, Music2, Palette, Pause, Play, Settings, X } from "lucide-react";
+import { Check, CircleHelp, Globe, Palette, Pause, Play, Settings, Volume2, VolumeX, X } from "lucide-react";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { useMusic } from "@/contexts/MusicContext";
 import { useTheme, type Theme } from "@/contexts/ThemeContext";
@@ -59,6 +59,7 @@ const MenuHeaderControls = () => {
     playPopSound();
     setOpenPicker((current) => current === picker ? null : picker);
   };
+  const musicStatusLabel = `${t("menu.musicButton")} · ${t(musicOn ? "settings.musicOn" : "settings.musicOff")}`;
 
   return (
     <div ref={containerRef} className="menu-header-controls relative flex items-center gap-1.5">
@@ -104,15 +105,17 @@ const MenuHeaderControls = () => {
       <div className="relative">
         <button
           type="button"
-          aria-label={t("menu.musicButton")}
-          title={t("menu.musicButton")}
+          aria-label={musicStatusLabel}
+          title={musicStatusLabel}
           aria-expanded={openPicker === "music"}
           aria-controls={musicPickerId}
           aria-pressed={musicOn}
           onClick={() => togglePicker("music")}
           className="menu-control-button menu-focusable"
         >
-          <Music2 aria-hidden="true" className="h-5 w-5" />
+          {musicOn
+            ? <Volume2 aria-hidden="true" className="h-5 w-5" />
+            : <VolumeX aria-hidden="true" className="h-5 w-5" />}
         </button>
         {openPicker === "music" && (
           <div
@@ -233,7 +236,7 @@ const MenuHeaderControls = () => {
           setOpenPicker(null);
           navigate("/pengaturan");
         }}
-        className="menu-control-button menu-focusable"
+        className="menu-control-button menu-focusable menu-mobile-settings"
       >
         <Settings aria-hidden="true" className="h-5 w-5" />
       </button>

@@ -33,7 +33,7 @@
     "back": "戻る",
     "next": "次のページ",
     "home": "メインメニュー",
-    "backToHome": "メイン画面に戻る"
+    "backToHome": "スタート画面"
   },
   "menu": {
     "title": "メインメニュー",
@@ -42,6 +42,7 @@
     "searchPlaceholder": "メニュー・教材・練習・機能を検索...",
     "clearSearch": "検索をクリア",
     "dismissAnnouncement": "お知らせを閉じる",
+    "closeMore": "その他メニューを閉じる",
     "guideTooltip": "ガイド",
     "newUserGuideAnnouncement": "Numatikは初めてですか？使い方ガイドをご覧ください",
     "viewGuide": "見る",

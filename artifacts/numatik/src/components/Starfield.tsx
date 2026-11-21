@@ -1,8 +1,12 @@
-import { createContext, useContext, useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAnimations } from "@/contexts/AnimationContext";
 
 export const StarfieldVisibilityContext = createContext(true);
+
+function getParticleCount(desktopCount: number, mobileCount: number): number {
+  return window.matchMedia("(max-width: 768px)").matches ? mobileCount : desktopCount;
+}
 
 // ── Shared RAF loop: 60fps cap + visibility pause ─────────────
 function startLoop(render: () => void, fps = 60): () => void {
@@ -76,7 +80,7 @@ const StarCanvas = () => {
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener("resize", resize);
-    const stars = Array.from({ length: 200 }, () => ({
+    const stars = Array.from({ length: getParticleCount(200, 70) }, () => ({
       x: Math.random() * canvas.width, y: Math.random() * canvas.height,
       size: Math.random() * 2 + 0.5, speed: Math.random() * 0.5 + 0.1,
       opacity: Math.random(), twinkleSpeed: Math.random() * 0.02 + 0.005,
@@ -108,7 +112,7 @@ const SnowCanvas = () => {
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener("resize", resize);
-    const flakes = Array.from({ length: 60 }, (_, i) => ({
+    const flakes = Array.from({ length: getParticleCount(60, 20) }, (_, i) => ({
       x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight,
       size: Math.random() * 10 + 5, speed: Math.random() * 0.8 + 0.3,
       drift: Math.random() * 0.4 - 0.2, opacity: Math.random() * 0.55 + 0.3,
@@ -139,7 +143,7 @@ const WhiteCanvas = () => {
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener("resize", resize);
-    const dots = Array.from({ length: 45 }, () => ({
+    const dots = Array.from({ length: getParticleCount(45, 18) }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight + window.innerHeight,
       r: Math.random() * 18 + 6,
@@ -180,7 +184,7 @@ const ForestCanvas = () => {
     resize();
     window.addEventListener("resize", resize);
     const colors = ["#4ade80","#22c55e","#16a34a","#86efac","#bbf7d0","#a3e635","#84cc16","#65a30d","#d9f99d"];
-    const leaves = Array.from({ length: 45 }, () => ({
+    const leaves = Array.from({ length: getParticleCount(45, 18) }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight - window.innerHeight * 0.3,
       size: Math.random() * 13 + 6,
@@ -239,7 +243,7 @@ const OceanCanvas = () => {
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener("resize", resize);
-    const bubbles = Array.from({ length: 55 }, () => ({
+    const bubbles = Array.from({ length: getParticleCount(55, 22) }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight + window.innerHeight,
       r: Math.random() * 14 + 2,
@@ -314,7 +318,7 @@ const CloudCanvas = () => {
       ctx.restore();
     }
 
-    const clouds = Array.from({ length: 9 }, (_, i) => ({
+    const clouds = Array.from({ length: getParticleCount(9, 5) }, (_, i) => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight * 0.65,
       w: Math.random() * 130 + 70,
@@ -346,8 +350,18 @@ const Starfield = () => {
   const isVisible = useContext(StarfieldVisibilityContext);
   const { animationsOn } = useAnimations();
   const { theme } = useTheme();
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
-  if (!isVisible || !animationsOn) return null;
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener("change", updatePreference);
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+
+  if (!isVisible || !animationsOn || prefersReducedMotion) return null;
 
   switch (theme) {
     case "light":   return <SnowCanvas />;

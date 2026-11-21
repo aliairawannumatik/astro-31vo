@@ -15,7 +15,7 @@ import {
   X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import Starfield from "@/components/Starfield";
+import Starfield, { StarfieldVisibilityContext } from "@/components/Starfield";
 import MenuHeaderControls from "@/components/MenuHeaderControls";
 import MenuSidebar from "@/components/MenuSidebar";
 import { MENU_ITEMS, MENU_SECTIONS, type MenuGroup, type MenuItemConfig } from "@/data/menuConfig";
@@ -80,6 +80,10 @@ function findMenuItem(path: string): MenuItemConfig | undefined {
   return MENU_ITEMS.find((item) => item.path === path);
 }
 
+function isHomeMenuItem(item: MenuItemConfig): boolean {
+  return item.key !== "ujiMandiri";
+}
+
 const TAB_ITEMS: ReadonlyArray<{
   id: MobileTab;
   icon: LucideIcon;
@@ -109,6 +113,15 @@ const MenuPage = () => {
     document.addEventListener("visibilitychange", updateVisibility);
     return () => document.removeEventListener("visibilitychange", updateVisibility);
   }, []);
+
+  useEffect(() => {
+    if (activeTab !== "more") return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveTab("home");
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [activeTab]);
 
   useEffect(() => {
     if (!searchQuery.trim() || deepIndex) return;
@@ -207,7 +220,7 @@ const MenuPage = () => {
       </button>
       <button
         type="button"
-        aria-label={t("menu.dismissAnnouncement")}
+        aria-label={t("menu.closeMore")}
         title={t("menu.dismissAnnouncement")}
         onClick={handleDismissGuideAnnouncement}
         className="menu-first-visit-dismiss menu-focusable"
@@ -229,8 +242,8 @@ const MenuPage = () => {
         <p>{t(announcement.messageKey)}</p>
         <button
           type="button"
-          aria-label={t("menu.dismissAnnouncement")}
-          title={t("menu.dismissAnnouncement")}
+          aria-label={t("menu.closeMore")}
+          title={t("menu.closeMore")}
           onClick={() => handleDismissAnnouncement(announcement.id)}
           className="menu-announcement-dismiss menu-focusable"
         >
@@ -244,6 +257,21 @@ const MenuPage = () => {
     setActiveTab("home");
     setSearchQuery("");
     document.getElementById("menu-desktop-content")?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleMobileTabClick = (tab: MobileTab) => {
+    if (tab === "home") {
+      handleHomeClick();
+      return;
+    }
+
+    if (tab === "more" && activeTab === "more") {
+      setActiveTab("home");
+      return;
+    }
+
+    setSearchQuery("");
+    setActiveTab(tab);
   };
 
   const renderRecentItems = () => recentItems.length > 0 && (
@@ -332,12 +360,12 @@ const MenuPage = () => {
   const renderSection = (group: MenuGroup, mode: "compact" | "expanded", desktop = false) => {
     const section = MENU_SECTIONS.find((candidate) => candidate.group === group);
     if (!section) return null;
-    const items = MENU_ITEMS.filter((item) => item.group === group && !item.featured);
+    const items = MENU_ITEMS.filter((item) => item.group === group && !item.featured && isHomeMenuItem(item));
     return (
       <section
         key={group}
-        id={desktop ? `menu-section-${group}` : undefined}
-        className={`menu-section${desktop && activeTab === group ? " is-highlighted" : ""}`}
+        id={desktop ? `menu-section-${group}` : `menu-mobile-section-${group}`}
+        className={`menu-section${activeTab === group ? " is-highlighted" : ""}`}
       >
         <h2 className="menu-section-title">{t(section.labelKey)}</h2>
         <div className={mode === "compact" ? "menu-compact-grid" : "menu-expanded-grid"}>
@@ -410,43 +438,57 @@ const MenuPage = () => {
     </div>
   );
 
-  const renderCategoryView = (group: "learn" | "practice" | "tools" | "more") => (
-    <div className="menu-category-view">
-      <h2 className="menu-category-title">{t(`menu.sections.${group}`)}</h2>
-      {group === "more" ? (
-        <>
-          <div className="menu-guide-more-entry">
-            <button
-              type="button"
-              aria-label={t("menu.guideTooltip")}
-              title={t("menu.guideTooltip")}
-              onClick={handleOpenGuide}
-              className="menu-guide-more-button menu-focusable"
-            >
-              <CircleHelp aria-hidden="true" className="h-4 w-4 shrink-0" />
-              <span>{t("menu.guideTooltip")}</span>
-            </button>
-          </div>
-          <div className="menu-category-grid">
-            {MENU_ITEMS.filter((item) => item.group === "more").map((item) => renderExpandedCard(item))}
-          </div>
-          {renderInfoBanner()}
+  const renderMoreSheet = () => (
+    <div className="menu-more-overlay">
+      <button
+        type="button"
+        aria-label={t("menu.dismissAnnouncement")}
+        onClick={() => setActiveTab("home")}
+        className="menu-more-scrim"
+      />
+      <section
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="menu-more-title"
+        className="menu-more-sheet"
+      >
+        <div className="menu-more-sheet-heading">
+          <span aria-hidden="true" className="menu-more-sheet-handle" />
+          <h2 id="menu-more-title" className="menu-category-title">{t("menu.sections.more")}</h2>
           <button
             type="button"
-            onClick={() => handleOpenPath("/")}
-            className="menu-back-home menu-focusable"
+            aria-label={t("menu.dismissAnnouncement")}
+            title={t("menu.dismissAnnouncement")}
+            onClick={() => setActiveTab("home")}
+            className="menu-more-sheet-close menu-focusable"
           >
-            {t("nav.backToHome")}
+            <X aria-hidden="true" className="h-5 w-5" />
           </button>
-        </>
-      ) : (
-        <>
-          <div className="menu-category-grid">
-            {MENU_ITEMS.filter((item) => item.group === group && !item.featured).map((item) => renderExpandedCard(item))}
-          </div>
-          {group === "tools" && renderInfoBanner()}
-        </>
-      )}
+        </div>
+        <button
+          type="button"
+          aria-label={t("menu.guideTooltip")}
+          title={t("menu.guideTooltip")}
+          onClick={handleOpenGuide}
+          className="menu-guide-more-button menu-focusable"
+        >
+          <CircleHelp aria-hidden="true" className="h-4 w-4 shrink-0" />
+          <span>{t("menu.guideTooltip")}</span>
+        </button>
+        <div className="menu-more-sheet-grid">
+          {MENU_ITEMS
+            .filter((item) => item.group === "more" && item.key !== "guide" && item.key !== "donate")
+            .map((item) => renderExpandedCard(item))}
+        </div>
+        {renderInfoBanner()}
+        <button
+          type="button"
+          onClick={() => handleOpenPath("/")}
+          className="menu-back-home menu-focusable"
+        >
+          {t("nav.backToHome")}
+        </button>
+      </section>
     </div>
   );
 
@@ -461,29 +503,57 @@ const MenuPage = () => {
     </div>
   );
 
-  const renderDesktopHome = () => (
-    <>
-      <div className="menu-featured-grid menu-featured-grid-desktop">
-        {MENU_ITEMS.filter((item) => item.featured).map((item) => renderFeaturedCard(item, true))}
-      </div>
-      <div className="menu-desktop-sections">
-        {MENU_SECTIONS.map((section) => (
-          <div key={section.group} className="menu-desktop-column">
-            {renderSection(section.group, "expanded", true)}
-            {section.group === "tools" && renderInfoBanner()}
-          </div>
-        ))}
-      </div>
-    </>
-  );
+  const renderDesktopHome = () => {
+    const sections = MENU_SECTIONS.map((section) => ({
+      ...section,
+      items: MENU_ITEMS.filter((item) => item.group === section.group && !item.featured && isHomeMenuItem(item)),
+    }));
+
+    return (
+      <>
+        <div className="menu-featured-grid menu-featured-grid-desktop">
+          {MENU_ITEMS.filter((item) => item.featured).map((item) => renderFeaturedCard(item, true))}
+        </div>
+        <div className="menu-desktop-sections">
+          {sections.map((section) => (
+            <h2
+              key={section.group}
+              id={`menu-section-${section.group}`}
+              className="menu-section-title"
+            >
+              {t(section.labelKey)}
+            </h2>
+          ))}
+          {Array.from({ length: 4 }, (_, row) => sections.map(({ group, items }) => {
+            const item = items[row];
+            return item
+              ? renderExpandedCard(item, true)
+              : <div key={`${group}-empty-${row}`} aria-hidden="true" />;
+          }))}
+        </div>
+        {renderInfoBanner()}
+      </>
+    );
+  };
 
   return (
     <div className="menu-page menu-app-root" data-tab-active={isPageVisible}>
-      <Starfield />
+      <StarfieldVisibilityContext.Provider value={isPageVisible}>
+        <Starfield />
+      </StarfieldVisibilityContext.Provider>
       <div className="menu-mobile-layout">
         <header className="menu-mobile-header">
           <div className="menu-brand">
-            <h1 className="menu-page-title">NUMATIK</h1>
+            <h1 className="menu-page-title menu-brand-title">
+              <button
+                type="button"
+                onClick={handleHomeClick}
+                aria-label={t("menu.homeTab")}
+                className="menu-brand-home-button menu-focusable"
+              >
+                NUMATIK
+              </button>
+            </h1>
             <p className="menu-muted">{t("menu.subtitle")}</p>
           </div>
           <MenuHeaderControls />
@@ -505,6 +575,7 @@ const MenuPage = () => {
               <button
                 type="button"
                 aria-label={t("menu.clearSearch")}
+                title={t("menu.clearSearch")}
                 onClick={() => setSearchQuery("")}
                 className="menu-search-clear menu-focusable"
               >
@@ -518,9 +589,7 @@ const MenuPage = () => {
           <div className={`menu-mobile-content${normalizedQuery ? " menu-mobile-search-content" : ""}`}>
             {normalizedQuery
               ? renderSearchResults()
-              : activeTab === "home"
-                ? renderMobileHome()
-                : renderCategoryView(activeTab === "more" ? "more" : activeTab)}
+              : renderMobileHome()}
           </div>
         </main>
 
@@ -531,14 +600,17 @@ const MenuPage = () => {
               type="button"
               aria-current={activeTab === id ? "page" : undefined}
               aria-label={t(labelKey)}
-              onClick={() => setActiveTab(id)}
+              onClick={() => handleMobileTabClick(id)}
               className={`menu-mobile-tab menu-focusable${activeTab === id ? " is-active" : ""}`}
             >
-              <Icon aria-hidden="true" className="h-5 w-5" />
+              <span className="menu-mobile-tab-icon">
+                <Icon aria-hidden="true" className="h-5 w-5" />
+              </span>
               <span>{t(labelKey)}</span>
             </button>
           ))}
         </nav>
+        {activeTab === "more" && !normalizedQuery && renderMoreSheet()}
       </div>
 
       <div className="menu-desktop-layout">
@@ -565,6 +637,7 @@ const MenuPage = () => {
                 <button
                   type="button"
                   aria-label={t("menu.clearSearch")}
+                  title={t("menu.clearSearch")}
                   onClick={() => setSearchQuery("")}
                   className="menu-search-clear menu-focusable"
                 >
