@@ -33,7 +33,7 @@
     "back": "Kembali",
     "next": "Halaman berikutnya",
     "home": "Menu Utama",
-    "backToHome": "← Kembali ke Beranda"
+    "backToHome": "Kembali ke Layar Utama"
   },
   "menu": {
     "title": "MENU UTAMA",
@@ -41,6 +41,7 @@
     "searchAriaLabel": "Cari di aplikasi",
     "searchPlaceholder": "Cari menu, materi, latihan, atau fitur...",
     "clearSearch": "Hapus pencarian",
+    "dismissAnnouncement": "Tutup pengumuman",
     "deepSearchLoading": "Mencari ke seluruh aplikasi...",
     "deepSearchTitle": "Hasil dari seluruh aplikasi",
     "open": "Buka",
@@ -63,6 +64,9 @@
     "soundOff": "Nyalakan suara",
     "themeButton": "Pilih tema",
     "donateBanner": "Dukung NUMATIK agar terus berkembang",
+    "announcements": {
+      "sidebarSectionShortcuts": "Baru: klik Belajar, Latihan, atau Alat di sidebar untuk langsung menuju bagiannya."
+    },
     "sections": {
       "featured": "Fitur andalan",
       "learn": "Belajar",

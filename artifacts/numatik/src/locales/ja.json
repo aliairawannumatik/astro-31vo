@@ -33,7 +33,7 @@
     "back": "戻る",
     "next": "次のページ",
     "home": "メインメニュー",
-    "backToHome": "← ホームに戻る"
+    "backToHome": "メイン画面に戻る"
   },
   "menu": {
     "title": "メインメニュー",
@@ -41,6 +41,7 @@
     "searchAriaLabel": "アプリを検索",
     "searchPlaceholder": "メニュー・教材・練習・機能を検索...",
     "clearSearch": "検索をクリア",
+    "dismissAnnouncement": "お知らせを閉じる",
     "deepSearchLoading": "アプリ全体を検索中...",
     "deepSearchTitle": "アプリ全体の検索結果",
     "open": "開く",
@@ -63,6 +64,9 @@
     "soundOff": "サウンドをオン",
     "themeButton": "テーマを選択",
     "donateBanner": "NUMATIKの成長を応援",
+    "announcements": {
+      "sidebarSectionShortcuts": "新機能：サイドバーの「学習」「練習」「ツール」を選ぶと、該当セクションへ移動します。"
+    },
     "sections": {
       "featured": "おすすめ機能",
       "learn": "学習",

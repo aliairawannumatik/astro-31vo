@@ -26,6 +26,7 @@ export default defineConfig({
       "lucide-react",
       "react-i18next",
       "react-katex",
+      "mathjs",
       "mathjs > javascript-natural-sort",
     ],
   },

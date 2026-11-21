@@ -8,6 +8,7 @@ import {
   Ellipsis,
   Home,
   Loader2,
+  Megaphone,
   Search,
   Wrench,
   X,
@@ -17,12 +18,25 @@ import Starfield from "@/components/Starfield";
 import MenuHeaderControls from "@/components/MenuHeaderControls";
 import MenuSidebar from "@/components/MenuSidebar";
 import { MENU_ITEMS, MENU_SECTIONS, type MenuGroup, type MenuItemConfig } from "@/data/menuConfig";
+import { MENU_ANNOUNCEMENTS } from "@/data/menuAnnouncements";
 import { playPopSound } from "@/hooks/useAudio";
 
 type DeepSearchItem = { path: string; title: string; content: string };
 type MobileTab = "home" | "learn" | "practice" | "tools" | "more";
 
 const RECENT_STORAGE_KEY = "numatik-menu-recent";
+const ANNOUNCEMENT_STORAGE_PREFIX = "numatik-menu-announcement-dismissed:";
+
+function readDismissedAnnouncementIds(): string[] {
+  return MENU_ANNOUNCEMENTS.filter(({ id }) => {
+    try {
+      return localStorage.getItem(`${ANNOUNCEMENT_STORAGE_PREFIX}${id}`) === "true";
+    } catch (error) {
+      console.warn("Unable to read dismissed menu announcement.", error);
+      return false;
+    }
+  }).map(({ id }) => id);
+}
 
 let deepIndexCache: DeepSearchItem[] | null = null;
 let deepIndexPromise: Promise<DeepSearchItem[]> | null = null;
@@ -84,6 +98,7 @@ const MenuPage = () => {
   const [deepIndexLoading, setDeepIndexLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<MobileTab>("home");
   const [recentPaths, setRecentPaths] = useState(readRecentPaths);
+  const [dismissedAnnouncementIds, setDismissedAnnouncementIds] = useState(readDismissedAnnouncementIds);
   const [isPageVisible, setIsPageVisible] = useState(() => !document.hidden);
 
   useEffect(() => {
@@ -155,6 +170,42 @@ const MenuPage = () => {
   };
 
   const handleOpenItem = (item: MenuItemConfig) => handleOpenPath(item.path);
+
+  const handleDismissAnnouncement = (id: string) => {
+    setDismissedAnnouncementIds((current) => current.includes(id) ? current : [...current, id]);
+    try {
+      localStorage.setItem(`${ANNOUNCEMENT_STORAGE_PREFIX}${id}`, "true");
+    } catch (error) {
+      console.warn("Unable to save dismissed menu announcement.", error);
+    }
+  };
+
+  const renderDesktopAnnouncement = () => {
+    const announcement = MENU_ANNOUNCEMENTS.find(({ id }) => !dismissedAnnouncementIds.includes(id));
+    if (!announcement) return null;
+
+    return (
+      <aside className="menu-announcement" role="status">
+        <Megaphone aria-hidden="true" className="h-4 w-4 shrink-0" />
+        <p>{t(announcement.messageKey)}</p>
+        <button
+          type="button"
+          aria-label={t("menu.dismissAnnouncement")}
+          title={t("menu.dismissAnnouncement")}
+          onClick={() => handleDismissAnnouncement(announcement.id)}
+          className="menu-announcement-dismiss menu-focusable"
+        >
+          <X aria-hidden="true" className="h-4 w-4" />
+        </button>
+      </aside>
+    );
+  };
+
+  const handleHomeClick = () => {
+    setActiveTab("home");
+    setSearchQuery("");
+    document.getElementById("menu-desktop-content")?.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const renderRecentItems = () => recentItems.length > 0 && (
     <div className="menu-recent-strip" aria-label={t("menu.lastOpened")}>
@@ -243,7 +294,11 @@ const MenuPage = () => {
     if (!section) return null;
     const items = MENU_ITEMS.filter((item) => item.group === group);
     return (
-      <section key={group} className="menu-section">
+      <section
+        key={group}
+        id={desktop ? `menu-section-${group}` : undefined}
+        className={`menu-section${desktop && activeTab === group ? " is-highlighted" : ""}`}
+      >
         <h2 className="menu-section-title">{t(section.labelKey)}</h2>
         <div className={mode === "compact" ? "menu-compact-grid" : "menu-expanded-grid"}>
           {items.map((item) => mode === "compact" ? renderCompactCard(item) : renderExpandedCard(item, desktop))}
@@ -438,8 +493,7 @@ const MenuPage = () => {
         <MenuSidebar
           activeTab={activeTab}
           onOpenItem={handleOpenItem}
-          onHomeClick={() => setActiveTab("home")}
-          onSelectTab={(tab) => setActiveTab(tab)}
+          onHomeClick={handleHomeClick}
         />
 
         <main className="menu-desktop-main">
@@ -470,8 +524,9 @@ const MenuPage = () => {
           </header>
 
           {renderRecentItems()}
+          {renderDesktopAnnouncement()}
 
-          <div className={`menu-desktop-content${normalizedQuery ? " menu-desktop-search-content" : ""}`}>
+          <div id="menu-desktop-content" className={`menu-desktop-content${normalizedQuery ? " menu-desktop-search-content" : ""}`}>
             {normalizedQuery
               ? renderSearchResults(true)
               : renderDesktopHome()}

@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Check, Globe, Music2, Palette, Pause, Play } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Check, Globe, Music2, Palette, Pause, Play, Settings, X } from "lucide-react";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { useMusic } from "@/contexts/MusicContext";
 import { useTheme, type Theme } from "@/contexts/ThemeContext";
@@ -16,10 +17,11 @@ const LANGUAGES: ReadonlyArray<{ id: Language; name: string }> = [
   { id: "ja", name: "日本語" },
 ];
 
-const THEMES: readonly Theme[] = ["dark", "white", "sunset", "ocean", "light", "forest", "pastel"];
+const THEMES: readonly Theme[] = ["dark", "sunset", "white", "ocean", "light", "forest", "pastel"];
 const MUSIC_TRACKS = [{ id: "none", name: "None", emoji: "🔇" }, ...MP3_TRACKS, ...TRACKS];
 
 const MenuHeaderControls = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { language, setLanguage } = useLanguage();
   const { musicOn, toggleMusic, trackId, setTrackId } = useMusic();
@@ -58,7 +60,7 @@ const MenuHeaderControls = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative flex items-center gap-1.5">
+    <div ref={containerRef} className="menu-header-controls relative flex items-center gap-1.5">
       <div className="relative">
         <button
           type="button"
@@ -202,6 +204,34 @@ const MenuHeaderControls = () => {
           </div>
         )}
       </div>
+
+      <button
+        type="button"
+        aria-label={t("menu.settings")}
+        title={t("menu.settings")}
+        onClick={() => {
+          playPopSound();
+          setOpenPicker(null);
+          navigate("/pengaturan");
+        }}
+        className="menu-control-button menu-focusable"
+      >
+        <Settings aria-hidden="true" className="h-5 w-5" />
+      </button>
+
+      <button
+        type="button"
+        aria-label={t("nav.backToHome")}
+        title={t("nav.backToHome")}
+        onClick={() => {
+          playPopSound();
+          setOpenPicker(null);
+          navigate("/");
+        }}
+        className="menu-control-button menu-focusable menu-mobile-close"
+      >
+        <X aria-hidden="true" className="h-5 w-5" />
+      </button>
     </div>
   );
 };

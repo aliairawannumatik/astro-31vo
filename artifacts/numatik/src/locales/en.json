@@ -33,7 +33,7 @@
     "back": "Back",
     "next": "Next page",
     "home": "Main Menu",
-    "backToHome": "← Back to Home"
+    "backToHome": "Back to Main Screen"
   },
   "menu": {
     "title": "MAIN MENU",
@@ -41,6 +41,7 @@
     "searchAriaLabel": "Search the app",
     "searchPlaceholder": "Search menus, lessons, practice, or features...",
     "clearSearch": "Clear search",
+    "dismissAnnouncement": "Dismiss announcement",
     "deepSearchLoading": "Searching the whole app...",
     "deepSearchTitle": "Results from across the app",
     "open": "Open",
@@ -63,6 +64,9 @@
     "soundOff": "Turn sound on",
     "themeButton": "Choose theme",
     "donateBanner": "Support NUMATIK as it grows",
+    "announcements": {
+      "sidebarSectionShortcuts": "New: select Learn, Practice, or Tools in the sidebar to jump to that section."
+    },
     "sections": {
       "featured": "Featured",
       "learn": "Learn",

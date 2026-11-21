@@ -13,6 +13,7 @@ const WelcomePage = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
   const isLight = ["light", "white", "forest", "sunset", "pastel"].includes(theme);
+  const isOcean = theme === "ocean";
   const isSunset = theme === "sunset";
   const isPastel = theme === "pastel";
   const [showThemePicker, setShowThemePicker] = useState(false);
@@ -67,8 +68,13 @@ const WelcomePage = () => {
           }`}
           style={
             isLight
-              ? { color: isPastel ? "#5b21b6" : "var(--text-primary)", textShadow: "0 1px 4px rgba(55,48,107,0.16)" }
-              : { textShadow: "0 0 20px rgba(34,211,238,0.6), 0 0 40px rgba(34,211,238,0.3), 0 0 60px rgba(59,130,246,0.2)" }
+              ? { color: isPastel ? "#4f6b5b" : "var(--text-primary)", textShadow: "0 1px 4px rgba(55,48,107,0.16)" }
+              : {
+                  color: isOcean ? "var(--menu-warm-accent)" : undefined,
+                  textShadow: isOcean
+                    ? "0 0 16px rgba(255,211,122,0.35)"
+                    : "0 0 20px rgba(34,211,238,0.6), 0 0 40px rgba(34,211,238,0.3), 0 0 60px rgba(59,130,246,0.2)",
+                }
           }
         >
           {t("appName")}

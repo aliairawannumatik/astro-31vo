@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
+  ArrowLeft,
   BookOpen,
   ChevronDown,
   ClipboardCheck,
@@ -19,7 +20,6 @@ type MenuSidebarProps = {
   activePath?: string;
   onHomeClick: () => void;
   onOpenItem?: (item: MenuItemConfig) => void;
-  onSelectTab?: (tab: MenuSidebarTab) => void;
 };
 
 const SIDEBAR_GROUPS = [
@@ -34,12 +34,14 @@ const SIDEBAR_GROUPS = [
   icon: LucideIcon;
 }>;
 
-const MenuSidebar = ({ activeTab, activePath, onHomeClick, onOpenItem, onSelectTab }: MenuSidebarProps) => {
+const MenuSidebar = ({ activeTab, activePath, onHomeClick, onOpenItem }: MenuSidebarProps) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [expandedGroup, setExpandedGroup] = useState<Exclude<MenuSidebarTab, "home"> | null>(
     activeTab === "home" ? null : activeTab,
   );
+  const isHomeActive = location.pathname === "/menu" && activeTab === "home";
 
   useEffect(() => {
     setExpandedGroup(activeTab === "home" ? null : activeTab);
@@ -55,12 +57,21 @@ const MenuSidebar = ({ activeTab, activePath, onHomeClick, onOpenItem, onSelectT
       <nav className="menu-sidebar-primary" aria-label={t("menu.homeTab")}>
         <button
           type="button"
-          aria-current={activeTab === "home" ? "page" : undefined}
+          onClick={() => navigate("/")}
+          className="menu-sidebar-link menu-sidebar-cover-link menu-focusable"
+        >
+          <ArrowLeft aria-hidden="true" className="h-5 w-5 shrink-0" />
+          <span>{t("nav.backToHome")}</span>
+        </button>
+
+        <button
+          type="button"
+          aria-current={isHomeActive ? "page" : undefined}
           onClick={() => {
             setExpandedGroup(null);
             onHomeClick();
           }}
-          className={`menu-sidebar-link menu-focusable${activeTab === "home" ? " is-active" : ""}`}
+          className={`menu-sidebar-link menu-focusable${isHomeActive ? " is-active" : ""}`}
         >
           <Home aria-hidden="true" className="h-5 w-5 shrink-0" />
           <span>{t("menu.homeTab")}</span>
@@ -68,18 +79,19 @@ const MenuSidebar = ({ activeTab, activePath, onHomeClick, onOpenItem, onSelectT
 
         {SIDEBAR_GROUPS.map(({ id, labelKey, group, icon: Icon }) => {
           const isExpanded = expandedGroup === id;
+          const isActive = activeTab === id || isExpanded;
           const submenuId = `menu-sidebar-submenu-${id}`;
           return (
             <div key={id} className="menu-sidebar-group">
               <button
                 type="button"
+                aria-current={activeTab === id ? "location" : undefined}
                 aria-expanded={isExpanded}
                 aria-controls={submenuId}
                 onClick={() => {
-                  onSelectTab?.(id);
                   setExpandedGroup((current) => current === id ? null : id);
                 }}
-                className={`menu-sidebar-link menu-focusable${activeTab === id ? " is-active" : ""}`}
+                className={`menu-sidebar-link menu-focusable${isActive ? " is-active" : ""}`}
               >
                 <Icon aria-hidden="true" className="h-5 w-5 shrink-0" />
                 <span className="min-w-0 flex-1">{t(labelKey)}</span>
