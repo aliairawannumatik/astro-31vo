@@ -5,6 +5,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
+import { markGuideSeen } from "@/lib/guideVisit";
 import Snowfall from "@/components/Snowfall";
 import {
   ChevronLeft,
@@ -1650,7 +1651,7 @@ const PetunjukPage = () => {
   const { theme } = useTheme();
   const { language } = useLanguage();
   const isDark   = theme === "dark";
-  const isWhite  = theme === "white";
+  const isWhite  = theme === "white" || theme === "pastel";
   const isSunset = theme === "sunset";
 
   const [current, setCurrent] = useState(0);
@@ -1661,6 +1662,10 @@ const PetunjukPage = () => {
 
   /* UI chrome strings for current language */
   const uiT = uiTrans[language];
+
+  useEffect(() => {
+    markGuideSeen();
+  }, []);
 
   const prev = useCallback(() => {
     playPopSound();

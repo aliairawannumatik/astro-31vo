@@ -211,8 +211,10 @@ const StarChip = ({ color }: { color: string }) => (
 const OlimpiadePage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const isLight = ["light", "white", "forest", "sunset"].includes(theme);
-  const pageGradient = theme === "white"
+  const isLight = ["light", "white", "forest", "sunset", "pastel"].includes(theme);
+  const pageGradient = theme === "pastel"
+    ? "gradient-pastel"
+    : theme === "white"
     ? "gradient-white"
     : theme === "forest"
       ? "gradient-forest"

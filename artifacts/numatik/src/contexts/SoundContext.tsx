@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { setSoundEnabled } from "@/hooks/useAudio";
 import { setCurrentSfxId, setVolume } from "@/hooks/soundEffects";
+import { readLocalStorage, writeLocalStorage } from "@/lib/localStorage";
 
 interface SoundContextType {
   soundOn: boolean;
@@ -15,31 +16,31 @@ const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
 export const SoundProvider = ({ children }: { children: ReactNode }) => {
   const [soundOn, setSoundOn] = useState<boolean>(() => {
-    const saved = localStorage.getItem("numatik-sound");
+    const saved = readLocalStorage("numatik-sound");
     return saved === null ? true : saved === "true";
   });
 
   const [sfxId, setSfxIdState] = useState<string>(() => {
-    return localStorage.getItem("numatik-sfx") ?? "pop-klasik";
+    return readLocalStorage("numatik-sfx") ?? "pop-klasik";
   });
 
   const [volumeState, setVolumeState] = useState<number>(() => {
-    const saved = localStorage.getItem("numatik-sfx-volume");
+    const saved = readLocalStorage("numatik-sfx-volume");
     return saved !== null ? Number(saved) : 80;
   });
 
   useEffect(() => {
-    localStorage.setItem("numatik-sound", String(soundOn));
+    writeLocalStorage("numatik-sound", String(soundOn));
     setSoundEnabled(soundOn);
   }, [soundOn]);
 
   useEffect(() => {
-    localStorage.setItem("numatik-sfx", sfxId);
+    writeLocalStorage("numatik-sfx", sfxId);
     setCurrentSfxId(sfxId);
   }, [sfxId]);
 
   useEffect(() => {
-    localStorage.setItem("numatik-sfx-volume", String(volumeState));
+    writeLocalStorage("numatik-sfx-volume", String(volumeState));
     setVolume(volumeState / 100);
   }, [volumeState]);
 

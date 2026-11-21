@@ -7,14 +7,40 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { startGlobalAmbient } from "@/hooks/useAudio";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { SoundProvider } from "@/contexts/SoundContext";
 import { MusicProvider } from "@/contexts/MusicContext";
 import { FontProvider } from "@/contexts/FontContext";
+import { AnimationProvider } from "@/contexts/AnimationContext";
 import PageLoader from "@/components/PageLoader";
+import MenuSidebar from "@/components/MenuSidebar";
+import type { MenuSidebarTab } from "@/components/MenuSidebar";
+import { MENU_ITEMS } from "@/data/menuConfig";
+// Sidebar destinations load eagerly so desktop navigation does not suspend on route changes.
+import BankSoalPage from "./pages/BankSoalPage";
+import BiografiPage from "./pages/BiografiPage";
+import ChatAIPage from "./pages/ChatAIPage";
+import DonasiPage from "./pages/DonasiPage";
+import KalkulatorScientificPage from "./pages/KalkulatorScientificPage";
+import KokulikulerPage from "./pages/ruang-untuk-guru/KokulikulerPage";
+import KonversiSatuanPage from "./pages/KonversiSatuanPage";
+import KumpulanRumusPage from "./pages/KumpulanRumusPage";
+import KritikSaranPage from "./pages/KritikSaranPage";
+import LKPDMenuPage from "./pages/LKPDMenuPage";
+import MenghitungCepatPage from "./pages/MenghitungCepatPage";
+import OlimpiadePage from "./pages/OlimpiadePage";
+import PengaturanPage from "./pages/PengaturanPage";
+import PetunjukPage from "./pages/PetunjukPage";
+import ReferensiPage from "./pages/ReferensiPage";
+import RuangUntukGuruPage from "./pages/RuangUntukGuruPage";
+import TentangAplikasiPage from "./pages/TentangAplikasiPage";
+import TugasLatihanMandiriPage from "./pages/TugasLatihanMandiriPage";
+import UjiMandiriPage from "./pages/UjiMandiriPage";
+import UcapanTerimaKasihPage from "./pages/UcapanTerimaKasihPage";
+import VideoPembelajaranPage from "./pages/VideoPembelajaranPage";
 
 const LegacyMathBookRedirect = () => {
   const location = useLocation();
@@ -50,10 +76,7 @@ const LegacyLKPDRedirect = () => {
 const WelcomePage = lazy(() => import("./pages/WelcomePage"));
 const ExamBrowserComingSoonPage = lazy(() => import("./pages/ExamBrowserComingSoonPage"));
 
-  const UjiMandiriPage = lazy(() => import("./pages/UjiMandiriPage"));
-
 const LKPDPage = lazy(() => import("./pages/LKPDPage"));
-const LKPDMenuPage = lazy(() => import("./pages/LKPDMenuPage"));
 const LKPDPerbandinganPage = lazy(() => import("./pages/LKPDPerbandinganPage"));
 const BertingkatLKPDPage = lazy(() => import("./pages/lkpd/perbandingan/BertingkatLKPDPage"));
 const SenilaiLKPDPage = lazy(() => import("./pages/lkpd/perbandingan/SenilaiLKPDPage"));
@@ -183,7 +206,6 @@ const PenyelesaianPtLSVLKPDPage = lazy(() => import("./pages/lkpd/plsv-ptlsv/Pen
 const ModelMatematikaPtLSVLKPDPage = lazy(() => import("./pages/lkpd/plsv-ptlsv/ModelMatematikaPtLSVLKPDPage"));
 const ATPPage = lazy(() => import("./pages/ATPPage"));
 const GuruLayout = lazy(() => import("./components/GuruLayout"));
-const RuangUntukGuruPage = lazy(() => import("./pages/RuangUntukGuruPage"));
 const SmaPage = lazy(() => import("./pages/ruang-untuk-guru/SmaPage"));
 const SdPage = lazy(() => import("./pages/ruang-untuk-guru/SdPage"));
 const SdComingSoonPage = lazy(() =>
@@ -277,7 +299,6 @@ const KKTPPage = lazy(() => import("./pages/ruang-untuk-guru/KKTPPage"));
 const AbsensiSiswaPage = lazy(() => import("./pages/ruang-untuk-guru/AbsensiSiswaPage"));
 const PenilaianSiswaPage = lazy(() => import("./pages/ruang-untuk-guru/PenilaianSiswaPage"));
 const RancangRPPPage = lazy(() => import("./pages/ruang-untuk-guru/RancangRPPPage"));
-const KokulikulerPage = lazy(() => import("./pages/ruang-untuk-guru/KokulikulerPage"));
 const RPPPage = lazy(() => import("./pages/ruang-untuk-guru/RPPPage"));
 const RPPBilanganBulatPage = lazy(() => import("./pages/ruang-untuk-guru/RPPBilanganBulatPage"));
 const RPPPenjumlahanBilanganBulatPage = lazy(() => import("./pages/ruang-untuk-guru/RPPPenjumlahanBilanganBulatPage"));
@@ -290,12 +311,7 @@ const RPPMateriDynamicPage = lazy(() => import("./pages/ruang-untuk-guru/RPPMate
 const RPPDetailDynamicPage = lazy(() => import("./pages/ruang-untuk-guru/RPPDetailDynamicPage"));
 const UlanganHarianPage = lazy(() => import("./pages/UlanganHarianPage"));
 const PesanKesanPage = lazy(() => import("./pages/PesanKesanPage"));
-const PetunjukPage = lazy(() => import("./pages/PetunjukPage"));
 const QuizPage = lazy(() => import("./pages/QuizPage"));
-const ReferensiPage = lazy(() => import("./pages/ReferensiPage"));
-const DonasiPage = lazy(() => import("./pages/DonasiPage"));
-const BiografiPage = lazy(() => import("./pages/BiografiPage"));
-const OlimpiadePage = lazy(() => import("./pages/OlimpiadePage"));
 const OlimpiadeBilanganBulatPage = lazy(() => import("./pages/OlimpiadeBilanganBulatPage"));
 const OlimpiadeBilanganRasionalPage = lazy(() => import("./pages/OlimpiadeBilanganRasionalPage"));
 const OlimpiadeBilanganBerpangkatPage = lazy(() => import("./pages/OlimpiadeBilanganBerpangkatPage"));
@@ -363,7 +379,6 @@ const TKAPemantapanPeluangPage = lazy(() => import("./pages/tka/modul-pemantapan
 const TKAPemantapanPersamaanGarisPage = lazy(() => import("./pages/tka/modul-pemantapan/PersamaanGarisPage"));
 const TKAPemantapanKoordinatCartesiusPage = lazy(() => import("./pages/tka/modul-pemantapan/KoordinatCartesiusPage"));
 const PapanPeringkatPage = lazy(() => import("./pages/PapanPeringkatPage"));
-const BankSoalPage = lazy(() => import("./pages/BankSoalPage"));
 const BankSoalBilanganBulatPage = lazy(() => import("./pages/bank-soal/BilanganBulatPage"));
 const BankSoalBilanganRasionalPage = lazy(() => import("./pages/bank-soal/BilanganRasionalPage"));
 const BankSoalSegitigaSegiempatPage = lazy(() => import("./pages/bank-soal/SegitigaSegiempatPage"));
@@ -390,16 +405,8 @@ const BankSoalStatistikaPage = lazy(() => import("./pages/bank-soal/StatistikaPa
 const BankSoalGarisSinggungLingkaranPage = lazy(() => import("./pages/bank-soal/GarisSinggungLingkaranPage"));
 const BankSoalKesebangunanPage = lazy(() => import("./pages/bank-soal/KesebangunanPage"));
 const BankSoalTransformasiGeometriPage = lazy(() => import("./pages/bank-soal/TransformasiGeometriPage"));
-const ChatAIPage = lazy(() => import("./pages/ChatAIPage"));
-const PengaturanPage = lazy(() => import("./pages/PengaturanPage"));
-const TentangAplikasiPage = lazy(() => import("./pages/TentangAplikasiPage"));
 const ComingSoonPage = lazy(() => import("./pages/ComingSoonPage"));
-const KalkulatorScientificPage = lazy(() => import("./pages/KalkulatorScientificPage"));
-const VideoPembelajaranPage = lazy(() => import("./pages/VideoPembelajaranPage"));
-const KumpulanRumusPage = lazy(() => import("./pages/KumpulanRumusPage"));
-const KonversiSatuanPage = lazy(() => import("./pages/KonversiSatuanPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const MenghitungCepatPage = lazy(() => import("./pages/MenghitungCepatPage"));
 const PerkalianDengan11Page = lazy(() => import("./pages/menghitung-cepat/PerkalianDengan11Page"));
 const KuadratBerakhiran5Page = lazy(() => import("./pages/menghitung-cepat/KuadratBerakhiran5Page"));
 const KuadratCepatPage = lazy(() => import("./pages/menghitung-cepat/KuadratCepatPage"));
@@ -413,7 +420,6 @@ const LatihanFlashcardPage = lazy(() => import("./pages/menghitung-cepat/Latihan
 const GameLatihanHitungCepatPage = lazy(() => import("./pages/menghitung-cepat/GameLatihanHitungCepatPage"));
 
 // Latihan Mandiri
-const TugasLatihanMandiriPage = lazy(() => import("./pages/TugasLatihanMandiriPage"));
 const TugasLatihanMandiriKelas7Page = lazy(() => import("./pages/TugasLatihanMandiriKelas7Page"));
 const TugasLatihanMandiriKelas8Page = lazy(() => import("./pages/TugasLatihanMandiriKelas8Page"));
 const TugasLatihanMandiriKelas9Page = lazy(() => import("./pages/TugasLatihanMandiriKelas9Page"));
@@ -1028,6 +1034,7 @@ const hidePracticeGradeLabels = () => {
 };
 
 const AppInner = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     const handleInteraction = () => {
       startGlobalAmbient();
@@ -1044,6 +1051,19 @@ const AppInner = () => {
 
   // GA4: track route changes
   const { pathname } = useLocation();
+  const sidebarMenuItems = MENU_ITEMS.filter((item) => item.group !== "featured");
+  const activeMenuItem = sidebarMenuItems.find((item) => pathname === item.path)
+    ?? sidebarMenuItems
+      .filter((item) => pathname.startsWith(`${item.path}/`))
+      .sort((left, right) => right.path.length - left.path.length)[0];
+  const activeMenuTab: MenuSidebarTab = activeMenuItem?.group === "learn"
+    || activeMenuItem?.group === "practice"
+    || activeMenuItem?.group === "games"
+    || activeMenuItem?.group === "tools"
+    || activeMenuItem?.group === "more"
+    ? activeMenuItem.group
+    : "home";
+
   useEffect(() => {
     trackPageView(pathname);
   }, [pathname]);
@@ -1062,7 +1082,16 @@ const AppInner = () => {
         <div className={[
           /^\/buku-animasi-matematika\/kelas-[789](?:\/.*)?$/.test(pathname) ? "animation-submaterial-route" : "",
           pathname.startsWith("/tugas-latihan-mandiri") ? "tugas-latihan-mandiri-route" : "",
+          activeMenuItem ? "menu-route-layout" : "",
         ].filter(Boolean).join(" ") || undefined}>
+        {activeMenuItem && (
+          <MenuSidebar
+            activeTab={activeMenuTab}
+            activePath={activeMenuItem.path}
+            onHomeClick={() => navigate("/menu")}
+          />
+        )}
+        <div className={activeMenuItem ? "menu-route-content" : undefined}>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/menu" element={<MenuPage />} />
@@ -1506,6 +1535,8 @@ const AppInner = () => {
           <Route path="/video-pembelajaran" element={<VideoPembelajaranPage />} />
           <Route path="/donasi" element={<DonasiPage />} />
           <Route path="/biografi" element={<BiografiPage />} />
+          <Route path="/kritik-saran" element={<KritikSaranPage />} />
+          <Route path="/ucapan-terima-kasih" element={<UcapanTerimaKasihPage />} />
           <Route path="/olimpiade" element={<OlimpiadePage />} />
           <Route path="/olimpiade/bilangan-bulat" element={<OlimpiadeBilanganBulatPage />} />
           <Route path="/olimpiade/bilangan-rasional" element={<OlimpiadeBilanganRasionalPage />} />
@@ -2143,6 +2174,7 @@ const AppInner = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
         </div>
+        </div>
       </Suspense>
     </>
   );
@@ -2150,24 +2182,26 @@ const AppInner = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <LanguageProvider>
-      <SoundProvider>
-        <MusicProvider>
-          <FontProvider>
-            <TooltipProvider>
-              <Toaster />
-              <Sonner />
-              {!Capacitor.isNativePlatform() && <Analytics />}
-              <BrowserRouter>
-                <AppInner />
-              </BrowserRouter>
-            </TooltipProvider>
-          </FontProvider>
-        </MusicProvider>
-      </SoundProvider>
-      </LanguageProvider>
-    </ThemeProvider>
+    <AnimationProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <SoundProvider>
+            <MusicProvider>
+              <FontProvider>
+                <TooltipProvider>
+                  <Toaster />
+                  <Sonner />
+                  {!Capacitor.isNativePlatform() && <Analytics />}
+                  <BrowserRouter>
+                    <AppInner />
+                  </BrowserRouter>
+                </TooltipProvider>
+              </FontProvider>
+            </MusicProvider>
+          </SoundProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </AnimationProvider>
   </QueryClientProvider>
 );
 

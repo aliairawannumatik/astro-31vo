@@ -3,18 +3,30 @@
 	"tasks": [
 		{
 			"label": "Preview Numatik",
-			"type": "shell",
-			"command": "pnpm",
+			"type": "process",
+			"command": "node",
 			"args": [
-				"--filter",
-				"@workspace/numatik",
-				"run",
-				"dev",
+				"node_modules/vite/bin/vite.js",
+				"--config",
+				"vite.config.ts",
+				"--host",
+				"0.0.0.0",
 				"--port",
-				"5173"
+				"18860"
 			],
+			"options": {
+				"cwd": "${workspaceFolder}/artifacts/numatik"
+			},
 			"isBackground": true,
-			"problemMatcher": []
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": false
+			},
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
 		}
 	]
 }

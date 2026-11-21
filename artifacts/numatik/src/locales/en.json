@@ -3,6 +3,7 @@
   "appName": "NUMATIK",
   "subtitle": "Active Numeracy with Information\nand Communication Technology",
   "schoolYear": "Academic Year 2026 – 2027",
+  "desktopAvailableText": "Also available on desktop at www.numatik.app",
   "start": "🚀 START",
   "marquee": "✨ INTERACTIVE MULTIMEDIA MATHEMATICS LEARNING APP FOR JUNIOR HIGH ✨",
   "selectTheme": "Choose Theme",
@@ -32,14 +33,55 @@
     "back": "Back",
     "next": "Next page",
     "home": "Main Menu",
-    "backToHome": "← Back to Home"
+    "backToHome": "Start Screen"
   },
   "menu": {
     "title": "MAIN MENU",
     "subtitle": "Choose a menu to explore",
+    "searchAriaLabel": "Search the app",
+    "searchPlaceholder": "Search menus, lessons, practice, or features...",
+    "clearSearch": "Clear search",
+    "dismissAnnouncement": "Dismiss announcement",
+    "closeMore": "Close More menu",
+    "guideTooltip": "Guide",
+    "newUserGuideAnnouncement": "New to Numatik? See the User Guide",
+    "viewGuide": "View",
+    "deepSearchLoading": "Searching the whole app...",
+    "deepSearchTitle": "Results from across the app",
+    "open": "Open",
+    "noSearchResults": "No search results",
+    "tryDifferentQuery": "Try a different search term.",
+    "matchingMenuItems": "Matching menu items",
+    "lastOpened": "Recently opened",
+    "homeTab": "Home",
+    "learnTab": "Learn",
+    "practiceTab": "Practice",
+    "gamesTab": "Games",
+    "toolsTab": "Tools",
+    "moreTab": "More",
+    "languageButton": "Choose language",
+    "musicButton": "Choose background music",
+    "musicList": "Background music list",
+    "musicNone": "None",
+    "musicTurnOn": "Play background music",
+    "musicTurnOff": "Turn off background music",
+    "soundOn": "Turn sound off",
+    "soundOff": "Turn sound on",
+    "themeButton": "Choose theme",
+    "donateBanner": "Support NUMATIK as it grows",
+    "announcements": {
+      "sidebarSectionShortcuts": "New: select Learn, Practice, or Tools in the sidebar to jump to that section."
+    },
+    "sections": {
+      "featured": "Featured",
+      "learn": "Learn",
+      "practice": "Practice and tests",
+      "tools": "Tools",
+      "more": "More"
+    },
     "teacherRoom": "TEACHER ROOM",
     "animatedBook": "ANIMATED BOOK",
-    "gameArena": "GAME ARENA",
+    "gameArena": "NUMATIK GAMEZ",
     "ai": "NUMATIK AI",
     "lkpd": "WORKSHEET",
     "olympiad": "OLYMPIAD",
@@ -54,9 +96,13 @@
     "questionBank": "QUESTION BANK",
     "practice": "PRACTICE",
     "about": "ABOUT",
+    "kritikSaran": "FEEDBACK",
     "biography": "BIOGRAPHY",
+    "gratitude": "ACKNOWLEDGEMENTS",
     "donate": "DONATE",
-    "guide": "GUIDE"
+    "guide": "GUIDE",
+    "settings": "Settings",
+    "reference": "References"
   },
   "menuItems": {
     "guide": {
@@ -143,6 +189,10 @@
       "label": "BIOGRAPHY",
       "desc": "App creator information"
     },
+    "gratitude": {
+      "label": "ACKNOWLEDGEMENTS",
+      "desc": "Recognize the people who inspired and supported NUMATIK"
+    },
     "reference": {
       "label": "REFERENCES",
       "desc": "Bibliography"
@@ -150,6 +200,10 @@
     "about": {
       "label": "ABOUT APP",
       "desc": "Information about the app"
+    },
+    "kritikSaran": {
+      "label": "FEEDBACK & SUGGESTIONS",
+      "desc": "Share feedback to help improve NUMATIK"
     }
   },
   "materiMatematika": {
@@ -6282,6 +6336,9 @@
     "soundSection": "Sound Effects",
     "soundOn": "🔊 Button sound active",
     "soundOff": "🔇 Sound is off",
+    "animationSection": "Animations",
+    "animationOn": "Background and transition animations are on",
+    "animationOff": "Animations are off",
     "languageSection": "Language",
     "languageDesc": "App display language",
     "volumeMusic": "🎚️ Music Volume",
@@ -6403,15 +6460,34 @@
     "subtitle": "Active Numeracy with Information and Communication Technology",
     "desc1": "<boldPrimary>NUMATIK</boldPrimary> stands for <boldAccent>Nu</boldAccent>meracy <boldAccent>A</boldAccent>ctively with <boldAccent>T</boldAccent>echnology of <boldAccent>I</boldAccent>nformation and <boldAccent>K</boldAccent>nowledge — a mathematics education application specifically designed to bridge learning challenges in the digital era. Born from a passion for delivering learning that is not only informative, but also <boldAccent>meaningful and enjoyable</boldAccent>.",
     "desc2": "First launched in <boldPrimary>2026</boldPrimary>, Numatik was developed fully aligned with the <boldAccent>Merdeka Curriculum</boldAccent>. The app integrates a <boldSecondary>Deep Learning</boldSecondary> approach to ensure students don't merely memorize formulas, but understand concepts deeply, critically, and contextually.",
-    "desc3": "Numatik is prepared to be a learning companion for all junior high school students around the world.",
+    "desc3": "Numatik is designed to be a learning companion for elementary, junior high, and senior high school students around the world.",
     "versionLabel": "App Version",
     "versionUpdateNote": "Content, feature, and interface updates",
     "versionBadge": "LATEST",
     "desktopLabel": "Desktop Version",
     "desktopTitle": "Also Available in Browser! 🌐",
     "desktopDesc": "Open <link>www.numatik.app</link> on your laptop or PC for a wider display and a better learning experience.",
-    "copyright": "Tenth Edition · © 2026 NUMATIK. All rights reserved.",
+    "copyright": "Thirteenth Edition · © 2026 NUMATIK. All rights reserved.",
     "backToMenu": "← Back to Menu"
+  },
+  "kritikSaran": {
+    "eyebrow": "YOUR VOICE MATTERS",
+    "pageTitle": "Feedback & Suggestions",
+    "intro": "Your feedback helps NUMATIK grow into an even more engaging, welcoming, and useful place to learn mathematics.",
+    "formEyebrow": "FEEDBACK BOX",
+    "formTitle": "Share your thoughts",
+    "formDescription": "Tell us about your experience, a problem you encountered, or an idea you would like to see in NUMATIK.",
+    "messageLabel": "Your message",
+    "placeholder": "Write your feedback, suggestion, or idea here...",
+    "emailNote": "Your message will open in your email app.",
+    "sendEmail": "Send via Email",
+    "recipientNote": "Email recipient:",
+    "ideasTitle": "What you can share",
+    "ideasIntro": "Every note helps us make the learning experience better.",
+    "ideaExperience": "Ways to improve the learning experience",
+    "ideaIssue": "Problems or confusing parts",
+    "ideaFeature": "Ideas for new features, lessons, or activities",
+    "thankYou": "Thank you for helping make NUMATIK better."
   },
   "biografi": {
     "pageTitle": "DEVELOPER BIOGRAPHY",
@@ -6422,11 +6498,6 @@
     "labelPesan": "MESSAGE FROM THE DEVELOPER",
     "pesanSubtitle": "🌍 To All Students Around the World",
     "pesanIsi": "\"Hello, amazing students around the world! I designed this app especially to make mathematics feel more approachable and friendly for all of you. Remember — no one is ever 'bad' at math; there are only those who haven't practiced enough yet. Happy exploring, and don't be afraid to make mistakes — because mistakes are how we truly learn!\"",
-    "labelKritikSaran": "FEEDBACK",
-    "kritikPlaceholder": "Write your feedback here...",
-    "kirimEmail": "📨 Send via Email",
-    "kirimKe": "Will be sent to: numatik.app@gmail.com",
-    "ucapanTerimakasih": "Acknowledgements",
     "kembali": "← Back to Menu",
     "kelompokA2": {
       "badge": "First Inspiration · Guru Penggerak Cohort 10",
@@ -6455,6 +6526,11 @@
       "footer": "THANK YOU SO MUCH, PAK WANDRI"
     }
   },
+  "acknowledgements": {
+    "eyebrow": "A PAGE OF GRATITUDE",
+    "title": "Acknowledgements",
+    "subtitle": "With heartfelt gratitude, we celebrate everyone whose inspiration and support helped bring NUMATIK to life."
+  },
   "donasi": {
     "pageTitle": "DONATE",
     "subtitle": "Support us to help the app grow",
@@ -6474,7 +6550,8 @@
     "sunset": "Clear Sky",
     "ocean": "Blue Ocean",
     "light": "Snowy Bright",
-    "forest": "Green Forest"
+    "forest": "Green Forest",
+    "pastel": "Pastel"
   },
   "languageContinueText": "Continue to Main Menu"
 }

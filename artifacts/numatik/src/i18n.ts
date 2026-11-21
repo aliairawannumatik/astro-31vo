@@ -4,10 +4,11 @@ import { initReactI18next } from "react-i18next";
 import id from "./locales/id.json";
 import en from "./locales/en.json";
 import ja from "./locales/ja.json";
+import { readLocalStorage } from "@/lib/localStorage";
 
 const STORAGE_KEY = "numatik_language";
 
-const savedLang = localStorage.getItem(STORAGE_KEY) || "id";
+const savedLang = readLocalStorage(STORAGE_KEY) || "id";
 const validLangs = ["id", "en", "ja"];
 const resolvedLang = validLangs.includes(savedLang) ? savedLang : "id";
 

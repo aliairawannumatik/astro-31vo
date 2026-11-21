@@ -2,12 +2,13 @@ import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Settings, Volume2, VolumeX, Music2, Type, ChevronDown, Globe } from "lucide-react";
+import { Settings, Volume2, VolumeX, Music2, Type, ChevronDown, Globe, Sparkles } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme, Theme } from "@/contexts/ThemeContext";
 import { useSound } from "@/contexts/SoundContext";
 import { useMusic } from "@/contexts/MusicContext";
 import { useFont, FONT_OPTIONS, FontKey } from "@/contexts/FontContext";
+import { useAnimations } from "@/contexts/AnimationContext";
 import { useLanguage, Language } from "@/contexts/LanguageContext";
 import { TRACKS } from "@/hooks/bgMusicTracks";
 import { MP3_TRACKS } from "@/hooks/mp3Tracks";
@@ -38,15 +39,15 @@ const THEME_DEFS: ThemeDef[] = [
     ready: true,
   },
   {
-    id: "white",
-    emoji: "🤍",
-    name: "Putih Bersih",
-    desc: "Minimalis & polos 🕊️",
-    gradient: "linear-gradient(135deg,#ffffff,#f8fafc,#f1f5f9)",
-    activeBorder: "border-slate-400",
-    activeShadow: "shadow-[0_0_16px_rgba(148,163,184,0.5)]",
-    activeDot: "bg-slate-400",
-    ready: true,
+    id: "sunset",
+    emoji: "☁️",
+    name: "Langit Cerah",
+    desc: "Cerah seperti langit biru & awan ☁️",
+    gradient: "linear-gradient(135deg,#38bdf8,#7dd3fc,#bae6fd,#e0f2fe,#f0f9ff)",
+    activeBorder: "border-sky-400",
+    activeShadow: "shadow-[0_0_16px_rgba(14,165,233,0.55)]",
+    activeDot: "bg-sky-400",
+    ready: false,
   },
   {
     id: "ocean",
@@ -82,15 +83,26 @@ const THEME_DEFS: ThemeDef[] = [
     ready: false,
   },
   {
-    id: "sunset",
-    emoji: "☁️",
-    name: "Langit Cerah",
-    desc: "Cerah seperti langit biru & awan ☁️",
-    gradient: "linear-gradient(135deg,#38bdf8,#7dd3fc,#bae6fd,#e0f2fe,#f0f9ff)",
-    activeBorder: "border-sky-400",
-    activeShadow: "shadow-[0_0_16px_rgba(14,165,233,0.55)]",
-    activeDot: "bg-sky-400",
-    ready: false,
+    id: "pastel",
+    emoji: "🎨",
+    name: "Pastel",
+    desc: "Ceria dengan warna permen & pelangi 🌈",
+    gradient: "linear-gradient(135deg,#fff1ad,#d5c9ff,#ffbdd9,#bfeeff)",
+    activeBorder: "border-violet-500",
+    activeShadow: "shadow-[0_0_16px_rgba(103,88,212,0.35)]",
+    activeDot: "bg-violet-500",
+    ready: true,
+  },
+  {
+    id: "white",
+    emoji: "🤍",
+    name: "Putih Bersih",
+    desc: "Minimalis & polos 🕊️",
+    gradient: "linear-gradient(135deg,#ffffff,#f8fafc,#f1f5f9)",
+    activeBorder: "border-slate-400",
+    activeShadow: "shadow-[0_0_16px_rgba(148,163,184,0.5)]",
+    activeDot: "bg-slate-400",
+    ready: true,
   },
 ];
 
@@ -134,6 +146,7 @@ function getThemeGradient(t: Theme): string {
     forest: "gradient-forest",
     ocean:  "gradient-ocean",
     sunset: "gradient-sunset",
+    pastel: "gradient-pastel",
   };
   return map[t] ?? "gradient-space";
 }
@@ -174,6 +187,7 @@ const PengaturanPage = () => {
   const { soundOn, toggleSound, sfxId, setSfxId, volume, setVolume: setSfxVolume } = useSound();
   const { musicOn, toggleMusic, trackId, setTrackId, musicVolume, setMusicVolume: setMusicVol } = useMusic();
   const { fontKey, setFont } = useFont();
+  const { animationsOn, toggleAnimations } = useAnimations();
   const { language, setLanguage } = useLanguage();
 
   const [shakingBtn, setShakingBtn] = useState<string | null>(null);
@@ -339,7 +353,7 @@ const PengaturanPage = () => {
                       <div className="w-full h-8 rounded-lg border border-black/10" style={{ background: td.gradient }} />
                       <span className="text-[17px] leading-none">{td.emoji}</span>
                       <p className={`font-display font-bold text-[10px] text-center leading-tight ${isDark ? "text-white/80" : "text-gray-700"}`}>
-                        {td.name}
+                        {t(`themeNames.${td.id}`)}
                       </p>
                       {isActive && (
                         <div className={`absolute top-1.5 right-1.5 w-2 h-2 rounded-full ${td.activeDot}`} />
@@ -581,6 +595,29 @@ const PengaturanPage = () => {
                 {t("settings.chooseMusic")}
               </p>
 
+              <button
+                type="button"
+                onClick={() => { playPopSound(); setTrackId("none"); }}
+                aria-pressed={trackId === "none"}
+                className={`w-full rounded-xl px-4 py-2.5 flex items-center gap-3 border transition-all duration-200 cursor-pointer text-left ${
+                  trackId === "none"
+                    ? isDark
+                      ? "border-violet-500 bg-violet-500/15 shadow-[0_0_16px_rgba(139,92,246,0.2)]"
+                      : "border-violet-400 bg-violet-50 shadow-sm"
+                    : isDark
+                      ? "border-white/7 bg-white/4 hover:border-white/15 hover:bg-white/6"
+                      : "border-gray-200 bg-gray-50/80 hover:border-gray-300 hover:bg-white"
+                }`}
+              >
+                <VolumeX aria-hidden="true" className="w-5 h-5 flex-shrink-0 text-violet-500" />
+                <span className={`flex-1 font-display font-bold text-sm ${
+                  trackId === "none"
+                    ? isDark ? "text-violet-300" : "text-violet-700"
+                    : isDark ? "text-white/85" : "text-gray-800"
+                }`}>{t("menu.musicNone")}</span>
+                {trackId === "none" && <div className="w-2 h-2 rounded-full flex-shrink-0 bg-violet-500" />}
+              </button>
+
               {MP3_TRACKS.map((track) => {
                 const isActive = trackId === track.id;
                 const ac  = ACCENT[track.accentColor]  ?? ACCENT["violet"];
@@ -588,7 +625,7 @@ const PengaturanPage = () => {
                 return (
                   <button
                     key={track.id}
-                    onClick={() => { playPopSound(); setTrackId(track.id); if (!musicOn) toggleMusic(); }}
+                    onClick={() => { playPopSound(); setTrackId(track.id); if (!musicOn) toggleMusic(track.id); }}
                     className={`w-full rounded-xl px-4 py-2.5 flex items-center gap-3 border transition-all duration-200 cursor-pointer text-left ${
                       isActive
                         ? isDark
@@ -632,7 +669,7 @@ const PengaturanPage = () => {
                     return (
                       <button
                         key={track.id}
-                        onClick={() => { playPopSound(); setTrackId(track.id); if (!musicOn) toggleMusic(); }}
+                        onClick={() => { playPopSound(); setTrackId(track.id); if (!musicOn) toggleMusic(track.id); }}
                         className={`w-full rounded-xl px-4 py-2.5 flex items-center gap-3 border transition-all duration-200 cursor-pointer text-left ${
                           isActive
                             ? isDark ? `${ac.border} ${ac.bg} ${ac.shadow}` : `${acl.border} ${acl.bg} ${acl.shadow}`
@@ -773,6 +810,41 @@ const PengaturanPage = () => {
             </div>
 
             </div>
+          </div>
+        </div>
+
+        <div className={`relative rounded-2xl overflow-hidden ${
+          isDark
+            ? "bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-white/10 backdrop-blur-xl"
+            : "bg-white/92 backdrop-blur-xl border border-amber-100/80 shadow-xl"
+        }`}>
+          <div className="px-5 py-5 pl-6 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/25 flex-shrink-0">
+              <Sparkles className="w-[18px] h-[18px] text-white" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className={`font-display text-[15px] font-bold leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
+                {t("settings.animationSection")}
+              </h2>
+              <p className={`font-body text-[11px] ${isDark ? "text-white/55" : "text-gray-600"}`}>
+                {t(animationsOn ? "settings.animationOn" : "settings.animationOff")}
+              </p>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={animationsOn}
+              aria-label={t("settings.animationSection")}
+              onClick={() => { playPopSound(); toggleAnimations(); }}
+              className={`relative rounded-full transition-all duration-300 flex-shrink-0 ${
+                animationsOn
+                  ? "bg-gradient-to-r from-amber-500 to-orange-500 shadow-[0_0_14px_rgba(245,158,11,0.35)]"
+                  : isDark ? "bg-white/15" : "bg-gray-300"
+              }`}
+              style={{ width: "52px", height: "28px" }}
+            >
+              <span className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-white shadow-md transition-transform duration-300 ${animationsOn ? "translate-x-6" : "translate-x-0"}`} />
+            </button>
           </div>
         </div>
 

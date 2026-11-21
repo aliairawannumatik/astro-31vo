@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { readLocalStorage, removeLocalStorage, writeLocalStorage } from "@/lib/localStorage";
 
 export type FontKey =
   | "space-classic"
@@ -78,10 +79,10 @@ const FontContext = createContext<FontContextType | undefined>(undefined);
 
 export const FontProvider = ({ children }: { children: ReactNode }) => {
   const [fontKey, setFontKey] = useState<FontKey>(() => {
-    const saved = localStorage.getItem("numatik-font");
+    const saved = readLocalStorage("numatik-font");
     const valid = FONT_OPTIONS.map(f => f.key);
     if (!valid.includes(saved as FontKey)) {
-      localStorage.removeItem("numatik-font");
+      removeLocalStorage("numatik-font");
       return "nunito";
     }
     return saved as FontKey;
@@ -90,7 +91,7 @@ export const FontProvider = ({ children }: { children: ReactNode }) => {
   const currentFont = FONT_OPTIONS.find(f => f.key === fontKey) || FONT_OPTIONS[0];
 
   useEffect(() => {
-    localStorage.setItem("numatik-font", fontKey);
+    writeLocalStorage("numatik-font", fontKey);
     document.documentElement.style.setProperty("--font-display", currentFont.displayFont);
     document.documentElement.style.setProperty("--font-body", currentFont.bodyFont);
   }, [fontKey, currentFont]);

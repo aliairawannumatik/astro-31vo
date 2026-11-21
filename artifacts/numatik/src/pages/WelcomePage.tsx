@@ -12,8 +12,10 @@ import { useTheme } from "@/contexts/ThemeContext";
 const WelcomePage = () => {
   const { t } = useTranslation();
   const { theme } = useTheme();
-  const isLight = ["light", "white", "forest", "sunset"].includes(theme);
+  const isLight = ["light", "white", "forest", "sunset", "pastel"].includes(theme);
+  const isOcean = theme === "ocean";
   const isSunset = theme === "sunset";
+  const isPastel = theme === "pastel";
   const [showThemePicker, setShowThemePicker] = useState(false);
   const [showLangPicker, setShowLangPicker] = useState(false);
 
@@ -25,7 +27,7 @@ const WelcomePage = () => {
   return (
     <div
       className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${
-        isSunset ? "gradient-sunset" : isLight ? "gradient-snow" : ""
+        isPastel ? "gradient-pastel" : isSunset ? "gradient-sunset" : isLight ? "gradient-snow" : ""
       }`}
     >
       {!isLight && (
@@ -52,7 +54,7 @@ const WelcomePage = () => {
       <div className="relative z-10 text-center w-full max-w-2xl flex flex-col items-center px-4 py-16 sm:px-6">
 
         <p
-          className={`font-display text-2xl sm:text-3xl font-bold tracking-widest mb-6 animate-fade-in ${
+          className={`font-display text-xl sm:text-3xl font-bold tracking-wide sm:tracking-widest leading-snug break-words max-w-full mb-6 animate-fade-in ${
             isLight ? "" : "text-cyan-400"
           }`}
           style={isLight ? { color: "var(--text-primary)" } : undefined}
@@ -61,15 +63,18 @@ const WelcomePage = () => {
         </p>
 
         <h1
-          className={`font-display text-5xl sm:text-7xl font-black mb-8 drop-shadow-lg ${
-            isSunset ? "text-yellow-400" : isLight ? "text-cyan-500" : "text-yellow-400"
+          className={`font-display text-5xl sm:text-7xl font-black mb-8 ${
+            isSunset ? "text-yellow-400" : isLight ? "text-primary" : "text-yellow-400"
           }`}
           style={
-            isSunset
-              ? { textShadow: "0 0 16px rgba(253,224,71,0.9), 0 0 32px rgba(250,204,21,0.8), 0 0 60px rgba(234,179,8,0.6), 0 0 90px rgba(234,179,8,0.35)" }
-              : isLight
-              ? { textShadow: "0 0 24px rgba(6,182,212,0.5), 0 0 48px rgba(14,165,233,0.35), 0 2px 8px rgba(6,182,212,0.25)" }
-              : { textShadow: "0 0 20px rgba(34,211,238,0.6), 0 0 40px rgba(34,211,238,0.3), 0 0 60px rgba(59,130,246,0.2)" }
+            isLight
+              ? { color: isPastel ? "#5144b8" : "var(--text-primary)", textShadow: "0 1px 4px rgba(55,48,107,0.16)" }
+              : {
+                  color: isOcean ? "var(--menu-warm-accent)" : undefined,
+                  textShadow: isOcean
+                    ? "0 0 16px rgba(255,211,122,0.35)"
+                    : "0 0 20px rgba(34,211,238,0.6), 0 0 40px rgba(34,211,238,0.3), 0 0 60px rgba(59,130,246,0.2)",
+                }
           }
         >
           {t("appName")}
@@ -100,23 +105,15 @@ const WelcomePage = () => {
           <div
             className="relative flex items-center gap-3 px-6 py-3 rounded-full font-display font-bold text-sm sm:text-base tracking-widest text-white border"
             style={{
-              background: isSunset
-                ? "linear-gradient(90deg, rgba(245,158,11,0.25), rgba(239,68,68,0.25), rgba(245,158,11,0.25))"
-                : isLight
-                ? "linear-gradient(90deg, rgba(99,102,241,0.2), rgba(6,182,212,0.2), rgba(99,102,241,0.2))"
+              background: isLight
+                ? "rgba(255,255,255,0.92)"
                 : "linear-gradient(90deg, rgba(139,92,246,0.25), rgba(6,182,212,0.25), rgba(139,92,246,0.25))",
-              borderColor: isSunset
-                ? "rgba(245,158,11,0.6)"
-                : isLight
-                ? "rgba(99,102,241,0.5)"
+              borderColor: isLight
+                ? "rgba(55,48,107,0.46)"
                 : "rgba(139,92,246,0.6)",
-              boxShadow: isSunset
-                ? "inset 0 1px 0 rgba(255,255,255,0.15)"
-                : "inset 0 1px 0 rgba(255,255,255,0.1)",
-              color: isSunset
-                ? "#fde68a"
-                : isLight
-                ? "#4f46e5"
+              boxShadow: "0 2px 8px rgba(31,41,55,0.12)",
+              color: isLight
+                ? "#312e81"
                 : "#c4b5fd",
             }}
           >
@@ -150,28 +147,16 @@ const WelcomePage = () => {
           href="https://www.numatik.app"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full font-body text-xs font-semibold tracking-wide transition-all duration-200 -mt-10 mb-10 border active:scale-95"
+          className="flex md:hidden items-center gap-2 px-5 py-2.5 rounded-full font-body text-xs font-semibold tracking-wide transition-all duration-200 -mt-10 mb-10 border active:scale-95"
           style={{
-            background: isSunset
-              ? "linear-gradient(90deg, rgba(245,158,11,0.18), rgba(239,68,68,0.18))"
-              : isLight
-              ? "linear-gradient(90deg, rgba(99,102,241,0.15), rgba(6,182,212,0.15))"
-              : "linear-gradient(90deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15))",
-            borderColor: isSunset
-              ? "rgba(245,158,11,0.5)"
-              : isLight
-              ? "rgba(99,102,241,0.45)"
-              : "rgba(6,182,212,0.4)",
-            color: isSunset ? "#fde68a" : isLight ? "#4f46e5" : "#67e8f9",
-            boxShadow: isSunset
-              ? "0 0 12px rgba(245,158,11,0.15)"
-              : isLight
-              ? "0 0 12px rgba(99,102,241,0.12)"
-              : "0 0 12px rgba(6,182,212,0.15)",
+          background: isLight ? "rgba(255,255,255,0.92)" : "rgba(8,47,73,0.82)",
+          borderColor: isLight ? "rgba(55,48,107,0.42)" : "rgba(103,232,249,0.45)",
+            color: isLight ? "#312e81" : "#cffafe",
+          boxShadow: "0 2px 8px rgba(31,41,55,0.12)",
           }}
         >
           <span>🖥️</span>
-          <span>Also available on desktop at <span className="underline underline-offset-2">www.numatik.app</span></span>
+          <span>{t("desktopAvailableText")}</span>
           <span className="opacity-60">↗</span>
         </a>
 

@@ -1,50 +1,53 @@
-import { useState, useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Starfield from "@/components/Starfield";
-import { useTheme } from "@/contexts/ThemeContext";
 import {
-  Info,
-  BookMarked,
-  Heart,
-  User,
-  Medal,
-  Brain,
-  FileText,
-  Bot,
-  Settings,
-  Calculator,
-  PlayCircle,
-  ClipboardCheck,
-  ClipboardList,
-  Gamepad2,
+  ArrowUpRight,
   BookOpen,
-  ArrowLeftRight,
-  Sigma,
-  Rocket,
-  Zap,
-  GraduationCap,
-  ShieldCheck,
-  Search,
-  X,
+  CircleHelp,
+  ClipboardList,
+  Ellipsis,
+  Home,
   Loader2,
+  Megaphone,
+  Search,
+  Wrench,
+  X,
 } from "lucide-react";
-import PageNavigation from "@/components/PageNavigation";
+import type { LucideIcon } from "lucide-react";
+import Starfield, { StarfieldVisibilityContext } from "@/components/Starfield";
+import MenuHeaderControls from "@/components/MenuHeaderControls";
+import MenuSidebar from "@/components/MenuSidebar";
+import { MENU_ITEMS, MENU_SECTIONS, type MenuGroup, type MenuItemConfig } from "@/data/menuConfig";
+import { MENU_ANNOUNCEMENTS } from "@/data/menuAnnouncements";
 import { playPopSound } from "@/hooks/useAudio";
+import { hasSeenGuide, markGuideSeen } from "@/lib/guideVisit";
 
-// Deep-search index of every routed page's title + readable text content.
-// Generated at build time by scripts/build-search-index.mjs (see "predev"/
-// "prebuild" in package.json) — NOT bundled into JS, fetched lazily on
-// demand so the menu screen stays light for users who never search.
 type DeepSearchItem = { path: string; title: string; content: string };
+type MobileTab = "home" | "learn" | "practice" | "tools" | "more";
+
+const RECENT_STORAGE_KEY = "numatik-menu-recent";
+const ANNOUNCEMENT_STORAGE_PREFIX = "numatik-menu-announcement-dismissed:";
+
+function readDismissedAnnouncementIds(): string[] {
+  return MENU_ANNOUNCEMENTS.filter(({ id }) => {
+    try {
+      return localStorage.getItem(`${ANNOUNCEMENT_STORAGE_PREFIX}${id}`) === "true";
+    } catch (error) {
+      console.warn("Unable to read dismissed menu announcement.", error);
+      return false;
+    }
+  }).map(({ id }) => id);
+}
 
 let deepIndexCache: DeepSearchItem[] | null = null;
 let deepIndexPromise: Promise<DeepSearchItem[]> | null = null;
+
 function loadDeepSearchIndex(): Promise<DeepSearchItem[]> {
   if (deepIndexCache) return Promise.resolve(deepIndexCache);
   if (!deepIndexPromise) {
     deepIndexPromise = fetch("/search-index.json")
-      .then((res) => (res.ok ? res.json() : []))
+      .then((response) => response.ok ? response.json() : [])
       .then((data: DeepSearchItem[]) => {
         deepIndexCache = data;
         return data;
@@ -57,18 +60,69 @@ function loadDeepSearchIndex(): Promise<DeepSearchItem[]> {
   return deepIndexPromise;
 }
 
+function readRecentPaths(): string[] {
+  try {
+    const saved = localStorage.getItem(RECENT_STORAGE_KEY);
+    if (!saved) return [];
+    const parsed: unknown = JSON.parse(saved);
+    if (!Array.isArray(parsed)) return [];
+    const validPaths = new Set<string>(MENU_ITEMS.map((item) => item.path));
+    return parsed
+      .filter((path): path is string => typeof path === "string" && validPaths.has(path))
+      .slice(0, 3);
+  } catch (error) {
+    console.warn("Unable to read recent menu items.", error);
+    return [];
+  }
+}
+
+function findMenuItem(path: string): MenuItemConfig | undefined {
+  return MENU_ITEMS.find((item) => item.path === path);
+}
+
+function isHomeMenuItem(item: MenuItemConfig): boolean {
+  return item.key !== "ujiMandiri";
+}
+
+const TAB_ITEMS: ReadonlyArray<{
+  id: MobileTab;
+  icon: LucideIcon;
+  labelKey: string;
+}> = [
+  { id: "home", icon: Home, labelKey: "menu.homeTab" },
+  { id: "learn", icon: BookOpen, labelKey: "menu.learnTab" },
+  { id: "practice", icon: ClipboardList, labelKey: "menu.practiceTab" },
+  { id: "tools", icon: Wrench, labelKey: "menu.toolsTab" },
+  { id: "more", icon: Ellipsis, labelKey: "menu.moreTab" },
+];
+
 const MenuPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [deepIndex, setDeepIndex] = useState<DeepSearchItem[] | null>(deepIndexCache);
   const [deepIndexLoading, setDeepIndexLoading] = useState(false);
-  const { theme } = useTheme();
-  const isWhite = theme === "white";
-  const isSpace = theme === "dark";
+  const [activeTab, setActiveTab] = useState<MobileTab>("home");
+  const [recentPaths, setRecentPaths] = useState(readRecentPaths);
+  const [dismissedAnnouncementIds, setDismissedAnnouncementIds] = useState(readDismissedAnnouncementIds);
+  const [guideSeen, setGuideSeen] = useState(hasSeenGuide);
+  const [isPageVisible, setIsPageVisible] = useState(() => !document.hidden);
 
-  // Only fetch the (fairly small, ~700KB) deep-search index once the user
-  // actually starts typing — no cost at all for people who just browse the menu.
+  useEffect(() => {
+    const updateVisibility = () => setIsPageVisible(!document.hidden);
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => document.removeEventListener("visibilitychange", updateVisibility);
+  }, []);
+
+  useEffect(() => {
+    if (activeTab !== "more") return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveTab("home");
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [activeTab]);
+
   useEffect(() => {
     if (!searchQuery.trim() || deepIndex) return;
     let cancelled = false;
@@ -84,38 +138,8 @@ const MenuPage = () => {
     };
   }, [searchQuery, deepIndex]);
 
-  const menuItems = [
-    { key: "guide",       icon: Info,           path: "/petunjuk" },
-    { key: "teacherRoom", icon: GraduationCap,  path: "/ruang-untuk-guru" },
-    { key: "animatedBook",icon: BookOpen,        path: "/buku-animasi-matematika" },
-    { key: "practice",    icon: ClipboardList,  path: "/tugas-latihan-mandiri" },
-    { key: "academic",    icon: Brain,          path: "/tka" },
-    { key: "gameArena",   icon: Gamepad2,       path: "/numatik-gamez" },
-    { key: "ai",          icon: Bot,            path: "/chat-ai" },
-    { key: "questionBank",icon: FileText,       path: "/bank-soal" },
-    { key: "olympiad",    icon: Medal,          path: "/olimpiade" },
-    { key: "lkpd",        icon: ClipboardCheck, path: "/lkpd" },
-    { key: "kokurikuler", icon: GraduationCap,  path: "/ruang-untuk-guru/kokulikuler" },
-    { key: "ujiMandiri",  icon: ClipboardCheck, path: "/uji-mandiri" },
-    { key: "calculator",  icon: Calculator,     path: "/kalkulator-scientific" },
-    { key: "fastCalc",    icon: Zap,            path: "/menghitung-cepat" },
-    { key: "conversion",  icon: ArrowLeftRight, path: "/konversi-satuan" },
-    { key: "formula",     icon: Sigma,          path: "/kumpulan-rumus" },
-    { key: "video",       icon: PlayCircle,     path: "/video-pembelajaran" },
-    { key: "settings",    icon: Settings,       path: "/pengaturan" },
-    { key: "donate",      icon: Heart,          path: "/donasi" },
-    { key: "biography",   icon: User,           path: "/biografi" },
-    { key: "reference",   icon: BookMarked,     path: "/referensi" },
-    { key: "about",       icon: Rocket,         path: "/tentang-aplikasi" },
-  ];
-
-  const handleClick = (path: string) => {
-    playPopSound();
-    navigate(path);
-  };
-
   const normalizedQuery = searchQuery.trim().toLowerCase();
-  const filteredMenuItems = menuItems.filter((item) => {
+  const filteredMenuItems = MENU_ITEMS.filter((item) => {
     if (!normalizedQuery) return true;
     const label = t(`menuItems.${item.key}.label`).toLowerCase();
     const description = t(`menuItems.${item.key}.desc`).toLowerCase();
@@ -132,11 +156,9 @@ const MenuPage = () => {
         const pathHit = item.path.toLowerCase().includes(normalizedQuery);
         const contentIndex = contentLower.indexOf(normalizedQuery);
         if (!titleHit && !pathHit && contentIndex < 0) return null;
-        const snippet =
-          contentIndex >= 0
-            ? item.content.slice(Math.max(0, contentIndex - 60), contentIndex + normalizedQuery.length + 100)
-            : item.content.slice(0, 140);
-        // Rank exact/near title matches above content-only matches.
+        const snippet = contentIndex >= 0
+          ? item.content.slice(Math.max(0, contentIndex - 60), contentIndex + normalizedQuery.length + 100)
+          : item.content.slice(0, 140);
         const rank = titleHit ? 0 : pathHit ? 1 : 2;
         return { ...item, snippet, rank };
       })
@@ -145,123 +167,497 @@ const MenuPage = () => {
       .slice(0, 24);
   }, [normalizedQuery, deepIndex]);
 
-  return (
-    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto">
-      <Starfield />
-      <PageNavigation prevPath="/" />
-      <div className="relative z-10 text-center px-4 max-w-3xl w-full pt-20 pb-12 md:pt-24 md:pb-16">
-        <h1 className="font-display text-3xl md:text-4xl font-bold text-primary text-glow-cyan mb-2">
-          {t("menu.title")}
-        </h1>
-        <p className="text-muted-foreground mb-5 text-sm">{t("menu.subtitle")}</p>
+  const recentItems = recentPaths
+    .map(findMenuItem)
+    .filter((item): item is MenuItemConfig => item !== undefined);
 
-        <div className="relative max-w-2xl mx-auto mb-8">
-          <Search
-            aria-hidden="true"
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground"
-          />
-          <label htmlFor="menu-search" className="sr-only">Cari di aplikasi</label>
-          <input
-            id="menu-search"
-            type="search"
-            value={searchQuery}
-            onChange={(event) => setSearchQuery(event.target.value)}
-            placeholder="Cari menu, materi, latihan, atau fitur..."
-            className={`w-full rounded-xl border border-border ${isWhite ? "bg-white/95 text-slate-900" : "bg-card/90 text-foreground"} py-3 pl-12 pr-11 text-sm shadow-sm outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/25`}
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              aria-label="Hapus pencarian"
-              onClick={() => setSearchQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-muted-foreground transition hover:bg-muted hover:text-foreground"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
-        </div>
+  const handleOpenPath = (path: string) => {
+    if (MENU_ITEMS.some((item) => item.path === path)) {
+      const updatedPaths = [path, ...recentPaths.filter((recentPath) => recentPath !== path)].slice(0, 3);
+      setRecentPaths(updatedPaths);
+      try {
+        localStorage.setItem(RECENT_STORAGE_KEY, JSON.stringify(updatedPaths));
+      } catch (error) {
+        console.warn("Unable to save recent menu items.", error);
+      }
+    }
+    playPopSound();
+    navigate(path);
+  };
 
-        {normalizedQuery && deepIndexLoading && filteredDeepResults.length === 0 && (
-          <div className="mb-6 flex items-center justify-center gap-2 max-w-2xl mx-auto rounded-xl border border-border bg-card/70 p-3 text-xs text-muted-foreground">
-            <Loader2 className="w-3.5 h-3.5 animate-spin" aria-hidden="true" />
-            Mencari ke seluruh aplikasi...
-          </div>
-        )}
+  const handleOpenItem = (item: MenuItemConfig) => handleOpenPath(item.path);
 
-        {filteredDeepResults.length > 0 && (
-          <div className="mb-6 max-w-2xl mx-auto rounded-xl border border-border bg-card/70 p-3 text-left shadow-sm">
-            <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Hasil dari seluruh aplikasi ({filteredDeepResults.length}{filteredDeepResults.length === 24 ? "+" : ""})
-            </p>
-            <div className="flex flex-col gap-1">
-              {filteredDeepResults.map((result) => (
-                <button
-                  key={result.path}
-                  type="button"
-                  onClick={() => handleClick(result.path)}
-                  className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-left transition hover:bg-primary/10"
-                >
-                  <span className="min-w-0 text-left">
-                    <span className="block truncate text-sm font-medium text-foreground">{result.title}</span>
-                    <span className="block truncate text-xs text-muted-foreground">{result.snippet}</span>
-                  </span>
-                  <span className="shrink-0 text-xs text-muted-foreground">Buka</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+  const handleOpenGuide = () => {
+    markGuideSeen();
+    setGuideSeen(true);
+    handleOpenPath("/petunjuk");
+  };
 
-        {filteredMenuItems.length > 0 || filteredDeepResults.length > 0 || (normalizedQuery && deepIndexLoading) ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
-          {filteredMenuItems.map((item, i) => (
-            <button
-              key={item.path}
-              onClick={() => handleClick(item.path)}
-              className={`water-btn group relative ${isWhite ? "" : "bg-card/80"} backdrop-blur border border-border rounded-xl p-6 hover:border-primary/60 hover:box-glow-cyan transition-all duration-300 cursor-pointer text-left animate-slide-up`}
-              style={{
-                animationDelay: `${i * 0.1}s`,
-                ...(isWhite && {
-                  background: "linear-gradient(to right, #2196f3, #00bcd4)",
-                  border: "none",
-                }),
-              }}
-            >
-              <item.icon
-                className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform"
-                style={{ color: isWhite ? "#ffffff" : isSpace ? "hsl(var(--primary))" : undefined }}
-              />
-              <h3
-                className="font-display text-[11px] sm:text-base font-bold mb-1 leading-tight"
-                style={{ color: isWhite ? "#ffffff" : undefined }}
-              >
-                {t(`menuItems.${item.key}.label`)}
-              </h3>
-              <p
-                className="text-xs"
-                style={{ color: isWhite ? "rgba(255,255,255,0.8)" : isSpace ? "hsl(var(--primary))" : undefined }}
-              >
-                {t(`menuItems.${item.key}.desc`)}
-              </p>
-            </button>
-          ))}
-          </div>
-        ) : (
-          <div className="mx-auto max-w-2xl rounded-xl border border-border bg-card/70 px-6 py-10 text-center">
-            <Search className="mx-auto mb-3 w-8 h-8 text-muted-foreground" aria-hidden="true" />
-            <p className="font-display text-base font-semibold text-foreground">Tidak ada hasil pencarian</p>
-            <p className="mt-1 text-sm text-muted-foreground">Coba gunakan kata kunci yang berbeda.</p>
-          </div>
-        )}
+  const handleDismissGuideAnnouncement = () => {
+    markGuideSeen();
+    setGuideSeen(true);
+  };
 
+  const handleDismissAnnouncement = (id: string) => {
+    setDismissedAnnouncementIds((current) => current.includes(id) ? current : [...current, id]);
+    try {
+      localStorage.setItem(`${ANNOUNCEMENT_STORAGE_PREFIX}${id}`, "true");
+    } catch (error) {
+      console.warn("Unable to save dismissed menu announcement.", error);
+    }
+  };
+
+  const renderFirstVisitAnnouncement = () => (
+    <aside className="menu-announcement menu-first-visit" role="status">
+      <CircleHelp aria-hidden="true" className="h-4 w-4 shrink-0" />
+      <span className="menu-first-visit-text">{t("menu.newUserGuideAnnouncement")}</span>
+      <button
+        type="button"
+        onClick={handleOpenGuide}
+        className="menu-first-visit-action menu-focusable"
+      >
+        {t("menu.viewGuide")}
+      </button>
+      <button
+        type="button"
+        aria-label={t("menu.closeMore")}
+        title={t("menu.dismissAnnouncement")}
+        onClick={handleDismissGuideAnnouncement}
+        className="menu-first-visit-dismiss menu-focusable"
+      >
+        <X aria-hidden="true" className="h-4 w-4" />
+      </button>
+    </aside>
+  );
+
+  const renderDesktopAnnouncement = () => {
+    if (!guideSeen) return renderFirstVisitAnnouncement();
+
+    const announcement = MENU_ANNOUNCEMENTS.find(({ id }) => !dismissedAnnouncementIds.includes(id));
+    if (!announcement) return null;
+
+    return (
+      <aside className="menu-announcement" role="status">
+        <Megaphone aria-hidden="true" className="h-4 w-4 shrink-0" />
+        <p>{t(announcement.messageKey)}</p>
         <button
-          onClick={() => { playPopSound(); navigate("/"); }}
-          className="mt-8 text-sm text-muted-foreground hover:text-primary transition-colors font-body cursor-pointer"
+          type="button"
+          aria-label={t("menu.closeMore")}
+          title={t("menu.closeMore")}
+          onClick={() => handleDismissAnnouncement(announcement.id)}
+          className="menu-announcement-dismiss menu-focusable"
+        >
+          <X aria-hidden="true" className="h-4 w-4" />
+        </button>
+      </aside>
+    );
+  };
+
+  const handleHomeClick = () => {
+    setActiveTab("home");
+    setSearchQuery("");
+    document.getElementById("menu-desktop-content")?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleMobileTabClick = (tab: MobileTab) => {
+    if (tab === "home") {
+      handleHomeClick();
+      return;
+    }
+
+    if (tab === "more" && activeTab === "more") {
+      setActiveTab("home");
+      return;
+    }
+
+    setSearchQuery("");
+    setActiveTab(tab);
+  };
+
+  const renderRecentItems = () => recentItems.length > 0 && (
+    <div className="menu-recent-strip" aria-label={t("menu.lastOpened")}>
+      <span className="menu-recent-label">{t("menu.lastOpened")}</span>
+      {recentItems.map((item) => (
+        <button
+          key={item.path}
+          type="button"
+          onClick={() => handleOpenItem(item)}
+          className="menu-recent-chip menu-focusable"
+          aria-label={t(`menuItems.${item.key}.label`)}
+          title={t(`menuItems.${item.key}.label`)}
+        >
+          {t(`menu.${item.key}`)}
+        </button>
+      ))}
+    </div>
+  );
+
+  const renderCompactCard = (item: MenuItemConfig) => {
+    const Icon = item.icon;
+    return (
+      <button
+        key={item.path}
+        type="button"
+        onClick={() => handleOpenItem(item)}
+        aria-label={t(`menuItems.${item.key}.label`)}
+        className="menu-card menu-focusable menu-compact-card"
+      >
+        <span className="menu-compact-icon-box">
+          <Icon aria-hidden="true" className="h-11 w-11" />
+        </span>
+        <span className="menu-compact-title">{t(`menu.${item.key}`)}</span>
+      </button>
+    );
+  };
+
+  const renderExpandedCard = (item: MenuItemConfig, desktop = false) => {
+    const Icon = item.icon;
+    const feedbackCardClass = item.key === "kritikSaran" && !desktop ? " menu-feedback-card" : "";
+    return (
+      <button
+        key={item.path}
+        type="button"
+        onClick={() => handleOpenItem(item)}
+        aria-label={t(`menuItems.${item.key}.label`)}
+        className={`menu-card menu-focusable menu-expanded-card${desktop ? " menu-expanded-card-desktop" : ""}${feedbackCardClass}`}
+      >
+        <Icon aria-hidden="true" className="menu-card-icon h-7 w-7 shrink-0" />
+        <span className="menu-expanded-copy">
+          <span className="menu-card-title menu-expanded-title">{t(`menuItems.${item.key}.label`)}</span>
+          <span className="menu-card-description menu-expanded-description" title={desktop ? t(`menuItems.${item.key}.desc`) : undefined}>
+            {t(`menuItems.${item.key}.desc`)}
+          </span>
+        </span>
+      </button>
+    );
+  };
+
+  const renderFeaturedCard = (item: MenuItemConfig, desktop = false) => {
+    const Icon = item.icon;
+    return (
+      <button
+        key={item.path}
+        type="button"
+        onClick={() => handleOpenItem(item)}
+        aria-label={t(`menuItems.${item.key}.label`)}
+        className={`menu-card menu-focusable menu-featured-card${desktop ? " menu-featured-card-desktop" : ""}`}
+      >
+        <span className="menu-featured-icon-box">
+          <Icon aria-hidden="true" />
+        </span>
+        <span className="menu-featured-title">
+          {desktop ? t(`menuItems.${item.key}.label`) : t(`menu.${item.key}`)}
+        </span>
+        {desktop && (
+          <span className="menu-card-description menu-featured-description">
+            {t(`menuItems.${item.key}.desc`)}
+          </span>
+        )}
+      </button>
+    );
+  };
+
+  const renderSection = (group: MenuGroup, mode: "compact" | "expanded", desktop = false) => {
+    const section = MENU_SECTIONS.find((candidate) => candidate.group === group);
+    if (!section) return null;
+    const items = MENU_ITEMS.filter((item) => item.group === group && !item.featured && isHomeMenuItem(item));
+    return (
+      <section
+        key={group}
+        id={desktop ? `menu-section-${group}` : `menu-mobile-section-${group}`}
+        className={`menu-section${activeTab === group ? " is-highlighted" : ""}`}
+      >
+        <h2 className="menu-section-title">{t(section.labelKey)}</h2>
+        <div className={mode === "compact" ? "menu-compact-grid" : "menu-expanded-grid"}>
+          {items.map((item) => mode === "compact" ? renderCompactCard(item) : renderExpandedCard(item, desktop))}
+        </div>
+      </section>
+    );
+  };
+
+  const renderInfoBanner = () => (
+    <button
+      type="button"
+      onClick={() => handleOpenPath("/donasi")}
+      className="menu-donate-banner menu-focusable"
+    >
+      <span>{t("menu.donateBanner")}</span>
+      <ArrowUpRight aria-hidden="true" className="h-5 w-5 shrink-0" />
+    </button>
+  );
+
+  const renderSearchResults = (desktop = false) => (
+    <div className="menu-search-results">
+      {normalizedQuery && deepIndexLoading && filteredDeepResults.length === 0 && (
+        <div className="menu-search-status" role="status">
+          <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" />
+          <span>{t("menu.deepSearchLoading")}</span>
+        </div>
+      )}
+
+      {filteredDeepResults.length > 0 && (
+        <section className="menu-deep-results">
+          <h2 className="menu-section-title">
+            {t("menu.deepSearchTitle")} ({filteredDeepResults.length}{filteredDeepResults.length === 24 ? "+" : ""})
+          </h2>
+          <div className="menu-deep-result-list">
+            {filteredDeepResults.map((result) => (
+              <button
+                key={result.path}
+                type="button"
+                onClick={() => handleOpenPath(result.path)}
+                className="menu-deep-result menu-focusable"
+              >
+                <span className="menu-deep-result-copy">
+                  <span className="menu-card-title menu-deep-result-title">{result.title}</span>
+                  <span className="menu-card-description menu-deep-result-snippet">{result.snippet}</span>
+                </span>
+                <span className="menu-muted shrink-0 text-xs">{t("menu.open")}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {filteredMenuItems.length > 0 && (
+        <section className="menu-search-menu-results">
+          <h2 className="menu-section-title">{t("menu.matchingMenuItems")}</h2>
+          <div className={desktop ? "menu-expanded-grid menu-search-card-grid" : "menu-search-card-grid"}>
+            {filteredMenuItems.map((item) => renderExpandedCard(item, desktop))}
+          </div>
+        </section>
+      )}
+
+      {filteredMenuItems.length === 0 && filteredDeepResults.length === 0 && !deepIndexLoading && (
+        <div className="menu-empty-state">
+          <Search aria-hidden="true" className="menu-card-icon h-8 w-8" />
+          <p className="menu-card-title">{t("menu.noSearchResults")}</p>
+          <p className="menu-card-description">{t("menu.tryDifferentQuery")}</p>
+        </div>
+      )}
+    </div>
+  );
+
+  const renderMoreSheet = () => (
+    <div className="menu-more-overlay">
+      <button
+        type="button"
+        aria-label={t("menu.dismissAnnouncement")}
+        onClick={() => setActiveTab("home")}
+        className="menu-more-scrim"
+      />
+      <section
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="menu-more-title"
+        className="menu-more-sheet"
+      >
+        <div className="menu-more-sheet-heading">
+          <span aria-hidden="true" className="menu-more-sheet-handle" />
+          <h2 id="menu-more-title" className="menu-category-title">{t("menu.sections.more")}</h2>
+          <button
+            type="button"
+            aria-label={t("menu.dismissAnnouncement")}
+            title={t("menu.dismissAnnouncement")}
+            onClick={() => setActiveTab("home")}
+            className="menu-more-sheet-close menu-focusable"
+          >
+            <X aria-hidden="true" className="h-5 w-5" />
+          </button>
+        </div>
+        <button
+          type="button"
+          aria-label={t("menu.guideTooltip")}
+          title={t("menu.guideTooltip")}
+          onClick={handleOpenGuide}
+          className="menu-guide-more-button menu-focusable"
+        >
+          <CircleHelp aria-hidden="true" className="h-4 w-4 shrink-0" />
+          <span>{t("menu.guideTooltip")}</span>
+        </button>
+        <div className="menu-more-sheet-grid">
+          {MENU_ITEMS
+            .filter((item) => item.group === "more" && item.key !== "guide" && item.key !== "donate")
+            .map((item) => renderExpandedCard(item))}
+        </div>
+        {renderInfoBanner()}
+        <button
+          type="button"
+          onClick={() => handleOpenPath("/")}
+          className="menu-back-home menu-focusable"
         >
           {t("nav.backToHome")}
         </button>
+      </section>
+    </div>
+  );
+
+  const renderMobileHome = () => (
+    <div className="menu-mobile-home">
+      <div className="menu-featured-grid">
+        {MENU_ITEMS.filter((item) => item.featured).map((item) => renderFeaturedCard(item))}
+      </div>
+      <div className="menu-mobile-sections">
+        {MENU_SECTIONS.map((section) => renderSection(section.group, "compact"))}
+      </div>
+    </div>
+  );
+
+  const renderDesktopHome = () => {
+    const sections = MENU_SECTIONS.map((section) => ({
+      ...section,
+      items: MENU_ITEMS.filter((item) => item.group === section.group && !item.featured && isHomeMenuItem(item)),
+    }));
+
+    return (
+      <>
+        <div className="menu-featured-grid menu-featured-grid-desktop">
+          {MENU_ITEMS.filter((item) => item.featured).map((item) => renderFeaturedCard(item, true))}
+        </div>
+        <div className="menu-desktop-sections">
+          {sections.map((section) => (
+            <h2
+              key={section.group}
+              id={`menu-section-${section.group}`}
+              className="menu-section-title"
+            >
+              {t(section.labelKey)}
+            </h2>
+          ))}
+          {Array.from({ length: 4 }, (_, row) => sections.map(({ group, items }) => {
+            const item = items[row];
+            return item
+              ? renderExpandedCard(item, true)
+              : <div key={`${group}-empty-${row}`} aria-hidden="true" />;
+          }))}
+        </div>
+        {renderInfoBanner()}
+      </>
+    );
+  };
+
+  return (
+    <div className="menu-page menu-app-root" data-tab-active={isPageVisible}>
+      <StarfieldVisibilityContext.Provider value={isPageVisible}>
+        <Starfield />
+      </StarfieldVisibilityContext.Provider>
+      <div className="menu-mobile-layout">
+        <header className="menu-mobile-header">
+          <div className="menu-brand">
+            <h1 className="menu-page-title menu-brand-title">
+              <button
+                type="button"
+                onClick={handleHomeClick}
+                aria-label={t("menu.homeTab")}
+                className="menu-brand-home-button menu-focusable"
+              >
+                NUMATIK
+              </button>
+            </h1>
+            <p className="menu-muted">{t("menu.subtitle")}</p>
+          </div>
+          <MenuHeaderControls />
+        </header>
+
+        <main className="menu-mobile-main">
+          <div className="menu-search-box">
+            <Search aria-hidden="true" className="menu-search-icon" />
+            <label htmlFor="mobile-menu-search" className="sr-only">{t("menu.searchAriaLabel")}</label>
+            <input
+              id="mobile-menu-search"
+              type="search"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder={t("menu.searchPlaceholder")}
+              className="menu-search-field menu-search-input menu-focusable"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                aria-label={t("menu.clearSearch")}
+                title={t("menu.clearSearch")}
+                onClick={() => setSearchQuery("")}
+                className="menu-search-clear menu-focusable"
+              >
+                <X aria-hidden="true" className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+
+          {guideSeen ? renderRecentItems() : renderFirstVisitAnnouncement()}
+
+          <div className={`menu-mobile-content${normalizedQuery ? " menu-mobile-search-content" : ""}`}>
+            {normalizedQuery
+              ? renderSearchResults()
+              : renderMobileHome()}
+          </div>
+        </main>
+
+        <nav className="menu-mobile-tabs" aria-label={t("menu.homeTab")}>
+          {TAB_ITEMS.map(({ id, icon: Icon, labelKey }) => (
+            <button
+              key={id}
+              type="button"
+              aria-current={activeTab === id ? "page" : undefined}
+              aria-label={t(labelKey)}
+              onClick={() => handleMobileTabClick(id)}
+              className={`menu-mobile-tab menu-focusable${activeTab === id ? " is-active" : ""}`}
+            >
+              <span className="menu-mobile-tab-icon">
+                <Icon aria-hidden="true" className="h-5 w-5" />
+              </span>
+              <span>{t(labelKey)}</span>
+            </button>
+          ))}
+        </nav>
+        {activeTab === "more" && !normalizedQuery && renderMoreSheet()}
       </div>
 
+      <div className="menu-desktop-layout">
+        <MenuSidebar
+          activeTab={activeTab}
+          onOpenItem={handleOpenItem}
+          onHomeClick={handleHomeClick}
+        />
+
+        <main className="menu-desktop-main">
+          <header className="menu-desktop-header">
+            <div className="menu-search-box">
+              <Search aria-hidden="true" className="menu-search-icon" />
+              <label htmlFor="desktop-menu-search" className="sr-only">{t("menu.searchAriaLabel")}</label>
+              <input
+                id="desktop-menu-search"
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder={t("menu.searchPlaceholder")}
+                className="menu-search-field menu-search-input menu-focusable"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  aria-label={t("menu.clearSearch")}
+                  title={t("menu.clearSearch")}
+                  onClick={() => setSearchQuery("")}
+                  className="menu-search-clear menu-focusable"
+                >
+                  <X aria-hidden="true" className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+            <MenuHeaderControls />
+          </header>
+
+          {renderRecentItems()}
+          {renderDesktopAnnouncement()}
+
+          <div id="menu-desktop-content" className={`menu-desktop-content${normalizedQuery ? " menu-desktop-search-content" : ""}`}>
+            {normalizedQuery
+              ? renderSearchResults(true)
+              : renderDesktopHome()}
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

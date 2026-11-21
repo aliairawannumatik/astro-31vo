@@ -3,6 +3,7 @@
   "appName": "NUMATIK",
   "subtitle": "情報通信技術を活用した\nアクティブ数的思考",
   "schoolYear": "2026 – 2027 年度",
+  "desktopAvailableText": "デスクトップ版は www.numatik.app でもご利用いただけます",
   "start": "🚀 スタート",
   "marquee": "✨ 中学校数学インタラクティブ学習アプリ ✨",
   "selectTheme": "テーマを選ぶ",
@@ -32,14 +33,55 @@
     "back": "戻る",
     "next": "次のページ",
     "home": "メインメニュー",
-    "backToHome": "← ホームに戻る"
+    "backToHome": "スタート画面"
   },
   "menu": {
     "title": "メインメニュー",
     "subtitle": "探索したいメニューを選んでください",
+    "searchAriaLabel": "アプリを検索",
+    "searchPlaceholder": "メニュー・教材・練習・機能を検索...",
+    "clearSearch": "検索をクリア",
+    "dismissAnnouncement": "お知らせを閉じる",
+    "closeMore": "その他メニューを閉じる",
+    "guideTooltip": "ガイド",
+    "newUserGuideAnnouncement": "Numatikは初めてですか？使い方ガイドをご覧ください",
+    "viewGuide": "見る",
+    "deepSearchLoading": "アプリ全体を検索中...",
+    "deepSearchTitle": "アプリ全体の検索結果",
+    "open": "開く",
+    "noSearchResults": "検索結果がありません",
+    "tryDifferentQuery": "別のキーワードをお試しください。",
+    "matchingMenuItems": "該当するメニュー",
+    "lastOpened": "最近開いた項目",
+    "homeTab": "ホーム",
+    "learnTab": "学習",
+    "practiceTab": "練習",
+    "gamesTab": "ゲーム",
+    "toolsTab": "ツール",
+    "moreTab": "その他",
+    "languageButton": "言語を選択",
+    "musicButton": "BGMを選ぶ",
+    "musicList": "BGM一覧",
+    "musicNone": "なし",
+    "musicTurnOn": "BGMを再生",
+    "musicTurnOff": "BGMを停止",
+    "soundOn": "サウンドをオフ",
+    "soundOff": "サウンドをオン",
+    "themeButton": "テーマを選択",
+    "donateBanner": "NUMATIKの成長を応援",
+    "announcements": {
+      "sidebarSectionShortcuts": "新機能：サイドバーの「学習」「練習」「ツール」を選ぶと、該当セクションへ移動します。"
+    },
+    "sections": {
+      "featured": "おすすめ機能",
+      "learn": "学習",
+      "practice": "練習とテスト",
+      "tools": "ツール",
+      "more": "その他"
+    },
     "teacherRoom": "教師の部屋",
     "animatedBook": "アニメ教科書",
-    "gameArena": "ゲームアリーナ",
+    "gameArena": "NUMATIK GAMEZ",
     "ai": "NUMATIK AI",
     "lkpd": "ワークシート",
     "olympiad": "数学オリンピック",
@@ -54,9 +96,13 @@
     "questionBank": "問題バンク",
     "practice": "練習問題",
     "about": "このアプリについて",
+    "kritikSaran": "ご意見・ご感想",
     "biography": "プロフィール",
+    "gratitude": "感謝の言葉",
     "donate": "寄付",
-    "guide": "ガイド"
+    "guide": "ガイド",
+    "settings": "設定",
+    "reference": "参考資料"
   },
   "menuItems": {
     "guide": {
@@ -143,6 +189,10 @@
       "label": "プロフィール",
       "desc": "アプリ製作者情報"
     },
+    "gratitude": {
+      "label": "感謝の言葉",
+      "desc": "NUMATIKを支えてくれた方々への感謝"
+    },
     "reference": {
       "label": "参考資料",
       "desc": "参考文献"
@@ -150,6 +200,10 @@
     "about": {
       "label": "このアプリについて",
       "desc": "アプリの情報"
+    },
+    "kritikSaran": {
+      "label": "ご意見・ご感想",
+      "desc": "NUMATIKへのご意見をお聞かせください"
     }
   },
   "materiMatematika": {
@@ -6282,6 +6336,9 @@
     "soundSection": "効果音",
     "soundOn": "🔊 ボタン音有効",
     "soundOff": "🔇 音オフ",
+    "animationSection": "アニメーション",
+    "animationOn": "背景と画面遷移のアニメーションが有効です",
+    "animationOff": "アニメーションはオフです",
     "languageSection": "言語",
     "languageDesc": "アプリの表示言語",
     "volumeMusic": "🎚️ 音楽ボリューム",
@@ -6403,15 +6460,34 @@
     "subtitle": "情報通信技術を活用したアクティブ数的思考",
     "desc1": "<boldPrimary>NUMATIK</boldPrimary>は<boldAccent>Nu</boldAccent>meracy（数的思考）、<boldAccent>A</boldAccent>ctively（主体的に）、<boldAccent>T</boldAccent>echnology（技術）、<boldAccent>I</boldAccent>nformation（情報）、<boldAccent>K</boldAccent>nowledge（知識）の頭文字を組み合わせた造語です。デジタル時代の学習課題に橋渡しをするために設計された数学教育アプリです。ただ情報を伝えるだけでなく、<boldAccent>意義深く楽しい</boldAccent>学びを提供することへの情熱から生まれました。",
     "desc2": "<boldPrimary>2026</boldPrimary>年に初リリースされたNumatikは、<boldAccent>メルデカカリキュラム</boldAccent>に完全準拠して開発されました。<boldSecondary>ディープラーニング</boldSecondary>的なアプローチを取り入れ、生徒が公式を丸暗記するだけでなく、深く・批判的・文脈的に概念を理解できるよう設計されています。",
-    "desc3": "Numatikは世界中の中学生の学習パートナーとなることを目指しています。",
+    "desc3": "Numatikは世界中の小学生・中学生・高校生の学習パートナーとなることを目指しています。",
     "versionLabel": "アプリバージョン",
     "versionUpdateNote": "コンテンツ・機能・インターフェースの更新",
     "versionBadge": "最新",
     "desktopLabel": "デスクトップ版",
     "desktopTitle": "ブラウザでも利用可能！🌐",
     "desktopDesc": "ノートパソコンまたはPCで<link>www.numatik.app</link>を開くと、より広い画面でより充実した学習体験ができます。",
-    "copyright": "第10版 · © 2026 NUMATIK. All rights reserved.",
+    "copyright": "第13版 · © 2026 NUMATIK. All rights reserved.",
     "backToMenu": "← メニューに戻る"
+  },
+  "kritikSaran": {
+    "eyebrow": "ユーザーの声",
+    "pageTitle": "ご意見・ご感想",
+    "intro": "皆さまの声が、NUMATIKをより楽しく、親しみやすく、役立つ数学学習の場へと育てます。",
+    "formEyebrow": "ご意見フォーム",
+    "formTitle": "お気軽にお聞かせください",
+    "formDescription": "使ってみた感想、お困りの点、NUMATIKに追加してほしいアイデアをお寄せください。",
+    "messageLabel": "メッセージ",
+    "placeholder": "ご意見、ご要望、アイデアをご記入ください...",
+    "emailNote": "メールアプリが開き、メッセージが入力されます。",
+    "sendEmail": "メールで送信",
+    "recipientNote": "送信先：",
+    "ideasTitle": "たとえば、こんな声をお寄せください",
+    "ideasIntro": "一つひとつの声が、学習体験の改善につながります。",
+    "ideaExperience": "学習体験をより良くするアイデア",
+    "ideaIssue": "使いにくい点や分かりにくい箇所",
+    "ideaFeature": "新しい機能、教材、アクティビティの提案",
+    "thankYou": "NUMATIKを一緒により良くしてくださり、ありがとうございます。"
   },
   "biografi": {
     "pageTitle": "開発者プロフィール",
@@ -6422,11 +6498,6 @@
     "labelPesan": "開発者からのメッセージ",
     "pesanSubtitle": "🌍 世界中の生徒たちへ",
     "pesanIsi": "「世界中の素晴らしい生徒たちへ。このアプリは、数学がもっと身近で親しみやすいものに感じられるよう、特別に設計しました。覚えておいてください——数学が『苦手』な人など、いません。まだ十分に練習していないだけです。さあ、探索を楽しんで、間違いを恐れないで。なぜなら、間違いこそが本当の学びの始まりだから！」",
-    "labelKritikSaran": "ご意見・ご感想",
-    "kritikPlaceholder": "こちらにご意見をお書きください...",
-    "kirimEmail": "📨 メールで送信",
-    "kirimKe": "送信先：numatik.app@gmail.com",
-    "ucapanTerimakasih": "謝辞",
     "kembali": "← メニューに戻る",
     "kelompokA2": {
       "badge": "最初のインスピレーション · Guru Penggerak 第10期",
@@ -6455,6 +6526,11 @@
       "footer": "本当にありがとうございます、PAK WANDRI"
     }
   },
+  "acknowledgements": {
+    "eyebrow": "感謝を込めて",
+    "title": "感謝の言葉",
+    "subtitle": "NUMATIKの誕生を支え、学びへの情熱を分かち合ってくださった皆さまに、心より感謝申し上げます。"
+  },
   "donasi": {
     "pageTitle": "寄付",
     "subtitle": "アプリの成長を応援してください",
@@ -6474,7 +6550,8 @@
     "sunset": "晴れた空",
     "ocean": "青い海",
     "light": "雪の白",
-    "forest": "緑の森"
+    "forest": "緑の森",
+    "pastel": "パステル"
   },
   "languageContinueText": "メインメニューへ"
 }

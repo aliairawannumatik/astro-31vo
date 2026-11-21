@@ -256,6 +256,8 @@ const BilanganBulatPage = () => {
   // ── outer background ────────────────────────────────────────────────
   const outerBg = isDark
     ? "gradient-space"
+    : theme === "pastel"
+    ? "bg-gradient-to-br from-purple-50 via-white to-pink-50"
     : theme === "white"
     ? "bg-white"
     : theme === "forest"
@@ -267,12 +269,14 @@ const BilanganBulatPage = () => {
   // ── header card background & border (solid on light themes) ─────────
   const headerBg = isDark
     ? "linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(15,12,41,0.9) 100%)"
+    : theme === "pastel" ? "#6d28d9"
     : theme === "forest"  ? "#16a34a"
     : theme === "sunset"  ? "#c2410c"
     : theme === "white"   ? "#4f46e5"
     : "#0369a1"; // ocean / blue
   const headerBorder = isDark
     ? "rgba(99,102,241,0.3)"
+    : theme === "pastel" ? "rgba(109,40,217,0.58)"
     : theme === "forest"  ? "rgba(22,163,74,0.6)"
     : theme === "sunset"  ? "rgba(194,65,12,0.6)"
     : theme === "white"   ? "rgba(79,70,229,0.5)"

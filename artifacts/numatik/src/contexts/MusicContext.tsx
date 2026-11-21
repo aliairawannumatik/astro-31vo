@@ -1,10 +1,11 @@
 import { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
 import { startMusic, stopMusic, TRACKS, setMusicVolume } from "@/hooks/bgMusicTracks";
 import { MP3_TRACKS } from "@/hooks/mp3Tracks";
+import { readLocalStorage, writeLocalStorage } from "@/lib/localStorage";
 
 interface MusicContextType {
   musicOn: boolean;
-  toggleMusic: () => void;
+  toggleMusic: (selectedTrackId?: string) => void;
   trackId: string;
   setTrackId: (id: string) => void;
   musicVolume: number;
@@ -13,29 +14,31 @@ interface MusicContextType {
 
 const MusicContext = createContext<MusicContextType | undefined>(undefined);
 
-const ALL_IDS = [...TRACKS.map(t => t.id), ...MP3_TRACKS.map(t => t.id)];
+const ALL_IDS = ["none", ...TRACKS.map(t => t.id), ...MP3_TRACKS.map(t => t.id)];
 const DEFAULT_TRACK = "mp3-dreams";
 
 const isMp3Id = (id: string) => id.startsWith("mp3-");
 
 export const MusicProvider = ({ children }: { children: ReactNode }) => {
   const [musicOn, setMusicOn] = useState<boolean>(() => {
-    const saved = localStorage.getItem("numatik-music");
-    return saved === null ? false : saved === "true";
+    const saved = readLocalStorage("numatik-music");
+    const savedTrack = readLocalStorage("numatik-music-track");
+    return saved === "true" && savedTrack !== "none";
   });
 
   const [trackId, setTrackIdState] = useState<string>(() => {
-    const saved = localStorage.getItem("numatik-music-track");
+    const saved = readLocalStorage("numatik-music-track");
     return saved && ALL_IDS.includes(saved) ? saved : DEFAULT_TRACK;
   });
 
   const [musicVolumeState, setMusicVolumeState] = useState<number>(() => {
-    const saved = localStorage.getItem("numatik-music-volume");
+    const saved = readLocalStorage("numatik-music-volume");
     return saved !== null ? Number(saved) : 15;
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isFirstMount = useRef(true);
+  const hasUserInteracted = useRef(false);
 
   // ── Helpers ──────────────────────────────────────────────────
   const stopMp3 = () => {
@@ -64,6 +67,11 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const startTrack = (id: string) => {
+    if (id === "none") {
+      stopAll();
+      return;
+    }
+
     if (isMp3Id(id)) {
       playMp3(id);
     } else {
@@ -74,14 +82,29 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
 
   // ── React to music on/off ────────────────────────────────────
   useEffect(() => {
-    localStorage.setItem("numatik-music", String(musicOn));
-    if (musicOn) {
-      startTrack(trackId);
-    } else {
-      stopAll();
-    }
+    writeLocalStorage("numatik-music", String(musicOn));
+    if (!musicOn) stopAll();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [musicOn]);
+
+  useEffect(() => {
+    if (hasUserInteracted.current) return;
+
+    const onUserInteraction = () => {
+      if (hasUserInteracted.current) return;
+      hasUserInteracted.current = true;
+      if (musicOn) startTrack(trackId);
+      window.removeEventListener("pointerdown", onUserInteraction);
+      window.removeEventListener("keydown", onUserInteraction);
+    };
+
+    window.addEventListener("pointerdown", onUserInteraction);
+    window.addEventListener("keydown", onUserInteraction);
+    return () => {
+      window.removeEventListener("pointerdown", onUserInteraction);
+      window.removeEventListener("keydown", onUserInteraction);
+    };
+  }, [musicOn, trackId, musicVolumeState]);
 
   // ── React to track changes ───────────────────────────────────
   useEffect(() => {
@@ -89,7 +112,7 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
       isFirstMount.current = false;
       return;
     }
-    localStorage.setItem("numatik-music-track", trackId);
+    writeLocalStorage("numatik-music-track", trackId);
     if (musicOn) {
       startTrack(trackId);
     }
@@ -98,7 +121,7 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
 
   // ── React to volume changes ──────────────────────────────────
   useEffect(() => {
-    localStorage.setItem("numatik-music-volume", String(musicVolumeState));
+    writeLocalStorage("numatik-music-volume", String(musicVolumeState));
     const v = musicVolumeState / 100;
     setMusicVolume(v);
     if (audioRef.current) audioRef.current.volume = v;
@@ -112,10 +135,26 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const toggleMusic = () => setMusicOn(prev => !prev);
+  const toggleMusic = (selectedTrackId = trackId) => {
+    if (selectedTrackId === "none") return;
+
+    if (musicOn) {
+      stopAll();
+      setMusicOn(false);
+      return;
+    }
+
+    hasUserInteracted.current = true;
+    if (selectedTrackId === trackId) startTrack(selectedTrackId);
+    setMusicOn(true);
+  };
 
   const setTrackId = (id: string) => {
     if (ALL_IDS.includes(id)) {
+      if (id === "none") {
+        stopAll();
+        setMusicOn(false);
+      }
       setTrackIdState(id);
     }
   };

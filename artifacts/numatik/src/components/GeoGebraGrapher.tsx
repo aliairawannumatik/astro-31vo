@@ -92,6 +92,17 @@ const CANVAS_THEME: Record<Theme, CanvasTheme> = {
     cursorBg: "rgba(240,249,255,0.92)",
     cursorText: "#0369a1",
   },
+  pastel: {
+    bg: "#fff9ef",
+    gridMinor: "rgba(103,88,212,0.14)",
+    gridMajor: "rgba(103,88,212,0.42)",
+    arrow: "rgba(79,63,174,0.72)",
+    label: "rgba(79,63,174,0.78)",
+    labelStrong: "rgba(48,51,79,0.9)",
+    cursorLine: "rgba(103,88,212,0.26)",
+    cursorBg: "rgba(247,243,255,0.96)",
+    cursorText: "#4f3fae",
+  },
 };
 
 /* ─── Types ─────────────────────────────────────────────── */

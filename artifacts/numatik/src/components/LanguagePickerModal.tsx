@@ -102,6 +102,31 @@ function getThemeStyles(theme: string): ThemeStyles {
         infoHighlight: "text-sky-200/60",
       };
 
+    case "pastel":
+      return {
+        topBg: "linear-gradient(160deg,#fff1ad 0%,#efe2ff 50%,#dff6ff 100%)",
+        topTextTitle: "text-indigo-950/90",
+        topTextSub: "text-indigo-800/60",
+        topBadgeBg: "bg-white/60 backdrop-blur-sm",
+        topBadgeText: "text-indigo-950/85",
+        topBadgeBorder: "border-violet-300/50",
+        floatingWordColor: "text-violet-700/35",
+        starOpacity: 0.08,
+        panelBg: "bg-gradient-to-b from-[#fffdf8] to-[#f3efff]",
+        panelBorder: "border-violet-200/60",
+        dragHandle: "bg-violet-300/40",
+        headerTitle: "text-indigo-950",
+        headerSub: "text-indigo-700/65",
+        cardInactive: "border-violet-200 bg-white/70 hover:bg-violet-50 hover:border-violet-300",
+        cardText: "text-indigo-950",
+        cardSubText: "text-indigo-700/70",
+        checkBg: "bg-violet-500",
+        checkText: "text-white",
+        infoText: "text-indigo-600/60",
+        infoIcon: "text-violet-400/60",
+        infoHighlight: "text-indigo-800/80",
+      };
+
     case "light":
     case "white":
       return {
